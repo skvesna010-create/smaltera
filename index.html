@@ -29,6 +29,7 @@
   color-scheme: light;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
@@ -473,6 +474,80 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
 @media (max-width:1080px){ .ctor{grid-template-columns:1fr;grid-template-areas:'room' 'panel' 'sum'} .ctor-panel{border-left:0} .room-wrap{position:sticky;top:66px;z-index:3;border-bottom:1px solid var(--line)} .ctor{overflow:visible} .room-wrap{border-radius:var(--r-lg) var(--r-lg) 0 0;overflow:hidden} }
 @media (max-width:720px){ .ctor-panel{padding:18px} .ctor .ctor-sum{padding:16px 18px} .ctor .ctor-sum .btn{width:100%} }
 
+/* Продающие блоки */
+.offer{text-decoration:none;color:inherit}
+.offer i{background:var(--gold)}
+.gift-chip{font-size:13px;font-weight:800;color:#8A6620;background:#FBF5E6;border:1px solid #EFDFB4;border-radius:999px;padding:7px 12px;align-self:flex-start}
+.gift-sec{background:linear-gradient(135deg,#FBF6E9,#F6EBD0);border-block:1px solid #EFDFB4}
+.gift-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,80px);align-items:center}
+.gift-badge{display:inline-block;background:var(--gold);color:#fff;font-size:13px;font-weight:800;padding:7px 14px;border-radius:999px;margin-bottom:18px}
+.gift-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:28px}
+.gift-cta span{font-size:13px;color:#7A6230;max-width:240px}
+.gift-list{list-style:none;display:grid;gap:12px;counter-reset:g}
+.gift-list li{display:grid;grid-template-columns:44px 1fr;gap:2px 14px;background:#fff;border:1px solid #EFDFB4;border-radius:16px;padding:16px 18px;box-shadow:0 18px 36px -30px rgba(120,90,20,.6)}
+.gift-list li::before{counter-increment:g;content:counter(g);grid-row:span 2;display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--smalt);color:#fff;font-weight:800}
+.gift-list b{font-size:16px}
+.gift-list span{font-size:14px;color:var(--muted)}
+.honest{background:var(--paper)}
+.honest-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(32px,6vw,80px);align-items:center}
+.honest .btn{margin-top:28px}
+.honest-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.hc{border:1px solid var(--line);border-radius:18px;padding:22px;display:grid;gap:8px;background:linear-gradient(180deg,#fff,#F7F8FB)}
+.hc b{font-family:var(--display);font-weight:400;font-size:24px;color:var(--smalt);line-height:1.15}
+.hc span{font-size:14.5px;color:var(--muted)}
+.cmp-hint{display:none;font-size:13px;color:var(--muted);margin:-20px 0 10px}
+.cmp-wrap{overflow-x:auto;border-radius:var(--r-lg);border:1px solid var(--line);background:var(--paper)}
+.cmp{width:100%;border-collapse:collapse;min-width:680px;font-size:15px}
+.cmp th,.cmp td{padding:16px 18px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+.cmp thead th{font-size:14px;color:var(--muted);font-weight:700}
+.cmp th.us{color:#fff;background:var(--smalt);font-size:16px;border-radius:14px 14px 0 0}
+.cmp td.us{background:#EEF2FC;font-weight:700;color:var(--smalt-ink)}
+.cmp tr:last-child td{border-bottom:0}
+.cmp td:first-child{font-weight:600}
+.cmp td:not(:first-child){color:var(--muted);font-size:14px}
+.cmp i{display:inline-block;border-radius:50%;margin-right:8px;vertical-align:middle;position:relative}
+.cmp i.y{width:22px;height:22px;background:#1E7A5B}
+.cmp i.y::after{content:"";position:absolute;left:7px;top:4px;width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+.cmp i.n{width:10px;height:10px;background:#D9534F}
+.cmp i.mid{width:10px;height:10px;background:#D8B66A}
+.final-pts{list-style:none;display:grid;gap:10px;margin-top:22px}
+.final-pts li{display:flex;gap:10px;align-items:center;color:#E3E8F6;font-weight:600}
+.final-pts li::before{content:"✓";display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--gold);color:#fff;font-size:13px;flex:none}
+.msgr-row{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.msgr{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:14px;border-radius:999px;padding:11px 16px;border:1.5px solid currentColor}
+.msgr svg{width:20px;height:20px}
+.final .msgr{color:#fff}
+.hdr-msgr{display:flex;gap:8px}
+.hdr-msgr .msgr{padding:0;width:40px;height:40px;justify-content:center;border:1px solid var(--line);color:var(--smalt)}
+.hdr-msgr .msgr span{display:none}
+.msgr-col{display:grid;gap:10px}
+.msgr-col .msgr{justify-content:center;color:var(--smalt);padding:14px}
+.sheet-m{position:fixed;inset:0;z-index:70;background:rgba(10,14,30,.5);display:flex;align-items:flex-end}
+.sheet-m[hidden]{display:none}
+.sheet-in{background:#fff;width:100%;border-radius:22px 22px 0 0;padding:22px 18px calc(18px + env(safe-area-inset-bottom));display:grid;gap:14px}
+.pop{position:fixed;inset:0;z-index:90;background:rgba(10,14,30,.55);display:grid;place-items:center;padding:16px;animation:fade .25s both}
+.pop[hidden]{display:none}
+.pop-card{position:relative;background:#fff;border-radius:24px;max-width:460px;width:100%;padding:30px;box-shadow:0 40px 90px -30px rgba(0,0,0,.5);animation:popIn .35s cubic-bezier(.2,.9,.3,1.2) both}
+@keyframes popIn{from{transform:translateY(16px) scale(.96);opacity:0}}
+.pop-card h3{font-family:var(--display);font-weight:400;font-size:28px;line-height:1.15;margin:4px 0 10px}
+.pop-card p{color:var(--muted);font-size:15px;margin-bottom:16px}
+.pop-card form{display:grid;gap:10px}
+.pop-x{position:absolute;right:14px;top:14px;width:34px;height:34px;border-radius:50%;border:0;background:#F0F1F4;font-size:20px;cursor:pointer}
+.pop-doc{position:relative;width:74px;height:92px;border-radius:10px;background:#fff;border:1px solid var(--line);box-shadow:0 14px 30px -14px rgba(15,29,71,.45);padding:14px 10px;display:grid;gap:7px;transform:rotate(-6deg);margin-bottom:12px}
+.pop-doc span{height:5px;border-radius:3px;background:#E3E6EE}
+.pop-doc span:nth-child(odd){width:70%}
+.pop-doc i{position:absolute;right:-12px;top:-12px;width:34px;height:34px;border-radius:50%;background:var(--gold);color:#fff;font-style:normal;font-weight:800;font-size:13px;display:grid;place-items:center}
+.pop-dl{width:100%}
+@media (max-width:1080px){ .gift-grid,.honest-grid{grid-template-columns:1fr} .hdr-msgr{display:none} }
+@media (max-width:720px){
+  .honest-cards{grid-template-columns:1fr}
+  .cmp-hint{display:block}
+  .mbar{grid-template-columns:1fr 1fr 1fr!important}
+  .mbar:has(#mbWrite[hidden]){grid-template-columns:1fr 1fr!important}
+  .mbar .btn{padding:14px 6px!important;font-size:14px!important}
+  .pop-card{padding:24px}
+}
+
 /* Нижняя панель на телефоне */
 .mbar{display:none}
 
@@ -527,7 +602,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
 
 <div class="topline">
   <div class="wrap">
-    <span>Ремонт квартир в Екатеринбурге · бесплатный выезд замерщика в день обращения</span>
+    <span><b>Дизайн-проект в подарок</b> при заказе капитального ремонта · гарантия 3 года в договоре</span>
     <span>Ежедневно <b>9:00–21:00</b></span>
   </div>
 </div>
@@ -546,6 +621,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
       <a href="#faq">Вопросы</a>
     </nav>
     <div class="bar-r">
+      <div class="hdr-msgr" data-msgr></div>
       <a class="phone" href="tel:+73430000000">+7 (343) 000-00-00<small>звонок бесплатный</small></a>
       <a class="btn btn-main" href="#final">Вызвать замерщика</a>
     </div>
@@ -557,9 +633,9 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
 <section class="hero" id="hero">
   <div class="ph"><img src="https://images.pexels.com/photos/6908500/pexels-photo-6908500.jpeg?auto=compress&cs=tinysrgb&w=2000" alt="Светлая гостиная после ремонта" fetchpriority="high" onerror="this.classList.add('err')"></div>
   <div class="wrap hero-in">
-    <div class="offer"><i>✓</i>Смета в договоре не меняется до конца ремонта</div>
+    <a class="offer" href="#gift"><i>🎁</i>Дизайн-проект в подарок при капитальном ремонте</a>
     <h1>Ремонт квартир в Екатеринбурге без сюрпризов</h1>
-    <p class="sub">Под ключ: от черновых работ до чистовой отделки. Фиксированная цена, один прораб на объекте и фотоотчёт каждую неделю.</p>
+    <p class="sub">Под ключ: от черновых работ до чистовой отделки. Цена фиксируется в договоре, оплата по этапам после приёмки, гарантия 3 года.</p>
     <div class="hero-cta">
       <a class="btn btn-main" href="#quiz">Рассчитать стоимость за 1 минуту</a>
       <a class="btn btn-line" href="#final">Бесплатный замер</a>
@@ -721,6 +797,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
           <div class="val">от 9 500 ₽ <small>/ м²</small></div>
           <ul><li>Новая электрика и разводка сантехники</li><li>Штукатурка по маякам, стяжка пола</li><li>Санузел под ключ</li><li>Чистовая отделка всех помещений</li></ul>
           <div class="meta"><span>Срок для 2-комнатной</span><b>от 10 недель</b></div>
+          <div class="gift-chip">🎁 Дизайн-проект в подарок</div>
           <a class="btn btn-main" href="#quiz">Рассчитать</a>
         </div>
       </article>
@@ -731,6 +808,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
           <div class="val">от 15 000 ₽ <small>/ м²</small></div>
           <ul><li>Работа строго по дизайн-проекту</li><li>Сложные потолки, ниши, подсветка</li><li>Скрытые двери и плинтусы</li><li>Авторский надзор дизайнера</li></ul>
           <div class="meta"><span>Срок для 2-комнатной</span><b>от 14 недель</b></div>
+          <div class="gift-chip">🎁 Дизайн-проект в подарок</div>
           <a class="btn btn-line" href="#quiz">Рассчитать</a>
         </div>
       </article>
@@ -760,6 +838,24 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
         <div class="fix-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/></svg></span><div><h3>Фото и видео каждую неделю</h3><p>Прораб присылает отчёт, так что за ремонтом можно следить даже из другого города.</p></div></div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="gift-sec" id="gift">
+  <div class="wrap gift-grid">
+    <div class="gift-l">
+      <span class="gift-badge">Подарок новым клиентам</span>
+      <h2>Дизайн-проект бесплатно</h2>
+      <p class="sub">Закажите капитальный или дизайнерский ремонт, и мы сделаем дизайн-проект вашей квартиры в подарок. Вы заранее увидите, как будет выглядеть каждая комната, а бригада будет работать по точным чертежам.</p>
+      <div class="gift-cta"><a class="btn btn-main" href="#final">Получить дизайн-проект</a><span>Подарок действует при заключении договора на ремонт</span></div>
+    </div>
+    <ul class="gift-list">
+      <li><b>Планировка</b><span>Обмеры, план квартиры и расстановка мебели</span></li>
+      <li><b>Визуализация</b><span>Как будут выглядеть комнаты после ремонта</span></li>
+      <li><b>Чертежи электрики</b><span>Каждая розетка и выключатель на своём месте</span></li>
+      <li><b>Чертежи сантехники</b><span>Разводка воды и канализации без переделок</span></li>
+      <li><b>Подбор материалов</b><span>Список отделки с количеством, чтобы не переплатить</span></li>
+    </ul>
   </div>
 </section>
 
@@ -905,10 +1001,46 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
           <span class="stage-n">Этап 6</span>
           <h3>Уборка и сдача</h3>
           <p>Делаем клининг, вместе проверяем всё по чек-листу, подписываем акт и выдаём гарантию. Вы заезжаете в готовую квартиру.</p>
-          <div class="stage-get"><b>Вы получаете:</b> ключи, акт приёмки и письменную гарантию</div>
+          <div class="stage-get"><b>Вы получаете:</b> ключи, акт приёмки и гарантию на 3 года</div>
           <a class="btn btn-main" href="#quiz" style="margin-top:18px">Рассчитать мой ремонт</a>
         </article>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="honest" id="honest">
+  <div class="wrap honest-grid">
+    <div>
+      <h2>Мы молодая компания, поэтому даём больше гарантий</h2>
+      <p class="sub">У нас пока нет сотен отзывов, и мы не будем их выдумывать. Вместо этого мы берём на себя обязательства, которые проверяются договором.</p>
+      <a class="btn btn-gold" href="#lead-check" data-open-pop>Получить чек-лист приёмки ремонта</a>
+    </div>
+    <div class="honest-cards">
+      <div class="hc"><b>Цена в договоре</b><span>Сумма за работы не меняется без вашего письменного согласия</span></div>
+      <div class="hc"><b>Оплата после приёмки</b><span>Платите за этап, только когда приняли его. Предоплаты за весь ремонт нет</span></div>
+      <div class="hc"><b>3 года гарантии</b><span>На все работы, срок прописан в договоре</span></div>
+      <div class="hc"><b>Фото каждую неделю</b><span>Видите ремонт, даже если живёте в другом городе</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cmp-sec" id="compare">
+  <div class="wrap">
+    <div class="head-row"><div><h2>Сравните, с кем спокойнее</h2><p class="sub">Чем ремонт со «Смальтэрой» отличается от частного мастера и от крупной компании.</p></div></div>
+    <p class="cmp-hint">Таблицу можно листать вбок →</p>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead><tr><th></th><th class="us">Смальтэра</th><th>Частный мастер</th><th>Крупная компания</th></tr></thead>
+        <tbody>
+          <tr><td>Договор с фиксированной ценой</td><td class="us"><i class="y"></i></td><td><i class="n"></i>редко</td><td><i class="y"></i></td></tr>
+          <tr><td>Оплата по этапам после приёмки</td><td class="us"><i class="y"></i></td><td><i class="mid"></i>как договоритесь</td><td><i class="mid"></i>часто предоплата</td></tr>
+          <tr><td>Гарантия на работы</td><td class="us"><b>3 года</b></td><td><i class="n"></i>обычно нет</td><td>1–2 года</td></tr>
+          <tr><td>Дизайн-проект</td><td class="us"><b>в подарок</b></td><td><i class="n"></i>нет</td><td>за отдельные деньги</td></tr>
+          <tr><td>Один прораб и фотоотчёты</td><td class="us"><i class="y"></i></td><td><i class="mid"></i>мастер сам себе прораб</td><td><i class="mid"></i>менеджер на много объектов</td></tr>
+          <tr><td>Цена работ</td><td class="us"><b>ниже крупных</b></td><td>ниже всего</td><td>выше всего</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -952,6 +1084,8 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
     </div>
     <div>
       <details open><summary>Цена действительно не изменится?</summary><p>Стоимость работ фиксируется в договоре после замера. Она может измениться, только если вы сами решите добавить работы, и только после вашего письменного согласия.</p></details>
+      <details><summary>Что входит в бесплатный дизайн-проект?</summary><p>Планировка и расстановка мебели, визуализация комнат, чертежи электрики и сантехники, подбор материалов с количеством. Дизайн-проект делаем в подарок при заказе капитального или дизайнерского ремонта.</p></details>
+      <details><summary>Какая гарантия на работы?</summary><p>3 года на все работы. Срок гарантии прописан в договоре, и если что-то пойдёт не так, мы приедем и исправим за свой счёт.</p></details>
       <details><summary>Сколько длится ремонт?</summary><p>Косметический ремонт однокомнатной квартиры занимает около месяца, капитальный ремонт двухкомнатной — от двух с половиной месяцев. Точный график прописываем в договоре.</p></details>
       <details><summary>Кто покупает материалы?</summary><p>Как удобнее вам. Можем закупить и привезти всё сами по согласованному списку с чеками или дать список, а вы купите в своём магазине.</p></details>
       <details><summary>Можно не присутствовать на объекте?</summary><p>Да. Прораб присылает фото и видео каждую неделю, этапы можно принимать по видеосвязи.</p></details>
@@ -966,6 +1100,8 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
     <div>
       <h2>Вызовите замерщика бесплатно</h2>
       <p class="sub">Инженер приедет, всё замерит и в течение двух дней пришлёт подробную смету. Это ни к чему не обязывает.</p>
+      <ul class="final-pts"><li>Замер и смета бесплатно</li><li>Дизайн-проект в подарок при капитальном ремонте</li><li>Гарантия 3 года в договоре</li></ul>
+      <div class="msgr-row" data-msgr></div>
     </div>
     <form class="final-card" id="finalForm" novalidate>
       <h3>Запись на замер</h3>
@@ -1004,6 +1140,22 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
   </div>
 </footer>
 
+<div class="pop" id="pop" hidden role="dialog" aria-modal="true" aria-labelledby="popT">
+  <div class="pop-card">
+    <button type="button" class="pop-x" id="popX" aria-label="Закрыть">×</button>
+    <div class="pop-doc" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><i>41</i></div>
+    <h3 id="popT">Заберите чек-лист приёмки ремонта</h3>
+    <p>41 пункт, которые нужно проверить перед тем, как подписать акт: стены, полы, плитка, электрика, сантехника и документы. Пригодится, даже если вы будете делать ремонт не с нами.</p>
+    <form id="popForm" novalidate>
+      <div class="field"><label for="popPhone">Телефон</label><input id="popPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></div>
+      <button class="btn btn-gold" type="submit">Получить чек-лист</button>
+      <div class="msg" id="popMsg" role="status"></div>
+      <p class="agree" style="margin:0">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
+    </form>
+    <a class="btn btn-main pop-dl" id="popDl" href="checklist.pdf" target="_blank" rel="noopener" hidden>Открыть чек-лист (PDF)</a>
+  </div>
+</div>
+
 <div class="helper" id="helper">
   <button type="button" class="h-ava" id="hAva" aria-label="Помощник Смальта"><svg class="lg" viewBox="0 0 64 64" aria-hidden="true"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#B8913F" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#B8913F"/></svg></button>
   <div class="h-bub hide" id="hBub" role="status">
@@ -1015,8 +1167,10 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
 
 <div class="mbar">
   <a class="btn btn-line" href="tel:+73430000000">Позвонить</a>
+  <button type="button" class="btn btn-line mb-write" id="mbWrite" hidden>Написать</button>
   <a class="btn btn-main" href="#quiz">Рассчитать</a>
 </div>
+<div class="sheet-m" id="sheetM" hidden><div class="sheet-in"><b>Напишите нам</b><div class="msgr-col" data-msgr></div><button type="button" class="btn btn-line" id="sheetX">Закрыть</button></div></div>
 
 <script>
 (function(){
@@ -1195,10 +1349,11 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
   }
 
   var FAQ = [
+    { v:'gift', t:'Что за дизайн-проект в подарок?', a:'При заказе капитального или дизайнерского ремонта дизайн-проект делаем бесплатно: планировка, расстановка мебели, визуализация, чертежи электрики и сантехники.' },
     { v:'in', t:'Что входит в цену?', a:'В цену входят все работы по смете: демонтаж, черновые и чистовые работы, вывоз мусора и финальная уборка. Черновые материалы считаем отдельной строкой по ценам поставщиков.' },
     { v:'pay', t:'Можно платить частями?', a:'Да, оплата идёт по этапам: вы платите за каждый этап после того, как приняли его. Предоплаты за весь ремонт нет.' },
     { v:'mat', t:'А сколько стоят материалы?', a:'Чистовые материалы — плитка, ламинат, сантехника, двери — часто стоят примерно столько же, сколько работы, но всё зависит от вашего выбора. Инженер поможет уложиться в бюджет.' },
-    { v:'gar', t:'Есть гарантия?', a:'Да, письменная гарантия на все работы, она прописана в договоре.' }
+    { v:'gar', t:'Какая гарантия?', a:'3 года на все работы. Срок гарантии прописан в договоре.' }
   ];
   function faq(){
     var my = run, left = FAQ.slice();
@@ -1273,7 +1428,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
                   keys:'Смету можно подготовить заранее по планировке, а замер сделать сразу после получения ключей.' }[o.v];
         return say(r); })
     .then(function(){ alive(); var t = calc();
-        return say('Готово! По вашим ответам работы обойдутся примерно в ' + money(t*0.92) + ' – ' + money(t*1.1) + ' ₽. Оставьте телефон: инженер уточнит детали и пришлёт подробную смету с чек-листом приёмки.'); })
+        return say('Готово! По вашим ответам работы обойдутся примерно в ' + money(t*0.92) + ' – ' + money(t*1.1) + ' ₽.' + (S.kind !== 'cosm' ? ' И хорошая новость: при таком ремонте дизайн-проект мы делаем в подарок.' : '')); })
     .then(function(){ alive(); return faq(); })
     .then(function(){ alive(); return say('Отлично! Оставьте имя и телефон, и инженер свяжется с вами, чтобы договориться о замере.'); })
     .then(function(){ alive(); contactForm(); })
@@ -1383,7 +1538,10 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
       hero: ['Привет! Я Смальта', 'Выберите свою квартиру в блоке «Сколько стоит ремонт», и я сразу покажу примерную цену.', [['Точный расчёт','#quiz',1]]],
       styles: ['Интерьеры', 'Работаем в любом стиле. Понравился какой-то? Нажмите на него, обсудим ваш вариант.', [['Обсудить интерьер','#final',1]]],
       ctor: ['Выбирайте стиль', 'Нажмите на любой стиль справа, а потом «Во весь экран», чтобы рассмотреть детали.', [['Хочу так же','#final',1]]],
-      prices: ['Подсказка', 'Капитальный ремонт выбирают чаще всего: он меняет проводку и трубы, и о них можно надолго забыть.', [['Посчитать мой','#quiz',1]]],
+      prices: ['Подарок', 'При капитальном и дизайнерском ремонте дизайн-проект делаем бесплатно.', [['Что входит','#gift',1]]],
+      gift: ['Это реально бесплатно', 'Дизайн-проект в подарок при заключении договора на капитальный ремонт. Без мелкого шрифта.', [['Хочу проект','#final',1]]],
+      honest: ['Честно о нас', 'Хотите проверить качество любой бригады? Заберите наш чек-лист приёмки, он бесплатный.', []],
+      compare: ['Сравните', 'Дизайн-проект в подарок и гарантия 3 года — то, чего нет у большинства.', [['Записаться на замер','#final',1]]],
       fix: ['Это важно', 'Это пример нашей сметы. Каждая позиция расписана, а итог закрепляется в договоре.', [['Получить смету','#final',1]]],
       steps: ['Смотрите на схему', 'Листайте вниз: квартира будет ремонтироваться прямо у вас на глазах.', []],
       bath: ['Ванная комната', 'Самое сложное помещение. Главное здесь — гидроизоляция, её мы делаем всегда.', [['Рассчитать ванную','#final',1]]],
@@ -1423,7 +1581,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
         if (id !== current) show(id);
       });
     }, { rootMargin: '-45% 0px -45% 0px' });
-    ['hero','quiz','styles','ctor','prices','fix','steps','bath','districts','faq','final'].forEach(function(id){
+    ['hero','quiz','styles','ctor','prices','gift','honest','compare','fix','steps','bath','districts','faq','final'].forEach(function(id){
       var el = document.getElementById(id); if (el) io.observe(el);
     });
     bub.classList.add('hide');
@@ -1584,6 +1742,57 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
         c.addEventListener('pointerleave', function(){ c.style.transform = ''; });
       });
     }
+  })();
+
+
+  /* ===== Мессенджеры: впишите ссылки ===== */
+  var MAX_URL = '';   /* например 'https://max.ru/u/ваш_ник' */
+  var VK_URL  = '';   /* например 'https://vk.com/smaltera' */
+  (function(){
+    var ICON = {
+      max:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 15V9l4 4 4-4v6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      vk:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.8 17.5c-5.5 0-8.7-3.8-8.8-10h2.8c.1 4.6 2.1 6.5 3.7 6.9V7.5h2.6v3.9c1.6-.2 3.3-2 3.8-3.9h2.6c-.4 2.4-2.2 4.2-3.4 4.9 1.2.6 3.2 2.1 4 5.1h-2.9c-.6-2-2.2-3.5-4.1-3.7v3.7h-.3z"/></svg>'
+    };
+    var list = [];
+    if (MAX_URL) list.push(['max', MAX_URL, 'Написать в MAX']);
+    if (VK_URL) list.push(['vk', VK_URL, 'Написать ВКонтакте']);
+    document.querySelectorAll('[data-msgr]').forEach(function(box){
+      if (!list.length){ box.hidden = true; return; }
+      list.forEach(function(m){ var a = document.createElement('a'); a.className = 'msgr'; a.href = m[1]; a.target = '_blank'; a.rel = 'noopener'; a.setAttribute('aria-label', m[2]); a.innerHTML = ICON[m[0]] + '<span>' + m[2] + '</span>'; box.appendChild(a); });
+    });
+    var w = document.getElementById('mbWrite'), sh = document.getElementById('sheetM');
+    if (list.length && w){ w.hidden = false; w.addEventListener('click', function(){ sh.hidden = false; }); document.getElementById('sheetX').addEventListener('click', function(){ sh.hidden = true; }); sh.addEventListener('click', function(e){ if (e.target === sh) sh.hidden = true; }); }
+  })();
+
+  /* ===== Окно с чек-листом: при попытке уйти или через минуту ===== */
+  (function(){
+    var pop = document.getElementById('pop'); if (!pop) return;
+    var shown = false;
+    try { shown = sessionStorage.getItem('sm_pop') === '1'; } catch(e){}
+    function open(force){
+      if ((shown && !force) || !pop.hidden) return;
+      if (!force && document.querySelector('.pop:not([hidden]), .lb:not([hidden])')) return;
+      shown = true; try { sessionStorage.setItem('sm_pop','1'); } catch(e){}
+      pop.hidden = false; setTimeout(function(){ document.getElementById('popPhone').focus(); }, 50);
+    }
+    function close(){ pop.hidden = true; }
+    document.getElementById('popX').addEventListener('click', close);
+    pop.addEventListener('click', function(e){ if (e.target === pop) close(); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !pop.hidden) close(); });
+    document.querySelectorAll('[data-open-pop]').forEach(function(b){ b.addEventListener('click', function(e){ e.preventDefault(); open(true); }); });
+    document.addEventListener('mouseout', function(e){ if (!e.relatedTarget && e.clientY < 8 && window.scrollY > innerHeight) open(false); });
+    setTimeout(function(){ if (window.scrollY > innerHeight * 1.5) open(false); }, 60000);
+    mask(document.getElementById('popPhone'));
+    document.getElementById('popForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      var ph = document.getElementById('popPhone').value, m = document.getElementById('popMsg');
+      if (ph.replace(/\D/g,'').length < 11){ m.className = 'msg err'; m.textContent = 'Введите номер полностью: 10 цифр после +7.'; return; }
+      m.className = 'msg'; m.textContent = 'Секунду…';
+      sendLead({ 'Источник':'Чек-лист приёмки', 'Телефон':ph }).then(function(){
+        m.className = 'msg ok'; m.textContent = 'Готово! Чек-лист открывается по кнопке ниже.';
+        document.getElementById('popForm').hidden = true; document.getElementById('popDl').hidden = false;
+      });
+    });
   })();
 
   /* Диалог стартует, когда блок расчёта появляется на экране */
