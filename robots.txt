@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /*?demo
+
+Sitemap: https://skvesna010-create.github.io/smaltera/sitemap.xml
