@@ -80,6 +80,24 @@ nav.menu a:hover{color:var(--smalt)}
 .phone small{display:block;font-size:12px;font-weight:500;color:var(--muted)}
 .bar .btn{padding:14px 22px;font-size:15px}
 
+/* Живой логотип: плитки смальты собираются, по ним бежит блик, звезда мерцает */
+.lg{overflow:visible;cursor:pointer}
+.lg .t{transform-box:fill-box;transform-origin:center;translate:0 0;transition:translate .35s cubic-bezier(.3,1.6,.5,1);
+  animation:tIn .75s cubic-bezier(.2,.9,.3,1.25) both, tWave 7s ease-in-out 1.6s infinite;animation-delay:calc(var(--i)*75ms), calc(1.6s + var(--i)*110ms)}
+.lg .star{transform-box:fill-box;transform-origin:center;animation:sIn .6s cubic-bezier(.2,.9,.3,1.4) .75s both, sTw 7s ease-in-out 2.6s infinite}
+.logo:hover .lg .t,.lg:hover .t{translate:var(--dx) var(--dy)}
+.logo:hover .lg .star{animation:sSpin 1.2s linear infinite}
+.lg.replay .t{animation:tIn .75s cubic-bezier(.2,.9,.3,1.25) both;animation-delay:calc(var(--i)*60ms)}
+.lg.replay .star{animation:sIn .6s cubic-bezier(.2,.9,.3,1.4) .6s both}
+@keyframes tIn{from{transform:translate(calc(var(--dx)*7),calc(var(--dy)*7)) rotate(140deg) scale(.15);opacity:0}}
+@keyframes tWave{0%,9%,100%{transform:none}4%{transform:translate(var(--dx),var(--dy)) scale(1.16)}}
+@keyframes sIn{from{transform:scale(0) rotate(-180deg);opacity:0}}
+@keyframes sTw{0%,84%,100%{transform:none}90%{transform:rotate(90deg) scale(1.45)}95%{transform:rotate(90deg) scale(.9)}}
+@keyframes sSpin{to{transform:rotate(360deg)}}
+.logo .name{background:linear-gradient(100deg,var(--ink) 0 40%,var(--gold) 50%,var(--ink) 60% 100%);background-size:250% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;animation:nameShine 7s ease-in-out 2.4s infinite}
+.foot .logo .name{background-image:linear-gradient(100deg,#fff 0 40%,var(--gold-2) 50%,#fff 60% 100%)}
+@keyframes nameShine{0%,12%{background-position:100% 0}22%,100%{background-position:0 0}}
+
 /* Первый экран */
 .hero{position:relative;padding:0;min-height:min(820px,92vh);display:grid;align-items:center;overflow:hidden;background:#E4E6EA}
 .hero .ph{position:absolute;inset:0}
@@ -95,54 +113,77 @@ nav.menu a:hover{color:var(--smalt)}
 .hero-trust b{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:#fff;border:1px solid var(--line);color:var(--smalt)}
 .hero-trust b svg{width:22px;height:22px}
 
-/* Квиз */
+/* Квиз-диалог с помощником */
 .quiz-sec{padding-top:clamp(56px,7vw,96px)}
-.quiz{display:grid;grid-template-columns:1fr 360px;background:var(--paper);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 40px 80px -48px rgba(15,29,71,.45);border:1px solid var(--line)}
-.quiz-main{padding:clamp(24px,4vw,52px)}
-.q-top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:26px}
-.q-count{font-weight:700;color:var(--muted);font-size:14px;white-space:nowrap}
-.q-prog{flex:1;height:6px;background:#EDEEF1;border-radius:9px;overflow:hidden;max-width:420px}
-.q-prog span{display:block;height:100%;width:20%;background:linear-gradient(90deg,var(--smalt),var(--smalt-2));border-radius:9px;transition:width .35s}
-.q-step{display:none}
-.q-step.on{display:block}
-.q-step h3{font-family:var(--display);font-weight:400;font-size:clamp(24px,2.6vw,32px);margin-bottom:24px}
-.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
-.opt{position:relative;cursor:pointer}
-.opt input{position:absolute;opacity:0;pointer-events:none}
-.opt .card{display:flex;flex-direction:column;height:100%;border:1.5px solid var(--line);border-radius:var(--r-md);overflow:hidden;transition:border-color .15s,box-shadow .15s;background:#fff}
-.opt .card .ph{aspect-ratio:16/10}
-.opt .card span{padding:14px 16px;font-weight:700;font-size:16px}
-.opt .card small{display:block;font-weight:500;color:var(--muted);font-size:13px;margin-top:2px}
-.opt.txt .card span{padding:18px 18px}
-.opt input:checked + .card{border-color:var(--smalt);box-shadow:0 0 0 1.5px var(--smalt)}
-.opt input:focus-visible + .card{outline:3px solid var(--gold);outline-offset:2px}
-.area-box{display:grid;gap:18px;max-width:560px}
-.area-num{font-family:var(--display);font-size:56px;line-height:1;color:var(--smalt);font-variant-numeric:tabular-nums}
-.area-num small{font-family:var(--body);font-size:20px;color:var(--muted);margin-left:6px}
-input[type=range]{width:100%;accent-color:var(--smalt);height:28px}
-.ticks{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
-.q-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:34px}
-.q-back{background:none;border:0;font-weight:700;color:var(--muted);cursor:pointer;padding:10px 4px;font-size:15px}
-.q-back[hidden]{display:none}
-.lead-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:620px}
+.quiz{display:grid;grid-template-columns:1fr 380px;background:var(--paper);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 40px 80px -48px rgba(15,29,71,.45);border:1px solid var(--line);min-height:640px}
+.chat{display:flex;flex-direction:column;min-width:0;background:linear-gradient(180deg,#FBFBFA,#F3F4F7)}
+.chat-head{display:flex;align-items:center;gap:14px;padding:18px 24px;background:#fff;border-bottom:1px solid var(--line)}
+.ava{width:48px;height:48px;border-radius:50%;background:#EEF1FA;display:grid;place-items:center;flex:none;position:relative}
+.ava .lg{width:34px;height:34px}
+.ava::after{content:"";position:absolute;right:1px;bottom:1px;width:11px;height:11px;border-radius:50%;background:#2FB27A;border:2px solid #fff}
+.chat-head b{display:block;font-size:16px}
+.chat-head small{color:var(--muted);font-size:13px}
+.chat-reset{margin-left:auto;background:none;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-weight:600;font-size:13px;color:var(--muted);cursor:pointer}
+.chat-reset:hover{color:var(--ink);border-color:var(--ink)}
+.prog{display:flex;gap:6px;padding:0 24px;margin-top:14px}
+.prog i{flex:1;height:4px;border-radius:4px;background:#E3E5EB;transition:background .4s}
+.prog i.on{background:var(--smalt)}
+.msgs{flex:1;overflow-y:auto;padding:20px 24px 10px;display:flex;flex-direction:column;gap:12px;max-height:470px;scroll-behavior:smooth}
+.m{max-width:min(520px,86%);padding:13px 17px;border-radius:18px;font-size:16px;line-height:1.5;animation:mIn .35s cubic-bezier(.2,.9,.3,1.2) both}
+.m.bot{background:#fff;border:1px solid var(--line);border-bottom-left-radius:6px;align-self:flex-start;box-shadow:0 6px 18px -14px rgba(15,29,71,.35)}
+.m.me{background:var(--smalt);color:#fff;border-bottom-right-radius:6px;align-self:flex-end}
+.m.tip{background:#FBF5E6;border:1px solid #EFDFB4;color:#5A4614;font-size:14px;align-self:flex-start;border-bottom-left-radius:6px}
+.m.tip b{color:#8A6620}
+@keyframes mIn{from{opacity:0;transform:translateY(10px) scale(.97)}}
+.typing{display:inline-flex;gap:5px;padding:16px 18px}
+.typing i{width:8px;height:8px;border-radius:2px;background:var(--smalt-2);animation:dot 1s ease-in-out infinite;transform:rotate(45deg)}
+.typing i:nth-child(2){animation-delay:.15s;background:var(--gold)}
+.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dot{0%,60%,100%{transform:rotate(45deg) translateY(0);opacity:.45}30%{transform:rotate(45deg) translateY(-6px);opacity:1}}
+.ava.talk .lg .t{animation:talk .6s ease-in-out infinite;animation-delay:calc(var(--i)*60ms)}
+@keyframes talk{50%{transform:translate(var(--dx),var(--dy)) scale(1.12)}}
+.answers{padding:16px 24px 22px;border-top:1px solid var(--line);background:#fff;min-height:96px}
+.ans{display:flex;flex-wrap:wrap;gap:10px;animation:mIn .35s both}
+.a-btn{display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:10px 16px 10px 10px;font:600 15px var(--body);color:var(--ink);cursor:pointer;text-align:left;transition:border-color .15s,background .15s,transform .15s}
+.a-btn:hover{border-color:var(--smalt);transform:translateY(-2px)}
+.a-btn.txt{padding:13px 18px}
+.a-btn .th{width:52px;height:40px;border-radius:9px;flex:none}
+.a-btn small{display:block;font-weight:500;color:var(--muted);font-size:12.5px}
+.a-btn.sel{border-color:var(--smalt);background:#EEF2FC;box-shadow:inset 0 0 0 1px var(--smalt)}
+.a-btn .ck{width:20px;height:20px;border-radius:6px;border:1.5px solid #C5C9D3;flex:none;display:grid;place-items:center;font-size:13px;color:#fff}
+.a-btn.sel .ck{background:var(--smalt);border-color:var(--smalt)}
+.a-row{display:flex;gap:10px;margin-top:12px;align-items:center;flex-wrap:wrap}
+.a-row .btn{padding:14px 24px;font-size:15px}
+.contact{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end}
+.contact .field input{padding:14px 16px;font-size:16px}
+.agree{font-size:12.5px;color:var(--muted);margin-top:10px}
+.msg{font-size:14px;font-weight:600;min-height:20px;margin-top:8px}
+.msg.ok{color:#1E7A5B}
+.msg.err{color:#B3261E}
 .field{display:grid;gap:7px}
 .field label{font-size:14px;font-weight:600;color:var(--muted)}
 .field input{font:600 17px var(--body);padding:16px 18px;border-radius:12px;border:1.5px solid var(--line);background:#fff;color:var(--ink)}
 .field input:focus{outline:none;border-color:var(--smalt)}
-.agree{font-size:13px;color:var(--muted);margin-top:14px}
-.msg{font-size:15px;font-weight:600;min-height:22px;margin-top:12px}
-.msg.ok{color:#1E7A5B}
-.msg.err{color:#B3261E}
-.quiz-side{background:var(--smalt-ink);color:#fff;padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:22px;position:relative;overflow:hidden}
-.quiz-side::before{content:"";position:absolute;right:-60px;bottom:-60px;width:220px;height:220px;background:
- conic-gradient(from 20deg,var(--smalt) 0 25%,var(--smalt-2) 0 50%,#16296A 0 75%,var(--gold) 0);opacity:.25;border-radius:28px;transform:rotate(18deg)}
-.quiz-side .lbl{font-size:13px;color:#AAB6DD;font-weight:600}
-.est{font-family:var(--display);font-size:clamp(28px,2.6vw,36px);line-height:1.1;font-variant-numeric:tabular-nums}
+
+.calc-side{background:var(--smalt-ink);color:#fff;padding:28px;display:flex;flex-direction:column;gap:20px;position:relative;overflow:hidden}
+.calc-side::before{content:"";position:absolute;right:-70px;top:-70px;width:220px;height:220px;background:conic-gradient(from 20deg,var(--smalt) 0 25%,var(--smalt-2) 0 50%,#16296A 0 75%,var(--gold) 0);opacity:.22;border-radius:30px;transform:rotate(18deg)}
+.calc-side .lbl{font-size:13px;color:#AAB6DD;font-weight:600;position:relative}
+.est{font-family:var(--display);font-size:clamp(28px,2.6vw,36px);line-height:1.1;font-variant-numeric:tabular-nums;position:relative}
 .est-note{font-size:13px;color:#AAB6DD}
-.side-list{list-style:none;display:grid;gap:12px;font-size:15px;position:relative}
-.side-list li{display:flex;gap:10px}
-.side-list li::before{content:"";flex:none;width:10px;height:10px;margin-top:8px;background:var(--gold-2);border-radius:2px;transform:rotate(45deg)}
-.gift{margin-top:auto;position:relative;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:16px;font-size:14px}
+.bars{display:grid;gap:12px;position:relative}
+.bar-i{display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:14px}
+.bar-i span:last-child{font-variant-numeric:tabular-nums;color:#D7DDF0}
+.bar-i em{grid-column:1/-1;height:6px;border-radius:6px;background:rgba(255,255,255,.1);overflow:hidden;font-style:normal}
+.bar-i em b{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--smalt-2),#6E8BE0);transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.bar-i.g em b{background:linear-gradient(90deg,var(--gold),var(--gold-2))}
+.bar-i.off{opacity:.38}
+.side-area{position:relative;display:grid;gap:8px;border-top:1px solid rgba(255,255,255,.14);padding-top:16px}
+.side-area div{display:flex;justify-content:space-between;font-size:14px;color:#C6CFEA}
+.side-area b{color:#fff;font-variant-numeric:tabular-nums}
+.side-area input{accent-color:var(--gold-2);width:100%}
+.term{display:flex;justify-content:space-between;font-size:14px;color:#C6CFEA;position:relative}
+.term b{color:#fff}
+.gift{margin-top:auto;position:relative;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px 16px;font-size:14px}
 .gift b{color:var(--gold-2)}
 
 /* Стили / портфолио */
@@ -281,7 +322,13 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
   .prices,.steps{grid-template-columns:1fr}
   .styles{grid-template-columns:1fr;grid-auto-rows:260px}
   .st:nth-child(1){grid-column:span 1;grid-row:span 1}
-  .lead-fields{grid-template-columns:1fr}
+  .contact{grid-template-columns:1fr}
+  .msgs{max-height:420px;padding:16px}
+  .answers{padding:14px 16px 18px}
+  .chat-head{padding:14px 16px}
+  .prog{padding:0 16px}
+  .chat-reset{padding:7px 10px;font-size:12px}
+  .quiz{min-height:0}
   .bath-txt ul{grid-template-columns:1fr}
   .foot{grid-template-columns:1fr}
   .q-nav .btn{flex:1}
@@ -306,17 +353,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
 <header class="site">
   <div class="wrap bar">
     <a class="logo" href="#top" aria-label="Смальтэра — на главную">
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#B8913F" transform="rotate(45 46.85 17.15)"/>
-        <rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(6.4 34.35 11.13)"/>
-        <rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-32.1 20.83 14.22)"/>
-        <rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-70.7 12.18 25.06)"/>
-        <rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-109.3 12.18 38.94)"/>
-        <rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-147.9 20.83 49.78)"/>
-        <rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-186.4 34.35 52.87)"/>
-        <rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-225 46.85 46.85)"/>
-        <path d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#B8913F"/>
-      </svg>
+      <svg class="lg " viewBox="0 0 64 64" aria-hidden="true"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#B8913F" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#B8913F"/></svg>
       <span><span class="name">СМАЛЬТЭРА</span><span class="tag">РЕМОНТ КВАРТИР</span></span>
     </a>
     <nav class="menu" aria-label="Разделы">
@@ -358,83 +395,41 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
     <div class="head-row">
       <div>
         <h2>Узнайте цену ремонта за минуту</h2>
-        <p class="sub">Ответьте на 4 вопроса, и калькулятор покажет примерную стоимость. Точную смету инженер составит после бесплатного замера.</p>
+        <p class="sub">Помощник задаст 5 коротких вопросов и сразу посчитает стоимость. Точную смету инженер составит после бесплатного замера.</p>
       </div>
     </div>
 
     <div class="quiz">
-      <form class="quiz-main" id="quizForm" novalidate>
-        <div class="q-top">
-          <div class="q-prog" aria-hidden="true"><span id="qBar"></span></div>
-          <div class="q-count" id="qCount">Вопрос 1 из 4</div>
+      <div class="chat">
+        <div class="chat-head">
+          <span class="ava" id="ava"><svg class="lg av" viewBox="0 0 64 64" aria-hidden="true"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#B8913F" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#B8913F"/></svg></span>
+          <div><b>Смальта</b><small>помощник по расчёту ремонта</small></div>
+          <button type="button" class="chat-reset" id="reset">Начать заново</button>
         </div>
+        <div class="prog" id="prog" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="msgs" id="msgs" aria-live="polite"></div>
+        <div class="answers" id="answers"></div>
+      </div>
 
-        <div class="q-step on" data-step="1">
-          <h3>Какая у вас квартира?</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="flat" value="new" checked><span class="card"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=700" alt="" onerror="this.classList.add('err')"></span><span>Новостройка<small>без отделки или white box</small></span></span></label>
-            <label class="opt"><input type="radio" name="flat" value="old"><span class="card"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=700" alt="" onerror="this.classList.add('err')"></span><span>Вторичное жильё<small>с демонтажом старой отделки</small></span></span></label>
-          </div>
-        </div>
-
-        <div class="q-step" data-step="2">
-          <h3>Какая площадь квартиры?</h3>
-          <div class="area-box">
-            <div class="area-num"><span id="areaOut">54</span><small>м²</small></div>
-            <input type="range" id="area" min="20" max="200" step="1" value="54" aria-label="Площадь квартиры, м²">
-            <div class="ticks"><span>20 м²</span><span>100 м²</span><span>200 м²</span></div>
-          </div>
-        </div>
-
-        <div class="q-step" data-step="3">
-          <h3>Какой ремонт планируете?</h3>
-          <div class="opts">
-            <label class="opt txt"><input type="radio" name="kind" value="cosm"><span class="card"><span>Косметический<small>стены, полы, потолки, двери</small></span></span></label>
-            <label class="opt txt"><input type="radio" name="kind" value="cap" checked><span class="card"><span>Капитальный<small>с электрикой, сантехникой, стяжкой</small></span></span></label>
-            <label class="opt txt"><input type="radio" name="kind" value="design"><span class="card"><span>Дизайнерский<small>по дизайн-проекту, сложные решения</small></span></span></label>
-            <label class="opt txt"><input type="radio" name="kind" value="unknown"><span class="card"><span>Пока не знаю<small>поможем выбрать на замере</small></span></span></label>
-          </div>
-        </div>
-
-        <div class="q-step" data-step="4">
-          <h3>Когда хотите начать?</h3>
-          <div class="opts">
-            <label class="opt txt"><input type="radio" name="when" value="now" checked><span class="card"><span>В ближайшие 2 недели</span></span></label>
-            <label class="opt txt"><input type="radio" name="when" value="month"><span class="card"><span>В течение месяца</span></span></label>
-            <label class="opt txt"><input type="radio" name="when" value="later"><span class="card"><span>Через 2–3 месяца</span></span></label>
-            <label class="opt txt"><input type="radio" name="when" value="keys"><span class="card"><span>Жду ключи от застройщика</span></span></label>
-          </div>
-        </div>
-
-        <div class="q-step" data-step="5">
-          <h3>Куда отправить подробный расчёт?</h3>
-          <div class="lead-fields">
-            <div class="field"><label for="qName">Имя</label><input id="qName" type="text" autocomplete="name" placeholder="Как к вам обращаться"></div>
-            <div class="field"><label for="qPhone">Телефон</label><input id="qPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></div>
-          </div>
-          <p class="agree">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
-          <div class="msg" id="qMsg" role="status"></div>
-        </div>
-
-        <div class="q-nav">
-          <button type="button" class="q-back" id="qBack" hidden>Назад</button>
-          <button type="button" class="btn btn-main" id="qNext">Дальше</button>
-        </div>
-      </form>
-
-      <aside class="quiz-side" aria-live="polite">
+      <aside class="calc-side" aria-live="polite">
         <div>
           <div class="lbl">Примерная стоимость работ</div>
           <div class="est" id="est">—</div>
           <div class="est-note">без учёта чистовых материалов</div>
         </div>
-        <ul class="side-list">
-          <li id="sFlat">Новостройка</li>
-          <li id="sArea">54 м²</li>
-          <li id="sKind">Капитальный ремонт</li>
-          <li id="sTerm">Срок около 10 недель</li>
-        </ul>
-        <div class="gift"><b>Подарок за расчёт:</b> чек-лист приёмки ремонта из 47 пунктов. Пришлём вместе со сметой.</div>
+        <div class="bars">
+          <div class="bar-i" id="bWork"><span>Ремонтные работы</span><span>—</span><em><b></b></em></div>
+          <div class="bar-i g off" id="bBath"><span>Санузел под ключ</span><span>—</span><em><b></b></em></div>
+          <div class="bar-i off" id="bCeil"><span>Натяжные потолки</span><span>—</span><em><b></b></em></div>
+          <div class="bar-i off" id="bWarm"><span>Тёплый пол</span><span>—</span><em><b></b></em></div>
+          <div class="bar-i g off" id="bDes"><span>Дизайн-проект</span><span>—</span><em><b></b></em></div>
+        </div>
+        <div class="side-area">
+          <div><span>Площадь квартиры</span><b id="areaOut">54 м²</b></div>
+          <input type="range" id="area" min="18" max="200" step="1" value="54" aria-label="Площадь квартиры, м²">
+        </div>
+        <div class="term"><span>Срок ремонта</span><b id="term">—</b></div>
+        <div class="gift"><b>Подарок за расчёт:</b> чек-лист приёмки ремонта. Пришлём вместе со сметой.</div>
       </aside>
     </div>
   </div>
@@ -621,17 +616,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
     <div class="foot">
       <div>
         <a class="logo" href="#top" aria-label="Смальтэра — наверх">
-          <svg viewBox="0 0 64 64" aria-hidden="true" style="width:42px;height:42px">
-            <rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#D8B66A" transform="rotate(45 46.85 17.15)"/>
-            <rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#4A6BC4" transform="rotate(6.4 34.35 11.13)"/>
-            <rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#3556B0" transform="rotate(-32.1 20.83 14.22)"/>
-            <rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#4A6BC4" transform="rotate(-70.7 12.18 25.06)"/>
-            <rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#3556B0" transform="rotate(-109.3 12.18 38.94)"/>
-            <rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#4A6BC4" transform="rotate(-147.9 20.83 49.78)"/>
-            <rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#3556B0" transform="rotate(-186.4 34.35 52.87)"/>
-            <rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#4A6BC4" transform="rotate(-225 46.85 46.85)"/>
-            <path d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#D8B66A"/>
-          </svg>
+          <svg class="lg " viewBox="0 0 64 64" aria-hidden="true" style="width:42px;height:42px"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#D8B66A" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#4A6BC4" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#3556B0" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#4A6BC4" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#3556B0" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#4A6BC4" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#3556B0" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#4A6BC4" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#D8B66A"/></svg>
           <span><span class="name">СМАЛЬТЭРА</span><span class="tag">РЕМОНТ КВАРТИР</span></span>
         </a>
         <p style="margin-top:16px">Ремонт квартир под ключ в Екатеринбурге с фиксированной сметой.</p>
@@ -656,55 +641,221 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
 
 <script>
 (function(){
-  /* ===== Цены (меняйте здесь) ===== */
-  var RATES = { cosm:4500, cap:9500, design:15000, unknown:9500 };   /* ₽ за м², только работы */
-  var OLD_FLAT = 1.15;                                                 /* вторичка: +15% за демонтаж */
-  var DAYS = { cosm:[16,0.4], cap:[38,0.7], design:[55,1.0], unknown:[38,0.7] };
-  var KIND_NAME = { cosm:'Косметический ремонт', cap:'Капитальный ремонт', design:'Дизайнерский ремонт', unknown:'Тип ремонта уточним' };
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var form = document.getElementById('quizForm');
-  var steps = form.querySelectorAll('.q-step');
-  var total = steps.length, cur = 1;
-  var bar = document.getElementById('qBar'), count = document.getElementById('qCount');
-  var next = document.getElementById('qNext'), back = document.getElementById('qBack');
-  var area = document.getElementById('area');
-
-  function val(name){ var el = form.querySelector('input[name='+name+']:checked'); return el ? el.value : null; }
-  function money(n){ return (Math.round(n/1000)*1000).toLocaleString('ru-RU'); }
-  function weeks(n){ var m = n % 100, l = n % 10; if (m > 10 && m < 20) return n+' недель'; if (l === 1) return n+' недели'; if (l > 1 && l < 5) return n+' недель'; return n+' недель'; }
-
-  function calc(){
-    var a = +area.value, kind = val('kind'), flat = val('flat');
-    document.getElementById('areaOut').textContent = a;
-    var per = RATES[kind] * (flat === 'old' ? OLD_FLAT : 1);
-    var sum = per * a;
-    document.getElementById('est').textContent = money(sum*0.9) + ' – ' + money(sum*1.12) + ' ₽';
-    document.getElementById('sFlat').textContent = flat === 'old' ? 'Вторичное жильё' : 'Новостройка';
-    document.getElementById('sArea').textContent = a + ' м²';
-    document.getElementById('sKind').textContent = KIND_NAME[kind];
-    var w = Math.max(3, Math.round((DAYS[kind][0] + DAYS[kind][1]*a)/7));
-    document.getElementById('sTerm').textContent = 'Срок около ' + weeks(w);
-  }
-
-  function show(n){
-    cur = n;
-    steps.forEach(function(s){ s.classList.toggle('on', +s.dataset.step === n); });
-    var shown = Math.min(n, 4);
-    bar.style.width = (n/total*100) + '%';
-    count.textContent = n < total ? ('Вопрос ' + shown + ' из 4') : 'Последний шаг';
-    back.hidden = n === 1;
-    next.textContent = n < total ? 'Дальше' : 'Получить расчёт';
-  }
-
-  next.addEventListener('click', function(){
-    if (cur < total){ show(cur+1); return; }
-    submit(form, 'qPhone', document.getElementById('qMsg'));
+  /* ===== Живой логотип: по клику собирается заново ===== */
+  document.querySelectorAll('.logo').forEach(function(a){
+    a.addEventListener('click', function(){
+      var s = a.querySelector('.lg'); if (!s) return;
+      s.classList.remove('replay'); void s.getBoundingClientRect(); s.classList.add('replay');
+      setTimeout(function(){ s.classList.remove('replay'); }, 1600);
+    });
   });
-  back.addEventListener('click', function(){ if (cur > 1) show(cur-1); });
-  form.addEventListener('input', calc); form.addEventListener('change', calc);
-  calc(); show(1);
 
-  /* ===== Телефон и отправка ===== */
+  /* ===== Цены (меняйте здесь) ===== */
+  var RATES = { cosm:4500, cap:9500, design:15000 };   /* ₽ за м², только работы */
+  var OLD_FLAT = 1.15;                                  /* вторичка: демонтаж +15% */
+  var BATH = { cosm:75000, cap:95000, design:120000 };  /* санузел под ключ, ₽ */
+  var CEIL = 650;                                       /* натяжные потолки, ₽ за м² */
+  var WARM = 2200, WARM_SHARE = 0.25;                   /* тёплый пол, ₽ за м² на четверть площади */
+  var DES = 1200;                                       /* дизайн-проект, ₽ за м² */
+  var DAYS = { cosm:[16,0.4], cap:[38,0.7], design:[55,1.0] };
+  var PHONE = '+7 (343) 000-00-00';
+
+  var S = { flat:'new', area:54, kind:'cap', extras:{}, when:null, name:'' };
+  var IMG = function(id){ return 'https://images.pexels.com/photos/'+id+'/pexels-photo-'+id+'.jpeg?auto=compress&cs=tinysrgb&w=200'; };
+
+  var msgs = document.getElementById('msgs'), answers = document.getElementById('answers');
+  var ava = document.getElementById('ava'), prog = document.getElementById('prog').children;
+  var area = document.getElementById('area');
+  var run = 0;
+
+  /* ----- расчёт ----- */
+  function parts(){
+    var k = S.kind, a = S.area;
+    var work = RATES[k] * a * (S.flat === 'old' ? OLD_FLAT : 1);
+    return {
+      work: work,
+      bath: S.extras.bath ? BATH[k] : 0,
+      ceil: S.extras.ceil ? CEIL * a : 0,
+      warm: S.extras.warm ? WARM * a * WARM_SHARE : 0,
+      des:  S.extras.des ? DES * a : 0
+    };
+  }
+  function money(n){ return (Math.round(n/1000)*1000).toLocaleString('ru-RU'); }
+  function weeksText(w){ var m=w%100,l=w%10; if(m>10&&m<20) return w+' недель'; if(l===1) return w+' неделя'; if(l>1&&l<5) return w+' недели'; return w+' недель'; }
+  var shown = 0;
+  function tween(to){
+    var el = document.getElementById('est'), from = shown, t0 = performance.now(), d = reduce ? 0 : 550;
+    shown = to;
+    function f(now){
+      var p = d ? Math.min(1,(now-t0)/d) : 1; p = 1 - Math.pow(1-p,3);
+      var v = from + (to-from)*p;
+      el.textContent = money(v*0.92) + ' – ' + money(v*1.1) + ' ₽';
+      if (p < 1) requestAnimationFrame(f);
+    }
+    requestAnimationFrame(f);
+  }
+  function setBar(id, val, total){
+    var el = document.getElementById(id);
+    el.classList.toggle('off', !val);
+    el.children[1].textContent = val ? money(val) + ' ₽' : '—';
+    el.querySelector('em b').style.width = (val && total ? Math.max(4, val/total*100) : 0) + '%';
+  }
+  function calc(){
+    var p = parts(), total = p.work + p.bath + p.ceil + p.warm + p.des;
+    tween(total);
+    setBar('bWork', p.work, total); setBar('bBath', p.bath, total); setBar('bCeil', p.ceil, total);
+    setBar('bWarm', p.warm, total); setBar('bDes', p.des, total);
+    document.getElementById('areaOut').textContent = S.area + ' м²';
+    var w = Math.max(3, Math.round((DAYS[S.kind][0] + DAYS[S.kind][1]*S.area)/7));
+    document.getElementById('term').textContent = 'около ' + weeksText(w);
+    return total;
+  }
+  area.addEventListener('input', function(){ S.area = +area.value; calc(); });
+
+  /* ----- диалог ----- */
+  function wait(ms){ return new Promise(function(r){ setTimeout(r, reduce ? 0 : ms); }); }
+  function scroll(){ msgs.scrollTop = msgs.scrollHeight; }
+  function add(cls, html){ var d = document.createElement('div'); d.className = 'm ' + cls; d.innerHTML = html; msgs.appendChild(d); scroll(); return d; }
+  function say(text, cls){
+    var my = run;
+    var t = add('bot', '<span class="typing"><i></i><i></i><i></i></span>');
+    t.style.padding = '0';
+    ava.classList.add('talk');
+    return wait(Math.min(1100, 450 + text.length * 6)).then(function(){
+      if (my !== run) return Promise.reject('reset');
+      t.style.padding = ''; t.className = 'm ' + (cls || 'bot');
+      if (reduce || /<[a-z]/i.test(text)){ t.innerHTML = text; ava.classList.remove('talk'); scroll(); return; }
+      return new Promise(function(res){
+        var i = 0; t.textContent = '';
+        (function step(){
+          if (my !== run) return;
+          i = Math.min(text.length, i + 2); t.textContent = text.slice(0, i); scroll();
+          if (i < text.length) setTimeout(step, 14); else { ava.classList.remove('talk'); res(); }
+        })();
+      });
+    });
+  }
+  function me(text){ add('me', text); }
+  function progress(n){ for (var i=0;i<prog.length;i++) prog[i].classList.toggle('on', i < n); }
+
+  function options(list, multi){
+    return new Promise(function(resolve){
+      answers.innerHTML = '';
+      var box = document.createElement('div'); box.className = 'ans';
+      var picked = {};
+      list.forEach(function(o){
+        var b = document.createElement('button'); b.type = 'button';
+        b.className = 'a-btn' + (o.img ? '' : ' txt') + (multi && o.on ? ' sel' : '');
+        if (multi && o.on) picked[o.v] = true;
+        b.innerHTML = (multi ? '<span class="ck">✓</span>' : '') +
+          (o.img ? '<span class="th ph"><img src="'+IMG(o.img)+'" alt="" onerror="this.classList.add(\'err\')"></span>' : '') +
+          '<span>' + o.t + (o.s ? '<small>' + o.s + '</small>' : '') + '</span>';
+        b.addEventListener('click', function(){
+          if (!multi){ answers.innerHTML = ''; resolve(o); return; }
+          picked[o.v] = !picked[o.v]; b.classList.toggle('sel', picked[o.v]);
+          S.extras = Object.assign({}, picked); calc();
+        });
+        box.appendChild(b);
+      });
+      answers.appendChild(box);
+      if (multi){
+        S.extras = Object.assign({}, picked); calc();
+        var row = document.createElement('div'); row.className = 'a-row';
+        row.innerHTML = '<button type="button" class="btn btn-main">Готово, дальше</button>';
+        row.firstChild.addEventListener('click', function(){ answers.innerHTML = ''; resolve(list.filter(function(o){ return picked[o.v]; })); });
+        answers.appendChild(row);
+      }
+    });
+  }
+
+  function contactForm(){
+    answers.innerHTML =
+      '<form class="contact" id="cForm" novalidate>' +
+        '<div class="field"><label for="cName">Имя</label><input id="cName" type="text" autocomplete="name" placeholder="Как к вам обращаться"></div>' +
+        '<div class="field"><label for="cPhone">Телефон</label><input id="cPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></div>' +
+        '<button class="btn btn-gold" type="submit">Получить смету</button>' +
+      '</form><div class="msg" id="cMsg" role="status"></div>' +
+      '<p class="agree">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>';
+    var f = document.getElementById('cForm'), ph = document.getElementById('cPhone');
+    mask(ph);
+    f.addEventListener('submit', function(e){
+      e.preventDefault();
+      var digits = ph.value.replace(/\D/g,''), m = document.getElementById('cMsg');
+      if (digits.length < 11){ m.className = 'msg err'; m.textContent = 'Введите номер полностью: 10 цифр после +7.'; ph.focus(); return; }
+      S.name = document.getElementById('cName').value.trim();
+      me(ph.value); answers.innerHTML = ''; progress(6);
+      /* Здесь подключается отправка заявки на почту или в CRM. Пока помощник просит позвонить. */
+      say((S.name ? S.name + ', спасибо! ' : 'Спасибо! ') + 'Онлайн-отправка заявок пока не подключена, поэтому позвоните нам по номеру ' + PHONE + ' и скажите, что делали расчёт на сайте. Инженер продолжит с того же места.').catch(function(){});
+    });
+  }
+
+  function start(){
+    run++; msgs.innerHTML = ''; answers.innerHTML = '';
+    S = { flat:'new', area:54, kind:'cap', extras:{}, when:null, name:'' };
+    area.value = 54; progress(0); calc();
+    var my = run;
+    function alive(){ if (my !== run) throw 'reset'; }
+
+    say('Здравствуйте! Я Смальта, помогу прикинуть стоимость ремонта. Всего 5 вопросов, а цена будет пересчитываться после каждого ответа.')
+    .then(function(){ alive(); return say('Для начала: какая у вас квартира?'); })
+    .then(function(){ alive(); return options([
+        { v:'new', t:'Новостройка', s:'без отделки или white box', img:1571460 },
+        { v:'old', t:'Вторичное жильё', s:'есть старая отделка', img:1643383 } ]); })
+    .then(function(o){ alive(); me(o.t); S.flat = o.v; progress(1); calc();
+        return say(o.v === 'new'
+          ? 'Отлично, в новостройке не нужен демонтаж, это экономит бюджет и время.'
+          : 'Понял. Во вторичке добавим демонтаж старой отделки и вывоз мусора, это примерно +15% к работам.'); })
+    .then(function(){ alive(); return say('Сколько в квартире комнат?'); })
+    .then(function(){ alive(); return options([
+        { v:28, t:'Студия' }, { v:38, t:'1-комнатная' }, { v:56, t:'2-комнатная' },
+        { v:78, t:'3-комнатная' }, { v:105, t:'4 и больше' } ]); })
+    .then(function(o){ alive(); me(o.t); S.area = o.v; area.value = o.v; progress(2); calc();
+        return say('Для такой квартиры типично около ' + o.v + ' м². Если у вас другая площадь, подвиньте ползунок «Площадь квартиры» в расчёте.'); })
+    .then(function(){ alive(); return say('Какой ремонт планируете?'); })
+    .then(function(){ alive(); return options([
+        { v:'cosm', t:'Косметический', s:'стены, полы, потолки' },
+        { v:'cap', t:'Капитальный', s:'с электрикой и сантехникой' },
+        { v:'design', t:'Дизайнерский', s:'по дизайн-проекту' },
+        { v:'unknown', t:'Пока не знаю', s:'помогите выбрать' } ]); })
+    .then(function(o){ alive(); me(o.t); S.kind = o.v === 'unknown' ? 'cap' : o.v; progress(3); calc();
+        var r = { cosm:'Косметика — самый быстрый вариант: обновим стены, полы и потолки без переноса коммуникаций.',
+                  cap:'Капитальный выбирают чаще всего: меняем проводку и трубы, чтобы надолго забыть о них.',
+                  design:'Дизайнерский ремонт ведём строго по проекту, с авторским надзором дизайнера.',
+                  unknown:'Ничего страшного. Посчитаю по капитальному, а на замере инженер подскажет, что действительно нужно.' }[o.v];
+        return say(r).then(function(){
+          if (S.flat === 'old' && o.v !== 'cosm') return say('<b>Совет:</b> во вторичке почти всегда стоит менять проводку. Старая алюминиевая не рассчитана на современную технику.', 'tip');
+        }); })
+    .then(function(){ alive(); return say('Что добавить в расчёт? Можно выбрать несколько.'); })
+    .then(function(){ alive(); return options([
+        { v:'bath', t:'Санузел под ключ', on: S.kind !== 'cosm' },
+        { v:'ceil', t:'Натяжные потолки' },
+        { v:'warm', t:'Тёплый пол' },
+        { v:'des', t:'Дизайн-проект' } ], true); })
+    .then(function(list){ alive(); me(list.length ? list.map(function(o){ return o.t; }).join(', ') : 'Ничего не нужно'); progress(4); calc();
+        var txt = !list.length ? 'Хорошо, считаем только основные работы.'
+          : S.extras.des ? 'Добавил. Дизайн-проект — хорошая идея: с ним бригада не гадает, где розетки и свет, и переделок не бывает.'
+          : 'Добавил в расчёт, посмотрите разбивку по статьям.';
+        return say(txt); })
+    .then(function(){ alive(); return say('И последнее: когда хотите начать?'); })
+    .then(function(){ alive(); return options([
+        { v:'now', t:'В ближайшие 2 недели' }, { v:'month', t:'В течение месяца' },
+        { v:'later', t:'Через 2–3 месяца' }, { v:'keys', t:'Жду ключи от застройщика' } ]); })
+    .then(function(o){ alive(); me(o.t); S.when = o.v; progress(5);
+        var r = { now:'Хорошо, тогда замер лучше назначить уже на этой неделе.',
+                  month:'Отлично, как раз хватит времени спокойно согласовать смету и материалы.',
+                  later:'Самое время: смета будет готова заранее, и вы спокойно спланируете бюджет.',
+                  keys:'Смету можно подготовить заранее по планировке, а замер сделать сразу после получения ключей.' }[o.v];
+        return say(r); })
+    .then(function(){ alive(); var t = calc();
+        return say('Готово! По вашим ответам работы обойдутся примерно в ' + money(t*0.92) + ' – ' + money(t*1.1) + ' ₽. Оставьте телефон: инженер уточнит детали и пришлёт подробную смету с чек-листом приёмки.'); })
+    .then(function(){ alive(); contactForm(); })
+    .catch(function(){ /* диалог перезапущен */ });
+  }
+  document.getElementById('reset').addEventListener('click', start);
+
+  /* ===== Телефон ===== */
   function mask(el){
     el.addEventListener('input', function(){
       var d = el.value.replace(/\D/g,'');
@@ -720,21 +871,23 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
       el.value = o;
     });
   }
-  mask(document.getElementById('qPhone')); mask(document.getElementById('fPhone'));
-
-  /* Сюда подключается отправка заявки (почта или CRM). Пока показывается сообщение. */
-  function submit(formEl, phoneId, msg){
-    var ph = document.getElementById(phoneId).value.replace(/\D/g,'');
-    if (ph.length < 11){
-      msg.className = 'msg err';
-      msg.textContent = 'Введите номер телефона полностью: 10 цифр после +7.';
-      return;
-    }
-    msg.className = 'msg ok';
-    msg.textContent = 'Отправка заявок ещё не подключена: позвоните нам по номеру в шапке сайта.';
-  }
+  mask(document.getElementById('fPhone'));
   var ff = document.getElementById('finalForm');
-  ff.addEventListener('submit', function(e){ e.preventDefault(); submit(ff, 'fPhone', ff.querySelector('.msg')); });
+  ff.addEventListener('submit', function(e){
+    e.preventDefault();
+    var m = ff.querySelector('.msg'), d = document.getElementById('fPhone').value.replace(/\D/g,'');
+    if (d.length < 11){ m.className = 'msg err'; m.textContent = 'Введите номер телефона полностью: 10 цифр после +7.'; return; }
+    m.className = 'msg ok'; m.textContent = 'Онлайн-отправка заявок пока не подключена: позвоните нам по номеру ' + PHONE + '.';
+  });
+
+  /* Диалог стартует, когда блок расчёта появляется на экране */
+  var started = false;
+  function go(){ if (!started){ started = true; start(); } }
+  calc();
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ go(); io.disconnect(); } }); }, { threshold:.25 });
+    io.observe(document.getElementById('quiz'));
+  } else go();
 })();
 </script>
 </body>
