@@ -5,27 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Смальтэра — ремонт квартир в Екатеринбурге</title>
 <meta name="description" content="Ремонт квартир под ключ в Екатеринбурге. Фиксированная смета в договоре, бесплатный замер, оплата по этапам. Рассчитайте стоимость за минуту.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231F3B8C'/%3E%3Cpath d='M44 20a17 17 0 1 0 0 24' stroke='%23D8B66A' stroke-width='7' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232340D9'/%3E%3Cpath d='M44 20a17 17 0 1 0 0 24' stroke='%23D7FF3A' stroke-width='7' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Prata&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* Светлый премиум: белый воздух, глубокий синий смальты, золото мозаики */
-  --bg:#F6F6F3;
+  /* Стиль Б: белый воздух, огромные заголовки, яркий синий и лаймовые стикеры */
+  --bg:#F4F4F1;
   --paper:#FFFFFF;
-  --ink:#15171C;
-  --muted:#5F6472;
-  --line:#E2E3E6;
-  --smalt:#1F3B8C;
-  --smalt-2:#2D4FA8;
-  --smalt-ink:#0F1D47;
-  --gold:#B8913F;
-  --gold-2:#D8B66A;
-  --display:"Prata", Georgia, "Times New Roman", serif;
-  --body:"Manrope", "Segoe UI", Roboto, Arial, sans-serif;
-  --r-lg:22px; --r-md:14px;
-  /* Макет: крупные фото во всю ширину, текст слева, одна плавающая карточка-квиз */
+  --ink:#0A0A0A;
+  --muted:#55575E;
+  --line:#E5E5E3;
+  --smalt:#2340D9;
+  --smalt-2:#4D66F2;
+  --smalt-ink:#101114;
+  --gold:#D7FF3A;
+  --gold-2:#E6FF85;
+  --display:"Unbounded", "Arial Black", system-ui, sans-serif;
+  --body:"Inter Tight", "Segoe UI", Roboto, Arial, sans-serif;
+  --r-lg:26px; --r-md:16px;
   color-scheme: light;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -548,6 +547,95 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
   .pop-card{padding:24px}
 }
 
+
+/* Переопределения под стиль Б */
+h1,h2{font-weight:700;letter-spacing:-.035em;line-height:1.02}
+h2{font-size:clamp(28px,3.6vw,50px)}
+h3{font-family:var(--body);font-weight:700}
+:focus-visible{outline-color:var(--smalt)!important}
+.btn{border-radius:999px;font-weight:700}
+.btn-gold{color:#0A0A0A!important}
+.btn-gold:hover{background:#C6F01E!important}
+.btn-main:hover{background:#1A31B0}
+.gift-badge,.pre li::before,.hit-tag,.offer i,.final-pts li::before,.pop-doc i,.a-btn.go{color:#0A0A0A!important}
+.a-btn.go:hover{background:#C6F01E!important;border-color:#C6F01E!important}
+.stage-n,.h-bub b,.sv-list li::before{color:var(--smalt)}
+.sv-list li::before,.type li::before{background:var(--smalt)}
+.gift-chip{background:var(--gold);border-color:var(--gold);color:#0A0A0A}
+.gift-sec{background:var(--gold);border:0}
+.gift-sec .sub,.gift-cta span{color:#2B2F12}
+.gift-badge{background:#0A0A0A;color:#fff!important}
+.gift-list li{border-color:rgba(0,0,0,.08)}
+.hc b{font-size:20px;color:var(--ink);letter-spacing:-.02em}
+.sv-cap h3,.stage h3,.pop-card h3,.final-card h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em}
+.est,.price .val,.ctor-sum b,.sv-sum b,.qp-sum,.bath-price,.area-num{font-family:var(--display);font-weight:600;letter-spacing:-.03em}
+.topline{background:#0A0A0A}
+.offer{border-radius:999px}
+.logo .name{letter-spacing:.06em;font-family:var(--display);font-weight:700;text-transform:lowercase;font-size:20px}
+.logo .tag{letter-spacing:.08em}
+
+/* Первый экран в стиле Б */
+.hero{background:var(--paper);min-height:0;display:block;padding:clamp(28px,4vw,56px) 0 clamp(48px,6vw,88px)}
+.hero h1{font-size:clamp(44px,8.4vw,124px);max-width:none;line-height:.95;letter-spacing:-.045em;margin-top:18px}
+.hero h1 span{color:var(--smalt)}
+.hero-row{display:grid;grid-template-columns:minmax(0,440px) 1fr;gap:clamp(24px,4vw,56px);margin-top:clamp(24px,3vw,40px);align-items:start}
+.hero .sub{color:#3B3D42;font-size:clamp(17px,1.5vw,20px);margin-top:0}
+.hero .hero-img.ph{position:relative;inset:auto}
+.hero .hero-img.ph::after{display:none}
+.hero-img{position:relative;border-radius:30px;overflow:hidden;aspect-ratio:16/10;background:linear-gradient(135deg,#E9ECF5,#D3D8E6)}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+.sticker{position:absolute;right:22px;top:22px;width:150px;height:150px;border-radius:50%;background:var(--gold);display:grid;place-items:center;text-align:center;font-family:var(--display);font-weight:700;font-size:16px;line-height:1.15;transform:rotate(-10deg);box-shadow:0 18px 40px -18px rgba(0,0,0,.45);text-decoration:none;color:#0A0A0A;animation:stk 6s ease-in-out infinite}
+@keyframes stk{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(-4deg) scale(1.04)}}
+.hero-badge{position:absolute;left:18px;bottom:18px;background:rgba(255,255,255,.92);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:700}
+.hero .qp{margin-top:26px;max-width:none;box-shadow:none;background:var(--bg);border:0}
+.hero .hero-cta{margin-top:26px}
+@media (max-width:900px){ .hero-row{grid-template-columns:1fr} .sticker{width:112px;height:112px;font-size:12.5px;right:12px;top:12px} }
+
+/* Сетка услуг */
+.svc{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.svc a{position:relative;display:flex;flex-direction:column;background:var(--paper);border-radius:22px;overflow:hidden;text-decoration:none;color:inherit;border:1px solid var(--line);transition:transform .2s,box-shadow .2s}
+.svc a:hover{transform:translateY(-4px);box-shadow:0 26px 50px -30px rgba(0,0,0,.35)}
+.svc .ph{aspect-ratio:4/3}
+.svc .t{padding:16px 18px 18px;display:grid;gap:4px}
+.svc b{font-size:17px}
+.svc span{font-size:14px;color:var(--muted)}
+.svc em{font-style:normal;font-family:var(--display);font-weight:600;font-size:17px;color:var(--smalt);margin-top:6px;letter-spacing:-.02em}
+.svc .tag{position:absolute;left:12px;top:12px;background:var(--gold);color:#0A0A0A;font-size:12px;font-weight:800;padding:6px 10px;border-radius:999px}
+@media (max-width:1080px){ .svc{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:520px){ .svc{grid-template-columns:1fr 1fr;gap:10px} .svc .t{padding:12px} .svc b{font-size:15px} .svc .t > span{display:none} .svc em{font-size:14px} }
+
+/* Таблица цен */
+.ptable-wrap{overflow-x:auto;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg)}
+.ptable{width:100%;border-collapse:collapse;min-width:760px}
+.ptable th,.ptable td{padding:18px 20px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.ptable thead th{font-size:13px;color:var(--muted);font-weight:700;background:#FAFAF8}
+.ptable td:first-child b{display:block;font-size:17px}
+.ptable td:first-child span{display:block;font-size:13px;color:var(--muted)}
+.ptable td:last-child,.ptable th:last-child,.ptable td:nth-child(4){white-space:nowrap}
+.ctor-sec{padding-top:clamp(64px,9vw,120px)!important}
+.ptable td.p{font-family:var(--display);font-weight:600;color:var(--smalt);white-space:nowrap;font-size:18px;letter-spacing:-.02em}
+.ptable td{font-size:15px;color:#3B3D42}
+.ptable tr:last-child td{border-bottom:0}
+.ptable tr.hl td{background:#F2F5FF}
+.ptable .gift-chip{display:inline-block;margin-top:8px;font-size:12px;padding:5px 10px}
+.pnote{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+.pnote div{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px 18px;font-size:14px;color:var(--muted)}
+.pnote b{display:block;color:var(--ink);font-size:15px;margin-bottom:4px}
+@media (max-width:720px){ .pnote{grid-template-columns:1fr} }
+
+/* Условия работы */
+.terms{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.term-c{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:24px;display:grid;gap:10px;align-content:start}
+.term-c i{width:46px;height:46px;border-radius:14px;background:var(--smalt);display:grid;place-items:center;color:#fff;font-style:normal;font-family:var(--display);font-weight:700}
+.term-c:nth-child(2) i{background:var(--gold);color:#0A0A0A}
+.term-c b{font-size:18px}
+.term-c p{font-size:15px;color:var(--muted)}
+@media (max-width:1080px){ .terms{grid-template-columns:1fr 1fr} }
+@media (max-width:620px){ .terms{grid-template-columns:1fr} }
+
+/* Обратный звонок */
+.cb-card .field{margin-bottom:10px}
+
 /* Нижняя панель на телефоне */
 .mbar{display:none}
 
@@ -610,10 +698,11 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
 <header class="site">
   <div class="wrap bar">
     <a class="logo" href="#top" aria-label="Смальтэра — на главную">
-      <svg class="lg " viewBox="0 0 64 64" aria-hidden="true"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#B8913F" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#B8913F"/></svg>
+      <svg class="lg " viewBox="0 0 64 64" aria-hidden="true"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#0A0A0A" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#2340D9" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#2340D9" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#2340D9" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#0A0A0A"/></svg>
       <span><span class="name">СМАЛЬТЭРА</span><span class="tag">РЕМОНТ КВАРТИР</span></span>
     </a>
     <nav class="menu" aria-label="Разделы">
+      <a href="#services">Услуги</a>
       <a href="#quiz">Расчёт</a>
       <a href="#ctor">Стили</a>
       <a href="#prices">Цены</a>
@@ -623,7 +712,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
     <div class="bar-r">
       <div class="hdr-msgr" data-msgr></div>
       <a class="phone" href="tel:+73430000000">+7 (343) 000-00-00<small>звонок бесплатный</small></a>
-      <a class="btn btn-main" href="#final">Вызвать замерщика</a>
+      <button type="button" class="btn btn-main" data-cb>Заказать звонок</button>
     </div>
   </div>
 </header>
@@ -631,93 +720,88 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
 <main id="top">
 
 <section class="hero" id="hero">
-  <div class="ph"><img src="https://images.pexels.com/photos/6908500/pexels-photo-6908500.jpeg?auto=compress&cs=tinysrgb&w=2000" alt="Светлая гостиная после ремонта" fetchpriority="high" onerror="this.classList.add('err')"></div>
-  <div class="wrap hero-in">
-    <a class="offer" href="#gift"><i>🎁</i>Дизайн-проект в подарок при капитальном ремонте</a>
-    <h1>Ремонт квартир в Екатеринбурге без сюрпризов</h1>
-    <p class="sub">Под ключ: от черновых работ до чистовой отделки. Цена фиксируется в договоре, оплата по этапам после приёмки, гарантия 3 года.</p>
-    <div class="hero-cta">
-      <a class="btn btn-main" href="#quiz">Рассчитать стоимость за 1 минуту</a>
-      <a class="btn btn-line" href="#final">Бесплатный замер</a>
-    </div>
-    <div class="qp" id="qp">
-      <div class="qp-t">Сколько стоит ремонт вашей квартиры? Выберите:</div>
-      <div class="qp-chips">
-        <button type="button" data-a="28">Студия</button>
-        <button type="button" data-a="38">1-комнатная</button>
-        <button type="button" data-a="56" class="on">2-комнатная</button>
-        <button type="button" data-a="78">3-комнатная</button>
+  <div class="wrap">
+    <a class="offer" href="#gift"><i>✓</i>Дизайн-проект в подарок при капитальном ремонте</a>
+    <h1>Ремонт квартир<br><span>без сюрпризов</span></h1>
+    <div class="hero-row">
+      <div>
+        <p class="sub">Под ключ в Екатеринбурге. Цена фиксируется в договоре, оплата по этапам после приёмки, гарантия 3 года.</p>
+        <div class="hero-cta">
+          <a class="btn btn-main" href="#quiz">Рассчитать за минуту</a>
+          <a class="btn btn-line" href="#final">Замер бесплатно</a>
+        </div>
+        <div class="qp" id="qp">
+          <div class="qp-t">Сколько стоит ремонт вашей квартиры?</div>
+          <div class="qp-chips">
+            <button type="button" data-a="28">Студия</button>
+            <button type="button" data-a="38">1-комн.</button>
+            <button type="button" data-a="56" class="on">2-комн.</button>
+            <button type="button" data-a="78">3-комн.</button>
+          </div>
+          <div class="qp-res">
+            <div class="qp-sum" id="qpSum">от 979 000 ₽<small id="qpNote">капитальный ремонт</small></div>
+            <a class="btn btn-gold" href="#quiz">Точный расчёт</a>
+          </div>
+        </div>
       </div>
-      <div class="qp-res">
-        <div class="qp-sum" id="qpSum">от 489 000 ₽<small id="qpNote">капитальный ремонт</small></div>
-        <a class="btn btn-gold" href="#quiz">Точный расчёт</a>
+      <div class="hero-img ph">
+        <img src="https://images.pexels.com/photos/6908500/pexels-photo-6908500.jpeg?auto=compress&cs=tinysrgb&w=2000" alt="Светлая гостиная после ремонта" fetchpriority="high" onerror="this.classList.add('err')">
+        <a class="sticker" href="#gift">Дизайн-<br>проект<br>в подарок</a>
+        <span class="hero-badge">Екатеринбург · замер бесплатно</span>
       </div>
     </div>
   </div>
 </section>
 
-<section class="quiz-sec" id="quiz">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="services">
   <div class="wrap">
-    <div class="head-row">
-      <div>
-        <h2>Узнайте цену ремонта за минуту</h2>
-        <p class="sub">Помощник задаст 5 коротких вопросов и сразу посчитает стоимость. Точную смету инженер составит после бесплатного замера.</p>
-      </div>
-    </div>
-
-    <div class="quiz">
-      <div class="chat">
-        <div class="chat-head">
-          <span class="ava" id="ava"><svg class="lg av" viewBox="0 0 64 64" aria-hidden="true"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#B8913F" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#B8913F"/></svg></span>
-          <div><b>Смальта</b><small>помощник по расчёту ремонта</small></div>
-          <button type="button" class="chat-reset" id="reset">Начать заново</button>
-        </div>
-        <div class="prog" id="prog" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="msgs" id="msgs" aria-live="polite"></div>
-        <div class="answers" id="answers"></div>
-      </div>
-
-      <aside class="calc-side" aria-live="polite">
-        <div>
-          <div class="lbl">Примерная стоимость работ</div>
-          <div class="est" id="est">—</div>
-          <div class="est-note">без учёта чистовых материалов</div>
-        </div>
-        <div class="bars">
-          <div class="bar-i" id="bWork"><span>Ремонтные работы</span><span>—</span><em><b></b></em></div>
-          <div class="bar-i g off" id="bBath"><span>Санузел под ключ</span><span>—</span><em><b></b></em></div>
-          <div class="bar-i off" id="bCeil"><span>Натяжные потолки</span><span>—</span><em><b></b></em></div>
-          <div class="bar-i off" id="bWarm"><span>Тёплый пол</span><span>—</span><em><b></b></em></div>
-          <div class="bar-i g off" id="bDes"><span>Дизайн-проект</span><span>—</span><em><b></b></em></div>
-        </div>
-        <div class="side-area">
-          <div><span>Площадь квартиры</span><b id="areaOut">54 м²</b></div>
-          <input type="range" id="area" min="18" max="200" step="1" value="54" aria-label="Площадь квартиры, м²">
-        </div>
-        <div class="term"><span>Срок ремонта</span><b id="term">—</b></div>
-        <div class="gift"><b>Подарок за расчёт:</b> чек-лист приёмки ремонта. Пришлём вместе со сметой.</div>
-      </aside>
+    <div class="head-row"><div><h2>Что мы делаем</h2><p class="sub">Квартиры, новостройки и ванные в Екатеринбурге. Цены за работы, материалы считаем отдельно.</p></div><a class="btn btn-line" href="#prices">Все цены</a></div>
+    <div class="svc">
+      <a href="#quiz"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/32177961/pexels-photo-32177961.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" onerror="this.classList.add('err')"></span><span class="t"><b>Ремонт под ключ</b><span>Всё от черновых работ до мебели</span><em>от 19 000 ₽/м²</em></span></a>
+      <a href="#quiz"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/14614670/pexels-photo-14614670.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" onerror="this.classList.add('err')"></span><span class="t"><b>Капитальный ремонт</b><span>Вторичка: новая электрика и трубы</span><em>от 22 500 ₽/м²</em></span></a>
+      <a href="#quiz"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/28853362/pexels-photo-28853362.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" onerror="this.classList.add('err')"></span><span class="t"><b>Ремонт в новостройке</b><span>Без отделки или white box</span><em>от 13 000 ₽/м²</em></span></a>
+      <a href="#quiz"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/33529500/pexels-photo-33529500.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" onerror="this.classList.add('err')"></span><span class="t"><b>Дизайнерский ремонт</b><span>Строго по проекту, с надзором</span><em>от 30 000 ₽/м²</em></span></a>
+      <a href="#quiz"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/33529504/pexels-photo-33529504.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" onerror="this.classList.add('err')"></span><span class="t"><b>Ванная под ключ</b><span>Гидроизоляция, плитка, инсталляция</span><em>от 160 000 ₽</em></span></a>
+      <a href="#quiz"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/14613456/pexels-photo-14613456.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" onerror="this.classList.add('err')"></span><span class="tag">При ремонте</span><span class="t"><b>Дизайн-проект</b><span>Планировка, визуализация, чертежи</span><em>в подарок</em></span></a>
+      <a href="#quiz"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/29515355/pexels-photo-29515355.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" onerror="this.classList.add('err')"></span><span class="t"><b>Натяжные потолки</b><span>Матовые, с подсветкой, парящие</span><em>от 600 ₽/м²</em></span></a>
+      <a href="#quiz"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/32177959/pexels-photo-32177959.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" onerror="this.classList.add('err')"></span><span class="t"><b>Косметический ремонт</b><span>Стены, полы, потолки, двери</span><em>от 8 000 ₽/м²</em></span></a>
     </div>
   </div>
 </section>
 
-<section id="styles">
-  <div class="wrap">
-    <div class="head-row">
-      <div>
-        <h2>Интерьеры, которые мы воплощаем</h2>
-        <p class="sub">Работаем в любом стиле: по вашим референсам или по проекту нашего дизайнера.</p>
-      </div>
-      <a class="btn btn-line" href="#final">Обсудить мой интерьер</a>
+<section class="gift-sec" id="gift">
+  <div class="wrap gift-grid">
+    <div class="gift-l">
+      <span class="gift-badge">Подарок новым клиентам</span>
+      <h2>Дизайн-проект бесплатно</h2>
+      <p class="sub">Закажите капитальный или дизайнерский ремонт, и мы сделаем дизайн-проект вашей квартиры в подарок. Вы заранее увидите, как будет выглядеть каждая комната, а бригада будет работать по точным чертежам.</p>
+      <div class="gift-cta"><a class="btn btn-main" href="#final">Получить дизайн-проект</a><span>Подарок действует при заключении договора на ремонт</span></div>
     </div>
-    <div class="styles">
-      <a class="st" href="#final"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Современная гостиная" onerror="this.classList.add('err')"></span><span class="cap"><h3>Современный</h3><p>Чистые линии, скрытое хранение, акцентный свет</p></span></a>
-      <a class="st" href="#final"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Скандинавский интерьер" onerror="this.classList.add('err')"></span><span class="cap"><h3>Скандинавский</h3><p>Светлое дерево, белые стены, много воздуха</p></span></a>
-      <a class="st" href="#final"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/8142977/pexels-photo-8142977.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Ванная с мрамором" onerror="this.classList.add('err')"></span><span class="cap"><h3>Ванные комнаты</h3><p>Крупноформатная плитка, скрытые инсталляции</p></span></a>
-      <a class="st" href="#final"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Спальня" onerror="this.classList.add('err')"></span><span class="cap"><h3>Спальни</h3><p>Тёплые оттенки и мягкий свет</p></span></a>
-      <a class="st" href="#final"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Кухня" onerror="this.classList.add('err')"></span><span class="cap"><h3>Кухни</h3><p>Продуманная эргономика и розетки на своих местах</p></span></a>
-      <a class="st" href="#final"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/7031865/pexels-photo-7031865.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Светлый санузел" onerror="this.classList.add('err')"></span><span class="cap"><h3>Минимализм</h3><p>Ничего лишнего, всё на своём месте</p></span></a>
-    </div>
+    <ul class="gift-list">
+      <li><b>Планировка</b><span>Обмеры, план квартиры и расстановка мебели</span></li>
+      <li><b>Визуализация</b><span>Как будут выглядеть комнаты после ремонта</span></li>
+      <li><b>Чертежи электрики</b><span>Каждая розетка и выключатель на своём месте</span></li>
+      <li><b>Чертежи сантехники</b><span>Разводка воды и канализации без переделок</span></li>
+      <li><b>Подбор материалов</b><span>Список отделки с количеством, чтобы не переплатить</span></li>
+    </ul>
   </div>
 </section>
 
@@ -770,48 +854,71 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
   </div>
 </section>
 
-<section id="prices" style="padding-top:0">
+<section id="prices">
+  <div class="wrap">
+    <div class="head-row"><div><h2>Цены без мелкого шрифта</h2><p class="sub">Стоимость работ за квадратный метр и минимальный заказ. Точную сумму закрепим в договоре после бесплатного замера.</p></div><a class="btn btn-main" href="#quiz">Рассчитать свою</a></div>
+    <div class="ptable-wrap">
+      <table class="ptable">
+        <thead><tr><th>Вид ремонта</th><th>Что входит</th><th>Работы, за м²</th><th>Минимальный заказ</th><th>Срок, 2-комн.</th></tr></thead>
+        <tbody>
+          <tr><td><b>Новостройка</b><span>без отделки или white box</span></td><td>Стяжка, штукатурка, электрика, сантехника, чистовая отделка</td><td class="p">от 13 000 ₽</td><td>350 000 ₽</td><td>от 9 недель</td></tr>
+          <tr class="hl"><td><b>Под ключ</b><span>выбирают чаще всего</span><div class="gift-chip">Дизайн-проект в подарок</div></td><td>Все черновые и чистовые работы, санузел, двери, свет, уборка</td><td class="p">от 19 000 ₽</td><td>400 000 ₽</td><td>от 10 недель</td></tr>
+          <tr><td><b>Капитальный</b><span>вторичное жильё</span><div class="gift-chip">Дизайн-проект в подарок</div></td><td>Демонтаж, новая проводка и трубы, выравнивание, чистовая отделка</td><td class="p">от 22 500 ₽</td><td>450 000 ₽</td><td>от 12 недель</td></tr>
+          <tr><td><b>Дизайнерский</b><span>по дизайн-проекту</span><div class="gift-chip">Дизайн-проект в подарок</div></td><td>Сложные потолки, скрытые двери, подсветка, авторский надзор</td><td class="p">от 30 000 ₽</td><td>600 000 ₽</td><td>от 14 недель</td></tr>
+          <tr><td><b>Ванная под ключ</b><span>санузел или ванная</span></td><td>Демонтаж, гидроизоляция, разводка, плитка, инсталляция</td><td class="p">от 43 000 ₽</td><td>160 000 ₽</td><td>от 3 недель</td></tr>
+          <tr><td><b>Косметический</b><span>без переноса коммуникаций</span></td><td>Покраска или обои, напольные покрытия, потолки, двери</td><td class="p">от 8 000 ₽</td><td>150 000 ₽</td><td>от 5 недель</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pnote">
+      <div><b>Цена в договоре</b>После замера сумма за работы фиксируется и не меняется без вашего согласия.</div>
+      <div><b>Материалы отдельно</b>Закупаем по вашему выбору или помогаем подобрать, все чеки передаём вам.</div>
+      <div><b>Минимальный заказ</b>Если по площади выходит меньше, действует минимальная сумма из таблицы.</div>
+    </div>
+  </div>
+</section>
+
+<section class="quiz-sec" id="quiz">
   <div class="wrap">
     <div class="head-row">
       <div>
-        <h2>Цены на ремонт под ключ</h2>
-        <p class="sub">Стоимость работ за квадратный метр. Черновые материалы считаем отдельно и закупаем по ценам поставщиков.</p>
+        <h2>Узнайте цену ремонта за минуту</h2>
+        <p class="sub">Помощник задаст 5 коротких вопросов и сразу посчитает стоимость. Точную смету инженер составит после бесплатного замера.</p>
       </div>
     </div>
-    <div class="prices">
-      <article class="price">
-        <div class="ph"><img loading="lazy" src="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" onerror="this.classList.add('err')"></div>
-        <div class="price-body">
-          <h3>Косметический</h3>
-          <div class="val">от 4 500 ₽ <small>/ м²</small></div>
-          <ul><li>Подготовка и покраска стен или обои</li><li>Ламинат или кварцвинил, плинтус</li><li>Замена дверей, розеток, выключателей</li><li>Натяжные потолки</li></ul>
-          <div class="meta"><span>Срок для 1-комнатной</span><b>от 4 недель</b></div>
-          <a class="btn btn-line" href="#quiz">Рассчитать</a>
+
+    <div class="quiz">
+      <div class="chat">
+        <div class="chat-head">
+          <span class="ava" id="ava"><svg class="lg av" viewBox="0 0 64 64" aria-hidden="true"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#0A0A0A" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#2340D9" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#2340D9" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#2340D9" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#0A0A0A"/></svg></span>
+          <div><b>Смальта</b><small>помощник по расчёту ремонта</small></div>
+          <button type="button" class="chat-reset" id="reset">Начать заново</button>
         </div>
-      </article>
-      <article class="price hit">
-        <span class="hit-tag">Выбирают чаще всего</span>
-        <div class="ph"><img loading="lazy" src="https://images.pexels.com/photos/6908500/pexels-photo-6908500.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" onerror="this.classList.add('err')"></div>
-        <div class="price-body">
-          <h3>Капитальный</h3>
-          <div class="val">от 9 500 ₽ <small>/ м²</small></div>
-          <ul><li>Новая электрика и разводка сантехники</li><li>Штукатурка по маякам, стяжка пола</li><li>Санузел под ключ</li><li>Чистовая отделка всех помещений</li></ul>
-          <div class="meta"><span>Срок для 2-комнатной</span><b>от 10 недель</b></div>
-          <div class="gift-chip">🎁 Дизайн-проект в подарок</div>
-          <a class="btn btn-main" href="#quiz">Рассчитать</a>
+        <div class="prog" id="prog" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="msgs" id="msgs" aria-live="polite"></div>
+        <div class="answers" id="answers"></div>
+      </div>
+
+      <aside class="calc-side" aria-live="polite">
+        <div>
+          <div class="lbl">Примерная стоимость работ</div>
+          <div class="est" id="est">—</div>
+          <div class="est-note">без учёта чистовых материалов</div>
         </div>
-      </article>
-      <article class="price">
-        <div class="ph"><img loading="lazy" src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" onerror="this.classList.add('err')"></div>
-        <div class="price-body">
-          <h3>Дизайнерский</h3>
-          <div class="val">от 15 000 ₽ <small>/ м²</small></div>
-          <ul><li>Работа строго по дизайн-проекту</li><li>Сложные потолки, ниши, подсветка</li><li>Скрытые двери и плинтусы</li><li>Авторский надзор дизайнера</li></ul>
-          <div class="meta"><span>Срок для 2-комнатной</span><b>от 14 недель</b></div>
-          <div class="gift-chip">🎁 Дизайн-проект в подарок</div>
-          <a class="btn btn-line" href="#quiz">Рассчитать</a>
+        <div class="bars">
+          <div class="bar-i" id="bWork"><span>Ремонтные работы</span><span>—</span><em><b></b></em></div>
+          <div class="bar-i g off" id="bBath"><span>Санузел под ключ</span><span>—</span><em><b></b></em></div>
+          <div class="bar-i off" id="bCeil"><span>Натяжные потолки</span><span>—</span><em><b></b></em></div>
+          <div class="bar-i off" id="bWarm"><span>Тёплый пол</span><span>—</span><em><b></b></em></div>
+          <div class="bar-i g off" id="bDes"><span>Дизайн-проект</span><span>—</span><em><b></b></em></div>
         </div>
-      </article>
+        <div class="side-area">
+          <div><span>Площадь квартиры</span><b id="areaOut">54 м²</b></div>
+          <input type="range" id="area" min="18" max="200" step="1" value="54" aria-label="Площадь квартиры, м²">
+        </div>
+        <div class="term"><span>Срок ремонта</span><b id="term">—</b></div>
+        <div class="gift"><b>Подарок за расчёт:</b> чек-лист приёмки ремонта. Пришлём вместе со сметой.</div>
+      </aside>
     </div>
   </div>
 </section>
@@ -820,13 +927,13 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
   <div class="wrap fix-grid">
     <div class="sheet" id="sheet" aria-label="Пример сметы">
       <div class="sheet-h"><b>Пример сметы</b><span>2-комн. квартира, 58 м²</span></div>
-      <div class="row"><span>Демонтаж и вывоз мусора</span><span>58 м²</span><span>34 800 ₽</span></div>
-      <div class="row"><span>Электромонтаж, 64 точки</span><span>1 компл.</span><span>96 000 ₽</span></div>
-      <div class="row"><span>Штукатурка стен по маякам</span><span>162 м²</span><span>113 400 ₽</span></div>
-      <div class="row"><span>Стяжка пола</span><span>58 м²</span><span>40 600 ₽</span></div>
-      <div class="row"><span>Санузел под ключ</span><span>1 компл.</span><span>98 000 ₽</span></div>
-      <div class="row"><span>Чистовая отделка</span><span>58 м²</span><span>168 200 ₽</span></div>
-      <div class="row total"><span>Итого по договору</span><span></span><span id="sheetTotal">551 000 ₽</span></div>
+      <div class="row"><span>Демонтаж и вывоз мусора</span><span>58 м²</span><span>69 600 ₽</span></div>
+      <div class="row"><span>Электромонтаж, 64 точки</span><span>1 компл.</span><span>179 200 ₽</span></div>
+      <div class="row"><span>Штукатурка стен по маякам</span><span>162 м²</span><span>145 800 ₽</span></div>
+      <div class="row"><span>Стяжка пола</span><span>58 м²</span><span>63 800 ₽</span></div>
+      <div class="row"><span>Санузел под ключ</span><span>1 компл.</span><span>215 000 ₽</span></div>
+      <div class="row"><span>Чистовая отделка</span><span>58 м²</span><span>556 800 ₽</span></div>
+      <div class="row total"><span>Итого по договору</span><span></span><span id="sheetTotal">1 230 200 ₽</span></div>
       <div class="stamp">ЦЕНА<br>ЗАФИКСИРОВАНА</div>
     </div>
     <div>
@@ -838,24 +945,6 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
         <div class="fix-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/></svg></span><div><h3>Фото и видео каждую неделю</h3><p>Прораб присылает отчёт, так что за ремонтом можно следить даже из другого города.</p></div></div>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="gift-sec" id="gift">
-  <div class="wrap gift-grid">
-    <div class="gift-l">
-      <span class="gift-badge">Подарок новым клиентам</span>
-      <h2>Дизайн-проект бесплатно</h2>
-      <p class="sub">Закажите капитальный или дизайнерский ремонт, и мы сделаем дизайн-проект вашей квартиры в подарок. Вы заранее увидите, как будет выглядеть каждая комната, а бригада будет работать по точным чертежам.</p>
-      <div class="gift-cta"><a class="btn btn-main" href="#final">Получить дизайн-проект</a><span>Подарок действует при заключении договора на ремонт</span></div>
-    </div>
-    <ul class="gift-list">
-      <li><b>Планировка</b><span>Обмеры, план квартиры и расстановка мебели</span></li>
-      <li><b>Визуализация</b><span>Как будут выглядеть комнаты после ремонта</span></li>
-      <li><b>Чертежи электрики</b><span>Каждая розетка и выключатель на своём месте</span></li>
-      <li><b>Чертежи сантехники</b><span>Разводка воды и канализации без переделок</span></li>
-      <li><b>Подбор материалов</b><span>Список отделки с количеством, чтобы не переплатить</span></li>
-    </ul>
   </div>
 </section>
 
@@ -924,7 +1013,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
               </g>
               <rect x="252" y="378" width="22" height="16" rx="3" fill="#15171C"/>
               <g fill="#fff" stroke="#C9A14A" stroke-width="2.4"><circle cx="40" cy="150" r="5.5"/><circle cx="280" cy="200" r="5.5"/><circle cx="190" cy="40" r="5.5"/><circle cx="320" cy="62" r="5.5"/><circle cx="560" cy="150" r="5.5"/><circle cx="36" cy="262" r="5.5"/><circle cx="120" cy="388" r="5.5"/><circle cx="222" cy="388" r="5.5"/><circle cx="300" cy="248" r="5.5"/><circle cx="456" cy="300" r="5.5"/></g>
-              <g class="tag-g"><rect x="330" y="92" width="150" height="28" rx="14" fill="#B8913F"/><text x="405" y="111" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">64 точки электрики</text></g>
+              <g class="tag-g"><rect x="330" y="92" width="150" height="28" rx="14" fill="#0A0A0A"/><text x="405" y="111" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">64 точки электрики</text></g>
             </g>
             <g class="ly ly-pl">
               <g fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -942,7 +1031,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
               <g class="ok"><circle cx="200" cy="270" r="16"/><path d="M192 270l6 6 11-12"/></g>
               <g class="ok"><circle cx="300" cy="296" r="16"/><path d="M292 296l6 6 11-12"/></g>
               <g class="ok"><circle cx="512" cy="350" r="16"/><path d="M504 350l6 6 11-12"/></g>
-              <g class="tag-g"><rect x="262" y="240" width="156" height="32" rx="16" fill="#1F3B8C"/><text x="340" y="261" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Ключи ваши!</text></g>
+              <g class="tag-g"><rect x="262" y="240" width="156" height="32" rx="16" fill="#2340D9"/><text x="340" y="261" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Ключи ваши!</text></g>
             </g>
 
             <g class="walls" fill="none" stroke="#15171C" stroke-linecap="square">
@@ -1009,6 +1098,20 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
   </div>
 </section>
 
+<section id="terms" style="padding-top:0">
+  <div class="wrap">
+    <div class="head-row"><div><h2>Условия работы</h2><p class="sub">Всё, что важно знать до начала ремонта. Каждый пункт прописываем в договоре.</p></div></div>
+    <div class="terms">
+      <div class="term-c"><i>1</i><b>Договор и смета</b><p>Подробная смета по каждой позиции и график работ. Итоговая сумма за работы закреплена в договоре.</p></div>
+      <div class="term-c"><i>3</i><b>Гарантия 3 года</b><p>На все работы с момента подписания акта. Если что-то пойдёт не так, исправим за свой счёт.</p></div>
+      <div class="term-c"><i>₽</i><b>Оплата по этапам</b><p>Платите за этап только после того, как приняли его. Предоплаты за весь ремонт нет.</p></div>
+      <div class="term-c"><i>✓</i><b>Контроль качества</b><p>Один прораб отвечает за объект от начала до сдачи и присылает фото и видео каждую неделю.</p></div>
+      <div class="term-c"><i>М</i><b>Материалы</b><p>Закупаем по согласованному списку или вы покупаете сами. Все чеки и документы остаются у вас.</p></div>
+      <div class="term-c"><i>±</i><b>Изменения</b><p>Любые дополнительные работы только с вашего письменного согласия и по цене из прайса.</p></div>
+    </div>
+  </div>
+</section>
+
 <section class="honest" id="honest">
   <div class="wrap honest-grid">
     <div>
@@ -1035,10 +1138,10 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
         <tbody>
           <tr><td>Договор с фиксированной ценой</td><td class="us"><i class="y"></i></td><td><i class="n"></i>редко</td><td><i class="y"></i></td></tr>
           <tr><td>Оплата по этапам после приёмки</td><td class="us"><i class="y"></i></td><td><i class="mid"></i>как договоритесь</td><td><i class="mid"></i>часто предоплата</td></tr>
-          <tr><td>Гарантия на работы</td><td class="us"><b>3 года</b></td><td><i class="n"></i>обычно нет</td><td>1–2 года</td></tr>
+          <tr><td>Гарантия на работы</td><td class="us"><b>3 года в договоре</b></td><td><i class="n"></i>обычно нет</td><td>по договору</td></tr>
           <tr><td>Дизайн-проект</td><td class="us"><b>в подарок</b></td><td><i class="n"></i>нет</td><td>за отдельные деньги</td></tr>
           <tr><td>Один прораб и фотоотчёты</td><td class="us"><i class="y"></i></td><td><i class="mid"></i>мастер сам себе прораб</td><td><i class="mid"></i>менеджер на много объектов</td></tr>
-          <tr><td>Цена работ</td><td class="us"><b>ниже крупных</b></td><td>ниже всего</td><td>выше всего</td></tr>
+          <tr><td>Интерактивный расчёт и выбор стиля онлайн</td><td class="us"><i class="y"></i></td><td><i class="n"></i>нет</td><td><i class="mid"></i>простой калькулятор</td></tr>
         </tbody>
       </table>
     </div>
@@ -1051,7 +1154,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
     <div class="bath-txt">
       <h2>Ванная комната под ключ</h2>
       <p class="sub">Самое сложное помещение в квартире. Делаем гидроизоляцию, разводку и раскладку плитки так, чтобы через 10 лет всё было как в первый день.</p>
-      <div class="bath-price">от 95 000 ₽ <small>за работы</small></div>
+      <div class="bath-price">от 160 000 ₽ <small>за работы</small></div>
       <ul>
         <li>Демонтаж старой отделки</li><li>Гидроизоляция пола и стен</li>
         <li>Новая разводка труб</li><li>Инсталляция и скрытые люки</li>
@@ -1122,7 +1225,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
     <div class="foot">
       <div>
         <a class="logo" href="#top" aria-label="Смальтэра — наверх">
-          <svg class="lg " viewBox="0 0 64 64" aria-hidden="true" style="width:42px;height:42px"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#D8B66A" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#4A6BC4" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#3556B0" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#4A6BC4" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#3556B0" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#4A6BC4" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#3556B0" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#4A6BC4" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#D8B66A"/></svg>
+          <svg class="lg " viewBox="0 0 64 64" aria-hidden="true" style="width:42px;height:42px"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#D7FF3A" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#8FA0FF" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#5A73F5" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#8FA0FF" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#5A73F5" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#8FA0FF" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#5A73F5" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#8FA0FF" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#D7FF3A"/></svg>
           <span><span class="name">СМАЛЬТЭРА</span><span class="tag">РЕМОНТ КВАРТИР</span></span>
         </a>
         <p style="margin-top:16px">Ремонт квартир под ключ в Екатеринбурге с фиксированной сметой.</p>
@@ -1156,8 +1259,21 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
   </div>
 </div>
 
+<div class="pop" id="cb" hidden role="dialog" aria-modal="true" aria-labelledby="cbT">
+  <div class="pop-card cb-card">
+    <button type="button" class="pop-x" data-cb-x aria-label="Закрыть">×</button>
+    <h3 id="cbT">Перезвоним и ответим на вопросы</h3>
+    <p>Оставьте номер, инженер позвонит в рабочее время, расскажет о ценах и договорится о бесплатном замере.</p>
+    <form id="cbForm" novalidate>
+      <div class="field"><label for="cbPhone">Телефон</label><input id="cbPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></div>
+      <button class="btn btn-main" type="submit" style="width:100%">Жду звонка</button>
+      <div class="msg" id="cbMsg" role="status"></div>
+    </form>
+  </div>
+</div>
+
 <div class="helper" id="helper">
-  <button type="button" class="h-ava" id="hAva" aria-label="Помощник Смальта"><svg class="lg" viewBox="0 0 64 64" aria-hidden="true"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#B8913F" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#B8913F"/></svg></button>
+  <button type="button" class="h-ava" id="hAva" aria-label="Помощник Смальта"><svg class="lg" viewBox="0 0 64 64" aria-hidden="true"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#0A0A0A" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#2340D9" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#2340D9" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#2340D9" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#0A0A0A"/></svg></button>
   <div class="h-bub hide" id="hBub" role="status">
     <button type="button" class="h-x" id="hX" aria-label="Скрыть подсказки">×</button>
     <div id="hTxt"></div>
@@ -1186,12 +1302,12 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
   });
 
   /* ===== Цены (меняйте здесь) ===== */
-  var RATES = { cosm:4500, cap:9500, design:15000 };   /* ₽ за м², только работы */
-  var OLD_FLAT = 1.15;                                  /* вторичка: демонтаж +15% */
-  var BATH = { cosm:75000, cap:95000, design:120000 };  /* санузел под ключ, ₽ */
-  var CEIL = 650;                                       /* натяжные потолки, ₽ за м² */
+  var RATES = { cosm:8000, cap:19000, design:30000 };   /* ₽ за м², только работы */
+  var OLD_FLAT = 1.18;                                  /* вторичка: демонтаж и капитальные работы +18% */
+  var BATH = { cosm:120000, cap:160000, design:220000 }; /* санузел под ключ, ₽ */
+  var CEIL = 600;                                       /* натяжные потолки, ₽ за м² */
   var WARM = 2200, WARM_SHARE = 0.25;                   /* тёплый пол, ₽ за м² на четверть площади */
-  var DES = 1200;                                       /* дизайн-проект, ₽ за м² */
+  var DES = 1500;                                       /* дизайн-проект, ₽ за м² */
   var DAYS = { cosm:[16,0.4], cap:[38,0.7], design:[55,1.0] };
   var PHONE = '+7 (343) 000-00-00';
 
@@ -1350,7 +1466,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
 
   var FAQ = [
     { v:'gift', t:'Что за дизайн-проект в подарок?', a:'При заказе капитального или дизайнерского ремонта дизайн-проект делаем бесплатно: планировка, расстановка мебели, визуализация, чертежи электрики и сантехники.' },
-    { v:'in', t:'Что входит в цену?', a:'В цену входят все работы по смете: демонтаж, черновые и чистовые работы, вывоз мусора и финальная уборка. Черновые материалы считаем отдельной строкой по ценам поставщиков.' },
+    { v:'in', t:'Что входит в цену?', a:'В цену входят все работы по смете: демонтаж, черновые и чистовые работы. Материалы считаем отдельно, а вывоз мусора и уборку — отдельными строками в смете, чтобы всё было прозрачно.' },
     { v:'pay', t:'Можно платить частями?', a:'Да, оплата идёт по этапам: вы платите за каждый этап после того, как приняли его. Предоплаты за весь ремонт нет.' },
     { v:'mat', t:'А сколько стоят материалы?', a:'Чистовые материалы — плитка, ламинат, сантехника, двери — часто стоят примерно столько же, сколько работы, но всё зависит от вашего выбора. Инженер поможет уложиться в бюджет.' },
     { v:'gar', t:'Какая гарантия?', a:'3 года на все работы. Срок гарантии прописан в договоре.' }
@@ -1385,7 +1501,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
     .then(function(o){ alive(); me(o.t); S.flat = o.v; progress(1); calc();
         return say(o.v === 'new'
           ? 'Отлично, в новостройке не нужен демонтаж, это экономит бюджет и время.'
-          : 'Понял. Во вторичке добавим демонтаж старой отделки и вывоз мусора, это примерно +15% к работам.'); })
+          : 'Понял. Во вторичке добавим демонтаж старой отделки и капитальные работы, это примерно +18% к стоимости.'); })
     .then(function(){ alive(); return say('Сколько в квартире комнат?'); })
     .then(function(){ alive(); return options([
         { v:28, t:'Студия' }, { v:38, t:'1-комнатная' }, { v:56, t:'2-комнатная' },
@@ -1514,7 +1630,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
   /* ===== Живая смета ===== */
   (function(){
     var sh = document.getElementById('sheet'); if (!sh || !('IntersectionObserver' in window)) return;
-    var tot = document.getElementById('sheetTotal'), target = 551000;
+    var tot = document.getElementById('sheetTotal'), target = 1230200;
     var io = new IntersectionObserver(function(es){
       if (!es[0].isIntersecting) return; io.disconnect();
       sh.classList.add('live');
@@ -1535,7 +1651,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
     var bub = document.getElementById('hBub'), txt = document.getElementById('hTxt'), acts = document.getElementById('hActs');
     var av = document.getElementById('hAva');
     var TIPS = {
-      hero: ['Привет! Я Смальта', 'Выберите свою квартиру в блоке «Сколько стоит ремонт», и я сразу покажу примерную цену.', [['Точный расчёт','#quiz',1]]],
+      hero: ['Привет! Я Смальта', 'Выберите размер квартиры под заголовком, и я сразу покажу примерную цену ремонта.', [['Точный расчёт','#quiz',1]]],
       styles: ['Интерьеры', 'Работаем в любом стиле. Понравился какой-то? Нажмите на него, обсудим ваш вариант.', [['Обсудить интерьер','#final',1]]],
       ctor: ['Выбирайте стиль', 'Нажмите на любой стиль справа, а потом «Во весь экран», чтобы рассмотреть детали.', [['Хочу так же','#final',1]]],
       prices: ['Подарок', 'При капитальном и дизайнерском ремонте дизайн-проект делаем бесплатно.', [['Что входит','#gift',1]]],
@@ -1543,6 +1659,8 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
       honest: ['Честно о нас', 'Хотите проверить качество любой бригады? Заберите наш чек-лист приёмки, он бесплатный.', []],
       compare: ['Сравните', 'Дизайн-проект в подарок и гарантия 3 года — то, чего нет у большинства.', [['Записаться на замер','#final',1]]],
       fix: ['Это важно', 'Это пример нашей сметы. Каждая позиция расписана, а итог закрепляется в договоре.', [['Получить смету','#final',1]]],
+      services: ['Выберите услугу', 'Нажмите на любую карточку, и я посчитаю стоимость под вашу квартиру.', [['Рассчитать','#quiz',1]]],
+      terms: ['Всё в договоре', 'Каждое условие из этого блока прописываем в договоре. Можем прислать образец до замера.', [['Заказать звонок','#final',1]]],
       steps: ['Смотрите на схему', 'Листайте вниз: квартира будет ремонтироваться прямо у вас на глазах.', []],
       bath: ['Ванная комната', 'Самое сложное помещение. Главное здесь — гидроизоляция, её мы делаем всегда.', [['Рассчитать ванную','#final',1]]],
       districts: ['Где работаем', 'Выезжаем в любой район Екатеринбурга. Замер бесплатный.', [['Вызвать замерщика','#final',1]]],
@@ -1581,7 +1699,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
         if (id !== current) show(id);
       });
     }, { rootMargin: '-45% 0px -45% 0px' });
-    ['hero','quiz','styles','ctor','prices','gift','honest','compare','fix','steps','bath','districts','faq','final'].forEach(function(id){
+    ['hero','services','quiz','ctor','prices','gift','terms','honest','compare','fix','steps','bath','districts','faq','final'].forEach(function(id){
       var el = document.getElementById(id); if (el) io.observe(el);
     });
     bub.classList.add('hide');
@@ -1594,15 +1712,15 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
     var stage = document.getElementById('svStage'); if (!stage) return;
     function src(id, w){ return 'https://images.pexels.com/photos/' + id + '/pexels-photo-' + id + '.jpeg?auto=compress&cs=tinysrgb&w=' + w; }
     var STYLES = [
-      { k:'warm', t:'Тёплый модерн', rate:12000, d:'Натуральное дерево на стенах, мягкий свет и спокойные оттенки. Уютно и современно.',
+      { k:'warm', t:'Тёплый модерн', rate:24000, d:'Натуральное дерево на стенах, мягкий свет и спокойные оттенки. Уютно и современно.',
         ph:[14614670, 28254550, 14614673], f:['Стеновые панели из дерева','Скрытая подсветка и трековый свет','Инженерная доска на полу','Скрытые двери под покраску'] },
-      { k:'modern', t:'Современный', rate:11000, d:'Чистые линии, нейтральные цвета и много света. Ничего лишнего, всё продумано.',
+      { k:'modern', t:'Современный', rate:21000, d:'Чистые линии, нейтральные цвета и много света. Ничего лишнего, всё продумано.',
         ph:[32177961, 32177959, 28853362], f:['Ровные стены под покраску','Натяжные или гипсовые потолки с подсветкой','Крупноформатный керамогранит','Встроенные системы хранения'] },
-      { k:'marble', t:'Минимализм с мрамором', rate:15000, d:'Мрамор, камень и стекло. Строго, дорого и очень светло.',
+      { k:'marble', t:'Минимализм с мрамором', rate:27000, d:'Мрамор, камень и стекло. Строго, дорого и очень светло.',
         ph:[32421762, 14613456, 15220867], f:['Керамогранит под мрамор большого формата','Теневой профиль и парящие потолки','Кухня с островом','Скрытые плинтусы'] },
-      { k:'premium', t:'Премиум', rate:22000, d:'Высокие потолки, люстры, мрамор и сложный свет. Интерьер как в лучших отелях.',
+      { k:'premium', t:'Премиум', rate:35000, d:'Высокие потолки, люстры, мрамор и сложный свет. Интерьер как в лучших отелях.',
         ph:[33529500, 36451512, 33529504], f:['Декоративные потолки и молдинги','Мрамор в ванной и на полу','Сложные сценарии освещения','Авторский надзор дизайнера'] },
-      { k:'light', t:'Светлый сканди', rate:9500, d:'Белые стены, светлое дерево и зелень. Просторно, свежо и недорого в обслуживании.',
+      { k:'light', t:'Светлый сканди', rate:19000, d:'Белые стены, светлое дерево и зелень. Просторно, свежо и недорого в обслуживании.',
         ph:[6908500, 28681145, 29515355], f:['Покраска стен в светлые тона','Ламинат или инженерная доска светлого дуба','Простые натяжные потолки','Много дневного света'] }
     ];
     var BEFORE = 15798784;
@@ -1791,6 +1909,29 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
       sendLead({ 'Источник':'Чек-лист приёмки', 'Телефон':ph }).then(function(){
         m.className = 'msg ok'; m.textContent = 'Готово! Чек-лист открывается по кнопке ниже.';
         document.getElementById('popForm').hidden = true; document.getElementById('popDl').hidden = false;
+      });
+    });
+  })();
+
+
+  /* ===== Обратный звонок ===== */
+  (function(){
+    var cb = document.getElementById('cb'); if (!cb) return;
+    function open(){ cb.hidden = false; setTimeout(function(){ document.getElementById('cbPhone').focus(); }, 50); }
+    function close(){ cb.hidden = true; }
+    document.querySelectorAll('[data-cb]').forEach(function(b){ b.addEventListener('click', open); });
+    cb.querySelector('[data-cb-x]').addEventListener('click', close);
+    cb.addEventListener('click', function(e){ if (e.target === cb) close(); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !cb.hidden) close(); });
+    mask(document.getElementById('cbPhone'));
+    document.getElementById('cbForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      var ph = document.getElementById('cbPhone').value, m = document.getElementById('cbMsg');
+      if (ph.replace(/\D/g,'').length < 11){ m.className = 'msg err'; m.textContent = 'Введите номер полностью: 10 цифр после +7.'; return; }
+      m.className = 'msg'; m.textContent = 'Отправляем…';
+      sendLead({ 'Источник':'Заказать звонок', 'Телефон':ph }).then(function(ok){
+        m.className = 'msg ok';
+        m.textContent = ok ? 'Заявка отправлена! Перезвоним в рабочее время.' : 'Онлайн-отправка заявок пока не подключена: позвоните нам по номеру ' + PHONE + '.';
       });
     });
   })();
