@@ -5,26 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Смальтэра — ремонт квартир в Екатеринбурге</title>
 <meta name="description" content="Ремонт квартир под ключ в Екатеринбурге. Фиксированная смета в договоре, бесплатный замер, оплата по этапам. Рассчитайте стоимость за минуту.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232340D9'/%3E%3Cpath d='M44 20a17 17 0 1 0 0 24' stroke='%23D7FF3A' stroke-width='7' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%2314213D'/%3E%3Cpath d='M44 20a17 17 0 1 0 0 24' stroke='%23F76707' stroke-width='7' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@600;700;800&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* Стиль Б: белый воздух, огромные заголовки, яркий синий и лаймовые стикеры */
-  --bg:#F4F4F1;
+  /* Строгий стиль: глубокий тёмно-синий, продающий оранжевый, прямые углы */
+  --bg:#F3F4F6;
   --paper:#FFFFFF;
-  --ink:#0A0A0A;
-  --muted:#55575E;
-  --line:#E5E5E3;
-  --smalt:#2340D9;
-  --smalt-2:#4D66F2;
-  --smalt-ink:#101114;
-  --gold:#D7FF3A;
-  --gold-2:#E6FF85;
-  --display:"Unbounded", "Arial Black", system-ui, sans-serif;
+  --ink:#111827;
+  --muted:#525B6B;
+  --line:#E1E4EA;
+  --smalt:#D9480F;
+  --smalt-2:#F76707;
+  --smalt-ink:#14213D;
+  --gold:#14213D;
+  --gold-2:#2B3A5C;
+  --display:"Geologica", "Arial", system-ui, sans-serif;
   --body:"Inter Tight", "Segoe UI", Roboto, Arial, sans-serif;
-  --r-lg:26px; --r-md:16px;
+  --r-lg:4px; --r-md:4px;
   color-scheme: light;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -118,7 +118,7 @@ nav.menu a:hover{color:var(--smalt)}
 .quiz{display:grid;grid-template-columns:1fr 380px;background:var(--paper);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 40px 80px -48px rgba(15,29,71,.45);border:1px solid var(--line);min-height:640px}
 .chat{display:flex;flex-direction:column;min-width:0;background:linear-gradient(180deg,#FBFBFA,#F3F4F7)}
 .chat-head{display:flex;align-items:center;gap:14px;padding:18px 24px;background:#fff;border-bottom:1px solid var(--line)}
-.ava{width:48px;height:48px;border-radius:50%;background:#EEF1FA;display:grid;place-items:center;flex:none;position:relative}
+.ava{width:48px;height:48px;border-radius:50%;background:#F1F3F6;display:grid;place-items:center;flex:none;position:relative}
 .ava .lg{width:34px;height:34px}
 .ava::after{content:"";position:absolute;right:1px;bottom:1px;width:11px;height:11px;border-radius:50%;background:#2FB27A;border:2px solid #fff}
 .chat-head b{display:block;font-size:16px}
@@ -151,7 +151,7 @@ nav.menu a:hover{color:var(--smalt)}
 .a-btn small{display:block;font-weight:500;color:var(--muted);font-size:12.5px}
 .a-btn.go{background:var(--gold);border-color:var(--gold);color:#fff}
 .a-btn.go:hover{background:#A07D33;border-color:#A07D33}
-.a-btn.sel{border-color:var(--smalt);background:#EEF2FC;box-shadow:inset 0 0 0 1px var(--smalt)}
+.a-btn.sel{border-color:var(--smalt);background:#FFF3EB;box-shadow:inset 0 0 0 1px var(--smalt)}
 .a-btn .ck{width:20px;height:20px;border-radius:6px;border:1.5px solid #C5C9D3;flex:none;display:grid;place-items:center;font-size:13px;color:#fff}
 .a-btn.sel .ck{background:var(--smalt);border-color:var(--smalt)}
 .a-row{display:flex;gap:10px;margin-top:12px;align-items:center;flex-wrap:wrap}
@@ -176,7 +176,7 @@ nav.menu a:hover{color:var(--smalt)}
 .bar-i{display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:14px}
 .bar-i span:last-child{font-variant-numeric:tabular-nums;color:#D7DDF0}
 .bar-i em{grid-column:1/-1;height:6px;border-radius:6px;background:rgba(255,255,255,.1);overflow:hidden;font-style:normal}
-.bar-i em b{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--smalt-2),#6E8BE0);transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.bar-i em b{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--smalt-2),#FFA94D);transition:width .6s cubic-bezier(.2,.8,.2,1)}
 .bar-i.g em b{background:linear-gradient(90deg,var(--gold),var(--gold-2))}
 .bar-i.off{opacity:.38}
 .side-area{position:relative;display:grid;gap:8px;border-top:1px solid rgba(255,255,255,.14);padding-top:16px}
@@ -214,7 +214,7 @@ nav.menu a:hover{color:var(--smalt)}
 .price .val small{font-family:var(--body);font-size:15px;color:var(--muted);font-weight:600}
 .price ul{list-style:none;display:grid;gap:9px;font-size:15px;color:var(--muted)}
 .price li{display:flex;gap:10px}
-.price li::before{content:"";flex:none;width:16px;height:16px;margin-top:4px;border-radius:50%;background:#EEF1FA url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.2l2.6 2.6L12 5.4' stroke='%231F3B8C' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.price li::before{content:"";flex:none;width:16px;height:16px;margin-top:4px;border-radius:50%;background:#F1F3F6 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.2l2.6 2.6L12 5.4' stroke='%231F3B8C' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
 .price .meta{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:14px;font-size:14px;color:var(--muted)}
 .price .meta b{color:var(--ink)}
 .price .btn{margin-top:auto}
@@ -235,7 +235,7 @@ nav.menu a:hover{color:var(--smalt)}
 .stamp{position:absolute;right:26px;bottom:62px;border:2.5px solid var(--smalt);color:var(--smalt);border-radius:10px;padding:8px 14px;font-weight:800;font-size:13px;letter-spacing:.06em;transform:rotate(-10deg);background:rgba(255,255,255,.85);text-align:center;line-height:1.3}
 .fix-list{display:grid;gap:26px;margin-top:34px}
 .fix-item{display:grid;grid-template-columns:52px 1fr;gap:18px}
-.fix-item .ic{width:52px;height:52px;border-radius:14px;background:#EEF1FA;display:grid;place-items:center;color:var(--smalt)}
+.fix-item .ic{width:52px;height:52px;border-radius:14px;background:#F1F3F6;display:grid;place-items:center;color:var(--smalt)}
 .fix-item .ic svg{width:24px;height:24px}
 .fix-item p{color:var(--muted);font-size:16px;margin-top:4px}
 
@@ -244,7 +244,7 @@ nav.menu a:hover{color:var(--smalt)}
 .step{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;position:relative}
 .step::before{counter-increment:s;content:counter(s);font-family:var(--display);font-size:46px;line-height:1;color:var(--gold);display:block;margin-bottom:18px}
 .step p{color:var(--muted);font-size:15px;margin-top:8px}
-.step .time{display:inline-block;margin-top:16px;font-size:13px;font-weight:700;color:var(--smalt);background:#EEF1FA;padding:6px 12px;border-radius:999px}
+.step .time{display:inline-block;margin-top:16px;font-size:13px;font-weight:700;color:var(--smalt);background:#F1F3F6;padding:6px 12px;border-radius:999px}
 
 /* Ванная */
 .bath{padding:0}
@@ -349,13 +349,13 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
 .stage-n{font-size:13px;font-weight:800;color:var(--gold);margin-bottom:10px}
 .stage h3{font-family:var(--display);font-weight:400;font-size:clamp(24px,2.4vw,32px);margin-bottom:12px}
 .stage p{color:var(--muted)}
-.stage-get{margin-top:16px;padding:14px 16px;border-radius:12px;background:#EEF1FA;font-size:15px}
+.stage-get{margin-top:16px;padding:14px 16px;border-radius:12px;background:#F1F3F6;font-size:15px}
 .stage-get b{color:var(--smalt)}
 .stage .btn{align-self:flex-start}
 
 /* Живая смета */
 .sheet .row{transition:background .3s}
-.sheet .row:hover{background:#F5F7FC}
+.sheet .row:hover{background:#F4F5F7}
 .sheet.live .row{animation:rowIn .5s both}
 .sheet.live .row:nth-child(2){animation-delay:.05s}.sheet.live .row:nth-child(3){animation-delay:.15s}.sheet.live .row:nth-child(4){animation-delay:.25s}.sheet.live .row:nth-child(5){animation-delay:.35s}.sheet.live .row:nth-child(6){animation-delay:.45s}.sheet.live .row:nth-child(7){animation-delay:.55s}
 @keyframes rowIn{50%{background:#FBF5E6}}
@@ -451,7 +451,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
 .lb[hidden]{display:none}
 .lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
 .lb-x{position:absolute;right:18px;top:18px;width:46px;height:46px;border-radius:50%;border:0;background:#fff;font-size:26px;cursor:pointer;z-index:2}
-.final-note{font-size:13px;background:#EEF1FA;border-radius:10px;padding:10px 12px;color:var(--smalt-ink)}
+.final-note{font-size:13px;background:#F1F3F6;border-radius:10px;padding:10px 12px;color:var(--smalt-ink)}
 .cg-t{font-size:14px;font-weight:800;margin-bottom:10px}
 @media (max-width:1080px){ .sv{grid-template-columns:1fr} .sv-stage{min-height:0;aspect-ratio:16/10} .sv-styles{grid-template-columns:repeat(5,1fr)} }
 @media (max-width:720px){
@@ -500,7 +500,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
 .cmp th,.cmp td{padding:16px 18px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
 .cmp thead th{font-size:14px;color:var(--muted);font-weight:700}
 .cmp th.us{color:#fff;background:var(--smalt);font-size:16px;border-radius:14px 14px 0 0}
-.cmp td.us{background:#EEF2FC;font-weight:700;color:var(--smalt-ink)}
+.cmp td.us{background:#FFF3EB;font-weight:700;color:var(--smalt-ink)}
 .cmp tr:last-child td{border-bottom:0}
 .cmp td:first-child{font-weight:600}
 .cmp td:not(:first-child){color:var(--muted);font-size:14px}
@@ -616,7 +616,7 @@ h3{font-family:var(--body);font-weight:700}
 .ptable td.p{font-family:var(--display);font-weight:600;color:var(--smalt);white-space:nowrap;font-size:18px;letter-spacing:-.02em}
 .ptable td{font-size:15px;color:#3B3D42}
 .ptable tr:last-child td{border-bottom:0}
-.ptable tr.hl td{background:#F2F5FF}
+.ptable tr.hl td{background:#FFF3EB}
 .ptable .gift-chip{display:inline-block;margin-top:8px;font-size:12px;padding:5px 10px}
 .pnote{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
 .pnote div{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px 18px;font-size:14px;color:var(--muted)}
@@ -683,6 +683,71 @@ h3{font-family:var(--body);font-weight:700}
   html{scroll-behavior:auto}
   *{transition:none!important}
 }
+
+/* ===== Строгий стиль: последние переопределения ===== */
+*,*::before,*::after{border-radius:4px!important}
+img,svg,.ph,.room,.plan{border-radius:inherit}
+html,body,main,section,header,footer,.topline,.wrap,table,thead,tbody,tr,th,td,.mbar,.pop,.lb,.sheet-m,#scrollbar,.hero .ph::after,.sv-stage::after{border-radius:0!important}
+.cmp th.us{border-radius:0!important}
+.h-ava,.ava,.ava::after,.h-ava::after,.cmp i,.sv-bars i,.sv-bars i b,input[type=range]{border-radius:999px!important}
+.typing i{border-radius:2px!important}
+h1,h2{font-family:var(--display);font-weight:800;letter-spacing:-.025em;line-height:1.04}
+h2{font-size:clamp(28px,3.4vw,46px)}
+.hero h1{font-size:clamp(42px,7vw,104px);letter-spacing:-.035em;line-height:.98}
+.hero h1 span{color:var(--smalt)}
+.sv-cap h3,.stage h3,.pop-card h3,.final-card h3{font-family:var(--display);font-weight:700;letter-spacing:-.015em}
+.est,.price .val,.ctor-sum b,.sv-sum b,.qp-sum,.bath-price,.area-num,.svc em,.ptable td.p,.hc b{font-family:var(--display);font-weight:700;letter-spacing:-.02em}
+.logo .name{font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:.14em;font-size:18px;background:none;color:var(--ink);-webkit-background-clip:border-box;background-clip:border-box;animation:none}
+.foot .logo .name{color:#fff;background:none}
+.btn{font-weight:700;letter-spacing:.01em}
+.btn-main{background:var(--smalt);color:#fff}
+.btn-main:hover{background:#B83C0B}
+.btn-gold{background:var(--smalt-ink)!important;color:#fff!important}
+.btn-gold:hover{background:#0B1428!important}
+.btn-line{border-color:var(--ink);color:var(--ink)}
+.btn-line:hover{background:var(--ink);color:#fff}
+.gift-badge,.pre li::before,.hit-tag,.offer i,.final-pts li::before,.pop-doc i,.a-btn.go,.gift-chip,.svc .tag,.term-c:nth-child(2) i{color:#fff!important}
+.offer i,.pre li::before,.final-pts li::before,.pop-doc i,.svc .tag,.hit-tag{background:var(--smalt)!important}
+.a-btn.go{background:var(--smalt)!important;border-color:var(--smalt)!important}
+.a-btn.go:hover{background:#B83C0B!important;border-color:#B83C0B!important}
+.gift-chip{background:var(--smalt-ink);border-color:var(--smalt-ink)}
+.term-c i{background:var(--smalt-ink)}
+.term-c:nth-child(2) i{background:var(--smalt)}
+.topline{background:var(--smalt-ink)}
+.topline b{color:#FFB086}
+#scrollbar{background:var(--smalt)}
+.sticker{width:auto;height:auto;padding:14px 18px;font-size:15px;line-height:1.25;transform:none;animation:none;background:var(--smalt);color:#fff;text-align:left;box-shadow:0 14px 30px -14px rgba(0,0,0,.5)}
+.sticker br{display:none}
+.hero-badge{background:rgba(255,255,255,.95)}
+.gift-sec{background:var(--smalt-ink)}
+.gift-sec h2{color:#fff}
+.gift-sec .sub,.gift-cta span{color:#C5CCDB}
+.gift-badge{background:var(--smalt)!important}
+.gift-list li{border-color:rgba(255,255,255,.08);box-shadow:none}
+.gift-list li::before{background:var(--smalt)}
+.gift-sec .btn-main{background:var(--smalt)}
+.stage-n,.h-bub b{color:var(--smalt)}
+.sv-list li::before,.type li::before{background:var(--smalt)}
+.m.me{background:var(--smalt-ink)}
+.prog i.on{background:var(--smalt)}
+.calc-side,.bath-txt,.final,.districts-section{background:var(--smalt-ink)}
+.bath-price{color:#FFB086}
+.qp-chips button.on,.chips button.on,.plan-tabs button.on{background:var(--smalt-ink);border-color:var(--smalt-ink)}
+.svc a,.term-c,.hc,.pnote div,.ptable-wrap,.cmp-wrap,.sv-side,.plan-card,.quiz,.stage.on{box-shadow:none}
+.svc a:hover{box-shadow:0 18px 34px -24px rgba(17,24,39,.45)}
+.svc em{color:var(--smalt)}
+.ptable thead th{background:var(--smalt-ink);color:#fff}
+.ptable tr.hl td{background:#FFF3EB}
+.cmp th.us{background:var(--smalt)}
+.cmp td.us{background:#FFF3EB;color:var(--ink)}
+.sv-st.on{box-shadow:0 0 0 3px var(--smalt)}
+.sv-st.on span::after{background:var(--smalt)}
+.sv-tag,.sv-nav{background:#fff}
+.offer{box-shadow:none;border-color:var(--line)}
+.hero .qp{background:var(--bg)}
+.districts li{background:rgba(255,255,255,.06)}
+.final-card .btn-gold,#popForm .btn-gold{background:var(--smalt)!important}
+.final-card .btn-gold:hover,#popForm .btn-gold:hover{background:#B83C0B!important}
 </style>
 </head>
 <body>
@@ -698,7 +763,7 @@ h3{font-family:var(--body);font-weight:700}
 <header class="site">
   <div class="wrap bar">
     <a class="logo" href="#top" aria-label="Смальтэра — на главную">
-      <svg class="lg " viewBox="0 0 64 64" aria-hidden="true"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#0A0A0A" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#2340D9" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#2340D9" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#2340D9" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#0A0A0A"/></svg>
+      <svg class="lg " viewBox="0 0 64 64" aria-hidden="true"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#D9480F" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#D9480F"/></svg>
       <span><span class="name">СМАЛЬТЭРА</span><span class="tag">РЕМОНТ КВАРТИР</span></span>
     </a>
     <nav class="menu" aria-label="Разделы">
@@ -746,7 +811,7 @@ h3{font-family:var(--body);font-weight:700}
       </div>
       <div class="hero-img ph">
         <img src="https://images.pexels.com/photos/6908500/pexels-photo-6908500.jpeg?auto=compress&cs=tinysrgb&w=2000" alt="Светлая гостиная после ремонта" fetchpriority="high" onerror="this.classList.add('err')">
-        <a class="sticker" href="#gift">Дизайн-<br>проект<br>в подарок</a>
+        <a class="sticker" href="#gift">Дизайн-проект в подарок</a>
         <span class="hero-badge">Екатеринбург · замер бесплатно</span>
       </div>
     </div>
@@ -890,7 +955,7 @@ h3{font-family:var(--body);font-weight:700}
     <div class="quiz">
       <div class="chat">
         <div class="chat-head">
-          <span class="ava" id="ava"><svg class="lg av" viewBox="0 0 64 64" aria-hidden="true"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#0A0A0A" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#2340D9" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#2340D9" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#2340D9" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#0A0A0A"/></svg></span>
+          <span class="ava" id="ava"><svg class="lg av" viewBox="0 0 64 64" aria-hidden="true"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#D9480F" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#D9480F"/></svg></span>
           <div><b>Смальта</b><small>помощник по расчёту ремонта</small></div>
           <button type="button" class="chat-reset" id="reset">Начать заново</button>
         </div>
@@ -1031,7 +1096,7 @@ h3{font-family:var(--body);font-weight:700}
               <g class="ok"><circle cx="200" cy="270" r="16"/><path d="M192 270l6 6 11-12"/></g>
               <g class="ok"><circle cx="300" cy="296" r="16"/><path d="M292 296l6 6 11-12"/></g>
               <g class="ok"><circle cx="512" cy="350" r="16"/><path d="M504 350l6 6 11-12"/></g>
-              <g class="tag-g"><rect x="262" y="240" width="156" height="32" rx="16" fill="#2340D9"/><text x="340" y="261" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Ключи ваши!</text></g>
+              <g class="tag-g"><rect x="262" y="240" width="156" height="32" rx="16" fill="#14213D"/><text x="340" y="261" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Ключи ваши!</text></g>
             </g>
 
             <g class="walls" fill="none" stroke="#15171C" stroke-linecap="square">
@@ -1225,7 +1290,7 @@ h3{font-family:var(--body);font-weight:700}
     <div class="foot">
       <div>
         <a class="logo" href="#top" aria-label="Смальтэра — наверх">
-          <svg class="lg " viewBox="0 0 64 64" aria-hidden="true" style="width:42px;height:42px"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#D7FF3A" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#8FA0FF" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#5A73F5" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#8FA0FF" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#5A73F5" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#8FA0FF" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#5A73F5" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#8FA0FF" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#D7FF3A"/></svg>
+          <svg class="lg " viewBox="0 0 64 64" aria-hidden="true" style="width:42px;height:42px"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#F76707" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#C3CAD9" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#8D99B3" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#C3CAD9" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#8D99B3" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#C3CAD9" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#8D99B3" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#C3CAD9" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#F76707"/></svg>
           <span><span class="name">СМАЛЬТЭРА</span><span class="tag">РЕМОНТ КВАРТИР</span></span>
         </a>
         <p style="margin-top:16px">Ремонт квартир под ключ в Екатеринбурге с фиксированной сметой.</p>
@@ -1273,7 +1338,7 @@ h3{font-family:var(--body);font-weight:700}
 </div>
 
 <div class="helper" id="helper">
-  <button type="button" class="h-ava" id="hAva" aria-label="Помощник Смальта"><svg class="lg" viewBox="0 0 64 64" aria-hidden="true"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#0A0A0A" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#2340D9" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#2340D9" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#2340D9" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#4D66F2" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#0A0A0A"/></svg></button>
+  <button type="button" class="h-ava" id="hAva" aria-label="Помощник Смальта"><svg class="lg" viewBox="0 0 64 64" aria-hidden="true"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#D9480F" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#D9480F"/></svg></button>
   <div class="h-bub hide" id="hBub" role="status">
     <button type="button" class="h-x" id="hX" aria-label="Скрыть подсказки">×</button>
     <div id="hTxt"></div>
