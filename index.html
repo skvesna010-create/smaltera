@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Смальтэра — ремонт квартир</title>
+<meta name="description" content="Ремонт квартир в Екатеринбурге под ключ: фиксированная смета в договоре, бесплатный замер, поэтапная оплата.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Палитра: синяя смальта + золото мозаики на холодной штукатурке */
+  --plaster:#EDEFF3;
+  --paper:#FFFFFF;
+  --ink:#121A2E;
+  --muted:#58627A;
+  --line:#D5D9E2;
+  --smalt:#1D3B8F;
+  --smalt-deep:#0E1F55;
+  --gold:#C9A14A;
+  --gold-soft:#E9D9AE;
+  --malachite:#1E7A5B;
+  --display:"Unbounded", "Arial Black", system-ui, sans-serif;
+  --body:"Golos Text", "Segoe UI", Roboto, system-ui, sans-serif;
+  /* Макет: текст по левому краю, мозаика справа; один «стеклянный» акцент — калькулятор */
+  color-scheme: light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--plaster);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img,canvas,svg{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.12;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:clamp(26px,3.4vw,40px)}
+h3{font-size:19px;font-weight:500}
+p{max-width:62ch}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+section{padding-block:clamp(56px,8vw,104px)}
+.lead{font-size:clamp(17px,1.6vw,20px);color:var(--muted)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+/* Кнопки */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:600 16px/1 var(--body);padding:17px 26px;border-radius:999px;border:2px solid transparent;cursor:pointer;text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+.btn-gold{background:var(--gold);color:var(--smalt-deep)}
+.btn-gold:hover{background:#D9B35C}
+.btn-ghost{border-color:currentColor;background:transparent}
+.btn-ghost:hover{background:rgba(255,255,255,.08)}
+.btn-smalt{background:var(--smalt);color:#fff}
+.btn-smalt:hover{background:var(--smalt-deep)}
+
+/* Шапка */
+header{position:sticky;top:0;z-index:20;background:rgba(237,239,243,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo b{font-family:var(--display);font-size:20px;letter-spacing:.01em}
+.logo small{display:block;font-size:12px;color:var(--muted);font-weight:500;line-height:1.2}
+nav{display:flex;gap:26px}
+nav a{text-decoration:none;font-weight:500;font-size:15px;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+.bar-right{display:flex;align-items:center;gap:18px}
+.phone{font-weight:600;text-decoration:none;white-space:nowrap}
+.phone span{display:block;font-size:12px;font-weight:400;color:var(--muted)}
+.bar .btn{padding:13px 20px;font-size:15px}
+
+/* Первый экран */
+.hero{background:var(--smalt-deep);color:#fff;padding-block:clamp(48px,7vw,88px);position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,64px);align-items:center}
+.hero h1{font-size:clamp(34px,5.2vw,66px);margin-bottom:22px}
+.hero .lead{color:#C4CCE4;margin-bottom:30px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:38px}
+.facts{display:grid;grid-template-columns:repeat(3,auto);gap:12px 34px;justify-content:start;border-top:1px solid rgba(255,255,255,.16);padding-top:24px}
+.facts dt{font-family:var(--display);font-size:18px;color:var(--gold-soft)}
+.facts dd{font-size:14px;color:#AEB8D6}
+.mosaic{aspect-ratio:1/1;width:100%;border-radius:6px;background:#0B1844;box-shadow:0 30px 80px -30px rgba(0,0,0,.6);touch-action:pan-y}
+
+/* Калькулятор */
+.calc-section{padding-top:clamp(56px,7vw,88px)}
+.calc-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:34px}
+.calc{display:grid;grid-template-columns:1.25fr .75fr;background:var(--paper);border-radius:22px;overflow:hidden;box-shadow:0 24px 60px -34px rgba(14,31,85,.45)}
+.calc-form{padding:clamp(22px,3.4vw,40px);display:grid;gap:28px}
+.q legend{font-weight:600;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip span{display:block;padding:11px 18px;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;font-weight:500;transition:border-color .15s,background .15s}
+.chip span small{display:block;font-weight:400;font-size:13px;color:var(--muted)}
+.chip input:checked + span{border-color:var(--smalt);background:#EEF2FC;box-shadow:inset 0 0 0 1px var(--smalt)}
+.chip input:focus-visible + span{outline:3px solid var(--gold);outline-offset:2px}
+.area-row{display:flex;align-items:center;gap:18px}
+.area-row input[type=range]{flex:1;accent-color:var(--smalt)}
+.area-val{font-family:var(--display);font-size:22px;min-width:96px;text-align:right;font-variant-numeric:tabular-nums}
+.checks{display:grid;gap:10px}
+.check{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+.check input{width:20px;height:20px;margin-top:2px;accent-color:var(--smalt);flex:none}
+.check small{color:var(--muted)}
+.calc-out{background:var(--smalt);color:#fff;padding:clamp(22px,3.4vw,40px);display:flex;flex-direction:column;gap:18px}
+.calc-out .label{font-size:14px;color:#BFC9E8}
+.price{font-family:var(--display);font-size:clamp(28px,3vw,38px);line-height:1.1;font-variant-numeric:tabular-nums}
+.price-note{font-size:14px;color:#BFC9E8}
+.out-row{display:flex;justify-content:space-between;gap:12px;border-top:1px solid rgba(255,255,255,.18);padding-top:12px;font-size:15px}
+.out-row b{font-variant-numeric:tabular-nums}
+.lead-form{display:grid;gap:10px;margin-top:auto}
+.field{display:grid;gap:6px}
+.field label{font-size:13px;color:#BFC9E8}
+.field input{font:500 16px var(--body);padding:14px 16px;border-radius:12px;border:1.5px solid transparent;background:#fff;color:var(--ink)}
+.field input:focus{outline:none;border-color:var(--gold)}
+.form-msg{font-size:14px;min-height:20px}
+.form-msg.ok{color:var(--gold-soft)}
+.form-msg.err{color:#FFC2B8}
+.fine{font-size:12px;color:#9FACD6}
+
+/* Виды ремонта */
+.types{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--ink);margin-top:36px}
+.type{padding:28px 28px 30px 0;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:14px}
+.type + .type{padding-left:28px}
+.type:last-child{border-right:0}
+.type .from{font-family:var(--display);font-size:26px;color:var(--smalt)}
+.type .from small{font-family:var(--body);font-size:15px;color:var(--muted);font-weight:500}
+.type ul{list-style:none;display:grid;gap:8px;color:var(--muted);font-size:16px}
+.type li{padding-left:20px;position:relative}
+.type li::before{content:"";position:absolute;left:0;top:.55em;width:9px;height:9px;background:var(--gold);transform:rotate(8deg)}
+.type .btn{margin-top:auto;align-self:flex-start}
+
+/* Этапы */
+.steps-section{background:var(--paper)}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(6,1fr);gap:0;margin-top:44px;counter-reset:s}
+.step{position:relative;padding:0 18px 0 0}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:46px;height:46px;border-radius:10px;background:var(--smalt);color:#fff;font-family:var(--display);font-size:18px;margin-bottom:18px;position:relative;z-index:1}
+.step::after{content:"";position:absolute;top:23px;left:46px;right:0;height:2px;background:repeating-linear-gradient(90deg,var(--gold) 0 8px,transparent 8px 14px)}
+.step:last-child::after{display:none}
+.step h3{margin-bottom:8px;font-size:17px}
+.step p{font-size:15px;color:var(--muted)}
+
+/* Обещания */
+.promise-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,5vw,72px);align-items:start}
+.promises{display:grid;grid-template-columns:1fr 1fr;gap:34px 32px}
+.promise h3{font-size:17px;margin-bottom:8px;display:flex;gap:12px;align-items:center}
+.promise h3 i{flex:none;width:14px;height:14px;background:var(--smalt);transform:rotate(-6deg);box-shadow:5px 5px 0 var(--gold)}
+.promise p{color:var(--muted);font-size:16px}
+
+/* Услуги */
+.services{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:36px}
+.service{background:var(--paper);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:10px;border:1px solid var(--line)}
+.service:first-child{background:var(--smalt);color:#fff;border-color:var(--smalt)}
+.service:first-child p{color:#C4CCE4}
+.service p{color:var(--muted);font-size:15px}
+.service .from{margin-top:auto;font-weight:600}
+
+/* Районы */
+.districts-section{background:var(--smalt-deep);color:#fff}
+.districts-section .lead{color:#C4CCE4}
+.districts{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.districts li{list-style:none;padding:10px 16px;border-radius:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);font-size:15px}
+
+/* Вопросы */
+.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(28px,5vw,72px)}
+details{border-bottom:1px solid var(--line)}
+details:first-child{border-top:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:22px 44px 22px 0;font-weight:600;font-size:18px;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";position:absolute;right:6px;top:50%;width:14px;height:14px;margin-top:-7px;background:var(--gold);transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 0 22px;color:var(--muted)}
+
+/* Финальный призыв */
+.final{background:var(--gold);color:var(--smalt-deep)}
+.final-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,64px);align-items:center}
+.final .lead{color:#4A3A12}
+.final-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.final-form .field label{color:#4A3A12}
+.final-form .field input{border-color:rgba(14,31,85,.15)}
+.final-form .btn{grid-column:1/-1}
+.final-form .form-msg{grid-column:1/-1}
+.final-form .form-msg.ok{color:var(--smalt-deep)}
+.final-form .form-msg.err{color:#8A1F10}
+
+footer{background:var(--ink);color:#AAB2C6;padding-block:40px;font-size:15px}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center}
+footer .logo b{color:#fff}
+
+/* Адаптив */
+@media (max-width:1020px){
+  nav{display:none}
+  .hero-grid,.calc,.promise-grid,.faq-grid,.final-grid{grid-template-columns:1fr}
+  .mosaic{max-width:520px}
+  .steps{grid-template-columns:repeat(3,1fr);row-gap:34px}
+  .step:nth-child(3)::after{display:none}
+  .services{grid-template-columns:1fr 1fr}
+}
+@media (max-width:720px){
+  body{font-size:16px}
+  .bar .btn{display:none}
+  .types{grid-template-columns:1fr}
+  .type,.type + .type{padding:26px 0;border-right:0;border-bottom:1px solid var(--line)}
+  .steps{grid-template-columns:1fr}
+  .step{display:grid;grid-template-columns:46px 1fr;column-gap:16px;padding:0}
+  .step::before{margin:0;grid-row:span 2}
+  .step::after{display:none}
+  .promises,.services,.final-form{grid-template-columns:1fr}
+  .facts{grid-template-columns:1fr 1fr}
+}
+@media (max-width:420px){
+  .phone span{display:none}
+  .logo small{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#top" aria-label="Смальтэра — на главную">
+      <svg width="38" height="38" viewBox="0 0 38 38" aria-hidden="true">
+        <rect x="1" y="1" width="11" height="11" rx="1.5" fill="#1D3B8F" transform="rotate(-4 6 6)"/>
+        <rect x="14" y="1" width="11" height="11" rx="1.5" fill="#C9A14A" transform="rotate(5 19 6)"/>
+        <rect x="27" y="1" width="10" height="11" rx="1.5" fill="#1D3B8F" transform="rotate(-3 32 6)"/>
+        <rect x="1" y="14" width="11" height="11" rx="1.5" fill="#C9A14A" transform="rotate(4 6 19)"/>
+        <rect x="14" y="14" width="11" height="11" rx="1.5" fill="#0E1F55" transform="rotate(-6 19 19)"/>
+        <rect x="1" y="27" width="11" height="10" rx="1.5" fill="#1D3B8F" transform="rotate(3 6 32)"/>
+        <rect x="14" y="27" width="11" height="10" rx="1.5" fill="#1D3B8F" transform="rotate(-2 19 32)"/>
+        <rect x="27" y="27" width="10" height="10" rx="1.5" fill="#C9A14A" transform="rotate(6 32 32)"/>
+      </svg>
+      <span><b>Смальтэра</b><small>ремонт квартир · Екатеринбург</small></span>
+    </a>
+    <nav aria-label="Разделы">
+      <a href="#calc">Калькулятор</a>
+      <a href="#types">Цены</a>
+      <a href="#steps">Как работаем</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <div class="bar-right">
+      <a class="phone" href="tel:+73430000000">+7 (343) 000-00-00<span>ежедневно 9:00–21:00</span></a>
+      <a class="btn btn-smalt" href="#final">Вызвать замерщика</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Ремонт квартир в Екатеринбурге под ключ</h1>
+      <p class="lead">Собираем ремонт, как мозаику: каждый этап на своём месте, смета фиксируется в договоре и не растёт по ходу работ.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="#calc">Рассчитать стоимость</a>
+        <a class="btn btn-ghost" href="#final">Бесплатный замер</a>
+      </div>
+      <dl class="facts">
+        <div><dt>0 ₽</dt><dd>замер и смета</dd></div>
+        <div><dt>Фикс</dt><dd>цена в договоре</dd></div>
+        <div><dt>Поэтапно</dt><dd>оплата по факту</dd></div>
+      </dl>
+    </div>
+    <canvas class="mosaic" id="mosaic" role="img" aria-label="Мозаика из синей и золотой смальты с буквой С"></canvas>
+  </div>
+</section>
+
+<section class="calc-section" id="calc">
+  <div class="wrap">
+    <div class="calc-head">
+      <div>
+        <h2>Сколько стоит ваш ремонт</h2>
+        <p class="lead">Ответьте на три вопроса и узнайте примерную цену работ. Точную смету составим после бесплатного замера.</p>
+      </div>
+    </div>
+
+    <div class="calc">
+      <form class="calc-form" id="calcForm" onsubmit="return false">
+        <fieldset class="q">
+          <legend>Какая квартира?</legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="flat" value="new" checked><span>Новостройка<small>без отделки или white box</small></span></label>
+            <label class="chip"><input type="radio" name="flat" value="old"><span>Вторичка<small>с демонтажом старого</small></span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="q">
+          <legend>Какой ремонт нужен?</legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="kind" value="cosm"><span>Косметический<small>стены, пол, потолок</small></span></label>
+            <label class="chip"><input type="radio" name="kind" value="cap" checked><span>Капитальный<small>с электрикой и сантехникой</small></span></label>
+            <label class="chip"><input type="radio" name="kind" value="design"><span>Дизайнерский<small>по дизайн-проекту</small></span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="q">
+          <legend><label for="area">Площадь квартиры</label></legend>
+          <div class="area-row">
+            <input type="range" id="area" min="20" max="200" step="1" value="54">
+            <output class="area-val" id="areaVal" for="area">54 м²</output>
+          </div>
+        </fieldset>
+
+        <fieldset class="q">
+          <legend>Что добавить?</legend>
+          <div class="checks">
+            <label class="check"><input type="checkbox" id="optDesign"><span>Дизайн-проект<br><small>планировка, 3D-визуализация, чертежи для бригады</small></span></label>
+            <label class="check"><input type="checkbox" id="optCeiling"><span>Натяжные потолки<br><small>во всех комнатах</small></span></label>
+            <label class="check"><input type="checkbox" id="optBath" checked><span>Санузел под ключ<br><small>плитка, инсталляция, разводка труб</small></span></label>
+          </div>
+        </fieldset>
+      </form>
+
+      <div class="calc-out" aria-live="polite">
+        <div>
+          <div class="label">Примерная стоимость работ</div>
+          <div class="price" id="price">—</div>
+          <div class="price-note">без учёта чистовых материалов</div>
+        </div>
+        <div class="out-row"><span>Цена за м²</span><b id="perM">—</b></div>
+        <div class="out-row"><span>Срок ремонта</span><b id="term">—</b></div>
+
+        <form class="lead-form" id="leadForm" novalidate>
+          <div class="field">
+            <label for="calcPhone">Получите точную смету после замера</label>
+            <input id="calcPhone" name="phone" type="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" autocomplete="tel">
+          </div>
+          <button class="btn btn-gold" type="submit">Записаться на бесплатный замер</button>
+          <div class="form-msg" role="status"></div>
+          <p class="fine">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="types">
+  <div class="wrap">
+    <h2>Виды ремонта и цены</h2>
+    <p class="lead">Цены за работы. Материалы закупаем по вашему выбору или помогаем подобрать с оптовой скидкой.</p>
+    <div class="types">
+      <article class="type">
+        <h3>Косметический</h3>
+        <div class="from">от 4 500 ₽ <small>/ м²</small></div>
+        <ul>
+          <li>Выравнивание и покраска стен или обои</li>
+          <li>Ламинат или линолеум, плинтус</li>
+          <li>Замена розеток, выключателей, дверей</li>
+        </ul>
+        <a class="btn btn-ghost" href="#final">Обсудить</a>
+      </article>
+      <article class="type">
+        <h3>Капитальный</h3>
+        <div class="from">от 9 500 ₽ <small>/ м²</small></div>
+        <ul>
+          <li>Новая электрика и разводка сантехники</li>
+          <li>Стяжка пола, штукатурка по маякам</li>
+          <li>Санузел под ключ, чистовая отделка</li>
+        </ul>
+        <a class="btn btn-smalt" href="#final">Обсудить</a>
+      </article>
+      <article class="type">
+        <h3>Дизайнерский</h3>
+        <div class="from">от 15 000 ₽ <small>/ м²</small></div>
+        <ul>
+          <li>Работа строго по дизайн-проекту</li>
+          <li>Сложные потолки, подсветка, ниши</li>
+          <li>Авторский надзор дизайнера</li>
+        </ul>
+        <a class="btn btn-ghost" href="#final">Обсудить</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="steps-section" id="steps">
+  <div class="wrap">
+    <h2>Как проходит ремонт</h2>
+    <p class="lead">Шесть этапов от звонка до ключей. На каждом вы знаете, что происходит и сколько это стоит.</p>
+    <ol class="steps">
+      <li class="step"><h3>Заявка</h3><p>Звоните или оставляете номер, перезваниваем в течение 15 минут.</p></li>
+      <li class="step"><h3>Замер</h3><p>Инженер приезжает в удобное время, замеряет и фотографирует квартиру.</p></li>
+      <li class="step"><h3>Смета</h3><p>Подробная смета по каждой позиции: видно, за что вы платите.</p></li>
+      <li class="step"><h3>Договор</h3><p>Фиксируем цену, сроки и график оплаты по этапам.</p></li>
+      <li class="step"><h3>Ремонт</h3><p>Прораб на связи, фото и видео прогресса каждую неделю.</p></li>
+      <li class="step"><h3>Приёмка</h3><p>Проверяете работу по чек-листу, подписываем акт, выдаём гарантию.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="wrap promise-grid">
+    <div>
+      <h2>Почему с нами спокойно</h2>
+      <p class="lead">Ремонт пугает тремя вещами: смета растёт, сроки срываются, связи с бригадой нет. Мы закрываем каждую из них в договоре.</p>
+    </div>
+    <div class="promises">
+      <div class="promise"><h3><i></i>Смета не растёт</h3><p>Цена работ из договора остаётся неизменной до конца ремонта.</p></div>
+      <div class="promise"><h3><i></i>Оплата по этапам</h3><p>Платите за выполненный этап после того, как приняли его.</p></div>
+      <div class="promise"><h3><i></i>Один прораб</h3><p>Отвечает за объект от первого дня до сдачи и всегда на связи.</p></div>
+      <div class="promise"><h3><i></i>Фотоотчёты</h3><p>Видите, как идёт ремонт, даже если живёте в другом городе.</p></div>
+      <div class="promise"><h3><i></i>Чистота</h3><p>Вывозим мусор, защищаем подъезд и лифт, делаем финальную уборку.</p></div>
+      <div class="promise"><h3><i></i>Гарантия</h3><p>Письменная гарантия на все выполненные работы.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="services" style="padding-top:0">
+  <div class="wrap">
+    <h2>Услуги</h2>
+    <div class="services">
+      <article class="service"><h3>Ремонт квартир под ключ</h3><p>Новостройки и вторичное жильё любой площади.</p><span class="from">от 4 500 ₽/м²</span></article>
+      <article class="service"><h3>Дизайн-проект</h3><p>Планировка, визуализация и рабочие чертежи.</p><span class="from">от 1 200 ₽/м²</span></article>
+      <article class="service"><h3>Ванная под ключ</h3><p>Плитка, инсталляция, тёплый пол, разводка.</p><span class="from">от 95 000 ₽</span></article>
+      <article class="service"><h3>Натяжные потолки</h3><p>Матовые, глянцевые, с подсветкой и парящие.</p><span class="from">от 650 ₽/м²</span></article>
+    </div>
+  </div>
+</section>
+
+<section class="districts-section">
+  <div class="wrap">
+    <h2>Работаем по всему Екатеринбургу</h2>
+    <p class="lead">Замерщик приедет в любой район города в день обращения или в удобное вам время.</p>
+    <ul class="districts">
+      <li>Академический</li><li>Центр</li><li>ВИЗ</li><li>Уралмаш</li><li>Эльмаш</li>
+      <li>Ботанический</li><li>Юго-Западный</li><li>Пионерский</li><li>Втузгородок</li>
+      <li>ЖБИ</li><li>Химмаш</li><li>Широкая Речка</li><li>Сортировка</li><li>Компрессорный</li>
+      <li>Синие Камни</li><li>Солнечный</li><li>Вторчермет</li><li>Парковый</li>
+    </ul>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap faq-grid">
+    <div>
+      <h2>Частые вопросы</h2>
+      <p class="lead">Не нашли ответ? Позвоните, инженер ответит сразу.</p>
+    </div>
+    <div>
+      <details open><summary>Цена точно не изменится?</summary><p>Стоимость работ фиксируется в договоре по итогам замера. Она может измениться только если вы сами решите добавить работы, и только после вашего письменного согласия.</p></details>
+      <details><summary>Сколько длится ремонт?</summary><p>Косметический ремонт однокомнатной квартиры занимает около месяца, капитальный ремонт двухкомнатной — два-три месяца. Точный срок прописываем в договоре.</p></details>
+      <details><summary>Нужно ли покупать материалы самому?</summary><p>Как удобнее вам. Можем закупить и привезти всё сами по согласованному списку или дать список, а вы купите в своём магазине.</p></details>
+      <details><summary>Можно не присутствовать на объекте?</summary><p>Да. Прораб присылает фото и видео каждую неделю, а принимать этапы можно по видеосвязи.</p></details>
+      <details><summary>Делаете ремонт в новостройках с отделкой white box?</summary><p>Да, считаем смету с учётом того, что уже сделал застройщик, чтобы вы не платили дважды.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final" id="final">
+  <div class="wrap final-grid">
+    <div>
+      <h2>Вызовите замерщика бесплатно</h2>
+      <p class="lead">Инженер приедет, всё замерит и через день пришлёт подробную смету. Ни к чему не обязывает.</p>
+    </div>
+    <form class="final-form" id="finalForm" novalidate>
+      <div class="field"><label for="fName">Ваше имя</label><input id="fName" name="name" type="text" autocomplete="name" placeholder="Как к вам обращаться"></div>
+      <div class="field"><label for="fPhone">Телефон</label><input id="fPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></div>
+      <button class="btn btn-smalt" type="submit">Вызвать замерщика</button>
+      <div class="form-msg" role="status"></div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a class="logo" href="#top"><b>Смальтэра</b></a>
+    <span>Ремонт квартир в Екатеринбурге</span>
+    <a class="phone" href="tel:+73430000000" style="color:#fff">+7 (343) 000-00-00</a>
+    <span>© 2026 ООО «Смальтэра»</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ---------- Мозаика ---------- */
+  var cv = document.getElementById('mosaic');
+  var ctx = cv.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var tiles = [], W = 0, H = 0, dpr = 1, pointer = null, start = 0, raf = 0;
+  var blues = [[29,59,143],[22,48,122],[14,31,85],[38,74,170],[25,55,135],[46,86,184]];
+  var golds = [[201,161,74],[222,186,104],[184,141,58],[233,211,160]];
+
+  function rnd(seed){ var x = Math.sin(seed) * 10000; return x - Math.floor(x); }
+
+  function build(){
+    var r = cv.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = r.width; H = r.height;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    tiles = [];
+    var cell = Math.max(16, Math.round(W / 24));
+    var cx = W/2, cy = H/2, R1 = W*0.22, R2 = W*0.36;
+    var i = 0;
+    for (var y = cell/2; y < H; y += cell){
+      for (var x = cell/2; x < W; x += cell){
+        i++;
+        var jx = (rnd(i*1.7)-.5)*cell*0.18, jy = (rnd(i*2.3)-.5)*cell*0.18;
+        var px = x + jx, py = y + jy;
+        var dx = px - cx, dy = py - cy, d = Math.sqrt(dx*dx+dy*dy);
+        var ang = Math.atan2(dy, dx);
+        var inC = d > R1 && d < R2 && Math.abs(ang) > 0.75;
+        var pal = inC ? golds : blues;
+        var c = pal[Math.floor(rnd(i*3.1)*pal.length)];
+        if (!inC && rnd(i*5.9) > 0.985) c = golds[3];
+        tiles.push({
+          x:px, y:py, s:cell*(0.84 + rnd(i*4.1)*0.08),
+          a:(rnd(i*6.7)-.5)*0.16, c:c, gold:inC,
+          t:rnd(i*7.3)*0.75, tilt:rnd(i*8.9)*Math.PI*2
+        });
+      }
+    }
+  }
+
+  function draw(now){
+    var p = reduce ? 1 : Math.min(1, (now - start) / 900);
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0B1844'; ctx.fillRect(0,0,W,H);
+    var lx = pointer ? pointer.x : W*0.78, ly = pointer ? pointer.y : H*0.18;
+    for (var k = 0; k < tiles.length; k++){
+      var t = tiles[k];
+      var vis = Math.max(0, Math.min(1, (p - t.t*0.8) / 0.25));
+      if (vis <= 0) continue;
+      var dx = t.x - lx, dy = t.y - ly, dist = Math.sqrt(dx*dx+dy*dy);
+      var glint = Math.max(0, 1 - dist / (W*0.42));
+      glint = glint*glint * (0.55 + 0.45*Math.cos(t.tilt));
+      var boost = (t.gold ? 70 : 90) * glint;
+      var c = t.c;
+      ctx.save();
+      ctx.globalAlpha = vis;
+      ctx.translate(t.x, t.y); ctx.rotate(t.a);
+      var h = t.s/2;
+      ctx.fillStyle = 'rgb(' + Math.min(255,c[0]+boost|0) + ',' + Math.min(255,c[1]+boost|0) + ',' + Math.min(255,c[2]+boost*0.8|0) + ')';
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(-h,-h,t.s,t.s,2); else ctx.rect(-h,-h,t.s,t.s);
+      ctx.fill();
+      if (glint > 0.25){
+        ctx.fillStyle = 'rgba(255,255,255,' + (glint*0.22).toFixed(3) + ')';
+        ctx.fillRect(-h, -h, t.s, t.s*0.28);
+      }
+      ctx.restore();
+    }
+    if (p < 1) raf = requestAnimationFrame(draw);
+    else raf = 0;
+  }
+  function redraw(){ if (!raf) raf = requestAnimationFrame(draw); }
+
+  build(); start = performance.now(); draw(start);
+  window.addEventListener('resize', function(){ build(); redraw(); });
+  if (!reduce){
+    cv.addEventListener('pointermove', function(e){
+      var r = cv.getBoundingClientRect();
+      pointer = {x:e.clientX - r.left, y:e.clientY - r.top}; redraw();
+    });
+    cv.addEventListener('pointerleave', function(){ pointer = null; redraw(); });
+  }
+
+  /* ---------- Калькулятор ---------- */
+  var RATES = { cosm:4500, cap:9500, design:15000 };      /* ₽ за м², работы */
+  var OLD_FLAT = 1.15;                                      /* вторичка: демонтаж */
+  var OPT = { design:1200, ceiling:650, bath:95000 };       /* дизайн и потолки за м², санузел фикс */
+  var DAYS = { cosm:[18,0.35], cap:[40,0.8], design:[60,1.1] };
+
+  var form = document.getElementById('calcForm');
+  var area = document.getElementById('area');
+  var fmt = function(n){ return Math.round(n/1000)*1000 > 0 ? (Math.round(n/1000)*1000).toLocaleString('ru-RU') : '0'; };
+
+  function calc(){
+    var flat = form.querySelector('input[name=flat]:checked').value;
+    var kind = form.querySelector('input[name=kind]:checked').value;
+    var a = +area.value;
+    document.getElementById('areaVal').textContent = a + ' м²';
+    var per = RATES[kind] * (flat === 'old' ? OLD_FLAT : 1);
+    var total = per * a;
+    if (document.getElementById('optDesign').checked) total += OPT.design * a;
+    if (document.getElementById('optCeiling').checked) total += OPT.ceiling * a;
+    if (document.getElementById('optBath').checked && kind !== 'cosm') total += OPT.bath;
+    else if (document.getElementById('optBath').checked) total += OPT.bath * 0.8;
+    var lo = total * 0.9, hi = total * 1.12;
+    document.getElementById('price').textContent = fmt(lo) + ' – ' + fmt(hi) + ' ₽';
+    document.getElementById('perM').textContent = 'от ' + Math.round(per).toLocaleString('ru-RU') + ' ₽';
+    var d = DAYS[kind][0] + DAYS[kind][1]*a;
+    var w = Math.max(3, Math.round(d/7));
+    document.getElementById('term').textContent = 'около ' + w + ' ' + plural(w, ['недели','недель','недель']);
+  }
+  function plural(n, f){ n = Math.abs(n) % 100; var n1 = n % 10; if (n > 10 && n < 20) return f[2]; if (n1 > 1 && n1 < 5) return f[0]; if (n1 === 1) return 'неделя'; return f[2]; }
+  form.addEventListener('input', calc); form.addEventListener('change', calc); calc();
+
+  /* ---------- Формы заявок (демо: отправка не подключена) ---------- */
+  function phoneOk(v){ return v.replace(/\D/g,'').length >= 10; }
+  function maskPhone(el){
+    el.addEventListener('input', function(){
+      var d = el.value.replace(/\D/g,'');
+      if (d.charAt(0) === '8') d = '7' + d.slice(1);
+      if (d && d.charAt(0) !== '7') d = '7' + d;
+      d = d.slice(0,11);
+      var out = d ? '+7' : '';
+      if (d.length > 1) out += ' (' + d.slice(1,4);
+      if (d.length >= 4) out += ')';
+      if (d.length > 4) out += ' ' + d.slice(4,7);
+      if (d.length > 7) out += '-' + d.slice(7,9);
+      if (d.length > 9) out += '-' + d.slice(9,11);
+      el.value = out;
+    });
+  }
+  ['calcPhone','fPhone'].forEach(function(id){ maskPhone(document.getElementById(id)); });
+
+  function handle(formEl, phoneId){
+    formEl.addEventListener('submit', function(e){
+      e.preventDefault();
+      var msg = formEl.querySelector('.form-msg');
+      var ph = document.getElementById(phoneId).value;
+      if (!phoneOk(ph)){
+        msg.className = 'form-msg err';
+        msg.textContent = 'Введите номер телефона полностью, 10 цифр после +7.';
+        return;
+      }
+      msg.className = 'form-msg ok';
+      msg.textContent = 'Это демо-версия сайта: отправка заявок подключается при публикации на хостинге.';
+    });
+  }
+  handle(document.getElementById('leadForm'), 'calcPhone');
+  handle(document.getElementById('finalForm'), 'fPhone');
+})();
+</script>
+</body>
+</html>
