@@ -400,31 +400,72 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
 
 /* Конструктор интерьера */
 .ctor-sec{padding-top:0}
-.ctor{display:grid;grid-template-columns:1.35fr .65fr;grid-template-areas:'room panel' 'sum panel';grid-template-rows:auto 1fr;gap:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 40px 80px -56px rgba(15,29,71,.5)}
-.room-wrap{grid-area:room;position:relative;background:#E9EAEE}
-.ctor-panel{grid-area:panel;border-left:1px solid var(--line)}
-.ctor .ctor-sum{grid-area:sum;margin:0;border-top:1px solid var(--line);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.ctor{display:grid;grid-template-columns:1.45fr .75fr;grid-template-areas:'room panel' 'sum panel';grid-template-rows:auto 1fr;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 40px 80px -56px rgba(15,29,71,.5)}
+.room-wrap{grid-area:room;position:relative;background:#E9EAEE;touch-action:pan-y;cursor:ew-resize;user-select:none;-webkit-user-select:none;overflow:hidden}
 .room{width:100%;height:auto;display:block}
-.room #rWall,.room #rWallL,.room #rWallR,.room #rCeil,.room #rRug,.room #rTint{transition:fill .6s ease,opacity .6s ease}
-.room #lampG{transition:opacity .6s ease}
-.room #rAcc,.room #rFloor,.room #rCeilLight{animation:fade .5s both}
-.room-note{position:absolute;left:16px;bottom:16px;background:rgba(255,255,255,.92);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:700}
-.ctor-panel{padding:26px;display:flex;flex-direction:column;gap:20px}
+.room .kw,.room #kCeilP,.room #kRug,.room #kTint,.room #kPend,.room #kPend2,.room #kStars,.room #kBeamF,.room #kCeilGlow{transition:fill .6s ease,opacity .7s ease}
+.room #kAcc,.room #kFloor{animation:fade .45s both}
+.room #kFurn,.room #kWalls{transition:transform .25s ease-out}
+.ba-handle{position:absolute;top:0;bottom:0;left:50%;width:0;z-index:2;outline:none}
+.ba-handle::before{content:"";position:absolute;top:0;bottom:0;left:-1.5px;width:3px;background:#fff;box-shadow:0 0 12px rgba(0,0,0,.25)}
+.ba-handle span{position:absolute;top:50%;left:0;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;background:#fff;box-shadow:0 10px 24px -8px rgba(15,29,71,.55);display:grid;place-items:center;cursor:grab;transition:transform .2s}
+.ba-handle span::before{content:"‹ ›";font:800 20px/1 var(--body);color:var(--smalt);letter-spacing:2px;margin-top:-2px}
+.ba-handle:focus-visible span{outline:3px solid var(--gold);outline-offset:3px}
+.room-wrap.drag .ba-handle span{transform:scale(1.1);cursor:grabbing}
+.ba-labels{position:absolute;inset:14px 14px auto 14px;display:flex;justify-content:space-between;pointer-events:none;z-index:1}
+.ba-labels span{background:rgba(255,255,255,.92);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:800}
+.ba-labels .ba-l{background:rgba(21,23,28,.75);color:#fff}
+.ctor .ctor-sum{grid-area:sum;align-self:start;border-top:1px solid var(--line);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.ctor-sum span{display:block;font-size:13px;font-weight:700;color:var(--muted)}
+.ctor-sum b{display:block;font-family:var(--display);font-weight:400;font-size:34px;color:var(--smalt);line-height:1.15;font-variant-numeric:tabular-nums}
+.ctor-sum small{display:block;font-size:13px;color:var(--muted);margin-top:4px;max-width:44ch}
+.ctor-panel{grid-area:panel;border-left:1px solid var(--line);padding:24px;display:flex;flex-direction:column;gap:22px}
 .cg-t{font-size:14px;font-weight:800;margin-bottom:10px}
 .cg-t span{font-weight:600;color:var(--muted)}
-.swatches{display:flex;gap:10px;flex-wrap:wrap}
-.swatches button{width:38px;height:38px;border-radius:50%;background:var(--c);border:2px solid #fff;box-shadow:0 0 0 1px var(--line);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.cgrp.two{display:grid;grid-template-columns:1fr;gap:18px}
+.presets{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.presets button{display:flex;align-items:center;gap:10px;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:9px 12px;font:700 14px var(--body);color:var(--ink);cursor:pointer;transition:border-color .15s,transform .15s}
+.presets button:hover{border-color:var(--smalt);transform:translateY(-1px)}
+.presets button.on{border-color:var(--smalt);box-shadow:inset 0 0 0 1px var(--smalt)}
+.presets i{width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,var(--a) 0 50%,var(--b) 50%);box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);flex:none}
+.dice{margin-top:8px;width:100%;border:1.5px dashed #C9CDD6;background:transparent;border-radius:12px;padding:10px;font:700 14px var(--body);color:var(--smalt);cursor:pointer}
+.dice:hover{border-color:var(--smalt);background:#F4F6FB}
+.swatches{display:flex;gap:9px;flex-wrap:wrap}
+.swatches button{width:34px;height:34px;border-radius:50%;background:var(--c);border:2px solid #fff;box-shadow:0 0 0 1px var(--line);cursor:pointer;transition:transform .15s,box-shadow .15s}
 .swatches button:hover{transform:scale(1.1)}
 .swatches button.on{box-shadow:0 0 0 2.5px var(--smalt);transform:scale(1.08)}
+.mats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.mats button{display:flex;flex-direction:column;gap:6px;align-items:stretch;border:0;background:none;padding:0;font:700 12px var(--body);color:var(--muted);cursor:pointer;text-align:center}
+.mats i{display:block;height:44px;border-radius:10px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);transition:box-shadow .15s,transform .15s}
+.mats button:hover i{transform:translateY(-2px)}
+.mats button.on{color:var(--ink)}
+.mats button.on i{box-shadow:0 0 0 2.5px var(--smalt)}
+.m-oak{background:repeating-linear-gradient(90deg,#D8BD93 0 14px,#CDAF84 14px 15px,#DFC59D 15px 29px,#C9AB7F 29px 30px)}
+.m-walnut{background:repeating-linear-gradient(90deg,#7B5737 0 14px,#5E4027 14px 15px,#86613F 15px 29px,#5E4027 29px 30px)}
+.m-vinyl{background:repeating-linear-gradient(90deg,#A9ACB1 0 16px,#8F9297 16px 17px,#B3B6BA 17px 33px,#8F9297 33px 34px)}
+.m-tile{background:linear-gradient(#CFCBC4,#CFCBC4) 50% 0/2px 100% no-repeat,linear-gradient(#CFCBC4,#CFCBC4) 0 50%/100% 2px no-repeat,#E6E3DD}
+.m-none{background:linear-gradient(135deg,#F1EFEA,#DCD6CB)}
+.m-slats{background:repeating-linear-gradient(90deg,#B98D5D 0 7px,#5E4027 7px 10px)}
+.m-mosaic{background:conic-gradient(#1F3B8C 0 25%,#B8913F 0 50%,#2D4FA8 0 75%,#16296A 0) 0 0/12px 12px}
+.m-marble{background:linear-gradient(120deg,transparent 40%,rgba(160,150,140,.35) 42%,transparent 45%),linear-gradient(60deg,transparent 60%,rgba(170,160,150,.3) 61%,transparent 63%),#F3F1EC}
 .chips{display:flex;gap:8px;flex-wrap:wrap}
-.chips button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;font:700 13.5px var(--body);color:var(--ink);cursor:pointer;transition:all .15s}
+.chips button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font:700 13.5px var(--body);color:var(--ink);cursor:pointer;transition:all .15s}
 .chips button:hover{border-color:var(--smalt)}
 .chips button.on{background:var(--smalt);border-color:var(--smalt);color:#fff}
-.ctor-sum{margin-top:auto;border-top:1px solid var(--line);padding-top:18px;display:grid;gap:14px}
-.ctor-sum span{display:block;font-size:13px;font-weight:700;color:var(--muted)}
-.ctor-sum b{display:block;font-family:var(--display);font-weight:400;font-size:32px;color:var(--smalt);line-height:1.15;font-variant-numeric:tabular-nums}
-.ctor-sum small{display:block;font-size:13px;color:var(--muted);margin-top:4px}
 .final-note{font-size:13px;background:#EEF1FA;border-radius:10px;padding:10px 12px;color:var(--smalt-ink)}
+@media (max-width:1080px){
+  .ctor{grid-template-columns:1fr;grid-template-areas:'room' 'panel' 'sum';overflow:visible}
+  .ctor-panel{border-left:0}
+  .room-wrap{position:sticky;top:66px;z-index:3;border-radius:var(--r-lg) var(--r-lg) 0 0;border-bottom:1px solid var(--line)}
+  .cgrp.two{grid-template-columns:1fr 1fr}
+}
+@media (max-width:720px){
+  .ctor-panel{padding:16px;gap:18px}
+  .ctor .ctor-sum{padding:16px}
+  .ctor .ctor-sum .btn{width:100%}
+  .cgrp.two{grid-template-columns:1fr}
+  .ba-handle span{width:42px;height:42px;margin:-21px 0 0 -21px}
+}
 
 /* Эффекты */
 #scrollbar{position:fixed;left:0;top:0;height:3px;width:100%;background:linear-gradient(90deg,var(--gold),var(--gold-2));transform-origin:0 50%;transform:scaleX(0);z-index:60;pointer-events:none}
@@ -610,97 +651,185 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
   <div class="wrap">
     <div class="head-row">
       <div>
-        <h2>Соберите свою гостиную</h2>
-        <p class="sub">Выбирайте стены, пол, потолок и свет. Комната меняется сразу, а внизу видна стоимость работ.</p>
+        <h2>Примерьте ремонт до его начала</h2>
+        <p class="sub">Потяните ползунок по комнате, чтобы увидеть, как бетон превращается в интерьер. Потом выберите отделку на свой вкус и сразу узнайте цену работ.</p>
       </div>
     </div>
     <div class="ctor">
-      <div class="room-wrap">
-        <svg class="room" id="room" viewBox="0 0 800 500" role="img" aria-label="Гостиная в выбранной отделке">
+      <div class="room-wrap" id="roomWrap">
+        <svg class="room" id="room" viewBox="0 0 1000 620" role="img" aria-label="Гостиная: слева до ремонта, справа после ремонта в выбранной отделке">
           <defs>
-            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFD6F2"/><stop offset="1" stop-color="#E9F1FA"/></linearGradient>
-            <radialGradient id="lampGlow"><stop offset="0" stop-color="#FFE3A8" stop-opacity=".9"/><stop offset="1" stop-color="#FFE3A8" stop-opacity="0"/></radialGradient>
-            <filter id="blur6"><feGaussianBlur stdDeviation="6"/></filter>
-            <clipPath id="floorClip"><polygon points="120,360 680,360 800,500 0,500"/></clipPath>
-            <clipPath id="accClip"><rect x="430" y="60" width="250" height="300"/></clipPath>
+            <linearGradient id="kSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9FC3EC"/><stop offset="1" stop-color="#E6F0FB"/></linearGradient>
+            <linearGradient id="kSkyN" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0B1433"/><stop offset="1" stop-color="#25365F"/></linearGradient>
+            <linearGradient id="kBack" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".07"/></linearGradient>
+            <linearGradient id="kBackV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".06"/><stop offset=".25" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".05"/></linearGradient>
+            <linearGradient id="kLeft" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".16"/><stop offset="1" stop-color="#000" stop-opacity=".04"/></linearGradient>
+            <linearGradient id="kRight" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".08"/></linearGradient>
+            <linearGradient id="kCeil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".08"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>
+            <linearGradient id="kGloss" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".18"/><stop offset=".35" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".08"/></linearGradient>
+            <linearGradient id="kBeam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFBEF" stop-opacity=".55"/><stop offset="1" stop-color="#FFFBEF" stop-opacity="0"/></linearGradient>
+            <linearGradient id="kSofa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E3E5EA"/><stop offset="1" stop-color="#C5CAD3"/></linearGradient>
+            <linearGradient id="kSofaS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D4D8E0"/><stop offset="1" stop-color="#B5BBC6"/></linearGradient>
+            <linearGradient id="kCurtain" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#EDE7DC"/><stop offset=".3" stop-color="#F8F4EC"/><stop offset=".6" stop-color="#E4DDCF"/><stop offset="1" stop-color="#F3EEE5"/></linearGradient>
+            <radialGradient id="kGlow"><stop offset="0" stop-color="#FFE2A3" stop-opacity=".95"/><stop offset=".4" stop-color="#FFD58A" stop-opacity=".35"/><stop offset="1" stop-color="#FFD58A" stop-opacity="0"/></radialGradient>
+            <radialGradient id="kBulb"><stop offset="0" stop-color="#FFF6D8" stop-opacity="1"/><stop offset="1" stop-color="#FFF6D8" stop-opacity="0"/></radialGradient>
+            <filter id="kBlur4" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+            <filter id="kBlur8" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+            <clipPath id="kFloorClip"><polygon points="230,430 770,430 1000,620 0,620"/></clipPath>
+            <clipPath id="kAccClip"><rect x="520" y="116" width="250" height="302"/></clipPath>
+            <clipPath id="kBefore"><rect id="kBeforeRect" x="0" y="0" width="500" height="620"/></clipPath>
           </defs>
-          <polygon id="rCeil" points="0,0 800,0 680,60 120,60"/>
-          <rect id="rWall" x="120" y="60" width="560" height="300"/>
-          <polygon id="rWallL" points="0,0 120,60 120,360 0,500"/>
-          <polygon id="rWallR" points="800,0 680,60 680,360 800,500"/>
-          <polygon points="0,0 120,60 120,360 0,500" fill="#000" opacity=".08"/>
-          <polygon points="800,0 680,60 680,360 800,500" fill="#000" opacity=".12"/>
-          <g id="rAcc" clip-path="url(#accClip)"></g>
-          <g id="rFloor" clip-path="url(#floorClip)"></g>
-          <rect x="120" y="352" width="560" height="8" fill="#fff" opacity=".7"/>
-          <g id="rCeilLight"></g>
-          <rect x="170" y="110" width="160" height="180" fill="url(#sky)" stroke="#fff" stroke-width="8"/>
-          <path d="M250 110V290M170 200H330" stroke="#fff" stroke-width="5"/>
-          <rect x="160" y="290" width="180" height="10" rx="2" fill="#fff"/>
-          <ellipse cx="545" cy="440" rx="200" ry="34" fill="#000" opacity=".06"/>
-          <ellipse id="rRug" cx="470" cy="430" rx="190" ry="40"/>
-          <g id="sofa">
-            <rect x="420" y="290" width="250" height="70" rx="16" fill="#C8CCD6"/>
-            <rect x="400" y="320" width="290" height="70" rx="18" fill="#D7DBE3"/>
-            <rect x="388" y="306" width="36" height="96" rx="14" fill="#C8CCD6"/>
-            <rect x="666" y="306" width="36" height="96" rx="14" fill="#C8CCD6"/>
-            <rect x="448" y="300" width="62" height="44" rx="12" fill="#B8913F" opacity=".85"/>
-            <rect x="600" y="300" width="56" height="42" rx="12" fill="#1F3B8C" opacity=".85"/>
-            <rect x="412" y="398" width="8" height="16" fill="#8A8F9C"/><rect x="670" y="398" width="8" height="16" fill="#8A8F9C"/>
+
+          <g id="kAfter">
+            <g id="kWalls">
+              <polygon id="kCeilP" points="0,0 1000,0 770,110 230,110" fill="#FAFAF8"/>
+              <polygon points="0,0 1000,0 770,110 230,110" fill="url(#kCeil)"/>
+              <rect class="kw" x="230" y="110" width="540" height="320"/>
+              <polygon class="kw" points="0,0 230,110 230,430 0,620"/>
+              <polygon class="kw" points="1000,0 770,110 770,430 1000,620"/>
+              <rect x="230" y="110" width="540" height="320" fill="url(#kBack)"/>
+              <rect x="230" y="110" width="540" height="320" fill="url(#kBackV)"/>
+              <polygon points="0,0 230,110 230,430 0,620" fill="url(#kLeft)"/>
+              <polygon points="1000,0 770,110 770,430 1000,620" fill="url(#kRight)"/>
+              <g id="kAcc" clip-path="url(#kAccClip)"></g>
+              <rect x="230" y="110" width="540" height="7" fill="#fff" opacity=".75"/>
+              <polygon points="0,0 230,110 230,117 0,9" fill="#fff" opacity=".6"/>
+              <polygon points="1000,0 770,110 770,117 1000,9" fill="#fff" opacity=".5"/>
+              <g id="kArt"><rect x="296" y="178" width="150" height="112" fill="#fff" stroke="#2C2F36" stroke-width="5"/><rect x="306" y="188" width="130" height="92" fill="#F3EFE7"/><circle cx="350" cy="236" r="26" fill="#B8913F"/><circle cx="392" cy="224" r="20" fill="#1F3B8C"/><path d="M316 270 Q360 246 426 268" stroke="#2C2F36" stroke-width="2" fill="none"/></g>
+              <polygon points="70,93 190,151 190,353 70,452" fill="#fff"/>
+              <polygon id="kGlass" points="80,108 180,156 180,348 80,436" fill="url(#kSky)"/>
+              <g id="kStars" opacity="0" fill="#fff"><circle cx="110" cy="160" r="1.4"/><circle cx="150" cy="190" r="1.1"/><circle cx="125" cy="215" r="1.6"/><circle cx="160" cy="240" r="1"/><circle cx="98" cy="250" r="1.2"/></g>
+              <path d="M130 132V392M80 272L180 252" stroke="#fff" stroke-width="6"/>
+              <polygon points="196,150 226,164 226,428 196,443" fill="url(#kCurtain)"/>
+              <path d="M204 156V440M214 160V436M221 162V432" stroke="#D6CEBF" stroke-width="1.5"/>
+              <rect x="230" y="418" width="540" height="12" fill="#F7F7F5"/>
+              <polygon points="0,602 230,418 230,430 0,620" fill="#F2F2EF"/>
+              <polygon points="1000,602 770,418 770,430 1000,620" fill="#E9E9E5"/>
+            </g>
+            <g id="kFloorG" clip-path="url(#kFloorClip)"><g id="kFloor"></g><polygon points="230,430 770,430 1000,620 0,620" fill="url(#kGloss)"/><polygon id="kBeamF" points="80,436 180,348 520,452 330,620" fill="url(#kBeam)"/></g>
+            <g id="kFurn">
+              <ellipse cx="660" cy="438" rx="175" ry="14" fill="#000" opacity=".22" filter="url(#kBlur8)"/>
+              <ellipse cx="600" cy="532" rx="300" ry="62" fill="#000" opacity=".06" filter="url(#kBlur4)"/>
+              <ellipse id="kRug" cx="600" cy="528" rx="295" ry="58" fill="#E9E4DA"/>
+              <ellipse cx="600" cy="528" rx="270" ry="49" fill="none" stroke="#D3CCBE" stroke-width="2"/>
+              <rect x="545" y="318" width="232" height="72" rx="20" fill="url(#kSofa)"/>
+              <rect x="512" y="340" width="44" height="88" rx="18" fill="url(#kSofaS)"/>
+              <rect x="766" y="340" width="44" height="88" rx="18" fill="url(#kSofaS)"/>
+              <rect x="532" y="368" width="256" height="56" rx="16" fill="url(#kSofa)"/>
+              <path d="M660 370V420" stroke="#B9BFCA" stroke-width="2"/>
+              <rect x="568" y="328" width="64" height="54" rx="15" fill="#B8913F"/><rect x="568" y="328" width="64" height="18" rx="9" fill="#fff" opacity=".12"/>
+              <rect x="688" y="332" width="60" height="50" rx="15" fill="#1F3B8C"/><rect x="688" y="332" width="60" height="16" rx="8" fill="#fff" opacity=".12"/>
+              <path d="M720 368 q20 30 60 22 l-4 34 q-40 4 -62 -26z" fill="#E7DED0" opacity=".95"/>
+              <rect x="540" y="424" width="8" height="12" fill="#5C5F66"/><rect x="772" y="424" width="8" height="12" fill="#5C5F66"/>
+              <ellipse cx="560" cy="548" rx="80" ry="10" fill="#000" opacity=".2" filter="url(#kBlur4)"/>
+              <path d="M548 512 L540 548 M572 512 L580 548" stroke="#2A2D33" stroke-width="5" stroke-linecap="round"/>
+              <ellipse cx="560" cy="512" rx="88" ry="20" fill="#2C2F36"/>
+              <ellipse cx="560" cy="508" rx="88" ry="20" fill="#3A3E47"/>
+              <rect x="586" y="478" width="18" height="30" rx="6" fill="#EDE8DF"/><path d="M595 480 q-14 -30 -4 -50 M595 480 q10 -24 22 -36" stroke="#5E7F5F" stroke-width="2.5" fill="none"/>
+              <rect x="520" y="496" width="44" height="8" rx="2" fill="#B8913F"/><rect x="524" y="489" width="38" height="7" rx="2" fill="#E7E4DE"/>
+              <ellipse cx="884" cy="606" rx="52" ry="9" fill="#000" opacity=".22" filter="url(#kBlur4)"/>
+              <path d="M854 560h60l-8 48h-44z" fill="#E7E2DA"/>
+              <g fill="#4E7B56"><ellipse cx="860" cy="500" rx="22" ry="50" transform="rotate(-28 860 500)"/><ellipse cx="905" cy="492" rx="22" ry="54" transform="rotate(22 905 492)"/><ellipse cx="884" cy="470" rx="18" ry="58"/></g>
+              <g fill="#3E6747"><ellipse cx="838" cy="530" rx="16" ry="34" transform="rotate(-55 838 530)"/><ellipse cx="930" cy="528" rx="16" ry="34" transform="rotate(55 930 528)"/></g>
+              <path d="M560 110V250" stroke="#2A2D33" stroke-width="2"/>
+              <path d="M528 280 Q560 234 592 280 Z" fill="#2C2F36"/>
+              <ellipse cx="560" cy="280" rx="32" ry="5" fill="#C9A14A"/>
+            </g>
+            <g id="kCeilL"></g>
+            <rect id="kTint" x="0" y="0" width="1000" height="620" pointer-events="none" fill="#081238" opacity="0"/>
+            <g id="kGlowG" pointer-events="none">
+              <ellipse id="kPend" cx="560" cy="330" rx="190" ry="150" fill="url(#kGlow)" opacity="0"/>
+              <ellipse id="kPend2" cx="560" cy="515" rx="220" ry="45" fill="url(#kGlow)" opacity="0"/>
+              <g id="kCeilGlow"></g>
+            </g>
           </g>
-          <g id="table"><ellipse cx="300" cy="420" rx="70" ry="16" fill="#3C3F47"/><rect x="296" y="420" width="8" height="34" fill="#3C3F47"/><ellipse cx="300" cy="454" rx="26" ry="6" fill="#3C3F47"/></g>
-          <g id="plant"><rect x="70" y="390" width="44" height="52" rx="6" fill="#E7E2DA"/><path d="M92 392C70 350 60 320 78 300M92 392C96 340 110 315 126 300M92 392C86 360 92 330 100 312" stroke="#4E7A55" stroke-width="7" fill="none" stroke-linecap="round"/></g>
-          <g id="lamp"><circle cx="360" cy="236" r="70" fill="url(#lampGlow)" id="lampG" opacity="0"/><path d="M360 380V250" stroke="#2A2D33" stroke-width="4"/><path d="M336 252h48l-10-30h-28z" fill="#E9E3D6"/><ellipse cx="360" cy="382" rx="22" ry="5" fill="#2A2D33"/></g>
-          <rect id="rTint" x="0" y="0" width="800" height="500" pointer-events="none"/>
+
+          <g id="kBeforeG" clip-path="url(#kBefore)" pointer-events="none">
+            <polygon points="0,0 1000,0 770,110 230,110" fill="#D2CFC9"/>
+            <rect x="230" y="110" width="540" height="320" fill="#B9B6AF"/>
+            <polygon points="0,0 230,110 230,430 0,620" fill="#A9A59E"/>
+            <polygon points="1000,0 770,110 770,430 1000,620" fill="#9E9A93"/>
+            <polygon points="230,430 770,430 1000,620 0,620" fill="#8F8C86"/>
+            <g fill="#000" opacity=".08"><circle cx="300" cy="160" r="3"/><circle cx="520" cy="250" r="2"/><circle cx="680" cy="190" r="3"/><circle cx="410" cy="360" r="2.5"/><circle cx="610" cy="330" r="2"/><circle cx="350" cy="300" r="1.8"/><circle cx="720" cy="390" r="2.4"/></g>
+            <path d="M330 520 l60 -8 l30 22 M640 470 l40 30 l70 -6" stroke="#77736D" stroke-width="1.5" fill="none" opacity=".7"/>
+            <path d="M232 260 H770 M232 340 H770" stroke="#A7A39C" stroke-width="1" stroke-dasharray="6 10" opacity=".6"/>
+            <rect x="330" y="380" width="14" height="14" fill="#6E6A64"/><rect x="600" y="380" width="14" height="14" fill="#6E6A64"/><rect x="470" y="250" width="14" height="14" fill="#6E6A64"/>
+            <polygon points="70,93 190,151 190,353 70,452" fill="#E9E8E4"/>
+            <polygon points="80,108 180,156 180,348 80,436" fill="url(#kSky)"/>
+            <path d="M130 132V392M80 272L180 252" stroke="#E9E8E4" stroke-width="6"/>
+            <path d="M430 110V250" stroke="#2A2D33" stroke-width="2"/>
+            <circle cx="430" cy="258" r="9" fill="#FFF3C4"/><circle cx="430" cy="258" r="34" fill="url(#kBulb)" opacity=".7"/>
+            <g><path d="M290 520h56l-6 62h-44z" fill="#E6E2DA"/><ellipse cx="318" cy="520" rx="28" ry="7" fill="#CFCAC0"/><ellipse cx="318" cy="520" rx="22" ry="5" fill="#8C877E"/></g>
+            <g><rect x="380" y="560" width="70" height="14" rx="7" fill="#CFC9BD" transform="rotate(-12 415 567)"/><rect x="446" y="530" width="6" height="40" fill="#5D5A55" transform="rotate(-12 449 550)"/></g>
+            <g><rect x="700" y="470" width="120" height="70" fill="#C9B79A"/><path d="M700 486H820M700 504H820M700 522H820" stroke="#B5A386"/></g>
+          </g>
         </svg>
+        <div class="ba-labels" aria-hidden="true"><span class="ba-l">Было</span><span class="ba-r">Стало</span></div>
+        <div class="ba-handle" id="baHandle" role="slider" tabindex="0" aria-label="Сравнение до и после ремонта" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><span></span></div>
       </div>
-        <div class="ctor-sum">
-          <div><span>Работы для гостиной 18 м²</span><b id="cSum">171 000 ₽</b><small id="cList">базовый капитальный ремонт</small></div>
-          <a class="btn btn-gold" href="#final" id="cWant">Хочу так же</a>
-        </div>
+
+      <div class="ctor-sum">
+        <div><span>Работы для гостиной 18 м²</span><b id="cSum">171 000 ₽</b><small id="cList">базовый капитальный ремонт</small></div>
+        <a class="btn btn-gold" href="#final" id="cWant">Хочу так же</a>
+      </div>
+
       <div class="ctor-panel">
+        <div class="cgrp">
+          <div class="cg-t">Готовые стили</div>
+          <div class="presets">
+            <button type="button" data-p="scandi"><i style="--a:#F1EFEA;--b:#D8BD93"></i>Сканди</button>
+            <button type="button" data-p="modern"><i style="--a:#D9D4CA;--b:#A7AAAF"></i>Современный</button>
+            <button type="button" data-p="loft"><i style="--a:#5E636E;--b:#7B5737"></i>Лофт</button>
+            <button type="button" data-p="smalta"><i style="--a:#1F3B8C;--b:#B8913F"></i>Смальта</button>
+          </div>
+          <button type="button" class="dice" id="kDice">Удивите меня</button>
+        </div>
         <div class="cgrp">
           <div class="cg-t">Цвет стен <span id="vWall"></span></div>
           <div class="swatches" data-k="wall">
             <button type="button" data-v="#F1EFEA" data-n="Тёплый белый" style="--c:#F1EFEA" class="on"></button>
-            <button type="button" data-v="#D9D4CA" data-n="Песочный" style="--c:#D9D4CA"></button>
-            <button type="button" data-v="#B9C3B0" data-n="Шалфей" style="--c:#B9C3B0"></button>
-            <button type="button" data-v="#AEB9CC" data-n="Голубой туман" style="--c:#AEB9CC"></button>
+            <button type="button" data-v="#DCD6CB" data-n="Песочный" style="--c:#DCD6CB"></button>
+            <button type="button" data-v="#BCC5B3" data-n="Шалфей" style="--c:#BCC5B3"></button>
+            <button type="button" data-v="#B3BED0" data-n="Голубой туман" style="--c:#B3BED0"></button>
+            <button type="button" data-v="#D9B9A6" data-n="Пудровый" style="--c:#D9B9A6"></button>
             <button type="button" data-v="#5E636E" data-n="Графит" style="--c:#5E636E"></button>
             <button type="button" data-v="#22356F" data-n="Смальта" style="--c:#22356F"></button>
           </div>
         </div>
         <div class="cgrp">
           <div class="cg-t">Пол</div>
-          <div class="chips" data-k="floor">
-            <button type="button" data-v="oak" class="on">Светлый дуб</button>
-            <button type="button" data-v="walnut">Орех</button>
-            <button type="button" data-v="vinyl">Серый кварцвинил</button>
-            <button type="button" data-v="tile">Керамогранит</button>
+          <div class="mats" data-k="floor">
+            <button type="button" data-v="oak" class="on"><i class="m-oak"></i>Светлый дуб</button>
+            <button type="button" data-v="walnut"><i class="m-walnut"></i>Орех</button>
+            <button type="button" data-v="vinyl"><i class="m-vinyl"></i>Кварцвинил</button>
+            <button type="button" data-v="tile"><i class="m-tile"></i>Керамогранит</button>
           </div>
         </div>
         <div class="cgrp">
-          <div class="cg-t">Акцентная стена</div>
-          <div class="chips" data-k="acc">
-            <button type="button" data-v="none" class="on">Без акцента</button>
-            <button type="button" data-v="slats">Деревянные рейки</button>
-            <button type="button" data-v="mosaic">Мозаика из смальты</button>
+          <div class="cg-t">Стена за диваном</div>
+          <div class="mats" data-k="acc">
+            <button type="button" data-v="none" class="on"><i class="m-none"></i>Покраска</button>
+            <button type="button" data-v="slats"><i class="m-slats"></i>Рейки</button>
+            <button type="button" data-v="mosaic"><i class="m-mosaic"></i>Смальта</button>
+            <button type="button" data-v="marble"><i class="m-marble"></i>Под мрамор</button>
           </div>
         </div>
-        <div class="cgrp">
-          <div class="cg-t">Потолок</div>
-          <div class="chips" data-k="ceil">
-            <button type="button" data-v="matte" class="on">Матовый</button>
-            <button type="button" data-v="led">С подсветкой</button>
-            <button type="button" data-v="float">Парящий</button>
+        <div class="cgrp two">
+          <div>
+            <div class="cg-t">Потолок</div>
+            <div class="chips" data-k="ceil">
+              <button type="button" data-v="matte" class="on">Матовый</button>
+              <button type="button" data-v="led">С подсветкой</button>
+              <button type="button" data-v="float">Парящий</button>
+            </div>
           </div>
-        </div>
-        <div class="cgrp">
-          <div class="cg-t">Освещение</div>
-          <div class="chips" data-k="light">
-            <button type="button" data-v="day" class="on">День</button>
-            <button type="button" data-v="warm">Тёплый вечер</button>
-            <button type="button" data-v="night">Ночь</button>
+          <div>
+            <div class="cg-t">Время суток</div>
+            <div class="chips" data-k="light">
+              <button type="button" data-v="day" class="on">День</button>
+              <button type="button" data-v="warm">Вечер</button>
+              <button type="button" data-v="night">Ночь</button>
+            </div>
           </div>
         </div>
       </div>
@@ -1396,7 +1525,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
     var TIPS = {
       hero: ['Привет! Я Смальта', 'Выберите свою квартиру в блоке «Сколько стоит ремонт», и я сразу покажу примерную цену.', [['Точный расчёт','#quiz',1]]],
       styles: ['Интерьеры', 'Работаем в любом стиле. Понравился какой-то? Нажмите на него, обсудим ваш вариант.', [['Обсудить интерьер','#final',1]]],
-      ctor: ['Поиграйте с интерьером', 'Попробуйте мозаику из смальты на акцентной стене и включите «Ночь» — смотрится эффектно.', [['Хочу так же','#final',1]]],
+      ctor: ['Попробуйте!', 'Потяните ползунок по комнате, а потом нажмите стиль «Смальта» — это моё любимое.', [['Хочу так же','#final',1]]],
       prices: ['Подсказка', 'Капитальный ремонт выбирают чаще всего: он меняет проводку и трубы, и о них можно надолго забыть.', [['Посчитать мой','#quiz',1]]],
       fix: ['Это важно', 'Это пример нашей сметы. Каждая позиция расписана, а итог закрепляется в договоре.', [['Получить смету','#final',1]]],
       steps: ['Смотрите на схему', 'Листайте вниз: квартира будет ремонтироваться прямо у вас на глазах.', []],
@@ -1450,106 +1579,194 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
     var room = document.getElementById('room'); if (!room) return;
     var NS = 'http://www.w3.org/2000/svg';
     var C = { wall:'#F1EFEA', floor:'oak', acc:'none', ceil:'matte', light:'day' };
-    var ROOM_AREA = 18, BASE = 9500 * ROOM_AREA;
+    var BASE = 9500 * 18;
     var ADD = {
       floor:{ vinyl:[4500,'выравнивание под кварцвинил'], tile:[19800,'укладка керамогранита'] },
-      acc:{ slats:[28000,'стена из реек'], mosaic:[46000,'мозаика из смальты'] },
+      acc:{ slats:[28000,'стена из реек'], mosaic:[46000,'мозаика из смальты'], marble:[32000,'декоративная штукатурка под мрамор'] },
       ceil:{ led:[14000,'потолок с подсветкой'], float:[22000,'парящий потолок'] }
     };
     var NAMES = {
-      floor:{ oak:'светлый дуб', walnut:'орех', vinyl:'серый кварцвинил', tile:'керамогранит' },
-      acc:{ none:'без акцентной стены', slats:'деревянные рейки', mosaic:'мозаика из смальты' },
-      ceil:{ matte:'матовый потолок', led:'потолок с подсветкой', float:'парящий потолок' },
-      light:{ day:'день', warm:'тёплый вечер', night:'ночь' }
+      floor:{ oak:'светлый дуб', walnut:'орех', vinyl:'кварцвинил', tile:'керамогранит' },
+      acc:{ none:'покраска', slats:'рейки', mosaic:'мозаика из смальты', marble:'штукатурка под мрамор' },
+      ceil:{ matte:'матовый потолок', led:'потолок с подсветкой', float:'парящий потолок' }
     };
-    function el(tag, attrs, parent){ var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
-    function seed(n){ var x = Math.sin(n*99.13)*43758.5; return x - Math.floor(x); }
+    var PRESETS = {
+      scandi:{ wall:'#F1EFEA', floor:'oak', acc:'slats', ceil:'matte', light:'day' },
+      modern:{ wall:'#DCD6CB', floor:'vinyl', acc:'marble', ceil:'led', light:'warm' },
+      loft:{ wall:'#5E636E', floor:'walnut', acc:'slats', ceil:'float', light:'warm' },
+      smalta:{ wall:'#F1EFEA', floor:'walnut', acc:'mosaic', ceil:'float', light:'night' }
+    };
+    function el(tag, a, p){ var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; }
+    function seed(n){ var x = Math.sin(n*127.1 + 311.7)*43758.5453; return x - Math.floor(x); }
+    function shade(hex, f){
+      var n = parseInt(hex.slice(1),16), r = n>>16, g = n>>8&255, b = n&255;
+      function c(v){ v = f < 0 ? v*(1+f) : v + (255-v)*f; return Math.max(0,Math.min(255,Math.round(v))); }
+      return 'rgb(' + c(r) + ',' + c(g) + ',' + c(b) + ')';
+    }
+    /* перспектива пола: u — по ширине (0..1), t — в глубину (0 дальняя стена, 1 передний край) */
+    function P(u, t){ var y = 430 + 190*t, xl = 230 - 230*t, xr = 770 + 230*t; return (xl + (xr-xl)*u).toFixed(1) + ',' + y.toFixed(1); }
+    function T(v){ return Math.pow(v, 1.45); }
 
     function floor(){
-      var g = document.getElementById('rFloor'); g.innerHTML = '';
-      var base = { oak:'#D8BD93', walnut:'#7B5737', vinyl:'#A7AAAF', tile:'#E3E1DC' }[C.floor];
-      var line = { oak:'#B99868', walnut:'#5A3C24', vinyl:'#8D9096', tile:'#C9C6BF' }[C.floor];
-      el('polygon', { points:'120,360 680,360 800,500 0,500', fill:base, class:'fl-base' }, g);
-      var N = C.floor === 'tile' ? 7 : 16;
-      for (var i = 1; i < N; i++){
-        el('line', { x1:120 + i*560/N, y1:360, x2:i*800/N, y2:500, stroke:line, 'stroke-width':1.2, opacity:.7 }, g);
-      }
-      var rows = C.floor === 'tile' ? 5 : 7;
-      for (var r = 1; r <= rows; r++){
-        var t = Math.pow(r/(rows+.4), 1.5), y = 360 + 140*t, x0 = 120 - 120*t, x1 = 680 + 120*t;
-        var attrs = { x1:x0, y1:y, x2:x1, y2:y, stroke:line, 'stroke-width':1.2, opacity:.7 };
-        if (C.floor !== 'tile'){ var seg = (x1-x0)/N; attrs['stroke-dasharray'] = (seg*0.15) + ' ' + (seg*0.85); attrs['stroke-dashoffset'] = (r%2) ? 0 : seg*.5; }
-        el('line', attrs, g);
-      }
-    }
-    function accent(){
-      var g = document.getElementById('rAcc'); g.innerHTML = '';
-      if (C.acc === 'slats'){
-        el('rect', { x:430, y:60, width:250, height:300, fill:'#5E4027' }, g);
-        for (var x = 432; x < 680; x += 13) el('rect', { x:x, y:60, width:9, height:300, fill: seed(x) > .5 ? '#B98D5D' : '#AD8253' }, g);
-      } else if (C.acc === 'mosaic'){
-        el('rect', { x:430, y:60, width:250, height:300, fill:'#E9ECF2' }, g);
-        var cols = ['#1F3B8C','#2D4FA8','#16296A','#3A5DBB','#1F3B8C','#2D4FA8','#B8913F','#D8B66A'];
-        var k = 0;
-        for (var y = 61; y < 360; y += 12.5) for (var x2 = 431; x2 < 680; x2 += 12.5){
-          k++; var c = cols[Math.floor(seed(k)*cols.length)];
-          el('rect', { x:x2 + seed(k+.3)*1.2, y:y + seed(k+.7)*1.2, width:10.5, height:10.5, rx:1.2, fill:c }, g);
+      var g = document.getElementById('kFloor'); g.innerHTML = '';
+      var M = { oak:['#D8BD93','#B9996A'], walnut:['#7B5737','#4F3520'], vinyl:['#A9ACB1','#8C9095'], tile:['#E6E3DD','#CBC6BE'] }[C.floor];
+      var tile = C.floor === 'tile';
+      var N = tile ? 7 : 15, k = 0;
+      for (var i = 0; i < N; i++){
+        var v = tile ? 0 : -seed(i)*0.25, step;
+        while (v < 1){
+          k++;
+          step = tile ? 1/6 : 0.22 + seed(k*3.1)*0.22;
+          var a = Math.max(0, v), b = Math.min(1, v + step);
+          var t0 = T(a), t1 = T(b), u0 = i/N, u1 = (i+1)/N;
+          var f = tile ? (seed(k)*.04 - .02) : (seed(k)*.16 - .08);
+          el('polygon', { points:[P(u0,t0),P(u1,t0),P(u1,t1),P(u0,t1)].join(' '), fill:shade(M[0], f), stroke:M[1], 'stroke-width':tile ? 1.4 : .7, 'stroke-opacity':tile ? .9 : .55 }, g);
+          v += step;
         }
       }
     }
-    function ceil(){
-      var g = document.getElementById('rCeilLight'); g.innerHTML = '';
-      document.getElementById('rCeil').style.fill = C.light === 'night' ? '#C9CCD6' : '#FAFAF8';
-      if (C.ceil === 'matte') return;
-      var d = C.ceil === 'led' ? 'M150 74H650' : 'M120 60H680M0 0L120 60M800 0L680 60';
-      var glow = C.light === 'day' ? .55 : 1;
-      el('path', { d:d, stroke:'#FFE7AE', 'stroke-width':C.ceil === 'led' ? 10 : 8, fill:'none', filter:'url(#blur6)', opacity:glow }, g);
-      el('path', { d:d, stroke:'#FFF6DD', 'stroke-width':2.4, fill:'none', opacity:glow }, g);
-      if (C.ceil === 'led') el('rect', { x:150, y:68, width:500, height:12, rx:6, fill:'none', stroke:'#E7E4DE', 'stroke-width':1.5 }, g);
+    function accent(){
+      var g = document.getElementById('kAcc'); g.innerHTML = '';
+      var x0 = 520, y0 = 116, w = 250, h = 302;
+      if (C.acc === 'slats'){
+        el('rect', { x:x0, y:y0, width:w, height:h, fill:'#4A321F' }, g);
+        for (var x = x0 + 3, j = 0; x < x0 + w; x += 14, j++){
+          el('rect', { x:x, y:y0, width:10, height:h, fill:shade('#B4885A', seed(j)*.14 - .07) }, g);
+          el('rect', { x:x, y:y0, width:3, height:h, fill:'#fff', opacity:.12 }, g);
+        }
+      } else if (C.acc === 'mosaic'){
+        el('rect', { x:x0, y:y0, width:w, height:h, fill:'#DDE1EA' }, g);
+        var cols = ['#1F3B8C','#2D4FA8','#16296A','#3A5DBB','#24408F','#1A3378','#B8913F','#D8B66A'];
+        var k = 0;
+        for (var y = y0 + 1; y < y0 + h; y += 12) for (var x2 = x0 + 1; x2 < x0 + w; x2 += 12){
+          k++;
+          var c = seed(k) > .86 ? cols[6 + (k%2)] : cols[Math.floor(seed(k+.5)*6)];
+          el('rect', { x:(x2 + seed(k+.3)*1.4).toFixed(1), y:(y + seed(k+.7)*1.4).toFixed(1), width:10, height:10, rx:1.4, fill:c }, g);
+        }
+        el('rect', { x:x0, y:y0, width:w, height:h, fill:'url(#kBack)' }, g);
+      } else if (C.acc === 'marble'){
+        el('rect', { x:x0, y:y0, width:w, height:h, fill:'#F2F0EB' }, g);
+        for (var m = 0; m < 9; m++){
+          var sx = x0 + seed(m)*w, sy = y0 + seed(m+9)*h;
+          el('path', { d:'M' + sx + ' ' + sy + ' q ' + (40 + seed(m+2)*60) + ' ' + (20 + seed(m+3)*40) + ' ' + (90 + seed(m+4)*80) + ' ' + (-10 + seed(m+5)*70), stroke:'#A79F94', 'stroke-width':.6 + seed(m+6)*1.2, fill:'none', opacity:.32 }, g);
+        }
+        el('rect', { x:x0, y:y0, width:w, height:h, fill:'url(#kBack)' }, g);
+      }
     }
-    function light(){
-      var tint = document.getElementById('rTint'), lamp = document.getElementById('lampG');
-      var T = { day:['#FFFFFF',0], warm:['#FF9E3D',.13], night:['#081238',.42] }[C.light];
-      tint.style.fill = T[0]; tint.style.opacity = T[1];
-      lamp.style.opacity = C.light === 'day' ? 0 : 1;
+    function lights(){
+      var night = C.light === 'night', warm = C.light === 'warm';
+      document.getElementById('kTint').style.fill = night ? '#081238' : '#FF9A3C';
+      document.getElementById('kTint').style.opacity = night ? .5 : warm ? .12 : 0;
+      document.getElementById('kGlass').setAttribute('fill', night ? 'url(#kSkyN)' : 'url(#kSky)');
+      document.getElementById('kStars').style.opacity = night ? 1 : 0;
+      document.getElementById('kBeamF').style.opacity = night ? 0 : warm ? .45 : 1;
+      document.getElementById('kPend').style.opacity = night ? .95 : warm ? .7 : 0;
+      document.getElementById('kPend2').style.opacity = night ? .7 : warm ? .45 : 0;
+      var cg = document.getElementById('kCeilGlow'), cl = document.getElementById('kCeilL');
+      cg.innerHTML = ''; cl.innerHTML = '';
+      if (C.ceil === 'matte') return;
+      var d = C.ceil === 'led' ? 'M262 128H738' : 'M230 110H770M0 0L230 110M1000 0L770 110';
+      if (C.ceil === 'led') el('rect', { x:256, y:122, width:488, height:12, rx:6, fill:'none', stroke:'#E3E0DA', 'stroke-width':1.5 }, cl);
+      var op = night ? 1 : warm ? .85 : .55;
+      el('path', { d:d, stroke:'#FFD98F', 'stroke-width':night ? 18 : 12, fill:'none', filter:'url(#kBlur8)', opacity:op }, cg);
+      el('path', { d:d, stroke:'#FFF4D6', 'stroke-width':2.6, fill:'none', opacity:Math.min(1, op + .2) }, cg);
     }
     function walls(){
-      ['rWall','rWallL','rWallR'].forEach(function(id){ document.getElementById(id).style.fill = C.wall; });
-      document.getElementById('rRug').style.fill = C.wall === '#22356F' || C.wall === '#5E636E' ? '#E9E5DD' : '#C9CDD6';
+      room.querySelectorAll('.kw').forEach(function(e){ e.style.fill = C.wall; });
+      var dark = C.wall === '#22356F' || C.wall === '#5E636E';
+      document.getElementById('kRug').style.fill = dark ? '#ECE7DE' : '#D6D9E0';
+    }
+    function sync(){
+      document.querySelectorAll('.ctor-panel [data-k]').forEach(function(grp){
+        var k = grp.dataset.k;
+        grp.querySelectorAll('button').forEach(function(b){ var on = b.dataset.v === C[k]; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+      });
     }
     function price(){
       var sum = BASE, list = [];
       ['floor','acc','ceil'].forEach(function(k){ var a = ADD[k][C[k]]; if (a){ sum += a[0]; list.push(a[1]); } });
       document.getElementById('cSum').textContent = sum.toLocaleString('ru-RU') + ' ₽';
-      document.getElementById('cList').textContent = list.length ? 'базовый ремонт + ' + list.join(', ') : 'базовый капитальный ремонт';
-      var wallName = document.querySelector('.swatches .on').dataset.n;
-      document.getElementById('vWall').textContent = '· ' + wallName.toLowerCase();
-      CTOR = 'Стены: ' + wallName.toLowerCase() + '; пол: ' + NAMES.floor[C.floor] + '; ' + NAMES.acc[C.acc] + '; ' + NAMES.ceil[C.ceil] + '; работы по комнате ≈ ' + sum.toLocaleString('ru-RU') + ' ₽';
+      document.getElementById('cList').textContent = list.length ? 'капитальный ремонт + ' + list.join(', ') : 'капитальный ремонт с покраской стен';
+      var sw = document.querySelector('.swatches button[data-v="' + C.wall + '"]'), wn = sw ? sw.dataset.n : '';
+      document.getElementById('vWall').textContent = '· ' + wn.toLowerCase();
+      CTOR = 'стены: ' + wn.toLowerCase() + '; пол: ' + NAMES.floor[C.floor] + '; стена за диваном: ' + NAMES.acc[C.acc] + '; ' + NAMES.ceil[C.ceil] + '; работы по комнате ≈ ' + sum.toLocaleString('ru-RU') + ' ₽';
     }
     function render(part){
       if (!part || part === 'wall') walls();
       if (!part || part === 'floor') floor();
       if (!part || part === 'acc') accent();
-      if (!part || part === 'ceil' || part === 'light') ceil();
-      if (!part || part === 'light') light();
-      price();
+      if (!part || part === 'ceil' || part === 'light') lights();
+      sync(); price();
     }
     document.querySelectorAll('.ctor-panel [data-k]').forEach(function(grp){
       var k = grp.dataset.k;
       grp.querySelectorAll('button').forEach(function(b){
-        b.setAttribute('aria-pressed', b.classList.contains('on'));
         if (grp.classList.contains('swatches')) b.setAttribute('aria-label', b.dataset.n);
         b.addEventListener('click', function(){
-          grp.querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', x === b); });
-          C[k] = b.dataset.v; render(k);
+          C[k] = b.dataset.v; document.querySelectorAll('.presets button').forEach(function(p){ p.classList.remove('on'); });
+          render(k); reveal();
         });
       });
+    });
+    document.querySelectorAll('.presets button').forEach(function(b){
+      b.addEventListener('click', function(){
+        C = Object.assign({}, PRESETS[b.dataset.p]);
+        document.querySelectorAll('.presets button').forEach(function(p){ p.classList.toggle('on', p === b); });
+        render(); reveal();
+      });
+    });
+    document.getElementById('kDice').addEventListener('click', function(){
+      function pick(sel){ var o = document.querySelectorAll(sel); return o[Math.floor(Math.random()*o.length)].dataset.v; }
+      C = { wall:pick('.swatches button'), floor:pick('[data-k="floor"] button'), acc:pick('[data-k="acc"] button'), ceil:pick('[data-k="ceil"] button'), light:pick('[data-k="light"] button') };
+      document.querySelectorAll('.presets button').forEach(function(p){ p.classList.remove('on'); });
+      render(); reveal();
     });
     render();
     document.getElementById('cWant').addEventListener('click', function(){
       var n = document.getElementById('finalNote');
       if (n){ n.textContent = 'Ваш вариант из конструктора: ' + CTOR; n.hidden = false; }
     });
+
+    /* ----- шторка «Было / Стало» ----- */
+    var wrap = document.getElementById('roomWrap'), handle = document.getElementById('baHandle'), rect = document.getElementById('kBeforeRect');
+    var pos = .5, anim = 0;
+    function setPos(p){
+      pos = Math.max(0, Math.min(1, p));
+      rect.setAttribute('width', (pos*1000).toFixed(1));
+      handle.style.left = (pos*100) + '%';
+      handle.setAttribute('aria-valuenow', Math.round(pos*100));
+    }
+    function animTo(to, ms){
+      cancelAnimationFrame(anim);
+      if (reduce){ setPos(to); return; }
+      var from = pos, t0 = performance.now();
+      (function f(now){ var p = Math.min(1,(now-t0)/ms); p = p<.5 ? 2*p*p : 1-Math.pow(-2*p+2,2)/2; setPos(from + (to-from)*p); if (p < 1) anim = requestAnimationFrame(f); })(t0);
+    }
+    function reveal(){ if (pos > .25) animTo(.12, 700); }
+    var dragging = false;
+    function fromEvent(e){ var r = wrap.getBoundingClientRect(); return (e.clientX - r.left) / r.width; }
+    wrap.addEventListener('pointerdown', function(e){ dragging = true; wrap.classList.add('drag'); cancelAnimationFrame(anim); setPos(fromEvent(e)); try { wrap.setPointerCapture(e.pointerId); } catch(_){} });
+    wrap.addEventListener('pointermove', function(e){
+      if (dragging){ setPos(fromEvent(e)); return; }
+      if (reduce || e.pointerType !== 'mouse') return;
+      var r = wrap.getBoundingClientRect(), dx = (e.clientX - r.left)/r.width - .5, dy = (e.clientY - r.top)/r.height - .5;
+      document.getElementById('kFurn').style.transform = 'translate(' + (dx*-14) + 'px,' + (dy*-6) + 'px)';
+    });
+    function stop(){ dragging = false; wrap.classList.remove('drag'); }
+    wrap.addEventListener('pointerup', stop); wrap.addEventListener('pointercancel', stop);
+    wrap.addEventListener('pointerleave', function(){ document.getElementById('kFurn').style.transform = ''; });
+    handle.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowLeft'){ setPos(pos - .05); e.preventDefault(); }
+      if (e.key === 'ArrowRight'){ setPos(pos + .05); e.preventDefault(); }
+    });
+    setPos(.5);
+    if ('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(es){
+        if (!es[0].isIntersecting) return; io.disconnect();
+        setPos(.88); setTimeout(function(){ animTo(.38, 1600); }, 350);
+      }, { threshold:.55 });
+      io.observe(wrap);
+    }
   })();
 
   /* ===== Эффекты ===== */
