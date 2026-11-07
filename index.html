@@ -854,6 +854,46 @@ summary{font-size:16.5px;padding:18px 44px 18px 0}
 .h-bub{font-size:14px;padding:14px 16px}
 .svc .ph{aspect-ratio:16/10}
 .bl-c .ph{aspect-ratio:16/9}
+
+/* Портфолио, видео, демо */
+.demo-tag{display:inline-block;background:#FFE3D3;color:#B83C0B;font-size:12px;font-weight:800;padding:4px 8px;margin-left:10px;vertical-align:middle;letter-spacing:.04em}
+.works{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.wk{background:var(--paper);border:1px solid var(--line);display:flex;flex-direction:column;cursor:pointer;text-align:left;padding:0;font:inherit;color:inherit;transition:box-shadow .2s,transform .2s}
+.wk:hover{box-shadow:0 18px 34px -24px rgba(17,24,39,.45);transform:translateY(-2px)}
+.wk .ph{aspect-ratio:4/3;position:relative}
+.wk .cnt{position:absolute;right:10px;bottom:10px;background:rgba(17,24,39,.75);color:#fff;font-size:12px;font-weight:700;padding:5px 9px}
+.wk .tx{padding:16px 18px 18px;display:grid;gap:8px}
+.wk b{font-family:var(--display);font-size:17px;font-weight:700}
+.wk .meta{display:flex;gap:8px;flex-wrap:wrap}
+.wk .meta span{font-size:13px;background:var(--bg);padding:5px 9px;color:var(--ink);font-weight:600}
+.wk .wkp{font-family:var(--display);font-weight:700;color:var(--smalt);font-size:18px}
+.works-more{margin-top:18px}
+.vids{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.vd{position:relative;aspect-ratio:4/3;background:#1B2438;border:0;padding:0;cursor:pointer;overflow:hidden;color:#fff;text-align:left;font:inherit}
+.vd img{width:100%;height:100%;object-fit:cover;opacity:.85;transition:transform .5s}
+.vd:hover img{transform:scale(1.04)}
+.vd::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(10,14,30,.85))}
+.vd .play{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:66px;height:66px;background:var(--smalt);display:grid;place-items:center;z-index:1;border-radius:999px!important;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.vd .play::before{content:"";margin-left:5px;border-left:18px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent;border-radius:0!important}
+.vd .vt{position:absolute;left:16px;right:16px;bottom:14px;z-index:1;display:grid;gap:4px}
+.vd .vt b{font-size:16px}
+.vd .vt span{font-size:13px;color:#C5CCDB}
+.gal,.vplay{background:rgba(8,10,18,.94)}
+.gal-in{display:grid;grid-template-columns:1fr 340px;gap:0;width:min(1200px,100%);max-height:90vh;background:#fff}
+.gal-img{position:relative;background:#111;min-height:300px;aspect-ratio:4/3}
+.gal-img img{width:100%;height:100%;max-height:90vh;object-fit:contain;display:block}
+.gal-info{padding:26px;overflow:auto;display:grid;gap:12px;align-content:start}
+.gal-info h3{font-family:var(--display);font-size:22px}
+.gal-info .meta{display:grid;gap:6px;font-size:14px}
+.gal-info .meta div{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding:6px 0}
+.gal-info p{font-size:14.5px;color:var(--muted)}
+.vplay-in{width:min(960px,100%);aspect-ratio:16/9;background:#000;display:grid;place-items:center;color:#fff;text-align:center;padding:20px}
+.vplay-in iframe,.vplay-in video{width:100%;height:100%;border:0}
+@media (max-width:1080px){ .works,.vids{grid-template-columns:1fr 1fr} .gal-in{grid-template-columns:1fr} }
+@media (max-width:620px){ .works{grid-template-columns:1fr} .vids{grid-template-columns:1fr 1fr;gap:10px} }
+@media (max-width:1080px){ .sv-stage{min-height:0} }
+@media (max-width:620px){ .sv-stage{min-height:420px;aspect-ratio:auto} }
+html,body{overflow-x:clip}
 </style>
 </head>
 <body>
@@ -878,6 +918,7 @@ summary{font-size:16.5px;padding:18px 44px 18px 0}
       <a href="#ctor">Стили</a>
       <a href="#prices">Цены</a>
       <a href="#steps">Этапы</a>
+      <a href="#works">Объекты</a>
       <a href="#team">Команда</a>
       <a href="blog/index.html">Блог</a>
       <a href="#faq">Вопросы</a>
@@ -972,6 +1013,28 @@ summary{font-size:16.5px;padding:18px 44px 18px 0}
       <a class="tk" href="#quiz"><b>Ремонт под сдачу в аренду</b><p>Практичная отделка, которая выдержит жильцов и быстро окупится.</p><span>косметический от 8 000 ₽/м²</span></a>
       <a class="tk" href="#ctor"><b>Хочу красивый интерьер</b><p>Дизайнерский ремонт по проекту с авторским надзором дизайнера.</p><span>от 30 000 ₽/м²</span></a>
     </div>
+  </div>
+</section>
+
+<section id="works" hidden>
+  <div class="wrap">
+    <div class="head-row"><div><h2>Наши объекты</h2><p class="sub">Реальные квартиры, которые мы отремонтировали: площадь, срок и итоговая стоимость работ.</p></div><a class="btn btn-main" href="#quiz">Хочу так же</a></div>
+    <div class="works" id="worksGrid"></div>
+    <button type="button" class="btn btn-line works-more" id="worksMore" hidden>Показать ещё объекты</button>
+  </div>
+</section>
+
+<section id="videos" hidden>
+  <div class="wrap">
+    <div class="head-row"><div><h2>Видео с объектов</h2><p class="sub">Без монтажа и красивых ракурсов: как идут работы и как выглядит результат.</p></div></div>
+    <div class="vids" id="vidGrid"></div>
+  </div>
+</section>
+
+<section id="reviews" hidden>
+  <div class="wrap">
+    <div class="head-row"><div><h2>Отзывы клиентов</h2><p class="sub">Только настоящие отзывы людей, которым мы делали ремонт.</p></div><a class="btn btn-line" id="revMap" href="#" target="_blank" rel="noopener" hidden>Все отзывы на Яндекс Картах</a></div>
+    <div class="revs" id="revGrid"></div>
   </div>
 </section>
 
@@ -1319,12 +1382,7 @@ summary{font-size:16.5px;padding:18px 44px 18px 0}
   </div>
 </section>
 
-<section id="reviews" hidden>
-  <div class="wrap">
-    <div class="head-row"><div><h2>Отзывы клиентов</h2><p class="sub">Только настоящие отзывы людей, которым мы делали ремонт.</p></div><a class="btn btn-line" id="revMap" href="#" target="_blank" rel="noopener" hidden>Все отзывы на Яндекс Картах</a></div>
-    <div class="revs" id="revGrid"></div>
-  </div>
-</section>
+
 
 <section class="honest" id="honest">
   <div class="wrap honest-grid">
@@ -1500,6 +1558,18 @@ summary{font-size:16.5px;padding:18px 44px 18px 0}
       <div class="msg" id="cbMsg" role="status"></div>
     </form>
   </div>
+</div>
+
+<div class="pop gal" id="gal" hidden role="dialog" aria-modal="true" aria-label="Фотографии объекта">
+  <button type="button" class="lb-x" id="galX" aria-label="Закрыть">×</button>
+  <div class="gal-in">
+    <div class="gal-img"><img id="galImg" alt=""><button type="button" class="sv-nav prev" id="galPrev" aria-label="Предыдущее фото">‹</button><button type="button" class="sv-nav next" id="galNext" aria-label="Следующее фото">›</button></div>
+    <div class="gal-info" id="galInfo"></div>
+  </div>
+</div>
+<div class="pop vplay" id="vplay" hidden role="dialog" aria-modal="true" aria-label="Видео">
+  <button type="button" class="lb-x" id="vX" aria-label="Закрыть">×</button>
+  <div class="vplay-in" id="vBox"></div>
 </div>
 
 <div class="helper" id="helper">
@@ -2216,6 +2286,111 @@ summary{font-size:16.5px;padding:18px 44px 18px 0}
       sec.hidden = false;
     }
     if (YANDEX_MAPS_URL){ var m = document.getElementById('revMap'); m.href = YANDEX_MAPS_URL; m.hidden = false; sec.hidden = false; }
+  })();
+
+
+  /* ===== Портфолио и видео: впишите настоящие данные =====
+     Фото и видео кладите в папку сайта (например works/zhk-1.jpg) или укажите ссылку.
+     Видео можно с Rutube или VK: укажите ссылку для встраивания (embed). */
+  var PROJECTS = [
+    /* { title:'2-комн. квартира, ЖК ...', area:56, days:75, price:'1 180 000 ₽', type:'Капитальный ремонт',
+         photos:['works/obj1-1.jpg','works/obj1-2.jpg'], text:'Что сделали и что было важно клиенту' } */
+  ];
+  var VIDEOS = [
+    /* { title:'Ванная под ключ, ЖК ...', note:'1 минута', poster:'works/v1.jpg', embed:'https://rutube.ru/play/embed/...' } */
+  ];
+  (function(){
+    var demo = /[?&]demo\b/.test(location.search);
+    var IMG = function(id, w){ return 'https://images.pexels.com/photos/' + id + '/pexels-photo-' + id + '.jpeg?auto=compress&cs=tinysrgb&w=' + (w||900); };
+    var P = PROJECTS, V = VIDEOS;
+    if (demo){
+      if (!P.length) P = [
+        { title:'Пример: 2-комн. квартира в новостройке', area:56, days:72, price:'1 120 000 ₽', type:'Ремонт под ключ', photos:[IMG(32177961),IMG(32177959),IMG(28853362)], text:'Здесь будет описание вашего объекта: что было, что сделали, что было важно клиенту.' },
+        { title:'Пример: капитальный ремонт во вторичке', area:48, days:84, price:'1 090 000 ₽', type:'Капитальный ремонт', photos:[IMG(14614670),IMG(14614673)], text:'Здесь будет описание вашего объекта.' },
+        { title:'Пример: ванная под ключ', area:5, days:21, price:'215 000 ₽', type:'Ванная комната', photos:[IMG(33529504),IMG(33529508)], text:'Здесь будет описание вашего объекта.' }
+      ];
+      if (!V.length) V = [
+        { title:'Пример: обзор готовой квартиры', note:'видео с объекта', poster:IMG(6908500,600) },
+        { title:'Пример: как мы делаем электрику', note:'видео с объекта', poster:IMG(14613456,600) },
+        { title:'Пример: приёмка ванной', note:'видео с объекта', poster:IMG(33529508,600) }
+      ];
+      ['works','videos','reviews'].forEach(function(id){
+        var h = document.querySelector('#' + id + ' h2'); if (h){ var t = document.createElement('span'); t.className = 'demo-tag'; t.textContent = 'ПРИМЕР'; h.appendChild(t); }
+      });
+      var rs = document.getElementById('reviews');
+      if (rs && rs.hidden){
+        var g = document.getElementById('revGrid');
+        for (var i = 0; i < 3; i++){
+          var d = document.createElement('div'); d.className = 'rv';
+          d.innerHTML = '<span class="st">★★★★★</span><p>Здесь будет настоящий отзыв клиента с Яндекс Карт или 2ГИС: что понравилось в работе, как прошёл ремонт.</p><b>Имя клиента</b><small>ЖК, тип квартиры</small>';
+          g.appendChild(d);
+        }
+        rs.hidden = false;
+      }
+    }
+
+    /* портфолио */
+    if (P.length){
+      var grid = document.getElementById('worksGrid'), more = document.getElementById('worksMore');
+      P.forEach(function(p, i){
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'wk'; if (i >= 6) b.hidden = true;
+        b.innerHTML = '<span class="ph"><img loading="lazy" alt="" onerror="this.classList.add(\'err\')"><span class="cnt"></span></span><span class="tx"><b></b><span class="meta"></span><span class="wkp"></span></span>';
+        b.querySelector('img').src = p.photos[0];
+        b.querySelector('.cnt').textContent = p.photos.length + ' фото';
+        b.querySelector('b').textContent = p.title;
+        var m = b.querySelector('.meta');
+        [p.type, p.area + ' м²', p.days + ' дней'].forEach(function(t){ var s = document.createElement('span'); s.textContent = t; m.appendChild(s); });
+        b.querySelector('.wkp').textContent = p.price;
+        b.addEventListener('click', function(){ openGal(p); });
+        grid.appendChild(b);
+      });
+      if (P.length > 6){ more.hidden = false; more.addEventListener('click', function(){ grid.querySelectorAll('.wk[hidden]').forEach(function(x){ x.hidden = false; }); more.hidden = true; }); }
+      document.getElementById('works').hidden = false;
+    }
+    var gal = document.getElementById('gal'), gImg = document.getElementById('galImg'), gP = null, gI = 0;
+    function gShow(){ gImg.src = gP.photos[gI]; }
+    function openGal(p){
+      gP = p; gI = 0; gShow();
+      var info = document.getElementById('galInfo'); info.innerHTML = '';
+      var h = document.createElement('h3'); h.textContent = p.title; info.appendChild(h);
+      var meta = document.createElement('div'); meta.className = 'meta';
+      [['Вид ремонта', p.type], ['Площадь', p.area + ' м²'], ['Срок', p.days + ' дней'], ['Стоимость работ', p.price]].forEach(function(r){
+        var d = document.createElement('div'); var a = document.createElement('span'); a.textContent = r[0]; var b = document.createElement('b'); b.textContent = r[1]; d.appendChild(a); d.appendChild(b); meta.appendChild(d);
+      });
+      info.appendChild(meta);
+      if (p.text){ var t = document.createElement('p'); t.textContent = p.text; info.appendChild(t); }
+      var c = document.createElement('a'); c.className = 'btn btn-main'; c.href = '#quiz'; c.textContent = 'Рассчитать похожий ремонт'; c.addEventListener('click', function(){ gal.hidden = true; }); info.appendChild(c);
+      gal.hidden = false;
+    }
+    document.getElementById('galNext').addEventListener('click', function(){ gI = (gI + 1) % gP.photos.length; gShow(); });
+    document.getElementById('galPrev').addEventListener('click', function(){ gI = (gI - 1 + gP.photos.length) % gP.photos.length; gShow(); });
+    document.getElementById('galX').addEventListener('click', function(){ gal.hidden = true; });
+    gal.addEventListener('click', function(e){ if (e.target === gal) gal.hidden = true; });
+
+    /* видео */
+    var vp = document.getElementById('vplay'), vb = document.getElementById('vBox');
+    if (V.length){
+      var vg = document.getElementById('vidGrid');
+      V.forEach(function(v){
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'vd';
+        b.innerHTML = '<img loading="lazy" alt="" onerror="this.style.opacity=0"><span class="play"></span><span class="vt"><b></b><span></span></span>';
+        b.querySelector('img').src = v.poster || '';
+        b.querySelector('b').textContent = v.title; b.querySelector('.vt span').textContent = v.note || '';
+        b.addEventListener('click', function(){
+          vb.innerHTML = '';
+          if (v.embed){ var f = document.createElement('iframe'); f.src = v.embed; f.allow = 'autoplay; fullscreen'; f.allowFullscreen = true; vb.appendChild(f); }
+          else if (v.file){ var vid = document.createElement('video'); vid.src = v.file; vid.controls = true; vid.autoplay = true; vb.appendChild(vid); }
+          else { vb.textContent = 'Здесь будет ваше видео с объекта.'; }
+          vp.hidden = false;
+        });
+        vg.appendChild(b);
+      });
+      document.getElementById('videos').hidden = false;
+    }
+    function vClose(){ vp.hidden = true; vb.innerHTML = ''; }
+    document.getElementById('vX').addEventListener('click', vClose);
+    vp.addEventListener('click', function(e){ if (e.target === vp) vClose(); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape'){ if (!vp.hidden) vClose(); if (!gal.hidden) gal.hidden = true; } });
   })();
 
   /* Диалог стартует, когда блок расчёта появляется на экране */
