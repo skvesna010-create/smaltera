@@ -776,6 +776,31 @@ h2{font-size:clamp(28px,3.4vw,46px)}
 .foot-legal a{color:#C5CCDB}
 @media (max-width:1080px){ .team{grid-template-columns:1fr 1fr} .revs,.bl{grid-template-columns:1fr 1fr} }
 @media (max-width:620px){ .team,.revs,.bl{grid-template-columns:1fr} }
+
+/* Задачи, материалы, способы связи */
+.micro{font-size:13.5px;color:var(--muted);margin-top:12px}
+.final .micro{color:#C5CCDB}
+.tasks{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tk{display:grid;gap:10px;align-content:start;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--smalt);border-radius:4px;padding:22px 24px;text-decoration:none;color:inherit;transition:box-shadow .2s,transform .2s}
+.tk:hover{box-shadow:0 18px 34px -24px rgba(17,24,39,.45);transform:translateY(-2px)}
+.tk b{font-family:var(--display);font-size:19px;font-weight:700}
+.tk p{font-size:15px;color:var(--muted)}
+.tk span{font-size:13.5px;font-weight:700;color:var(--smalt)}
+.mat{position:relative;display:grid;gap:10px;border-top:1px solid rgba(255,255,255,.14);padding-top:16px}
+.mat-h,.mat-t{display:flex;justify-content:space-between;gap:10px;font-size:14px;color:#C6CFEA}
+.mat-h b,.mat-t b{color:#fff;font-variant-numeric:tabular-nums;text-align:right}
+.mat-t b{font-family:var(--display);font-size:17px;color:#FFB086}
+.mat-c{display:flex;gap:6px}
+.mat-c button{flex:1;border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;padding:8px 6px;font:600 13px var(--body);cursor:pointer}
+.mat-c button.on{background:#fff;color:var(--smalt-ink)}
+.cb-ways{display:grid;gap:10px;margin:6px 0 12px}
+.cb-ways .btn{width:100%}
+.cb-or{font-size:14px;color:var(--muted);margin:0 0 10px!important}
+@media (max-width:1080px){ .tasks{grid-template-columns:1fr 1fr} }
+@media (max-width:620px){ .tasks{grid-template-columns:1fr} }
+
+.calc-side .gift b{color:#FFB086}
+.pop-card h3{padding-right:36px}
 </style>
 </head>
 <body>
@@ -825,6 +850,7 @@ h2{font-size:clamp(28px,3.4vw,46px)}
           <a class="btn btn-main" href="#quiz">Рассчитать за минуту</a>
           <a class="btn btn-line" href="#final">Замер бесплатно</a>
         </div>
+        <p class="micro">Без предоплаты · работаем по договору · замер и смета бесплатно</p>
         <div class="qp" id="qp">
           <div class="qp-t">Сколько стоит ремонт вашей квартиры?</div>
           <div class="qp-chips">
@@ -878,6 +904,20 @@ h2{font-size:clamp(28px,3.4vw,46px)}
       <a href="#quiz"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/14613456/pexels-photo-14613456.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" onerror="this.classList.add('err')"></span><span class="tag">При ремонте</span><span class="t"><b>Дизайн-проект</b><span>Планировка, визуализация, чертежи</span><em>в подарок</em></span></a>
       <a href="#quiz"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/29515355/pexels-photo-29515355.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" onerror="this.classList.add('err')"></span><span class="t"><b>Натяжные потолки</b><span>Матовые, с подсветкой, парящие</span><em>от 600 ₽/м²</em></span></a>
       <a href="#quiz"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/32177959/pexels-photo-32177959.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" onerror="this.classList.add('err')"></span><span class="t"><b>Косметический ремонт</b><span>Стены, полы, потолки, двери</span><em>от 8 000 ₽/м²</em></span></a>
+    </div>
+  </div>
+</section>
+
+<section id="tasks" style="padding-top:0">
+  <div class="wrap">
+    <div class="head-row"><div><h2>С какой задачей вы к нам?</h2><p class="sub">Выберите свою ситуацию: расскажем, с чего начать и сколько это стоит.</p></div></div>
+    <div class="tasks">
+      <a class="tk" href="#quiz"><b>Новостройка без отделки</b><p>Голые стены от застройщика. Начинаем с дизайн-проекта, потом черновые и чистовые работы.</p><span>от 13 000 ₽/м² · дизайн-проект в подарок</span></a>
+      <a class="tk" href="#quiz"><b>Квартира с white box</b><p>Часть работ уже сделана. Проверим качество отделки застройщика и не возьмём деньги дважды.</p><span>смету считаем с учётом готового</span></a>
+      <a class="tk" href="#quiz"><b>Вторичка, старый ремонт</b><p>Демонтаж, новая проводка и трубы, ровные стены. Квартира как новая.</p><span>от 22 500 ₽/м² · дизайн-проект в подарок</span></a>
+      <a class="tk" href="#bath"><b>Только ванная комната</b><p>Гидроизоляция, разводка, плитка и сантехника. Самое важное помещение под ключ.</p><span>от 160 000 ₽ за работы</span></a>
+      <a class="tk" href="#quiz"><b>Ремонт под сдачу в аренду</b><p>Практичная отделка, которая выдержит жильцов и быстро окупится.</p><span>косметический от 8 000 ₽/м²</span></a>
+      <a class="tk" href="#ctor"><b>Хочу красивый интерьер</b><p>Дизайнерский ремонт по проекту с авторским надзором дизайнера.</p><span>от 30 000 ₽/м²</span></a>
     </div>
   </div>
 </section>
@@ -998,7 +1038,7 @@ h2{font-size:clamp(28px,3.4vw,46px)}
         <div>
           <div class="lbl">Примерная стоимость работ</div>
           <div class="est" id="est">—</div>
-          <div class="est-note">без учёта чистовых материалов</div>
+          <div class="est-note">только работы, материалы ниже</div>
         </div>
         <div class="bars">
           <div class="bar-i" id="bWork"><span>Ремонтные работы</span><span>—</span><em><b></b></em></div>
@@ -1006,6 +1046,13 @@ h2{font-size:clamp(28px,3.4vw,46px)}
           <div class="bar-i off" id="bCeil"><span>Натяжные потолки</span><span>—</span><em><b></b></em></div>
           <div class="bar-i off" id="bWarm"><span>Тёплый пол</span><span>—</span><em><b></b></em></div>
           <div class="bar-i g off" id="bDes"><span>Дизайн-проект</span><span>—</span><em><b></b></em></div>
+        </div>
+        <div class="mat">
+          <div class="mat-h"><span>Материалы, ориентировочно</span><b id="matSum">—</b></div>
+          <div class="mat-c" role="group" aria-label="Уровень материалов">
+            <button type="button" data-m="econ">Эконом</button><button type="button" data-m="std" class="on">Стандарт</button><button type="button" data-m="prem">Премиум</button>
+          </div>
+          <div class="mat-t"><span>Весь бюджет ремонта</span><b id="allSum">—</b></div>
         </div>
         <div class="side-area">
           <div><span>Площадь квартиры</span><b id="areaOut">54 м²</b></div>
@@ -1337,6 +1384,7 @@ h2{font-size:clamp(28px,3.4vw,46px)}
       <div class="field"><label for="fName">Имя</label><input id="fName" type="text" autocomplete="name" placeholder="Как к вам обращаться"></div>
       <div class="field"><label for="fPhone">Телефон</label><input id="fPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></div>
       <button class="btn btn-gold" type="submit">Записаться на замер</button>
+      <p class="micro" style="margin:0">Без предоплаты. Перезвоним в рабочее время.</p>
       <div class="msg" role="status"></div>
       <p class="agree" style="margin:0">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank">политикой обработки персональных данных</a>.</p>
     </form>
@@ -1387,8 +1435,12 @@ h2{font-size:clamp(28px,3.4vw,46px)}
 <div class="pop" id="cb" hidden role="dialog" aria-modal="true" aria-labelledby="cbT">
   <div class="pop-card cb-card">
     <button type="button" class="pop-x" data-cb-x aria-label="Закрыть">×</button>
-    <h3 id="cbT">Перезвоним и ответим на вопросы</h3>
-    <p>Оставьте номер, инженер позвонит в рабочее время, расскажет о ценах и договорится о бесплатном замере.</p>
+    <h3 id="cbT">Как вам удобнее связаться?</h3>
+    <div class="cb-ways">
+      <a class="btn btn-line" href="tel:+73430000000">Позвонить: +7 (343) 000-00-00</a>
+      <div class="msgr-col" data-msgr></div>
+    </div>
+    <p class="cb-or">или оставьте номер, и инженер перезвонит сам</p>
     <form id="cbForm" novalidate>
       <div class="field"><label for="cbPhone">Телефон</label><input id="cbPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></div>
       <button class="btn btn-main" type="submit" style="width:100%">Жду звонка</button>
@@ -1435,6 +1487,7 @@ h2{font-size:clamp(28px,3.4vw,46px)}
   var DES = 1500;                                       /* дизайн-проект, ₽ за м² */
   var DAYS = { cosm:[16,0.4], cap:[38,0.7], design:[55,1.0] };
   var PHONE = '+7 (343) 000-00-00';
+  var MAT = { econ:6000, std:12000, prem:25000 };       /* материалы ориентировочно, ₽ за м² квартиры */
 
 
   /* ===== Отправка заявок =====
@@ -1497,9 +1550,15 @@ h2{font-size:clamp(28px,3.4vw,46px)}
     document.getElementById('areaOut').textContent = S.area + ' м²';
     var w = Math.max(3, Math.round((DAYS[S.kind][0] + DAYS[S.kind][1]*S.area)/7));
     document.getElementById('term').textContent = 'около ' + weeksText(w);
+    var mat = MAT[S.mat || 'std'] * S.area;
+    document.getElementById('matSum').textContent = money(mat*0.85) + ' – ' + money(mat*1.15) + ' ₽';
+    document.getElementById('allSum').textContent = money((total+mat)*0.9) + ' – ' + money((total+mat)*1.12) + ' ₽';
     return total;
   }
   area.addEventListener('input', function(){ S.area = +area.value; calc(); });
+  document.querySelectorAll('.mat-c button').forEach(function(b){ b.addEventListener('click', function(){
+    S.mat = b.dataset.m; document.querySelectorAll('.mat-c button').forEach(function(x){ x.classList.toggle('on', x === b); }); calc();
+  }); });
 
   /* ----- диалог ----- */
   function wait(ms){ return new Promise(function(r){ setTimeout(r, reduce ? 0 : ms); }); }
@@ -1580,7 +1639,7 @@ h2{font-size:clamp(28px,3.4vw,46px)}
         'Квартира':S.flat === 'old' ? 'вторичка' : 'новостройка', 'Площадь':S.area + ' м²',
         'Ремонт':{ cosm:'косметический', cap:'капитальный', design:'дизайнерский' }[S.kind],
         'Дополнительно':ex.join(', ') || 'нет', 'Когда начать':{ now:'в ближайшие 2 недели', month:'в течение месяца', later:'через 2–3 месяца', keys:'ждёт ключи' }[S.when] || '—',
-        'Расчёт':money(t*0.92) + ' – ' + money(t*1.1) + ' ₽'
+        'Расчёт':money(t*0.92) + ' – ' + money(t*1.1) + ' ₽', 'Подарок':S.gift || '—'
       }).then(function(ok){
         var hi = S.name ? S.name + ', спасибо! ' : 'Спасибо! ';
         say(ok ? hi + 'Заявка у нас. Инженер позвонит вам в рабочее время, уточнит детали и договорится о замере.'
@@ -1669,7 +1728,15 @@ h2{font-size:clamp(28px,3.4vw,46px)}
                   keys:'Смету можно подготовить заранее по планировке, а замер сделать сразу после получения ключей.' }[o.v];
         return say(r); })
     .then(function(){ alive(); var t = calc();
-        return say('Готово! По вашим ответам работы обойдутся примерно в ' + money(t*0.92) + ' – ' + money(t*1.1) + ' ₽.' + (S.kind !== 'cosm' ? ' И хорошая новость: при таком ремонте дизайн-проект мы делаем в подарок.' : '')); })
+        return say('Готово! По вашим ответам работы обойдутся примерно в ' + money(t*0.92) + ' – ' + money(t*1.1) + ' ₽.'); })
+    .then(function(){ alive();
+        if (S.kind === 'cosm'){ S.gift = 'чек-лист приёмки'; return say('К расчёту пришлём в подарок чек-лист приёмки ремонта из 41 пункта.'); }
+        return say('И приятное: выберите подарок к ремонту.').then(function(){ return options([
+          { v:'design', t:'Дизайн-проект бесплатно', s:'планировка, визуализация, чертежи' },
+          { v:'check', t:'Чек-лист приёмки ремонта', s:'41 пункт, PDF' } ]); }).then(function(o){
+          alive(); me(o.t); S.gift = o.v === 'design' ? 'дизайн-проект' : 'чек-лист приёмки';
+          return say(o.v === 'design' ? 'Отличный выбор! Закрепим дизайн-проект за вами, он входит в подарок при заключении договора.' : 'Хорошо, пришлём чек-лист вместе со сметой.');
+        }); })
     .then(function(){ alive(); return faq(); })
     .then(function(){ alive(); return say('Отлично! Оставьте имя и телефон, и инженер свяжется с вами, чтобы договориться о замере.'); })
     .then(function(){ alive(); contactForm(); })
@@ -1786,6 +1853,7 @@ h2{font-size:clamp(28px,3.4vw,46px)}
       fix: ['Это важно', 'Это пример нашей сметы. Каждая позиция расписана, а итог закрепляется в договоре.', [['Получить смету','#final',1]]],
       services: ['Выберите услугу', 'Нажмите на любую карточку, и я посчитаю стоимость под вашу квартиру.', [['Рассчитать','#quiz',1]]],
       terms: ['Всё в договоре', 'Каждое условие из этого блока прописываем в договоре. Можем прислать образец до замера.', [['Заказать звонок','#final',1]]],
+      tasks: ['Подскажу', 'Не нашли свою ситуацию? Опишите её в расчёте, и инженер подберёт решение.', [['Рассчитать','#quiz',1]]],
       team: ['Познакомимся лично', 'Инженер, дизайнер и прораб приедут на объект. Задайте любой вопрос заранее.', [['Заказать звонок','#final',1]]],
       blog: ['Почитайте', 'Статья про приёмку ремонта пригодится, даже если вы ещё выбираете подрядчика.', [['Открыть блог','blog/index.html',1]]],
       steps: ['Смотрите на схему', 'Листайте вниз: квартира будет ремонтироваться прямо у вас на глазах.', []],
@@ -1826,7 +1894,7 @@ h2{font-size:clamp(28px,3.4vw,46px)}
         if (id !== current) show(id);
       });
     }, { rootMargin: '-45% 0px -45% 0px' });
-    ['hero','services','quiz','ctor','prices','gift','terms','team','blog','honest','compare','fix','steps','bath','districts','faq','final'].forEach(function(id){
+    ['hero','services','tasks','quiz','ctor','prices','gift','terms','team','blog','honest','compare','fix','steps','bath','districts','faq','final'].forEach(function(id){
       var el = document.getElementById(id); if (el) io.observe(el);
     });
     bub.classList.add('hide');
