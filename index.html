@@ -149,6 +149,8 @@ nav.menu a:hover{color:var(--smalt)}
 .a-btn.txt{padding:13px 18px}
 .a-btn .th{width:52px;height:40px;border-radius:9px;flex:none}
 .a-btn small{display:block;font-weight:500;color:var(--muted);font-size:12.5px}
+.a-btn.go{background:var(--gold);border-color:var(--gold);color:#fff}
+.a-btn.go:hover{background:#A07D33;border-color:#A07D33}
 .a-btn.sel{border-color:var(--smalt);background:#EEF2FC;box-shadow:inset 0 0 0 1px var(--smalt)}
 .a-btn .ck{width:20px;height:20px;border-radius:6px;border:1.5px solid #C5C9D3;flex:none;display:grid;place-items:center;font-size:13px;color:#fff}
 .a-btn.sel .ck{background:var(--smalt);border-color:var(--smalt)}
@@ -292,6 +294,110 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
 .foot .phone{color:#fff}
 .copy{border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-top:22px;font-size:13px}
 
+/* Мгновенная цена в первом экране */
+.qp{margin-top:34px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;max-width:560px;box-shadow:0 24px 50px -36px rgba(15,29,71,.5)}
+.qp-t{font-size:14px;font-weight:700;color:var(--muted);margin-bottom:12px}
+.qp-chips{display:flex;flex-wrap:wrap;gap:8px}
+.qp-chips button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:10px 16px;font:700 15px var(--body);cursor:pointer;color:var(--ink);transition:all .15s}
+.qp-chips button:hover{border-color:var(--smalt)}
+.qp-chips button.on{background:var(--smalt);border-color:var(--smalt);color:#fff}
+.qp-res{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.qp-sum{font-family:var(--display);font-size:30px;line-height:1;color:var(--smalt);font-variant-numeric:tabular-nums}
+.qp-sum small{display:block;font-family:var(--body);font-size:13px;color:var(--muted);margin-top:6px;font-weight:600}
+.qp-res .btn{padding:15px 22px;font-size:15px}
+
+/* Схема квартиры по этапам */
+.pre{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px;counter-reset:p}
+.pre li{display:flex;align-items:center;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:8px 18px 8px 8px;font-size:15px}
+.pre li::before{counter-increment:p;content:counter(p);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--gold);color:#fff;font-weight:800;font-size:14px}
+.pre span{color:var(--muted);font-size:13px}
+.proc-grid > *{min-width:0}
+.proc-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,4vw,56px);align-items:start}
+.plan-col{position:sticky;top:96px}
+.plan-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;box-shadow:0 40px 80px -56px rgba(15,29,71,.5)}
+.plan-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.plan-tabs button{border:0;background:#F0F1F4;border-radius:999px;padding:9px 14px;font:700 13px var(--body);color:var(--muted);cursor:pointer;transition:all .2s}
+.plan-tabs button.on{background:var(--smalt);color:#fff}
+.plan-tabs button.done{color:var(--smalt)}
+.plan{width:100%;height:auto;display:block;border-radius:12px;font-family:var(--body)}
+.plan .ly{opacity:0;transition:opacity .6s ease}
+.plan .draw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s ease}
+.plan.s1 .ly-demo{opacity:1}
+.plan.s2 .ly-el,.plan.s3 .ly-el,.plan.s4 .ly-el{opacity:1}
+.plan.s2 .ly-el .draw,.plan.s3 .ly-el .draw,.plan.s4 .ly-el .draw,.plan.s5 .ly-el .draw,.plan.s6 .ly-el .draw{stroke-dashoffset:0}
+.plan.s3 .ly-pl,.plan.s4 .ly-pl{opacity:1}
+.plan.s3 .ly-pl .draw,.plan.s4 .ly-pl .draw,.plan.s5 .ly-pl .draw,.plan.s6 .ly-pl .draw{stroke-dashoffset:0}
+.plan.s4 .ly-wall{opacity:1}
+.plan.s4 .ly-el,.plan.s4 .ly-pl{opacity:.28}
+.plan.s4 .tag-g{opacity:0}
+.plan.s5 .ly-fin,.plan.s6 .ly-fin{opacity:1}
+.plan.s6 .ly-done{opacity:1}
+.plan .tag-g{transition:opacity .4s}
+.plan .ok circle{fill:#1F3B8C}
+.plan .ok path{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.plan.s6 .ok{animation:pop .5s cubic-bezier(.2,.9,.3,1.5) both}
+.plan.s6 .ok:nth-child(2){animation-delay:.12s}.plan.s6 .ok:nth-child(3){animation-delay:.24s}.plan.s6 .ok:nth-child(4){animation-delay:.36s}.plan.s6 .ok:nth-child(5){animation-delay:.48s}
+.plan .ok{transform-box:fill-box;transform-origin:center}
+@keyframes pop{from{transform:scale(0)}}
+.plan.s5 .furn,.plan.s6 .furn{animation:fade .8s .2s both}
+@keyframes fade{from{opacity:0}}
+.plan-foot{display:flex;justify-content:space-between;margin-top:12px;font-size:14px;font-weight:700;color:var(--muted)}
+.plan-foot #planTime{color:var(--smalt)}
+.stage-col{display:grid;gap:22px;padding-bottom:12vh}
+.stage{min-height:46vh;display:flex;flex-direction:column;justify-content:center;padding:28px;border-radius:var(--r-lg);border:1px solid transparent;transition:background .35s,border-color .35s,opacity .35s;opacity:.45}
+.stage.on{background:var(--paper);border-color:var(--line);opacity:1;box-shadow:0 30px 60px -48px rgba(15,29,71,.45)}
+.stage-n{font-size:13px;font-weight:800;color:var(--gold);margin-bottom:10px}
+.stage h3{font-family:var(--display);font-weight:400;font-size:clamp(24px,2.4vw,32px);margin-bottom:12px}
+.stage p{color:var(--muted)}
+.stage-get{margin-top:16px;padding:14px 16px;border-radius:12px;background:#EEF1FA;font-size:15px}
+.stage-get b{color:var(--smalt)}
+.stage .btn{align-self:flex-start}
+
+/* Живая смета */
+.sheet .row{transition:background .3s}
+.sheet .row:hover{background:#F5F7FC}
+.sheet.live .row{animation:rowIn .5s both}
+.sheet.live .row:nth-child(2){animation-delay:.05s}.sheet.live .row:nth-child(3){animation-delay:.15s}.sheet.live .row:nth-child(4){animation-delay:.25s}.sheet.live .row:nth-child(5){animation-delay:.35s}.sheet.live .row:nth-child(6){animation-delay:.45s}.sheet.live .row:nth-child(7){animation-delay:.55s}
+@keyframes rowIn{50%{background:#FBF5E6}}
+.sheet.live .stamp{animation:stamp .5s cubic-bezier(.3,1.6,.5,1) 1.3s both}
+@keyframes stamp{from{transform:rotate(-10deg) scale(2.4);opacity:0}}
+
+/* Помощник по сайту */
+.helper{position:fixed;right:22px;bottom:22px;z-index:45;display:flex;align-items:flex-end;gap:12px;flex-direction:row-reverse;pointer-events:none}
+.helper > *{pointer-events:auto}
+.h-ava{width:64px;height:64px;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:0 18px 36px -16px rgba(15,29,71,.55);display:grid;place-items:center;cursor:pointer;position:relative;flex:none;transition:transform .2s}
+.h-ava:hover{transform:scale(1.06)}
+.h-ava .lg{width:42px;height:42px}
+.h-ava::after{content:"";position:absolute;right:3px;top:3px;width:12px;height:12px;border-radius:50%;background:#2FB27A;border:2px solid #fff}
+.h-ava.talk .lg .t{animation:talk .6s ease-in-out infinite;animation-delay:calc(var(--i)*60ms)}
+.h-bub{width:min(320px,calc(100vw - 120px));background:#fff;border:1px solid var(--line);border-radius:18px 18px 6px 18px;box-shadow:0 24px 48px -24px rgba(15,29,71,.5);padding:16px 18px;font-size:15px;line-height:1.5;position:relative;transform-origin:bottom right;transition:opacity .3s,transform .3s}
+.h-bub.hide{opacity:0;transform:scale(.85) translateY(10px);pointer-events:none}
+.h-bub b{display:block;font-size:13px;color:var(--gold);margin-bottom:4px}
+.h-bub .h-acts{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.h-bub .h-acts a,.h-bub .h-acts button{font:700 13px var(--body);padding:9px 14px;border-radius:999px;text-decoration:none;cursor:pointer;border:1.5px solid var(--line);background:#fff;color:var(--ink)}
+.h-bub .h-acts a.pri{background:var(--smalt);border-color:var(--smalt);color:#fff}
+.h-x{position:absolute;right:8px;top:8px;width:26px;height:26px;border-radius:50%;border:0;background:#F0F1F4;color:var(--muted);cursor:pointer;font-size:15px;line-height:1}
+.helper.away{opacity:0;transform:translateY(20px);pointer-events:none}
+.helper{transition:opacity .3s,transform .3s}
+
+@media (max-width:1080px){
+  .proc-grid{grid-template-columns:1fr}
+  .plan-col{top:70px;z-index:2}
+  .stage{min-height:38vh}
+}
+@media (max-width:720px){
+  .plan-card{padding:10px}
+  .plan-tabs{flex-wrap:nowrap;overflow-x:auto}
+  .plan-tabs button{flex:none;padding:7px 11px;font-size:12px}
+  .stage{min-height:52vh;padding:20px}
+  .helper{right:12px;bottom:84px}
+  .h-ava{width:54px;height:54px}
+  .qp-sum{font-size:26px}
+}
+@media (prefers-reduced-motion:reduce){
+  .plan .draw{transition:none}
+}
+
 /* Нижняя панель на телефоне */
 .mbar{display:none}
 
@@ -372,7 +478,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
 
 <main id="top">
 
-<section class="hero">
+<section class="hero" id="hero">
   <div class="ph"><img src="https://images.pexels.com/photos/6908500/pexels-photo-6908500.jpeg?auto=compress&cs=tinysrgb&w=2000" alt="Светлая гостиная после ремонта" fetchpriority="high" onerror="this.classList.add('err')"></div>
   <div class="wrap hero-in">
     <div class="offer"><i>✓</i>Смета в договоре не меняется до конца ремонта</div>
@@ -382,10 +488,18 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
       <a class="btn btn-main" href="#quiz">Рассчитать стоимость за 1 минуту</a>
       <a class="btn btn-line" href="#final">Бесплатный замер</a>
     </div>
-    <div class="hero-trust">
-      <div><b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/></svg></b>Цена фиксируется<br>в договоре</div>
-      <div><b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 7 4-14 3 7h4"/></svg></b>Оплата по этапам<br>после приёмки</div>
-      <div><b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></b>Письменная<br>гарантия</div>
+    <div class="qp" id="qp">
+      <div class="qp-t">Сколько стоит ремонт вашей квартиры? Выберите:</div>
+      <div class="qp-chips">
+        <button type="button" data-a="28">Студия</button>
+        <button type="button" data-a="38">1-комнатная</button>
+        <button type="button" data-a="56" class="on">2-комнатная</button>
+        <button type="button" data-a="78">3-комнатная</button>
+      </div>
+      <div class="qp-res">
+        <div class="qp-sum" id="qpSum">от 489 000 ₽<small id="qpNote">капитальный ремонт</small></div>
+        <a class="btn btn-gold" href="#quiz">Точный расчёт</a>
+      </div>
     </div>
   </div>
 </section>
@@ -499,17 +613,17 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
   </div>
 </section>
 
-<section class="fix">
+<section class="fix" id="fix">
   <div class="wrap fix-grid">
-    <div class="sheet" aria-label="Пример сметы">
-      <div class="sheet-h"><b>Смета № 0147 · ЖК на Академическом</b><span>2-комн., 58 м²</span></div>
+    <div class="sheet" id="sheet" aria-label="Пример сметы">
+      <div class="sheet-h"><b>Пример сметы</b><span>2-комн. квартира, 58 м²</span></div>
       <div class="row"><span>Демонтаж и вывоз мусора</span><span>58 м²</span><span>34 800 ₽</span></div>
       <div class="row"><span>Электромонтаж, 64 точки</span><span>1 компл.</span><span>96 000 ₽</span></div>
       <div class="row"><span>Штукатурка стен по маякам</span><span>162 м²</span><span>113 400 ₽</span></div>
       <div class="row"><span>Стяжка пола</span><span>58 м²</span><span>40 600 ₽</span></div>
       <div class="row"><span>Санузел под ключ</span><span>1 компл.</span><span>98 000 ₽</span></div>
       <div class="row"><span>Чистовая отделка</span><span>58 м²</span><span>168 200 ₽</span></div>
-      <div class="row total"><span>Итого по договору</span><span></span><span>551 000 ₽</span></div>
+      <div class="row total"><span>Итого по договору</span><span></span><span id="sheetTotal">551 000 ₽</span></div>
       <div class="stamp">ЦЕНА<br>ЗАФИКСИРОВАНА</div>
     </div>
     <div>
@@ -524,27 +638,157 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
   </div>
 </section>
 
-<section id="steps">
+<section id="steps" class="proc">
   <div class="wrap">
     <div class="head-row">
       <div>
-        <h2>Как проходит ремонт</h2>
-        <p class="sub">Шесть понятных шагов от первого звонка до ключей от готовой квартиры.</p>
+        <h2>Посмотрите, как пройдёт ваш ремонт</h2>
+        <p class="sub">Листайте вниз: квартира на схеме будет меняться этап за этапом, от голых стен до ключей.</p>
       </div>
-      <a class="btn btn-main" href="#final">Начать с замера</a>
     </div>
-    <ol class="steps">
-      <li class="step"><h3>Заявка</h3><p>Оставляете номер на сайте или звоните. Перезваниваем и договариваемся о времени замера.</p><span class="time">в день обращения</span></li>
-      <li class="step"><h3>Бесплатный замер</h3><p>Инженер приезжает, делает обмеры, фотографирует квартиру и обсуждает с вами пожелания.</p><span class="time">1 час</span></li>
-      <li class="step"><h3>Смета и план</h3><p>Присылаем детальную смету и график работ. Корректируем вместе до полного согласия.</p><span class="time">1–2 дня</span></li>
-      <li class="step"><h3>Договор</h3><p>Фиксируем стоимость, сроки, этапы оплаты и гарантию. Всё на бумаге.</p><span class="time">1 встреча</span></li>
-      <li class="step"><h3>Ремонт</h3><p>Работает своя бригада под контролем прораба. Вы получаете фотоотчёты и принимаете этапы.</p><span class="time">по графику</span></li>
-      <li class="step"><h3>Сдача объекта</h3><p>Проверяем всё по чек-листу, делаем клининг, подписываем акт и выдаём гарантию.</p><span class="time">финал</span></li>
+
+    <ol class="pre">
+      <li><b>Заявка</b><span>в день обращения</span></li>
+      <li><b>Бесплатный замер</b><span>около часа</span></li>
+      <li><b>Смета и график</b><span>1–2 дня</span></li>
+      <li><b>Договор с фиксированной ценой</b><span>1 встреча</span></li>
     </ol>
+
+    <div class="proc-grid">
+      <div class="plan-col">
+        <div class="plan-card">
+          <div class="plan-tabs" role="tablist" aria-label="Этапы ремонта">
+            <button type="button" data-s="1" class="on">Демонтаж</button>
+            <button type="button" data-s="2">Электрика</button>
+            <button type="button" data-s="3">Сантехника</button>
+            <button type="button" data-s="4">Стены и пол</button>
+            <button type="button" data-s="5">Отделка</button>
+            <button type="button" data-s="6">Сдача</button>
+          </div>
+          <svg class="plan s1" id="plan" viewBox="0 0 600 420" role="img" aria-label="Схема двухкомнатной квартиры по этапам ремонта">
+            <defs>
+              <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="#EEEFF2"/><line x1="0" y1="0" x2="0" y2="10" stroke="#D6D9E0" stroke-width="3"/></pattern>
+              <pattern id="parquet" width="36" height="12" patternUnits="userSpaceOnUse"><rect width="36" height="12" fill="#EADCC4"/><path d="M0 12H36M18 0V12" stroke="#D8C5A4" stroke-width="1.2"/><path d="M0 6H18" stroke="#E0CFB2" stroke-width=".8"/></pattern>
+              <pattern id="tile" width="18" height="18" patternUnits="userSpaceOnUse"><rect width="18" height="18" fill="#EEF2F8"/><path d="M18 0V18H0" stroke="#D3DAE6" stroke-width="1.2" fill="none"/></pattern>
+            </defs>
+            <rect x="20" y="20" width="560" height="380" fill="#F4F2EE"/>
+
+            <g class="ly ly-wall">
+              <rect x="20" y="20" width="280" height="210" fill="url(#hatch)"/><rect x="300" y="20" width="280" height="210" fill="url(#hatch)"/>
+              <rect x="20" y="230" width="220" height="170" fill="url(#hatch)"/><rect x="240" y="230" width="200" height="170" fill="url(#hatch)"/><rect x="440" y="230" width="140" height="170" fill="url(#hatch)"/>
+            </g>
+            <g class="ly ly-fin">
+              <rect x="20" y="20" width="280" height="210" fill="url(#parquet)"/><rect x="300" y="20" width="280" height="210" fill="url(#parquet)"/>
+              <rect x="20" y="230" width="220" height="170" fill="url(#tile)"/><rect x="240" y="230" width="200" height="170" fill="url(#parquet)"/><rect x="440" y="230" width="140" height="170" fill="url(#tile)"/>
+              <g class="furn" fill="#fff" stroke="#9AA3B5" stroke-width="1.6">
+                <rect x="50" y="160" width="160" height="50" rx="10"/><rect x="50" y="160" width="160" height="14" rx="7"/>
+                <circle cx="130" cy="110" r="22"/><rect x="230" y="40" width="50" height="110" rx="4"/>
+                <rect x="380" y="50" width="150" height="120" rx="8"/><rect x="392" y="58" width="56" height="26" rx="6"/><rect x="462" y="58" width="56" height="26" rx="6"/>
+                <rect x="28" y="238" width="34" height="154" rx="3"/><rect x="28" y="358" width="190" height="34" rx="3"/><circle cx="120" cy="375" r="10"/><rect x="160" y="363" width="40" height="24" rx="3"/>
+                <rect x="250" y="370" width="110" height="24" rx="3"/>
+                <rect x="452" y="242" width="118" height="50" rx="22"/><ellipse cx="553" cy="368" rx="14" ry="19"/><rect x="455" y="372" width="44" height="22" rx="8"/>
+              </g>
+            </g>
+            <g class="ly ly-demo">
+              <line x1="140" y1="230" x2="140" y2="400" stroke="#D9534F" stroke-width="6" stroke-dasharray="10 8"/>
+              <g fill="#B9BDC6"><rect x="60" y="270" width="14" height="10" rx="2" transform="rotate(20 67 275)"/><rect x="90" y="300" width="10" height="8" rx="2"/><rect x="180" y="340" width="16" height="10" rx="2" transform="rotate(-15 188 345)"/><rect x="380" y="110" width="14" height="10" rx="2" transform="rotate(30 387 115)"/><rect x="120" y="70" width="12" height="9" rx="2"/><rect x="500" y="320" width="12" height="9" rx="2" transform="rotate(12 506 324)"/></g>
+              <g class="tag-g"><rect x="150" y="296" width="132" height="28" rx="14" fill="#D9534F"/><text x="216" y="315" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">снос перегородки</text></g>
+            </g>
+            <g class="ly ly-el">
+              <g fill="none" stroke="#C9A14A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <path class="draw" pathLength="1" d="M262 386V246H190V36"/>
+                <path class="draw" pathLength="1" d="M262 386V246H560V60"/>
+                <path class="draw" pathLength="1" d="M262 386V252H36V380"/>
+                <path class="draw" pathLength="1" d="M262 386H300V246M262 386H456V252"/>
+              </g>
+              <rect x="252" y="378" width="22" height="16" rx="3" fill="#15171C"/>
+              <g fill="#fff" stroke="#C9A14A" stroke-width="2.4"><circle cx="40" cy="150" r="5.5"/><circle cx="280" cy="200" r="5.5"/><circle cx="190" cy="40" r="5.5"/><circle cx="320" cy="62" r="5.5"/><circle cx="560" cy="150" r="5.5"/><circle cx="36" cy="262" r="5.5"/><circle cx="120" cy="388" r="5.5"/><circle cx="222" cy="388" r="5.5"/><circle cx="300" cy="248" r="5.5"/><circle cx="456" cy="300" r="5.5"/></g>
+              <g class="tag-g"><rect x="330" y="92" width="150" height="28" rx="14" fill="#B8913F"/><text x="405" y="111" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">64 точки электрики</text></g>
+            </g>
+            <g class="ly ly-pl">
+              <g fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path class="draw" pathLength="1" stroke="#2F7BEA" d="M566 250V392H48V372"/>
+                <path class="draw" pathLength="1" stroke="#E5484D" d="M556 250V384H58V372"/>
+                <path class="draw" pathLength="1" stroke="#2F7BEA" d="M566 250H478"/>
+                <path class="draw" pathLength="1" stroke="#E5484D" d="M556 258H486"/>
+              </g>
+              <circle cx="566" cy="246" r="7" fill="#2F7BEA"/><circle cx="552" cy="246" r="7" fill="#E5484D"/>
+              <g class="tag-g"><rect x="300" y="296" width="132" height="28" rx="14" fill="#2F7BEA"/><text x="366" y="315" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">новые трубы</text></g>
+            </g>
+            <g class="ly ly-done">
+              <g class="ok"><circle cx="160" cy="70" r="16"/><path d="M152 70l6 6 11-12"/></g>
+              <g class="ok"><circle cx="350" cy="180" r="16"/><path d="M342 180l6 6 11-12"/></g>
+              <g class="ok"><circle cx="200" cy="270" r="16"/><path d="M192 270l6 6 11-12"/></g>
+              <g class="ok"><circle cx="300" cy="296" r="16"/><path d="M292 296l6 6 11-12"/></g>
+              <g class="ok"><circle cx="512" cy="350" r="16"/><path d="M504 350l6 6 11-12"/></g>
+              <g class="tag-g"><rect x="262" y="240" width="156" height="32" rx="16" fill="#1F3B8C"/><text x="340" y="261" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Ключи ваши!</text></g>
+            </g>
+
+            <g class="walls" fill="none" stroke="#15171C" stroke-linecap="square">
+              <rect x="20" y="20" width="560" height="380" stroke-width="9"/>
+              <path d="M300 20V230M20 230H580M240 230V400M440 230V400" stroke-width="5"/>
+            </g>
+            <g fill="#F4F2EE">
+              <rect x="252" y="226" width="40" height="9"/><rect x="390" y="226" width="40" height="9"/>
+              <rect x="235.5" y="300" width="9" height="40"/><rect x="435.5" y="336" width="9" height="40"/>
+              <rect x="300" y="395" width="70" height="10" fill="#fff"/>
+            </g>
+            <g fill="#fff" stroke="#15171C" stroke-width="1.5">
+              <rect x="90" y="16" width="110" height="8"/><rect x="390" y="16" width="120" height="8"/><rect x="16" y="285" width="8" height="70"/>
+            </g>
+            <g class="lbl" font-size="13" font-weight="700" fill="#15171C" text-anchor="middle">
+              <text x="160" y="140">Гостиная · 18,4 м²</text><text x="455" y="205">Спальня · 14,2 м²</text>
+              <text x="140" y="318">Кухня · 10,1 м²</text><text x="340" y="345">Прихожая · 7,6 м²</text><text x="510" y="322">Санузел · 5 м²</text>
+            </g>
+          </svg>
+          <div class="plan-foot"><span id="planStage">Этап 1 из 6</span><span id="planTime">3–5 дней</span></div>
+        </div>
+      </div>
+
+      <div class="stage-col">
+        <article class="stage on" data-s="1">
+          <span class="stage-n">Этап 1</span>
+          <h3>Демонтаж и подготовка</h3>
+          <p>Снимаем старую отделку и ненужные перегородки, выносим мусор, защищаем подъезд и лифт. В новостройке этот этап короче.</p>
+          <div class="stage-get"><b>Вы получаете:</b> фотоотчёт и чистую «коробку» под ремонт</div>
+        </article>
+        <article class="stage" data-s="2">
+          <span class="stage-n">Этап 2</span>
+          <h3>Новая электрика</h3>
+          <p>Прокладываем проводку по проекту: каждая розетка и выключатель там, где вам удобно. Отдельные линии для плиты, духовки и кондиционера.</p>
+          <div class="stage-get"><b>Вы получаете:</b> схему электрики с фото трасс до того, как их закроют стены</div>
+        </article>
+        <article class="stage" data-s="3">
+          <span class="stage-n">Этап 3</span>
+          <h3>Сантехника</h3>
+          <p>Разводим трубы холодной и горячей воды, канализацию, ставим коллектор и защиту от протечек.</p>
+          <div class="stage-get"><b>Вы получаете:</b> проверку труб под давлением (опрессовку) до закрытия</div>
+        </article>
+        <article class="stage" data-s="4">
+          <span class="stage-n">Этап 4</span>
+          <h3>Стены, пол и потолок</h3>
+          <p>Штукатурим стены по маякам, заливаем стяжку, готовим все поверхности под чистовую отделку. Ровность проверяем правилом на каждой стене.</p>
+          <div class="stage-get"><b>Вы получаете:</b> ровные стены и пол под любую отделку</div>
+        </article>
+        <article class="stage" data-s="5">
+          <span class="stage-n">Этап 5</span>
+          <h3>Чистовая отделка</h3>
+          <p>Плитка, покраска или обои, напольные покрытия, двери, натяжные потолки, установка сантехники, розеток и света.</p>
+          <div class="stage-get"><b>Вы получаете:</b> квартиру, которая выглядит как на визуализации</div>
+        </article>
+        <article class="stage" data-s="6">
+          <span class="stage-n">Этап 6</span>
+          <h3>Уборка и сдача</h3>
+          <p>Делаем клининг, вместе проверяем всё по чек-листу, подписываем акт и выдаём гарантию. Вы заезжаете в готовую квартиру.</p>
+          <div class="stage-get"><b>Вы получаете:</b> ключи, акт приёмки и письменную гарантию</div>
+          <a class="btn btn-main" href="#quiz" style="margin-top:18px">Рассчитать мой ремонт</a>
+        </article>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="bath">
+<section class="bath" id="bath">
   <div class="bath-grid">
     <div class="ph"><img loading="lazy" src="https://images.pexels.com/photos/8142977/pexels-photo-8142977.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Ванная комната с мрамором и стеклянной душевой" onerror="this.classList.add('err')"></div>
     <div class="bath-txt">
@@ -561,7 +805,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
   </div>
 </section>
 
-<section>
+<section id="districts">
   <div class="wrap area-grid">
     <div>
       <h2>Работаем по всему Екатеринбургу</h2>
@@ -633,6 +877,15 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
     <div class="copy">© 2026 Смальтэра. Информация на сайте не является публичной офертой.</div>
   </div>
 </footer>
+
+<div class="helper" id="helper">
+  <button type="button" class="h-ava" id="hAva" aria-label="Помощник Смальта"><svg class="lg" viewBox="0 0 64 64" aria-hidden="true"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#B8913F" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#1F3B8C" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#2D4FA8" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#B8913F"/></svg></button>
+  <div class="h-bub hide" id="hBub" role="status">
+    <button type="button" class="h-x" id="hX" aria-label="Скрыть подсказки">×</button>
+    <div id="hTxt"></div>
+    <div class="h-acts" id="hActs"></div>
+  </div>
+</div>
 
 <div class="mbar">
   <a class="btn btn-line" href="tel:+73430000000">Позвонить</a>
@@ -747,7 +1000,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
       var picked = {};
       list.forEach(function(o){
         var b = document.createElement('button'); b.type = 'button';
-        b.className = 'a-btn' + (o.img ? '' : ' txt') + (multi && o.on ? ' sel' : '');
+        b.className = 'a-btn' + (o.img ? '' : ' txt') + (multi && o.on ? ' sel' : '') + (o.v === 'go' ? ' go' : '');
         if (multi && o.on) picked[o.v] = true;
         b.innerHTML = (multi ? '<span class="ck">✓</span>' : '') +
           (o.img ? '<span class="th ph"><img src="'+IMG(o.img)+'" alt="" onerror="this.classList.add(\'err\')"></span>' : '') +
@@ -789,6 +1042,27 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
       /* Здесь подключается отправка заявки на почту или в CRM. Пока помощник просит позвонить. */
       say((S.name ? S.name + ', спасибо! ' : 'Спасибо! ') + 'Онлайн-отправка заявок пока не подключена, поэтому позвоните нам по номеру ' + PHONE + ' и скажите, что делали расчёт на сайте. Инженер продолжит с того же места.').catch(function(){});
     });
+  }
+
+  var FAQ = [
+    { v:'in', t:'Что входит в цену?', a:'В цену входят все работы по смете: демонтаж, черновые и чистовые работы, вывоз мусора и финальная уборка. Черновые материалы считаем отдельной строкой по ценам поставщиков.' },
+    { v:'pay', t:'Можно платить частями?', a:'Да, оплата идёт по этапам: вы платите за каждый этап после того, как приняли его. Предоплаты за весь ремонт нет.' },
+    { v:'mat', t:'А сколько стоят материалы?', a:'Чистовые материалы — плитка, ламинат, сантехника, двери — часто стоят примерно столько же, сколько работы, но всё зависит от вашего выбора. Инженер поможет уложиться в бюджет.' },
+    { v:'gar', t:'Есть гарантия?', a:'Да, письменная гарантия на все работы, она прописана в договоре.' }
+  ];
+  function faq(){
+    var my = run, left = FAQ.slice();
+    function loop(){
+      if (my !== run) return Promise.reject('reset');
+      var list = [{ v:'go', t:'Записаться на бесплатный замер' }].concat(left);
+      return options(list).then(function(o){
+        me(o.t);
+        if (o.v === 'go') return;
+        left = left.filter(function(x){ return x.v !== o.v; });
+        return say(o.a).then(function(){ return left.length ? say('Что-то ещё?') : null; }).then(loop);
+      });
+    }
+    return say('Если есть вопросы, спрашивайте. Или сразу запишитесь на бесплатный замер.').then(loop);
   }
 
   function start(){
@@ -850,6 +1124,8 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
         return say(r); })
     .then(function(){ alive(); var t = calc();
         return say('Готово! По вашим ответам работы обойдутся примерно в ' + money(t*0.92) + ' – ' + money(t*1.1) + ' ₽. Оставьте телефон: инженер уточнит детали и пришлёт подробную смету с чек-листом приёмки.'); })
+    .then(function(){ alive(); return faq(); })
+    .then(function(){ alive(); return say('Отлично! Оставьте имя и телефон, и инженер свяжется с вами, чтобы договориться о замере.'); })
     .then(function(){ alive(); contactForm(); })
     .catch(function(){ /* диалог перезапущен */ });
   }
@@ -879,6 +1155,122 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
     if (d.length < 11){ m.className = 'msg err'; m.textContent = 'Введите номер телефона полностью: 10 цифр после +7.'; return; }
     m.className = 'msg ok'; m.textContent = 'Онлайн-отправка заявок пока не подключена: позвоните нам по номеру ' + PHONE + '.';
   });
+
+
+  /* ===== Мгновенная цена в первом экране ===== */
+  (function(){
+    var box = document.getElementById('qp'); if (!box) return;
+    var sum = document.getElementById('qpSum'), note = document.getElementById('qpNote');
+    function pick(btn){
+      box.querySelectorAll('.qp-chips button').forEach(function(b){ b.classList.toggle('on', b === btn); });
+      var a = +btn.dataset.a, v = RATES.cap * a;
+      var w = Math.max(3, Math.round((DAYS.cap[0] + DAYS.cap[1]*a)/7));
+      sum.firstChild.textContent = 'от ' + money(v*0.92) + ' ₽';
+      note.textContent = 'капитальный ремонт, около ' + a + ' м², срок ' + weeksText(w);
+    }
+    box.querySelectorAll('.qp-chips button').forEach(function(b){ b.addEventListener('click', function(){ pick(b); }); });
+    pick(box.querySelector('.qp-chips button.on'));
+  })();
+
+  /* ===== Схема квартиры по этапам ===== */
+  (function(){
+    var plan = document.getElementById('plan'); if (!plan) return;
+    var tabs = document.querySelectorAll('.plan-tabs button'), cards = document.querySelectorAll('.stage');
+    var TIME = ['3–5 дней','5–7 дней','3–5 дней','2–3 недели','3–5 недель','1–2 дня'];
+    var cur = 0;
+    function set(n){
+      if (n === cur) return; cur = n;
+      plan.setAttribute('class', 'plan s' + n);
+      tabs.forEach(function(t){ var s = +t.dataset.s; t.classList.toggle('on', s === n); t.classList.toggle('done', s < n); });
+      cards.forEach(function(c){ c.classList.toggle('on', +c.dataset.s === n); });
+      document.getElementById('planStage').textContent = 'Этап ' + n + ' из 6';
+      document.getElementById('planTime').textContent = TIME[n-1];
+    }
+    set(1);
+    tabs.forEach(function(t){ t.addEventListener('click', function(){
+      var n = +t.dataset.s; set(n);
+      var c = document.querySelector('.stage[data-s="'+n+'"]');
+      if (c) c.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+    }); });
+    if ('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(es){
+        es.forEach(function(e){ if (e.isIntersecting) set(+e.target.dataset.s); });
+      }, { rootMargin: '-40% 0px -40% 0px' });
+      cards.forEach(function(c){ io.observe(c); });
+    }
+  })();
+
+  /* ===== Живая смета ===== */
+  (function(){
+    var sh = document.getElementById('sheet'); if (!sh || !('IntersectionObserver' in window)) return;
+    var tot = document.getElementById('sheetTotal'), target = 551000;
+    var io = new IntersectionObserver(function(es){
+      if (!es[0].isIntersecting) return; io.disconnect();
+      sh.classList.add('live');
+      if (reduce) return;
+      var t0 = performance.now();
+      (function f(now){
+        var p = Math.min(1, (now - t0) / 1200); p = 1 - Math.pow(1-p, 3);
+        tot.textContent = (Math.round(target*p/100)*100).toLocaleString('ru-RU') + ' ₽';
+        if (p < 1) requestAnimationFrame(f);
+      })(t0);
+    }, { threshold: .5 });
+    io.observe(sh);
+  })();
+
+  /* ===== Помощник по сайту ===== */
+  (function(){
+    var h = document.getElementById('helper'); if (!h) return;
+    var bub = document.getElementById('hBub'), txt = document.getElementById('hTxt'), acts = document.getElementById('hActs');
+    var av = document.getElementById('hAva');
+    var TIPS = {
+      hero: ['Привет! Я Смальта', 'Выберите свою квартиру в блоке «Сколько стоит ремонт», и я сразу покажу примерную цену.', [['Точный расчёт','#quiz',1]]],
+      styles: ['Интерьеры', 'Работаем в любом стиле. Понравился какой-то? Нажмите на него, обсудим ваш вариант.', [['Обсудить интерьер','#final',1]]],
+      prices: ['Подсказка', 'Капитальный ремонт выбирают чаще всего: он меняет проводку и трубы, и о них можно надолго забыть.', [['Посчитать мой','#quiz',1]]],
+      fix: ['Это важно', 'Это пример нашей сметы. Каждая позиция расписана, а итог закрепляется в договоре.', [['Получить смету','#final',1]]],
+      steps: ['Смотрите на схему', 'Листайте вниз: квартира будет ремонтироваться прямо у вас на глазах.', []],
+      bath: ['Ванная комната', 'Самое сложное помещение. Главное здесь — гидроизоляция, её мы делаем всегда.', [['Рассчитать ванную','#final',1]]],
+      districts: ['Где работаем', 'Выезжаем в любой район Екатеринбурга. Замер бесплатный.', [['Вызвать замерщика','#final',1]]],
+      faq: ['Есть вопрос?', 'Если не нашли ответ, позвоните: инженер ответит сразу.', [['Позвонить','tel:+73430000000',1]]],
+      final: ['Последний шаг', 'Замер бесплатный и ни к чему не обязывает. Оставьте телефон, и мы согласуем время.', []]
+    };
+    var dismissed = false, current = null, timer = 0, hidden = false;
+    function show(key, force){
+      var t = TIPS[key]; if (!t) return;
+      if (dismissed && !force) return;
+      if (!force && window.innerWidth < 720){ current = key; av.classList.add('talk'); setTimeout(function(){ av.classList.remove('talk'); }, 1400); return; }
+      current = key;
+      txt.innerHTML = '<b>' + t[0] + '</b>' + t[1];
+      acts.innerHTML = '';
+      t[2].forEach(function(a){ var el = document.createElement('a'); el.href = a[1]; el.textContent = a[0]; if (a[2]) el.className = 'pri'; acts.appendChild(el); });
+      bub.classList.remove('hide');
+      av.classList.add('talk'); setTimeout(function(){ av.classList.remove('talk'); }, 1400);
+      clearTimeout(timer); timer = setTimeout(function(){ bub.classList.add('hide'); }, 9000);
+    }
+    document.getElementById('hX').addEventListener('click', function(){ dismissed = true; bub.classList.add('hide'); });
+    av.addEventListener('click', function(){
+      if (!bub.classList.contains('hide')) { bub.classList.add('hide'); return; }
+      show(current || 'hero', true);
+    });
+    acts.addEventListener('click', function(){ bub.classList.add('hide'); });
+    if (!('IntersectionObserver' in window)) return;
+    var ready = false, pending = null;
+    setTimeout(function(){ ready = true; if (pending) show(pending); }, 2500);
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var id = e.target.id;
+        if (!ready){ pending = id; if (id === 'quiz') h.classList.add('away'); return; }
+        if (id === 'quiz'){ h.classList.add('away'); return; }
+        h.classList.remove('away');
+        if (id !== current) show(id);
+      });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    ['hero','quiz','styles','prices','fix','steps','bath','districts','faq','final'].forEach(function(id){
+      var el = document.getElementById(id); if (el) io.observe(el);
+    });
+    bub.classList.add('hide');
+  })();
 
   /* Диалог стартует, когда блок расчёта появляется на экране */
   var started = false;
