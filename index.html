@@ -398,6 +398,42 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
   .plan .draw{transition:none}
 }
 
+/* Конструктор интерьера */
+.ctor-sec{padding-top:0}
+.ctor{display:grid;grid-template-columns:1.35fr .65fr;grid-template-areas:'room panel' 'sum panel';grid-template-rows:auto 1fr;gap:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 40px 80px -56px rgba(15,29,71,.5)}
+.room-wrap{grid-area:room;position:relative;background:#E9EAEE}
+.ctor-panel{grid-area:panel;border-left:1px solid var(--line)}
+.ctor .ctor-sum{grid-area:sum;margin:0;border-top:1px solid var(--line);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.room{width:100%;height:auto;display:block}
+.room #rWall,.room #rWallL,.room #rWallR,.room #rCeil,.room #rRug,.room #rTint{transition:fill .6s ease,opacity .6s ease}
+.room #lampG{transition:opacity .6s ease}
+.room #rAcc,.room #rFloor,.room #rCeilLight{animation:fade .5s both}
+.room-note{position:absolute;left:16px;bottom:16px;background:rgba(255,255,255,.92);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:700}
+.ctor-panel{padding:26px;display:flex;flex-direction:column;gap:20px}
+.cg-t{font-size:14px;font-weight:800;margin-bottom:10px}
+.cg-t span{font-weight:600;color:var(--muted)}
+.swatches{display:flex;gap:10px;flex-wrap:wrap}
+.swatches button{width:38px;height:38px;border-radius:50%;background:var(--c);border:2px solid #fff;box-shadow:0 0 0 1px var(--line);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.swatches button:hover{transform:scale(1.1)}
+.swatches button.on{box-shadow:0 0 0 2.5px var(--smalt);transform:scale(1.08)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;font:700 13.5px var(--body);color:var(--ink);cursor:pointer;transition:all .15s}
+.chips button:hover{border-color:var(--smalt)}
+.chips button.on{background:var(--smalt);border-color:var(--smalt);color:#fff}
+.ctor-sum{margin-top:auto;border-top:1px solid var(--line);padding-top:18px;display:grid;gap:14px}
+.ctor-sum span{display:block;font-size:13px;font-weight:700;color:var(--muted)}
+.ctor-sum b{display:block;font-family:var(--display);font-weight:400;font-size:32px;color:var(--smalt);line-height:1.15;font-variant-numeric:tabular-nums}
+.ctor-sum small{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+.final-note{font-size:13px;background:#EEF1FA;border-radius:10px;padding:10px 12px;color:var(--smalt-ink)}
+
+/* Эффекты */
+#scrollbar{position:fixed;left:0;top:0;height:3px;width:100%;background:linear-gradient(90deg,var(--gold),var(--gold-2));transform-origin:0 50%;transform:scaleX(0);z-index:60;pointer-events:none}
+.hero .ph img{will-change:transform;transform:scale(1.1)}
+.st,.price{transition:transform .25s ease, box-shadow .25s ease;will-change:transform}
+.st:hover,.price:hover{box-shadow:0 30px 60px -36px rgba(15,29,71,.55)}
+@media (max-width:1080px){ .ctor{grid-template-columns:1fr;grid-template-areas:'room' 'panel' 'sum'} .ctor-panel{border-left:0} .room-wrap{position:sticky;top:66px;z-index:3;border-bottom:1px solid var(--line)} .ctor{overflow:visible} .room-wrap{border-radius:var(--r-lg) var(--r-lg) 0 0;overflow:hidden} }
+@media (max-width:720px){ .ctor-panel{padding:18px} .ctor .ctor-sum{padding:16px 18px} .ctor .ctor-sum .btn{width:100%} }
+
 /* Нижняя панель на телефоне */
 .mbar{display:none}
 
@@ -448,6 +484,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
 </style>
 </head>
 <body>
+<div id="scrollbar" aria-hidden="true"></div>
 
 <div class="topline">
   <div class="wrap">
@@ -464,7 +501,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
     </a>
     <nav class="menu" aria-label="Разделы">
       <a href="#quiz">Расчёт</a>
-      <a href="#styles">Интерьеры</a>
+      <a href="#ctor">Конструктор</a>
       <a href="#prices">Цены</a>
       <a href="#steps">Этапы</a>
       <a href="#faq">Вопросы</a>
@@ -565,6 +602,108 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
       <a class="st" href="#final"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Спальня" onerror="this.classList.add('err')"></span><span class="cap"><h3>Спальни</h3><p>Тёплые оттенки и мягкий свет</p></span></a>
       <a class="st" href="#final"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Кухня" onerror="this.classList.add('err')"></span><span class="cap"><h3>Кухни</h3><p>Продуманная эргономика и розетки на своих местах</p></span></a>
       <a class="st" href="#final"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/7031865/pexels-photo-7031865.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Светлый санузел" onerror="this.classList.add('err')"></span><span class="cap"><h3>Минимализм</h3><p>Ничего лишнего, всё на своём месте</p></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="ctor-sec" id="ctor">
+  <div class="wrap">
+    <div class="head-row">
+      <div>
+        <h2>Соберите свою гостиную</h2>
+        <p class="sub">Выбирайте стены, пол, потолок и свет. Комната меняется сразу, а внизу видна стоимость работ.</p>
+      </div>
+    </div>
+    <div class="ctor">
+      <div class="room-wrap">
+        <svg class="room" id="room" viewBox="0 0 800 500" role="img" aria-label="Гостиная в выбранной отделке">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFD6F2"/><stop offset="1" stop-color="#E9F1FA"/></linearGradient>
+            <radialGradient id="lampGlow"><stop offset="0" stop-color="#FFE3A8" stop-opacity=".9"/><stop offset="1" stop-color="#FFE3A8" stop-opacity="0"/></radialGradient>
+            <filter id="blur6"><feGaussianBlur stdDeviation="6"/></filter>
+            <clipPath id="floorClip"><polygon points="120,360 680,360 800,500 0,500"/></clipPath>
+            <clipPath id="accClip"><rect x="430" y="60" width="250" height="300"/></clipPath>
+          </defs>
+          <polygon id="rCeil" points="0,0 800,0 680,60 120,60"/>
+          <rect id="rWall" x="120" y="60" width="560" height="300"/>
+          <polygon id="rWallL" points="0,0 120,60 120,360 0,500"/>
+          <polygon id="rWallR" points="800,0 680,60 680,360 800,500"/>
+          <polygon points="0,0 120,60 120,360 0,500" fill="#000" opacity=".08"/>
+          <polygon points="800,0 680,60 680,360 800,500" fill="#000" opacity=".12"/>
+          <g id="rAcc" clip-path="url(#accClip)"></g>
+          <g id="rFloor" clip-path="url(#floorClip)"></g>
+          <rect x="120" y="352" width="560" height="8" fill="#fff" opacity=".7"/>
+          <g id="rCeilLight"></g>
+          <rect x="170" y="110" width="160" height="180" fill="url(#sky)" stroke="#fff" stroke-width="8"/>
+          <path d="M250 110V290M170 200H330" stroke="#fff" stroke-width="5"/>
+          <rect x="160" y="290" width="180" height="10" rx="2" fill="#fff"/>
+          <ellipse cx="545" cy="440" rx="200" ry="34" fill="#000" opacity=".06"/>
+          <ellipse id="rRug" cx="470" cy="430" rx="190" ry="40"/>
+          <g id="sofa">
+            <rect x="420" y="290" width="250" height="70" rx="16" fill="#C8CCD6"/>
+            <rect x="400" y="320" width="290" height="70" rx="18" fill="#D7DBE3"/>
+            <rect x="388" y="306" width="36" height="96" rx="14" fill="#C8CCD6"/>
+            <rect x="666" y="306" width="36" height="96" rx="14" fill="#C8CCD6"/>
+            <rect x="448" y="300" width="62" height="44" rx="12" fill="#B8913F" opacity=".85"/>
+            <rect x="600" y="300" width="56" height="42" rx="12" fill="#1F3B8C" opacity=".85"/>
+            <rect x="412" y="398" width="8" height="16" fill="#8A8F9C"/><rect x="670" y="398" width="8" height="16" fill="#8A8F9C"/>
+          </g>
+          <g id="table"><ellipse cx="300" cy="420" rx="70" ry="16" fill="#3C3F47"/><rect x="296" y="420" width="8" height="34" fill="#3C3F47"/><ellipse cx="300" cy="454" rx="26" ry="6" fill="#3C3F47"/></g>
+          <g id="plant"><rect x="70" y="390" width="44" height="52" rx="6" fill="#E7E2DA"/><path d="M92 392C70 350 60 320 78 300M92 392C96 340 110 315 126 300M92 392C86 360 92 330 100 312" stroke="#4E7A55" stroke-width="7" fill="none" stroke-linecap="round"/></g>
+          <g id="lamp"><circle cx="360" cy="236" r="70" fill="url(#lampGlow)" id="lampG" opacity="0"/><path d="M360 380V250" stroke="#2A2D33" stroke-width="4"/><path d="M336 252h48l-10-30h-28z" fill="#E9E3D6"/><ellipse cx="360" cy="382" rx="22" ry="5" fill="#2A2D33"/></g>
+          <rect id="rTint" x="0" y="0" width="800" height="500" pointer-events="none"/>
+        </svg>
+      </div>
+        <div class="ctor-sum">
+          <div><span>Работы для гостиной 18 м²</span><b id="cSum">171 000 ₽</b><small id="cList">базовый капитальный ремонт</small></div>
+          <a class="btn btn-gold" href="#final" id="cWant">Хочу так же</a>
+        </div>
+      <div class="ctor-panel">
+        <div class="cgrp">
+          <div class="cg-t">Цвет стен <span id="vWall"></span></div>
+          <div class="swatches" data-k="wall">
+            <button type="button" data-v="#F1EFEA" data-n="Тёплый белый" style="--c:#F1EFEA" class="on"></button>
+            <button type="button" data-v="#D9D4CA" data-n="Песочный" style="--c:#D9D4CA"></button>
+            <button type="button" data-v="#B9C3B0" data-n="Шалфей" style="--c:#B9C3B0"></button>
+            <button type="button" data-v="#AEB9CC" data-n="Голубой туман" style="--c:#AEB9CC"></button>
+            <button type="button" data-v="#5E636E" data-n="Графит" style="--c:#5E636E"></button>
+            <button type="button" data-v="#22356F" data-n="Смальта" style="--c:#22356F"></button>
+          </div>
+        </div>
+        <div class="cgrp">
+          <div class="cg-t">Пол</div>
+          <div class="chips" data-k="floor">
+            <button type="button" data-v="oak" class="on">Светлый дуб</button>
+            <button type="button" data-v="walnut">Орех</button>
+            <button type="button" data-v="vinyl">Серый кварцвинил</button>
+            <button type="button" data-v="tile">Керамогранит</button>
+          </div>
+        </div>
+        <div class="cgrp">
+          <div class="cg-t">Акцентная стена</div>
+          <div class="chips" data-k="acc">
+            <button type="button" data-v="none" class="on">Без акцента</button>
+            <button type="button" data-v="slats">Деревянные рейки</button>
+            <button type="button" data-v="mosaic">Мозаика из смальты</button>
+          </div>
+        </div>
+        <div class="cgrp">
+          <div class="cg-t">Потолок</div>
+          <div class="chips" data-k="ceil">
+            <button type="button" data-v="matte" class="on">Матовый</button>
+            <button type="button" data-v="led">С подсветкой</button>
+            <button type="button" data-v="float">Парящий</button>
+          </div>
+        </div>
+        <div class="cgrp">
+          <div class="cg-t">Освещение</div>
+          <div class="chips" data-k="light">
+            <button type="button" data-v="day" class="on">День</button>
+            <button type="button" data-v="warm">Тёплый вечер</button>
+            <button type="button" data-v="night">Ночь</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -844,6 +983,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
     </div>
     <form class="final-card" id="finalForm" novalidate>
       <h3>Запись на замер</h3>
+      <p class="final-note" id="finalNote" hidden></p>
       <div class="field"><label for="fName">Имя</label><input id="fName" type="text" autocomplete="name" placeholder="Как к вам обращаться"></div>
       <div class="field"><label for="fPhone">Телефон</label><input id="fPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></div>
       <button class="btn btn-gold" type="submit">Записаться на замер</button>
@@ -914,6 +1054,19 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
   var DES = 1200;                                       /* дизайн-проект, ₽ за м² */
   var DAYS = { cosm:[16,0.4], cap:[38,0.7], design:[55,1.0] };
   var PHONE = '+7 (343) 000-00-00';
+
+
+  /* ===== Отправка заявок =====
+     Впишите почту, на которую должны приходить заявки, например 'mail@example.ru'.
+     После первой заявки сервис FormSubmit пришлёт на эту почту письмо: нажмите в нём кнопку подтверждения. */
+  var LEAD_EMAIL = '';
+  function sendLead(data){
+    if (!LEAD_EMAIL) return Promise.resolve(false);
+    var body = Object.assign({ _subject:'Заявка с сайта Смальтэра', _template:'table', _captcha:'false' }, data);
+    return fetch('https://formsubmit.co/ajax/' + encodeURIComponent(LEAD_EMAIL), {
+      method:'POST', headers:{ 'Content-Type':'application/json', 'Accept':'application/json' }, body: JSON.stringify(body)
+    }).then(function(r){ return r.json(); }).then(function(j){ return String(j.success) === 'true'; }).catch(function(){ return false; });
+  }
 
   var S = { flat:'new', area:54, kind:'cap', extras:{}, when:null, name:'' };
   var IMG = function(id){ return 'https://images.pexels.com/photos/'+id+'/pexels-photo-'+id+'.jpeg?auto=compress&cs=tinysrgb&w=200'; };
@@ -1039,8 +1192,19 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
       if (digits.length < 11){ m.className = 'msg err'; m.textContent = 'Введите номер полностью: 10 цифр после +7.'; ph.focus(); return; }
       S.name = document.getElementById('cName').value.trim();
       me(ph.value); answers.innerHTML = ''; progress(6);
-      /* Здесь подключается отправка заявки на почту или в CRM. Пока помощник просит позвонить. */
-      say((S.name ? S.name + ', спасибо! ' : 'Спасибо! ') + 'Онлайн-отправка заявок пока не подключена, поэтому позвоните нам по номеру ' + PHONE + ' и скажите, что делали расчёт на сайте. Инженер продолжит с того же места.').catch(function(){});
+      var t = calc(), ex = [];
+      if (S.extras.bath) ex.push('санузел'); if (S.extras.ceil) ex.push('натяжные потолки'); if (S.extras.warm) ex.push('тёплый пол'); if (S.extras.des) ex.push('дизайн-проект');
+      sendLead({
+        'Источник':'Квиз на сайте', 'Имя':S.name || '—', 'Телефон':ph.value,
+        'Квартира':S.flat === 'old' ? 'вторичка' : 'новостройка', 'Площадь':S.area + ' м²',
+        'Ремонт':{ cosm:'косметический', cap:'капитальный', design:'дизайнерский' }[S.kind],
+        'Дополнительно':ex.join(', ') || 'нет', 'Когда начать':{ now:'в ближайшие 2 недели', month:'в течение месяца', later:'через 2–3 месяца', keys:'ждёт ключи' }[S.when] || '—',
+        'Расчёт':money(t*0.92) + ' – ' + money(t*1.1) + ' ₽'
+      }).then(function(ok){
+        var hi = S.name ? S.name + ', спасибо! ' : 'Спасибо! ';
+        say(ok ? hi + 'Заявка у нас. Инженер позвонит вам в рабочее время, уточнит детали и договорится о замере.'
+               : hi + 'Онлайн-отправка заявок пока не подключена, поэтому позвоните нам по номеру ' + PHONE + ' и скажите, что делали расчёт на сайте.').catch(function(){});
+      });
     });
   }
 
@@ -1153,7 +1317,13 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
     e.preventDefault();
     var m = ff.querySelector('.msg'), d = document.getElementById('fPhone').value.replace(/\D/g,'');
     if (d.length < 11){ m.className = 'msg err'; m.textContent = 'Введите номер телефона полностью: 10 цифр после +7.'; return; }
-    m.className = 'msg ok'; m.textContent = 'Онлайн-отправка заявок пока не подключена: позвоните нам по номеру ' + PHONE + '.';
+    m.className = 'msg'; m.textContent = 'Отправляем…';
+    var note = document.getElementById('finalNote');
+    sendLead({ 'Источник':'Форма записи на замер', 'Имя':document.getElementById('fName').value.trim() || '—', 'Телефон':document.getElementById('fPhone').value,
+      'Вариант из конструктора':(note && !note.hidden) ? CTOR : '—' }).then(function(ok){
+      m.className = 'msg ok';
+      m.textContent = ok ? 'Заявка отправлена! Инженер перезвонит вам и договорится о замере.' : 'Онлайн-отправка заявок пока не подключена: позвоните нам по номеру ' + PHONE + '.';
+    });
   });
 
 
@@ -1226,6 +1396,7 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
     var TIPS = {
       hero: ['Привет! Я Смальта', 'Выберите свою квартиру в блоке «Сколько стоит ремонт», и я сразу покажу примерную цену.', [['Точный расчёт','#quiz',1]]],
       styles: ['Интерьеры', 'Работаем в любом стиле. Понравился какой-то? Нажмите на него, обсудим ваш вариант.', [['Обсудить интерьер','#final',1]]],
+      ctor: ['Поиграйте с интерьером', 'Попробуйте мозаику из смальты на акцентной стене и включите «Ночь» — смотрится эффектно.', [['Хочу так же','#final',1]]],
       prices: ['Подсказка', 'Капитальный ремонт выбирают чаще всего: он меняет проводку и трубы, и о них можно надолго забыть.', [['Посчитать мой','#quiz',1]]],
       fix: ['Это важно', 'Это пример нашей сметы. Каждая позиция расписана, а итог закрепляется в договоре.', [['Получить смету','#final',1]]],
       steps: ['Смотрите на схему', 'Листайте вниз: квартира будет ремонтироваться прямо у вас на глазах.', []],
@@ -1266,10 +1437,151 @@ footer{background:#0B132F;color:#9AA4C4;padding-block:48px 110px;font-size:15px}
         if (id !== current) show(id);
       });
     }, { rootMargin: '-45% 0px -45% 0px' });
-    ['hero','quiz','styles','prices','fix','steps','bath','districts','faq','final'].forEach(function(id){
+    ['hero','quiz','styles','ctor','prices','fix','steps','bath','districts','faq','final'].forEach(function(id){
       var el = document.getElementById(id); if (el) io.observe(el);
     });
     bub.classList.add('hide');
+  })();
+
+
+  /* ===== Конструктор интерьера ===== */
+  var CTOR = null;
+  (function(){
+    var room = document.getElementById('room'); if (!room) return;
+    var NS = 'http://www.w3.org/2000/svg';
+    var C = { wall:'#F1EFEA', floor:'oak', acc:'none', ceil:'matte', light:'day' };
+    var ROOM_AREA = 18, BASE = 9500 * ROOM_AREA;
+    var ADD = {
+      floor:{ vinyl:[4500,'выравнивание под кварцвинил'], tile:[19800,'укладка керамогранита'] },
+      acc:{ slats:[28000,'стена из реек'], mosaic:[46000,'мозаика из смальты'] },
+      ceil:{ led:[14000,'потолок с подсветкой'], float:[22000,'парящий потолок'] }
+    };
+    var NAMES = {
+      floor:{ oak:'светлый дуб', walnut:'орех', vinyl:'серый кварцвинил', tile:'керамогранит' },
+      acc:{ none:'без акцентной стены', slats:'деревянные рейки', mosaic:'мозаика из смальты' },
+      ceil:{ matte:'матовый потолок', led:'потолок с подсветкой', float:'парящий потолок' },
+      light:{ day:'день', warm:'тёплый вечер', night:'ночь' }
+    };
+    function el(tag, attrs, parent){ var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+    function seed(n){ var x = Math.sin(n*99.13)*43758.5; return x - Math.floor(x); }
+
+    function floor(){
+      var g = document.getElementById('rFloor'); g.innerHTML = '';
+      var base = { oak:'#D8BD93', walnut:'#7B5737', vinyl:'#A7AAAF', tile:'#E3E1DC' }[C.floor];
+      var line = { oak:'#B99868', walnut:'#5A3C24', vinyl:'#8D9096', tile:'#C9C6BF' }[C.floor];
+      el('polygon', { points:'120,360 680,360 800,500 0,500', fill:base, class:'fl-base' }, g);
+      var N = C.floor === 'tile' ? 7 : 16;
+      for (var i = 1; i < N; i++){
+        el('line', { x1:120 + i*560/N, y1:360, x2:i*800/N, y2:500, stroke:line, 'stroke-width':1.2, opacity:.7 }, g);
+      }
+      var rows = C.floor === 'tile' ? 5 : 7;
+      for (var r = 1; r <= rows; r++){
+        var t = Math.pow(r/(rows+.4), 1.5), y = 360 + 140*t, x0 = 120 - 120*t, x1 = 680 + 120*t;
+        var attrs = { x1:x0, y1:y, x2:x1, y2:y, stroke:line, 'stroke-width':1.2, opacity:.7 };
+        if (C.floor !== 'tile'){ var seg = (x1-x0)/N; attrs['stroke-dasharray'] = (seg*0.15) + ' ' + (seg*0.85); attrs['stroke-dashoffset'] = (r%2) ? 0 : seg*.5; }
+        el('line', attrs, g);
+      }
+    }
+    function accent(){
+      var g = document.getElementById('rAcc'); g.innerHTML = '';
+      if (C.acc === 'slats'){
+        el('rect', { x:430, y:60, width:250, height:300, fill:'#5E4027' }, g);
+        for (var x = 432; x < 680; x += 13) el('rect', { x:x, y:60, width:9, height:300, fill: seed(x) > .5 ? '#B98D5D' : '#AD8253' }, g);
+      } else if (C.acc === 'mosaic'){
+        el('rect', { x:430, y:60, width:250, height:300, fill:'#E9ECF2' }, g);
+        var cols = ['#1F3B8C','#2D4FA8','#16296A','#3A5DBB','#1F3B8C','#2D4FA8','#B8913F','#D8B66A'];
+        var k = 0;
+        for (var y = 61; y < 360; y += 12.5) for (var x2 = 431; x2 < 680; x2 += 12.5){
+          k++; var c = cols[Math.floor(seed(k)*cols.length)];
+          el('rect', { x:x2 + seed(k+.3)*1.2, y:y + seed(k+.7)*1.2, width:10.5, height:10.5, rx:1.2, fill:c }, g);
+        }
+      }
+    }
+    function ceil(){
+      var g = document.getElementById('rCeilLight'); g.innerHTML = '';
+      document.getElementById('rCeil').style.fill = C.light === 'night' ? '#C9CCD6' : '#FAFAF8';
+      if (C.ceil === 'matte') return;
+      var d = C.ceil === 'led' ? 'M150 74H650' : 'M120 60H680M0 0L120 60M800 0L680 60';
+      var glow = C.light === 'day' ? .55 : 1;
+      el('path', { d:d, stroke:'#FFE7AE', 'stroke-width':C.ceil === 'led' ? 10 : 8, fill:'none', filter:'url(#blur6)', opacity:glow }, g);
+      el('path', { d:d, stroke:'#FFF6DD', 'stroke-width':2.4, fill:'none', opacity:glow }, g);
+      if (C.ceil === 'led') el('rect', { x:150, y:68, width:500, height:12, rx:6, fill:'none', stroke:'#E7E4DE', 'stroke-width':1.5 }, g);
+    }
+    function light(){
+      var tint = document.getElementById('rTint'), lamp = document.getElementById('lampG');
+      var T = { day:['#FFFFFF',0], warm:['#FF9E3D',.13], night:['#081238',.42] }[C.light];
+      tint.style.fill = T[0]; tint.style.opacity = T[1];
+      lamp.style.opacity = C.light === 'day' ? 0 : 1;
+    }
+    function walls(){
+      ['rWall','rWallL','rWallR'].forEach(function(id){ document.getElementById(id).style.fill = C.wall; });
+      document.getElementById('rRug').style.fill = C.wall === '#22356F' || C.wall === '#5E636E' ? '#E9E5DD' : '#C9CDD6';
+    }
+    function price(){
+      var sum = BASE, list = [];
+      ['floor','acc','ceil'].forEach(function(k){ var a = ADD[k][C[k]]; if (a){ sum += a[0]; list.push(a[1]); } });
+      document.getElementById('cSum').textContent = sum.toLocaleString('ru-RU') + ' ₽';
+      document.getElementById('cList').textContent = list.length ? 'базовый ремонт + ' + list.join(', ') : 'базовый капитальный ремонт';
+      var wallName = document.querySelector('.swatches .on').dataset.n;
+      document.getElementById('vWall').textContent = '· ' + wallName.toLowerCase();
+      CTOR = 'Стены: ' + wallName.toLowerCase() + '; пол: ' + NAMES.floor[C.floor] + '; ' + NAMES.acc[C.acc] + '; ' + NAMES.ceil[C.ceil] + '; работы по комнате ≈ ' + sum.toLocaleString('ru-RU') + ' ₽';
+    }
+    function render(part){
+      if (!part || part === 'wall') walls();
+      if (!part || part === 'floor') floor();
+      if (!part || part === 'acc') accent();
+      if (!part || part === 'ceil' || part === 'light') ceil();
+      if (!part || part === 'light') light();
+      price();
+    }
+    document.querySelectorAll('.ctor-panel [data-k]').forEach(function(grp){
+      var k = grp.dataset.k;
+      grp.querySelectorAll('button').forEach(function(b){
+        b.setAttribute('aria-pressed', b.classList.contains('on'));
+        if (grp.classList.contains('swatches')) b.setAttribute('aria-label', b.dataset.n);
+        b.addEventListener('click', function(){
+          grp.querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', x === b); });
+          C[k] = b.dataset.v; render(k);
+        });
+      });
+    });
+    render();
+    document.getElementById('cWant').addEventListener('click', function(){
+      var n = document.getElementById('finalNote');
+      if (n){ n.textContent = 'Ваш вариант из конструктора: ' + CTOR; n.hidden = false; }
+    });
+  })();
+
+  /* ===== Эффекты ===== */
+  (function(){
+    var bar = document.getElementById('scrollbar');
+    var heroImg = document.querySelector('.hero .ph img');
+    var hero = document.getElementById('hero');
+    var mx = 0, my = 0, ticking = false;
+    function frame(){
+      ticking = false;
+      var y = window.scrollY, h = document.documentElement.scrollHeight - innerHeight;
+      if (bar) bar.style.transform = 'scaleX(' + (h > 0 ? y/h : 0) + ')';
+      if (!reduce && heroImg && y < innerHeight * 1.2){
+        heroImg.style.transform = 'translate3d(' + (mx*-14) + 'px,' + (y*0.28 + my*-10) + 'px,0) scale(1.1)';
+      }
+    }
+    function req(){ if (!ticking){ ticking = true; requestAnimationFrame(frame); } }
+    addEventListener('scroll', req, { passive:true }); addEventListener('resize', req);
+    if (hero && !reduce) hero.addEventListener('pointermove', function(e){
+      if (e.pointerType !== 'mouse') return;
+      mx = e.clientX / innerWidth - .5; my = e.clientY / innerHeight - .5; req();
+    });
+    frame();
+    if (!reduce && matchMedia('(hover:hover)').matches){
+      document.querySelectorAll('.st, .price').forEach(function(c){
+        c.addEventListener('pointermove', function(e){
+          var r = c.getBoundingClientRect(), x = (e.clientX - r.left)/r.width - .5, yy = (e.clientY - r.top)/r.height - .5;
+          c.style.transform = 'perspective(900px) rotateY(' + (x*7) + 'deg) rotateX(' + (yy*-7) + 'deg) translateY(-4px)';
+        });
+        c.addEventListener('pointerleave', function(){ c.style.transform = ''; });
+      });
+    }
   })();
 
   /* Диалог стартует, когда блок расчёта появляется на экране */
