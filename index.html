@@ -748,6 +748,34 @@ h2{font-size:clamp(28px,3.4vw,46px)}
 .districts li{background:rgba(255,255,255,.06)}
 .final-card .btn-gold,#popForm .btn-gold{background:var(--smalt)!important}
 .final-card .btn-gold:hover,#popForm .btn-gold:hover{background:#B83C0B!important}
+
+/* Команда, отзывы, блог */
+.team{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.tm{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:22px;display:grid;gap:10px;align-content:start}
+.tm-ph{aspect-ratio:1/1;border-radius:4px;background:linear-gradient(135deg,#1B2A4A,#14213D);display:grid;place-items:center;overflow:hidden;margin-bottom:6px;position:relative}
+.tm-ph span{font-family:var(--display);font-weight:800;font-size:64px;color:rgba(255,255,255,.14)}
+.tm-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tm b{font-size:18px}
+.tm small{color:var(--smalt);font-weight:700;font-size:13px}
+.tm p{font-size:14.5px;color:var(--muted)}
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rv{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:24px;display:grid;gap:12px;align-content:start}
+.rv .st{color:var(--smalt);letter-spacing:2px;font-size:16px}
+.rv p{font-size:15.5px;color:#2F3542}
+.rv b{font-size:15px}
+.rv small{font-size:13px;color:var(--muted)}
+.bl{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.bl-c{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:4px;overflow:hidden;text-decoration:none;color:inherit;transition:box-shadow .2s}
+.bl-c:hover{box-shadow:0 18px 34px -24px rgba(17,24,39,.45)}
+.bl-c .ph{aspect-ratio:16/10}
+.bl-t{padding:18px 20px 20px;display:grid;gap:8px}
+.bl-t b{font-family:var(--display);font-size:19px;line-height:1.25;font-weight:700}
+.bl-t span{font-size:14.5px;color:var(--muted)}
+.bl-t em{font-style:normal;font-size:13px;font-weight:700;color:var(--smalt)}
+.foot-legal{display:flex;gap:18px;flex-wrap:wrap}
+.foot-legal a{color:#C5CCDB}
+@media (max-width:1080px){ .team{grid-template-columns:1fr 1fr} .revs,.bl{grid-template-columns:1fr 1fr} }
+@media (max-width:620px){ .team,.revs,.bl{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
@@ -772,6 +800,8 @@ h2{font-size:clamp(28px,3.4vw,46px)}
       <a href="#ctor">Стили</a>
       <a href="#prices">Цены</a>
       <a href="#steps">Этапы</a>
+      <a href="#team">Команда</a>
+      <a href="blog/index.html">Блог</a>
       <a href="#faq">Вопросы</a>
     </nav>
     <div class="bar-r">
@@ -1177,6 +1207,25 @@ h2{font-size:clamp(28px,3.4vw,46px)}
   </div>
 </section>
 
+<section id="team">
+  <div class="wrap">
+    <div class="head-row"><div><h2>Кто будет делать ваш ремонт</h2><p class="sub">За каждым этапом стоит конкретный человек, который за него отвечает. Со всеми вы познакомитесь лично на замере и на объекте.</p></div><button type="button" class="btn btn-line" data-cb>Задать вопрос инженеру</button></div>
+    <div class="team" id="teamGrid">
+      <div class="tm"><div class="tm-ph" data-role="engineer"><span>И</span></div><b>Инженер-сметчик</b><p>Приезжает на замер, обмеряет квартиру и составляет подробную смету, которая потом входит в договор.</p></div>
+      <div class="tm"><div class="tm-ph" data-role="designer"><span>Д</span></div><b>Дизайнер</b><p>Делает дизайн-проект: планировку, визуализацию, чертежи электрики и сантехники. При капитальном ремонте в подарок.</p></div>
+      <div class="tm"><div class="tm-ph" data-role="foreman"><span>П</span></div><b>Прораб</b><p>Отвечает за объект от первого до последнего дня, принимает работу у мастеров и присылает вам фото каждую неделю.</p></div>
+      <div class="tm"><div class="tm-ph" data-role="masters"><span>М</span></div><b>Мастера</b><p>Электрик, сантехник, плиточник, отделочники. Каждый работает в своём направлении, а не «всё и сразу».</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" hidden>
+  <div class="wrap">
+    <div class="head-row"><div><h2>Отзывы клиентов</h2><p class="sub">Только настоящие отзывы людей, которым мы делали ремонт.</p></div><a class="btn btn-line" id="revMap" href="#" target="_blank" rel="noopener" hidden>Все отзывы на Яндекс Картах</a></div>
+    <div class="revs" id="revGrid"></div>
+  </div>
+</section>
+
 <section class="honest" id="honest">
   <div class="wrap honest-grid">
     <div>
@@ -1244,6 +1293,17 @@ h2{font-size:clamp(28px,3.4vw,46px)}
   </div>
 </section>
 
+<section id="blog">
+  <div class="wrap">
+    <div class="head-row"><div><h2>Полезное о ремонте</h2><p class="sub">Честно о ценах, порядке работ и приёмке. Пишем то, что сами объясняем клиентам на замере.</p></div><a class="btn btn-line" href="blog/index.html">Все статьи</a></div>
+    <div class="bl">
+      <a class="bl-c" href="blog/skolko-stoit-remont-kvartiry-ekaterinburg.html"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/32177961/pexels-photo-32177961.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" onerror="this.classList.add('err')"></span><span class="bl-t"><b>Сколько стоит ремонт квартиры в Екатеринбурге в 2026 году</b><span>Из чего складывается цена, цены за м² и пример расчёта для двухкомнатной квартиры.</span><em>Читать 7 минут</em></span></a>
+      <a class="bl-c" href="blog/kak-prinyat-remont.html"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/14614670/pexels-photo-14614670.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" onerror="this.classList.add('err')"></span><span class="bl-t"><b>Как принять ремонт квартиры и не пожалеть</b><span>Что проверить перед подписанием акта: стены, полы, плитка, электрика, сантехника, документы.</span><em>Читать 6 минут</em></span></a>
+      <a class="bl-c" href="blog/remont-v-novostroyke-s-chego-nachat.html"><span class="ph"><img loading="lazy" src="https://images.pexels.com/photos/28853362/pexels-photo-28853362.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" onerror="this.classList.add('err')"></span><span class="bl-t"><b>Ремонт в новостройке: с чего начать и в каком порядке</b><span>Приёмка у застройщика, дизайн-проект, черновые и чистовые работы, нюансы white box.</span><em>Читать 6 минут</em></span></a>
+    </div>
+  </div>
+</section>
+
 <section id="faq" style="padding-top:0">
   <div class="wrap faq-grid">
     <div>
@@ -1278,7 +1338,7 @@ h2{font-size:clamp(28px,3.4vw,46px)}
       <div class="field"><label for="fPhone">Телефон</label><input id="fPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></div>
       <button class="btn btn-gold" type="submit">Записаться на замер</button>
       <div class="msg" role="status"></div>
-      <p class="agree" style="margin:0">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
+      <p class="agree" style="margin:0">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank">политикой обработки персональных данных</a>.</p>
     </form>
   </div>
 </section>
@@ -1304,7 +1364,7 @@ h2{font-size:clamp(28px,3.4vw,46px)}
         <p><a class="phone" href="tel:+73430000000">+7 (343) 000-00-00</a><br>Екатеринбург<br>Ежедневно 9:00–21:00</p>
       </div>
     </div>
-    <div class="copy">© 2026 Смальтэра. Информация на сайте не является публичной офертой.</div>
+    <div class="copy foot-legal"><span>© 2026 Смальтэра. Информация на сайте не является публичной офертой.</span><a href="blog/index.html">Блог</a><a href="privacy.html">Политика конфиденциальности</a></div>
   </div>
 </footer>
 
@@ -1318,7 +1378,7 @@ h2{font-size:clamp(28px,3.4vw,46px)}
       <div class="field"><label for="popPhone">Телефон</label><input id="popPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></div>
       <button class="btn btn-gold" type="submit">Получить чек-лист</button>
       <div class="msg" id="popMsg" role="status"></div>
-      <p class="agree" style="margin:0">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
+      <p class="agree" style="margin:0">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank">политикой обработки персональных данных</a>.</p>
     </form>
     <a class="btn btn-main pop-dl" id="popDl" href="checklist.pdf" target="_blank" rel="noopener" hidden>Открыть чек-лист (PDF)</a>
   </div>
@@ -1504,7 +1564,7 @@ h2{font-size:clamp(28px,3.4vw,46px)}
         '<div class="field"><label for="cPhone">Телефон</label><input id="cPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></div>' +
         '<button class="btn btn-gold" type="submit">Получить смету</button>' +
       '</form><div class="msg" id="cMsg" role="status"></div>' +
-      '<p class="agree">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>';
+      '<p class="agree">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank">политикой обработки персональных данных</a>.</p>';
     var f = document.getElementById('cForm'), ph = document.getElementById('cPhone');
     mask(ph);
     f.addEventListener('submit', function(e){
@@ -1726,6 +1786,8 @@ h2{font-size:clamp(28px,3.4vw,46px)}
       fix: ['Это важно', 'Это пример нашей сметы. Каждая позиция расписана, а итог закрепляется в договоре.', [['Получить смету','#final',1]]],
       services: ['Выберите услугу', 'Нажмите на любую карточку, и я посчитаю стоимость под вашу квартиру.', [['Рассчитать','#quiz',1]]],
       terms: ['Всё в договоре', 'Каждое условие из этого блока прописываем в договоре. Можем прислать образец до замера.', [['Заказать звонок','#final',1]]],
+      team: ['Познакомимся лично', 'Инженер, дизайнер и прораб приедут на объект. Задайте любой вопрос заранее.', [['Заказать звонок','#final',1]]],
+      blog: ['Почитайте', 'Статья про приёмку ремонта пригодится, даже если вы ещё выбираете подрядчика.', [['Открыть блог','blog/index.html',1]]],
       steps: ['Смотрите на схему', 'Листайте вниз: квартира будет ремонтироваться прямо у вас на глазах.', []],
       bath: ['Ванная комната', 'Самое сложное помещение. Главное здесь — гидроизоляция, её мы делаем всегда.', [['Рассчитать ванную','#final',1]]],
       districts: ['Где работаем', 'Выезжаем в любой район Екатеринбурга. Замер бесплатный.', [['Вызвать замерщика','#final',1]]],
@@ -1764,7 +1826,7 @@ h2{font-size:clamp(28px,3.4vw,46px)}
         if (id !== current) show(id);
       });
     }, { rootMargin: '-45% 0px -45% 0px' });
-    ['hero','services','quiz','ctor','prices','gift','terms','honest','compare','fix','steps','bath','districts','faq','final'].forEach(function(id){
+    ['hero','services','quiz','ctor','prices','gift','terms','team','blog','honest','compare','fix','steps','bath','districts','faq','final'].forEach(function(id){
       var el = document.getElementById(id); if (el) io.observe(el);
     });
     bub.classList.add('hide');
@@ -1999,6 +2061,40 @@ h2{font-size:clamp(28px,3.4vw,46px)}
         m.textContent = ok ? 'Заявка отправлена! Перезвоним в рабочее время.' : 'Онлайн-отправка заявок пока не подключена: позвоните нам по номеру ' + PHONE + '.';
       });
     });
+  })();
+
+
+  /* ===== Команда и отзывы: впишите настоящие данные =====
+     Фото кладите в папку сайта, например team-foreman.jpg, и укажите имя файла. */
+  var TEAM = {
+    engineer: { name:'', photo:'' },
+    designer: { name:'', photo:'' },
+    foreman:  { name:'', photo:'' },
+    masters:  { name:'', photo:'' }
+  };
+  /* Отзывы: только настоящие. Пример: { text:'...', name:'Анна', place:'ЖК ..., 2-комн.', stars:5 } */
+  var REVIEWS = [];
+  var YANDEX_MAPS_URL = '';   /* ссылка на вашу организацию в Яндекс Картах */
+  (function(){
+    document.querySelectorAll('.tm-ph[data-role]').forEach(function(ph){
+      var t = TEAM[ph.dataset.role]; if (!t) return;
+      if (t.photo){ var im = new Image(); im.alt = t.name || ''; im.src = t.photo; im.onerror = function(){ im.remove(); }; ph.appendChild(im); }
+      if (t.name){ var n = document.createElement('small'); n.textContent = t.name; ph.parentNode.insertBefore(n, ph.nextSibling); }
+    });
+    var sec = document.getElementById('reviews');
+    if (REVIEWS.length){
+      var g = document.getElementById('revGrid');
+      REVIEWS.forEach(function(r){
+        var d = document.createElement('div'); d.className = 'rv';
+        var st = document.createElement('span'); st.className = 'st'; st.textContent = '★★★★★'.slice(0, r.stars || 5);
+        var p = document.createElement('p'); p.textContent = r.text;
+        var b = document.createElement('b'); b.textContent = r.name;
+        var sm = document.createElement('small'); sm.textContent = r.place || '';
+        d.appendChild(st); d.appendChild(p); d.appendChild(b); d.appendChild(sm); g.appendChild(d);
+      });
+      sec.hidden = false;
+    }
+    if (YANDEX_MAPS_URL){ var m = document.getElementById('revMap'); m.href = YANDEX_MAPS_URL; m.hidden = false; sec.hidden = false; }
   })();
 
   /* Диалог стартует, когда блок расчёта появляется на экране */
