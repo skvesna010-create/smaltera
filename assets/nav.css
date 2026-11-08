@@ -20,7 +20,12 @@ header.mn{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.97);back
 .mn-item{position:relative}
 .mn-drop{position:absolute;top:100%;left:0;background:#fff;border:1px solid #E1E4EA;border-top:3px solid #D9480F;box-shadow:0 30px 60px -30px rgba(17,24,39,.45);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .18s,transform .18s,visibility 0s .18s;z-index:5}
 .mn-item.open .mn-drop{opacity:1;visibility:visible;transform:none;transition:opacity .18s,transform .18s}
-.mn-mega{left:-160px;width:min(900px,92vw);display:grid;grid-template-columns:1fr 250px;gap:0}
+.mn-mega{left:-160px;width:min(1080px,94vw);display:grid;grid-template-columns:1fr 200px 240px;gap:0}
+.mn-mega-col{display:grid;align-content:start;gap:2px;padding:20px 18px;border-left:1px solid #E1E4EA}
+.mn-mega-col b{font-size:12.5px;font-weight:700;color:#525B6B;margin:4px 0 6px}
+.mn-mega-col b:not(:first-child){margin-top:16px}
+.mn-mega-col a{color:#111827;text-decoration:none;font-weight:600;font-size:15px;padding:6px 0}
+.mn-mega-col a:hover{color:#D9480F}
 .mn-mega-list{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:16px}
 .mn-svc{display:grid;grid-template-columns:56px 1fr;grid-template-rows:auto auto;column-gap:14px;align-items:center;padding:10px;text-decoration:none;color:#111827;transition:background .15s}
 .mn-svc:hover{background:#F3F4F6}
@@ -71,7 +76,7 @@ header.mn{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.97);back
 @media (max-width:620px){.mn-top{display:none}.mn-r .mn-cta,.mn-phone small{display:none}.mn-phone{font-size:15px}.mn-bar{min-height:64px}.mn-logo svg{width:34px;height:34px}.mn-logo b{font-size:15px}}
 @media (max-width:400px){.mn-phone{display:none}}
 footer.mf{background:#0B132F;color:#9AA4C4;font-family:"Inter Tight",Arial,sans-serif;font-size:15px;padding:56px 0 30px;margin:0;border-radius:0}
-.mf-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+.mf-grid{display:grid;grid-template-columns:1.3fr 1.1fr 1fr 1fr 1fr;gap:28px}
 .mf .mn-logo{color:#fff}.mf .mn-logo small{color:#9AA4C4}
 .mf p{margin-top:16px;line-height:1.55;max-width:320px}
 .mf h4{color:#fff;font-family:Geologica,Arial,sans-serif;font-size:16px;margin:0 0 14px}
@@ -81,7 +86,7 @@ footer.mf{background:#0B132F;color:#9AA4C4;font-family:"Inter Tight",Arial,sans-
 .mf-tel{font-family:Geologica,Arial,sans-serif;font-size:20px;font-weight:700;color:#fff!important}
 .mf-cta{display:inline-block;justify-self:start;margin-top:8px;background:#D9480F;color:#fff!important;font-weight:700;padding:12px 16px}
 .mf-legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid #1E2A4D;margin-top:40px;padding-top:22px;font-size:13.5px}
-@media (max-width:900px){.mf-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:1000px){.mf-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.mf-grid{grid-template-columns:1fr}footer.mf.mf-main{padding-bottom:110px}}
 .mn :focus-visible,.mf :focus-visible{outline:3px solid #D9480F;outline-offset:2px}
 @media (prefers-reduced-motion:reduce){.mn-drop,.mn-link::after,.mn-btn::after{transition:none}}

@@ -951,6 +951,9 @@ i.rv2-stars{font-style:normal;color:var(--smalt);letter-spacing:3px;font-size:17
 @media (max-width:820px){ .seo-grid{grid-template-columns:1fr} }
 .h1-sub{display:block;font-size:.34em;font-weight:600;letter-spacing:0;margin-top:14px;color:var(--muted);font-family:var(--body)}
 h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-fill-color:currentColor;background:none}
+.wk-demo{position:absolute;left:10px;top:10px;margin:0;z-index:2}
+.row-btns{display:flex;gap:10px;flex-wrap:wrap}
+.vd .wk-demo{z-index:3}
 </style>
 <script>
   /* Яндекс Метрика: впишите номер счётчика, например var YM_ID = 98765432; */
@@ -959,6 +962,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
     ym(YM_ID,'init',{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true}); }
 </script>
 <link rel="stylesheet" href="assets/nav.css">
+<script src="assets/data.js"></script>
 </head>
 <body>
 <div id="scrollbar" aria-hidden="true"></div>
@@ -971,24 +975,25 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
       <div class="mn-item"><button type="button" class="mn-btn" aria-expanded="false" aria-controls="mnSvc">Услуги<i></i></button>
         <div class="mn-drop mn-mega" id="mnSvc">
           <div class="mn-mega-list"><a class="mn-svc" href="uslugi/remont-pod-klyuch.html"><img src="https://images.pexels.com/photos/32177961/pexels-photo-32177961.jpeg?auto=compress&cs=tinysrgb&w=200" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span><b>Ремонт под ключ</b><small>Всё от черновых работ до уборки</small></span><em>от 19 000 ₽/м²</em></a><a class="mn-svc" href="uslugi/kapitalnyj-remont.html"><img src="https://images.pexels.com/photos/14614670/pexels-photo-14614670.jpeg?auto=compress&cs=tinysrgb&w=200" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span><b>Капитальный ремонт</b><small>Вторичка: новая электрика и трубы</small></span><em>от 22 500 ₽/м²</em></a><a class="mn-svc" href="uslugi/remont-v-novostrojke.html"><img src="https://images.pexels.com/photos/28853362/pexels-photo-28853362.jpeg?auto=compress&cs=tinysrgb&w=200" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span><b>Ремонт в новостройке</b><small>Без отделки или white box</small></span><em>от 13 000 ₽/м²</em></a><a class="mn-svc" href="uslugi/dizajnerskij-remont.html"><img src="https://images.pexels.com/photos/33529500/pexels-photo-33529500.jpeg?auto=compress&cs=tinysrgb&w=200" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span><b>Дизайнерский ремонт</b><small>Строго по проекту, с надзором</small></span><em>от 30 000 ₽/м²</em></a><a class="mn-svc" href="uslugi/remont-vannoj.html"><img src="https://images.pexels.com/photos/33529504/pexels-photo-33529504.jpeg?auto=compress&cs=tinysrgb&w=200" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span><b>Ремонт ванной под ключ</b><small>Гидроизоляция, плитка, инсталляция</small></span><em>от 160 000 ₽</em></a><a class="mn-svc" href="uslugi/kosmeticheskij-remont.html"><img src="https://images.pexels.com/photos/32177959/pexels-photo-32177959.jpeg?auto=compress&cs=tinysrgb&w=200" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span><b>Косметический ремонт</b><small>Стены, полы, потолки, двери</small></span><em>от 8 000 ₽/м²</em></a></div>
+          <div class="mn-mega-col"><b>По типу квартиры</b><a href="remont-studii.html">Студия</a><a href="remont-odnokomnatnoj-kvartiry.html">Однокомнатная</a><a href="remont-dvuhkomnatnoj-kvartiry.html">Двухкомнатная</a><a href="remont-trehkomnatnoj-kvartiry.html">Трёхкомнатная</a><b>Дополнительно</b><a href="dizajn-proekt.html">Дизайн-проект</a><a href="garantiya.html">Гарантия 3 года</a></div>
           <a class="mn-promo" href="uslugi/kapitalnyj-remont.html"><img src="https://images.pexels.com/photos/6908500/pexels-photo-6908500.jpeg?auto=compress&cs=tinysrgb&w=500" alt="" loading="lazy" onerror="this.remove()"><span><b>Дизайн-проект в подарок</b><small>При заказе капитального или дизайнерского ремонта: планировка, визуализация, чертежи.</small><u>Подробнее</u></span></a>
           <div class="mn-mega-foot"><a href="uslugi/">Все услуги и цены</a><span>Не знаете, какой ремонт нужен? <a href="#quiz">Ответьте на 5 вопросов</a> — посчитаем.</span></div>
         </div>
       </div>
       <a class="mn-link" href="ceny.html">Цены</a>
-      <a class="mn-link" href="#quiz">Калькулятор</a>
+      <a class="mn-link" href="obekty.html">Объекты</a>
       <a class="mn-link" href="kak-my-rabotaem.html">Как мы работаем</a>
       <div class="mn-item"><button type="button" class="mn-btn" aria-expanded="false" aria-controls="mnAbout">О компании<i></i></button>
-        <div class="mn-drop mn-small" id="mnAbout"><a class="mn-sm" href="o-kompanii.html"><b>О компании</b><small>Кто мы и какие гарантии даём</small></a><a class="mn-sm" href="voprosy.html"><b>Вопросы и ответы</b><small>Цена, сроки, договор, материалы</small></a><a class="mn-sm" href="blog/"><b>Блог</b><small>Статьи о ремонте и ценах</small></a><a class="mn-sm" href="checklist.pdf"><b>Чек-лист приёмки</b><small>41 пункт, PDF бесплатно</small></a></div>
+        <div class="mn-drop mn-small" id="mnAbout"><a class="mn-sm" href="o-kompanii.html"><b>О компании</b><small>Кто мы и какие гарантии даём</small></a><a class="mn-sm" href="komanda.html"><b>Команда</b><small>Кто будет делать ваш ремонт</small></a><a class="mn-sm" href="otzyvy.html"><b>Отзывы</b><small>Что говорят клиенты</small></a><a class="mn-sm" href="garantiya.html"><b>Гарантия и договор</b><small>3 года, что входит в гарантию</small></a><a class="mn-sm" href="voprosy.html"><b>Вопросы и ответы</b><small>Цена, сроки, договор, материалы</small></a><a class="mn-sm" href="blog/"><b>Блог</b><small>Статьи о ремонте и ценах</small></a><a class="mn-sm" href="checklist.pdf"><b>Чек-лист приёмки</b><small>41 пункт, PDF бесплатно</small></a></div>
       </div>
       <a class="mn-link" href="kontakty.html">Контакты</a>
     </nav>
     <div class="mn-r"><div class="hdr-msgr" data-msgr></div><a class="mn-phone" href="tel:+73430000000">+7 (343) 000-00-00<small>звонок бесплатный</small></a><button type="button" class="mn-cta" data-cb>Заказать звонок</button><button type="button" class="mn-burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="mnMob"><span></span></button></div>
   </div>
   <div class="mn-mob" id="mnMob" hidden>
-    <details open><summary>Услуги</summary><div class="mn-mob-svc"><a href="uslugi/remont-pod-klyuch.html">Ремонт под ключ<em>от 19 000 ₽/м²</em></a><a href="uslugi/kapitalnyj-remont.html">Капитальный ремонт<em>от 22 500 ₽/м²</em></a><a href="uslugi/remont-v-novostrojke.html">Ремонт в новостройке<em>от 13 000 ₽/м²</em></a><a href="uslugi/dizajnerskij-remont.html">Дизайнерский ремонт<em>от 30 000 ₽/м²</em></a><a href="uslugi/remont-vannoj.html">Ремонт ванной под ключ<em>от 160 000 ₽</em></a><a href="uslugi/kosmeticheskij-remont.html">Косметический ремонт<em>от 8 000 ₽/м²</em></a><a href="uslugi/">Все услуги</a></div></details>
-    <a href="ceny.html">Цены</a><a href="#quiz">Калькулятор стоимости</a><a href="kak-my-rabotaem.html">Как мы работаем</a>
-    <details><summary>О компании</summary><div class="mn-mob-svc"><a href="o-kompanii.html">О компании</a><a href="voprosy.html">Вопросы и ответы</a><a href="blog/">Блог</a><a href="checklist.pdf">Чек-лист приёмки</a></div></details>
+    <details open><summary>Услуги</summary><div class="mn-mob-svc"><a href="uslugi/remont-pod-klyuch.html">Ремонт под ключ<em>от 19 000 ₽/м²</em></a><a href="uslugi/kapitalnyj-remont.html">Капитальный ремонт<em>от 22 500 ₽/м²</em></a><a href="uslugi/remont-v-novostrojke.html">Ремонт в новостройке<em>от 13 000 ₽/м²</em></a><a href="uslugi/dizajnerskij-remont.html">Дизайнерский ремонт<em>от 30 000 ₽/м²</em></a><a href="uslugi/remont-vannoj.html">Ремонт ванной под ключ<em>от 160 000 ₽</em></a><a href="uslugi/kosmeticheskij-remont.html">Косметический ремонт<em>от 8 000 ₽/м²</em></a><a href="remont-studii.html">Ремонт: студия</a><a href="remont-odnokomnatnoj-kvartiry.html">Ремонт: однокомнатная</a><a href="remont-dvuhkomnatnoj-kvartiry.html">Ремонт: двухкомнатная</a><a href="remont-trehkomnatnoj-kvartiry.html">Ремонт: трёхкомнатная</a><a href="dizajn-proekt.html">Дизайн-проект</a><a href="uslugi/">Все услуги</a></div></details>
+    <a href="ceny.html">Цены</a><a href="obekty.html">Наши объекты</a><a href="#quiz">Калькулятор стоимости</a><a href="kak-my-rabotaem.html">Как мы работаем</a>
+    <details><summary>О компании</summary><div class="mn-mob-svc"><a href="o-kompanii.html">О компании</a><a href="komanda.html">Команда</a><a href="otzyvy.html">Отзывы</a><a href="garantiya.html">Гарантия и договор</a><a href="voprosy.html">Вопросы и ответы</a><a href="blog/">Блог</a><a href="checklist.pdf">Чек-лист приёмки</a></div></details>
     <a href="kontakty.html">Контакты</a>
     <div class="mn-mob-foot"><a class="mn-mob-tel" href="tel:+73430000000">+7 (343) 000-00-00</a><small>Ежедневно 9:00–21:00, звонок бесплатный</small><a class="mn-cta" href="#quiz">Рассчитать стоимость</a></div>
   </div>
@@ -1139,7 +1144,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
 
 <section id="works" hidden>
   <div class="wrap">
-    <div class="head-row"><div><h2>Наши объекты</h2><p class="sub">Реальные квартиры, которые мы отремонтировали: площадь, срок и итоговая стоимость работ.</p></div><a class="btn btn-main" href="#quiz">Хочу так же</a></div>
+    <div class="head-row"><div><h2>Наши объекты</h2><p class="sub">Реальные квартиры, которые мы отремонтировали: площадь, срок и итоговая стоимость работ.</p></div><span class="row-btns"><a class="btn btn-line" href="obekty.html">Все объекты</a><a class="btn btn-main" href="#quiz">Хочу так же</a></span></div>
     <div class="works" id="worksGrid"></div>
     <button type="button" class="btn btn-line works-more" id="worksMore" hidden>Показать ещё объекты</button>
   </div>
@@ -1151,7 +1156,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
       <h2>Отзывы клиентов</h2>
       <div class="rv2-score" id="rvScore" hidden><b id="rvVal"></b><span><i class="rv2-stars">★★★★★</i><small id="rvCnt"></small></span></div>
       <p class="rv2-note">Мы не пишем отзывы сами и не удаляем плохие. Каждый отзыв можно проверить на картах.</p>
-      <div class="rv2-links"><a class="btn btn-line" id="revMap" href="#" target="_blank" rel="noopener" hidden>Отзывы на Яндекс Картах</a><a class="btn btn-line" id="rev2gis" href="#" target="_blank" rel="noopener" hidden>Отзывы в 2ГИС</a></div>
+      <div class="rv2-links"><a class="btn btn-line" href="otzyvy.html">Все отзывы</a><a class="btn btn-line" id="revMap" href="#" target="_blank" rel="noopener" hidden>Отзывы на Яндекс Картах</a><a class="btn btn-line" id="rev2gis" href="#" target="_blank" rel="noopener" hidden>Отзывы в 2ГИС</a></div>
       <div class="rv2-arrows"><button type="button" id="rvPrev" aria-label="Предыдущие отзывы">‹</button><button type="button" id="rvNext" aria-label="Следующие отзывы">›</button></div>
     </aside>
     <div class="rv2-track" id="revGrid"></div>
@@ -1581,7 +1586,8 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
   <div class="mn-wrap mf-grid">
     <div><a class="mn-logo mf-logo" href="./"><svg class="lg mn-lg" viewBox="0 0 64 64" aria-hidden="true"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#D9480F" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#D9480F"/></svg><span><b>СМАЛЬТЭРА</b><small>РЕМОНТ КВАРТИР</small></span></a><p>Ремонт квартир под ключ в Екатеринбурге. Цена в договоре, оплата по этапам, гарантия 3 года.</p></div>
     <div><h4>Услуги</h4><a href="uslugi/remont-pod-klyuch.html">Ремонт под ключ</a><a href="uslugi/kapitalnyj-remont.html">Капитальный ремонт</a><a href="uslugi/remont-v-novostrojke.html">Ремонт в новостройке</a><a href="uslugi/dizajnerskij-remont.html">Дизайнерский ремонт</a><a href="uslugi/remont-vannoj.html">Ремонт ванной под ключ</a><a href="uslugi/kosmeticheskij-remont.html">Косметический ремонт</a><a href="uslugi/">Все услуги</a></div>
-    <div><h4>Компания</h4><a href="ceny.html">Цены</a><a href="kak-my-rabotaem.html">Как мы работаем</a><a href="o-kompanii.html">О компании</a><a href="voprosy.html">Вопросы и ответы</a><a href="blog/">Блог</a><a href="kontakty.html">Контакты</a></div>
+    <div><h4>Ремонт квартир</h4><a href="remont-studii.html">Студия</a><a href="remont-odnokomnatnoj-kvartiry.html">Однокомнатная квартира</a><a href="remont-dvuhkomnatnoj-kvartiry.html">Двухкомнатная квартира</a><a href="remont-trehkomnatnoj-kvartiry.html">Трёхкомнатная квартира</a><a href="dizajn-proekt.html">Дизайн-проект</a><a href="ceny.html">Цены</a></div>
+    <div><h4>Компания</h4><a href="obekty.html">Наши объекты</a><a href="otzyvy.html">Отзывы</a><a href="komanda.html">Команда</a><a href="kak-my-rabotaem.html">Как мы работаем</a><a href="garantiya.html">Гарантия и договор</a><a href="o-kompanii.html">О компании</a><a href="voprosy.html">Вопросы и ответы</a><a href="blog/">Блог</a><a href="kontakty.html">Контакты</a></div>
     <div><h4>Контакты</h4><a class="mf-tel" href="tel:+73430000000">+7 (343) 000-00-00</a><span>Екатеринбург</span><span>Ежедневно 9:00–21:00</span><a class="mf-cta" href="#quiz">Рассчитать стоимость</a></div>
   </div>
   <div class="mn-wrap mf-legal"><span>© 2026 Смальтэра. Информация на сайте не является публичной офертой.</span><a href="privacy.html">Политика конфиденциальности</a></div>
@@ -2326,10 +2332,11 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
   };
   /* Отзывы: только настоящие. Пример: { text:'...', name:'Анна', place:'ЖК ..., 2-комн.', work:'Капитальный ремонт, 54 м²', date:'октябрь 2026', source:'yandex', stars:5, photo:'works/rv1.jpg' }
      source: 'yandex' или '2gis' */
-  var REVIEWS = [];
-  var YANDEX_MAPS_URL = '';   /* ссылка на вашу организацию в Яндекс Картах */
-  var GIS_URL = '';           /* ссылка на вашу организацию в 2ГИС */
-  var RATING = { value:'', count:'' };  /* рейтинг с карт, например { value:'4,9', count:27 } — только настоящий */
+  var SM = window.SM || {};
+  var REVIEWS = SM.reviews || [];
+  var YANDEX_MAPS_URL = SM.yandexMaps || '';   /* ссылка на вашу организацию в Яндекс Картах */
+  var GIS_URL = SM.gis || '';           /* ссылка на вашу организацию в 2ГИС */
+  var RATING = SM.rating || { value:'', count:'' };  /* рейтинг с карт, например { value:'4,9', count:27 } — только настоящий */
   (function(){
     document.querySelectorAll('.tm-ph[data-role]').forEach(function(ph){
       var t = TEAM[ph.dataset.role]; if (!t) return;
@@ -2337,7 +2344,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
       if (t.name){ var n = document.createElement('small'); n.textContent = t.name; ph.parentNode.insertBefore(n, ph.nextSibling); }
     });
     var sec = document.getElementById('reviews'), g = document.getElementById('revGrid');
-    var demo = /[?&]demo\b/.test(location.search), R = REVIEWS;
+    var demo = false, R = REVIEWS;
     if (demo && !R.length) R = [
       { name:'Анна', place:'ЖК в Академическом, 2-комн.', work:'Ремонт под ключ, 56 м²', date:'октябрь', source:'demo', stars:5, text:'Пример отзыва. Так будет выглядеть настоящий отзыв клиента: что понравилось, как соблюдали сроки, как прораб держал в курсе. Длинный текст аккуратно сворачивается, а по кнопке раскрывается целиком, чтобы карточки оставались ровными.' },
       { name:'Дмитрий', place:'Вторичка на Уралмаше, 3-комн.', work:'Капитальный ремонт, 64 м²', date:'сентябрь', source:'demo', stars:5, text:'Пример отзыва. Здесь будет история клиента: с чем пришёл, что сделали, совпала ли итоговая сумма со сметой.' },
@@ -2362,7 +2369,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
       requestAnimationFrame(function(){ if (t.scrollHeight > t.clientHeight + 4) m.hidden = false; });
       m.addEventListener('click', function(){ d.classList.toggle('open'); m.textContent = d.classList.contains('open') ? 'Свернуть' : 'Читать полностью'; });
     });
-    if (demo && !REVIEWS.length){ var h = sec.querySelector('h2'), tg = document.createElement('span'); tg.className = 'demo-tag'; tg.textContent = 'ПРИМЕР'; h.appendChild(tg); }
+    if (R.length && R.every(function(r){ return r.demo; })){ var h = sec.querySelector('h2'), tg = document.createElement('span'); tg.className = 'demo-tag'; tg.textContent = 'ПРИМЕР'; h.appendChild(tg); }
     if (R.length) sec.hidden = false;
     if (YANDEX_MAPS_URL){ var mp = document.getElementById('revMap'); mp.href = YANDEX_MAPS_URL; mp.hidden = false; sec.hidden = false; }
     if (GIS_URL){ var gs = document.getElementById('rev2gis'); gs.href = GIS_URL; gs.hidden = false; sec.hidden = false; }
@@ -2376,15 +2383,12 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
   /* ===== Портфолио и видео: впишите настоящие данные =====
      Фото и видео кладите в папку сайта (например works/zhk-1.jpg) или укажите ссылку.
      Видео можно с Rutube или VK: укажите ссылку для встраивания (embed). */
-  var PROJECTS = [
-    /* { title:'2-комн. квартира, ЖК ...', area:56, days:75, price:'1 180 000 ₽', type:'Капитальный ремонт',
-         photos:['works/obj1-1.jpg','works/obj1-2.jpg'], text:'Что сделали и что было важно клиенту' } */
-  ];
-  var VIDEOS = [
-    /* { title:'Ванная под ключ, ЖК ...', note:'1 минута', poster:'works/v1.jpg', embed:'https://rutube.ru/play/embed/...' } */
-  ];
+  var PROJECTS = (window.SM && SM.projects) || [];   /* материалы — в файле assets/data.js */
+  var VIDEOS = (window.SM && SM.videos) || [];
   (function(){
-    var demo = /[?&]demo\b/.test(location.search);
+    var demo = false;
+    function allDemo(L){ return L.length && L.every(function(x){ return x.demo; }); }
+    [['works', PROJECTS], ['videos', VIDEOS]].forEach(function(k){ if (allDemo(k[1])){ var h = document.querySelector('#' + k[0] + ' h2'); if (h){ var t = document.createElement('span'); t.className = 'demo-tag'; t.textContent = 'ПРИМЕР'; h.appendChild(t); } } });
     var IMG = function(id, w){ return 'https://images.pexels.com/photos/' + id + '/pexels-photo-' + id + '.jpeg?auto=compress&cs=tinysrgb&w=' + (w||900); };
     var P = PROJECTS, V = VIDEOS;
     if (demo){
@@ -2408,9 +2412,10 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
     if (P.length){
       var grid = document.getElementById('worksGrid'), more = document.getElementById('worksMore');
       P.forEach(function(p, i){
-        var b = document.createElement('button'); b.type = 'button'; b.className = 'wk'; if (i >= 6) b.hidden = true;
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'wk'; if (i >= 3) b.hidden = true;
         b.innerHTML = '<span class="ph"><img loading="lazy" alt="" onerror="this.classList.add(\'err\')"><span class="cnt"></span></span><span class="tx"><b></b><span class="meta"></span><span class="wkp"></span></span>';
         b.querySelector('img').src = p.photos[0];
+        if (p.demo){ var dt = document.createElement('span'); dt.className = 'demo-tag wk-demo'; dt.textContent = 'ПРИМЕР'; b.querySelector('.ph').appendChild(dt); }
         b.querySelector('.cnt').textContent = p.photos.length + ' фото';
         b.querySelector('b').textContent = p.title;
         var m = b.querySelector('.meta');
@@ -2419,7 +2424,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
         b.addEventListener('click', function(){ openGal(p); });
         grid.appendChild(b);
       });
-      if (P.length > 6){ more.hidden = false; more.addEventListener('click', function(){ grid.querySelectorAll('.wk[hidden]').forEach(function(x){ x.hidden = false; }); more.hidden = true; }); }
+      if (P.length > 3){ more.hidden = false; more.addEventListener('click', function(){ grid.querySelectorAll('.wk[hidden]').forEach(function(x){ x.hidden = false; }); more.hidden = true; }); }
       document.getElementById('works').hidden = false;
     }
     var gal = document.getElementById('gal'), gImg = document.getElementById('galImg'), gP = null, gI = 0;
@@ -2433,7 +2438,8 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
         var d = document.createElement('div'); var a = document.createElement('span'); a.textContent = r[0]; var b = document.createElement('b'); b.textContent = r[1]; d.appendChild(a); d.appendChild(b); meta.appendChild(d);
       });
       info.appendChild(meta);
-      if (p.text){ var t = document.createElement('p'); t.textContent = p.text; info.appendChild(t); }
+      if (p.text || p.task){ var t = document.createElement('p'); t.textContent = p.text || p.task; info.appendChild(t); }
+      if (p.id){ var l = document.createElement('a'); l.className = 'btn btn-line'; l.href = 'obekt.html?id=' + encodeURIComponent(p.id); l.textContent = 'Подробнее об объекте'; info.appendChild(l); }
       var c = document.createElement('a'); c.className = 'btn btn-main'; c.href = '#quiz'; c.textContent = 'Рассчитать похожий ремонт'; c.addEventListener('click', function(){ gal.hidden = true; }); info.appendChild(c);
       gal.hidden = false;
     }
@@ -2451,6 +2457,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
         b.innerHTML = '<img loading="lazy" alt="" onerror="this.style.opacity=0"><span class="play"></span><span class="vt"><b></b><span></span></span>';
         b.querySelector('img').src = v.poster || '';
         b.querySelector('b').textContent = v.title; b.querySelector('.vt span').textContent = v.note || '';
+        if (v.demo){ var vt = document.createElement('span'); vt.className = 'demo-tag wk-demo'; vt.textContent = 'ПРИМЕР'; b.appendChild(vt); }
         b.addEventListener('click', function(){
           vb.innerHTML = '';
           if (v.embed){ var f = document.createElement('iframe'); f.src = v.embed; f.allow = 'autoplay; fullscreen'; f.allowFullscreen = true; vb.appendChild(f); }
