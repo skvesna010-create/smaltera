@@ -39,6 +39,13 @@
     ck.querySelector('button').addEventListener('click', function(){ try { localStorage.setItem('sm-ck', '1'); } catch(e){} ck.remove(); });
     document.body.appendChild(ck);
   }
+  /* таблицы на телефоне превращаются в карточки: подписываем ячейки названиями колонок */
+  document.querySelectorAll('table.ptbl, table.tbl').forEach(function(t){
+    var head = t.querySelector('tr'); if (!head || !head.querySelector('th')) { t.classList.add('t-plain'); return; }
+    var names = [].map.call(head.children, function(c){ return c.textContent.trim(); });
+    head.classList.add('t-head'); t.classList.add('t-cards');
+    t.querySelectorAll('tr').forEach(function(tr){ if (tr === head) return; [].forEach.call(tr.children, function(td, i){ if (i && names[i]) td.setAttribute('data-label', names[i]); }); });
+  });
   var here = location.pathname.replace(/index\.html$/, '');
   document.querySelectorAll('.mn-link, .mn-drop a').forEach(function(a){
     var u = new URL(a.getAttribute('href'), location.href);

@@ -93,6 +93,24 @@ footer.mf{background:#0B132F;color:#9AA4C4;font-family:"Inter Tight",Arial,sans-
 @media (max-width:620px){.ck{left:10px;right:10px;bottom:76px;max-width:none}}
 .mf-legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid #1E2A4D;margin-top:40px;padding-top:22px;font-size:13.5px}
 @media (max-width:1000px){.mf-grid{grid-template-columns:1fr 1fr}}
-@media (max-width:560px){.mf-grid{grid-template-columns:1fr}footer.mf.mf-main{padding-bottom:110px}}
+@media (max-width:560px){.mf-grid{grid-template-columns:1fr 1fr;gap:28px 18px}.mf-grid > div:first-child{grid-column:1/-1}.mf-grid a{font-size:14px}footer.mf.mf-main{padding-bottom:110px}.mf-legal{flex-direction:column}}
 .mn :focus-visible,.mf :focus-visible{outline:3px solid #D9480F;outline-offset:2px}
+@media (max-width:620px){
+  table.t-cards,table.t-cards tbody,table.t-cards thead,table.t-cards tr,table.t-cards td,table.t-cards th{display:block;width:100%}
+  table.t-cards{border:0!important;background:none!important;min-width:0!important}
+  table.t-cards .t-head,table.t-cards thead{display:none}
+  table.t-cards tr{background:#fff;border:1px solid #E1E4EA;border-radius:4px;margin-bottom:10px;padding:14px 16px}
+  table.t-cards tr.hl{border-color:#D9480F}
+  table.t-cards td{border:0!important;padding:5px 0!important;background:none!important;text-align:left!important;white-space:normal!important}
+  table.t-cards td:first-child{font-size:17px;padding-bottom:8px!important;border-bottom:1px solid #EEF0F4!important;margin-bottom:4px}
+  table.t-cards td[data-label]{display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+  table.t-cards td[data-label]::before{content:attr(data-label);font:500 13.5px "Inter Tight",Arial,sans-serif;color:#525B6B;flex:none;max-width:48%}
+  table.t-cards td[data-label]:not(.pr){text-align:right!important}
+  table.t-plain,table.t-plain tbody,table.t-plain tr,table.t-plain td{display:block;width:100%}
+  table.t-plain tr{padding:12px 0}
+  table.t-plain td{border:0!important;padding:2px 14px!important;white-space:normal!important}
+  table.t-plain tr{border-bottom:1px solid #E1E4EA}
+  .sv-hero .chips{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .sv-hero .row .btn,.cta .row .btn,.hero-box .btn{flex:1 1 100%;justify-content:center;text-align:center;display:flex}
+}
 @media (prefers-reduced-motion:reduce){.mn-drop,.mn-link::after,.mn-btn::after{transition:none}}
