@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Админка — Смальтэра</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%2314213D'/%3E%3Cpath d='M44 20a17 17 0 1 0 0 24' stroke='%23F76707' stroke-width='7' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@600;700;800&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#111827;--muted:#5B6474;--line:#E1E4EA;--bg:#F3F4F6;--paper:#fff;--acc:#D9480F;--acc2:#B83C0B;--navy:#14213D;--navy2:#0F1A33;--ok:#1F9D55;--err:#C0392B}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+body{font:15px/1.5 "Inter Tight",Arial,sans-serif;color:var(--ink);background:var(--bg)}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3{font-family:Geologica,Arial,sans-serif;letter-spacing:-.01em;line-height:1.2}
+a{color:var(--acc)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;background:var(--acc);color:#fff;font-weight:700;padding:11px 16px;border-radius:4px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:hover{background:var(--acc2)}
+.btn.sec{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn.sec:hover{border-color:var(--ink)}
+.btn.navy{background:var(--navy)}
+.btn.sm{padding:7px 11px;font-size:13.5px}
+.btn.danger{background:#fff;color:var(--err);border:1px solid #F1C7C2}
+.btn.danger:hover{background:#FDF1EF}
+.btn:disabled{opacity:.5;cursor:default}
+.ic{width:34px;height:34px;display:inline-grid;place-items:center;border:1px solid var(--line);background:#fff;border-radius:4px;cursor:pointer;font-size:16px;line-height:1}
+.ic:hover{border-color:var(--ink)}
+.ic.del:hover{border-color:var(--err);color:var(--err)}
+input[type=text],input[type=number],input[type=password],input[type=url],input[type=email],select,textarea{width:100%;border:1.5px solid #D5DAE3;border-radius:4px;padding:10px 12px;background:#fff}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--acc)}
+textarea{min-height:90px;resize:vertical}
+label.f{display:grid;gap:6px;font-weight:600;font-size:14px}
+label.f small{font-weight:400;color:var(--muted);font-size:13px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.hint{background:#FFF6F0;border:1px solid #FFD8C2;border-left:4px solid var(--acc);padding:12px 14px;border-radius:4px;font-size:14px}
+.hint.blue{background:#F1F5FF;border-color:#D3DEFA;border-left-color:var(--navy)}
+.muted{color:var(--muted)}
+/* вход */
+.login{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(160deg,#14213D,#0B132F)}
+.login-box{background:#fff;width:min(560px,100%);padding:34px;border-radius:4px;display:grid;gap:16px;border-top:4px solid var(--acc)}
+.login-box h1{font-size:26px}
+.login-box ol{margin-left:20px;display:grid;gap:6px;font-size:14px;color:#333}
+.login-box details summary{cursor:pointer;font-weight:700;color:var(--navy)}
+.logo{display:flex;align-items:center;gap:10px}
+.logo svg{width:38px;height:38px}
+.logo b{font-family:Geologica,Arial,sans-serif;font-weight:800;letter-spacing:.14em}
+.logo small{display:block;font-size:10.5px;letter-spacing:.12em;color:var(--muted);font-weight:600}
+/* приложение */
+.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+.side{background:var(--navy2);color:#C9D1EA;padding:18px 12px;position:sticky;top:0;height:100vh;overflow:auto;display:flex;flex-direction:column;gap:4px}
+.side .logo{color:#fff;padding:4px 8px 18px}
+.side .logo small{color:#8F9AB6}
+.side button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;color:#C9D1EA;padding:11px 12px;border-radius:4px;cursor:pointer;font-weight:600}
+.side button:hover{background:#1A2647;color:#fff}
+.side button.on{background:var(--acc);color:#fff}
+.side button i{font-style:normal;width:22px;text-align:center}
+.side .sep{height:1px;background:#22305A;margin:10px 4px}
+.side .grow{flex:1}
+.main{min-width:0;display:flex;flex-direction:column}
+.top{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);padding:12px 26px;display:flex;align-items:center;gap:14px}
+.top h2{font-size:21px;margin-right:auto}
+.state{font-size:13.5px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.state i{width:9px;height:9px;border-radius:50%;background:var(--ok);display:inline-block}
+.state.dirty i{background:var(--acc)}
+.view{padding:26px;display:grid;gap:18px;align-content:start;max-width:1300px;width:100%}
+.card{background:#fff;border:1px solid var(--line);border-radius:4px;padding:22px}
+.card h3{font-size:18px;margin-bottom:12px}
+.list{display:grid;gap:10px}
+.it{background:#fff;border:1px solid var(--line);border-radius:4px;display:grid;grid-template-columns:96px 1fr auto;gap:16px;align-items:center;padding:10px 12px}
+.it .th{width:96px;height:72px;border-radius:4px;background:#DDE1E8 center/cover no-repeat;display:grid;place-items:center;font-family:Geologica;font-weight:800;font-size:26px;color:#fff;overflow:hidden}
+.it .th.ini{background:var(--navy)}
+.it b{display:block;font-size:16px}
+.it small{color:var(--muted)}
+.it .acts{display:flex;gap:6px}
+.tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:4px;background:#FFE3D3;color:#B83C0B;margin-left:6px;vertical-align:middle}
+.tag.new{background:#E3F5EA;color:#1F7A45}
+.empty{padding:40px;text-align:center;color:var(--muted);border:2px dashed var(--line);border-radius:4px;background:#fff}
+/* панель редактирования */
+.drawer{position:fixed;inset:0;z-index:50;background:rgba(10,14,30,.45);display:flex;justify-content:flex-end}
+.drawer[hidden]{display:none}
+.drawer-in{width:min(760px,100%);height:100%;background:var(--bg);display:flex;flex-direction:column}
+.drawer-h{background:#fff;border-bottom:1px solid var(--line);padding:16px 22px;display:flex;align-items:center;gap:12px}
+.drawer-h h3{font-size:19px;margin-right:auto}
+.drawer-b{overflow:auto;padding:22px;display:grid;gap:16px;align-content:start}
+.drawer-f{background:#fff;border-top:1px solid var(--line);padding:14px 22px;display:flex;gap:10px;justify-content:flex-end}
+.fs{background:#fff;border:1px solid var(--line);border-radius:4px;padding:18px;display:grid;gap:14px}
+.fs > b{font-family:Geologica;font-size:16px}
+/* фото */
+.drop{border:2px dashed #C4CBD8;border-radius:4px;padding:22px;text-align:center;background:#FAFBFC;cursor:pointer;transition:all .15s}
+.drop:hover,.drop.over{border-color:var(--acc);background:#FFF6F0}
+.drop b{display:block;font-size:15px}
+.drop small{color:var(--muted)}
+.phs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.ph{background:#fff;border:1px solid var(--line);border-radius:4px;overflow:hidden;display:grid}
+.ph .im{aspect-ratio:4/3;background:#DDE1E8 center/cover no-repeat;position:relative}
+.ph .im em{position:absolute;left:6px;top:6px;background:var(--acc);color:#fff;font-style:normal;font-size:11px;font-weight:700;padding:3px 6px;border-radius:4px}
+.ph .im u{position:absolute;right:6px;top:6px;background:#1F9D55;color:#fff;text-decoration:none;font-size:11px;font-weight:700;padding:3px 6px;border-radius:4px}
+.ph textarea{min-height:52px;font-size:12.5px;border:0;border-top:1px solid var(--line);border-radius:0;padding:7px 8px}
+.ph .bar{display:flex;justify-content:space-between;padding:6px;gap:4px;border-top:1px solid var(--line)}
+.ph .bar button{flex:1;border:1px solid var(--line);background:#fff;border-radius:4px;cursor:pointer;padding:4px 0;font-size:13px}
+.ph .bar button:hover{border-color:var(--ink)}
+.prog{height:6px;background:#EEF0F4;border-radius:3px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--acc);width:0;transition:width .2s}
+/* строки */
+.rows{display:grid;gap:8px}
+.row{display:grid;grid-template-columns:1fr 170px 34px;gap:8px}
+.row.s2{grid-template-columns:1fr 1fr 34px}
+.sum{font-weight:800;font-family:Geologica;text-align:right}
+/* тексты */
+.ed{display:grid;grid-template-columns:1fr 300px;gap:16px;align-items:start}
+.ed-frame{background:#fff;border:1px solid var(--line);border-radius:4px;overflow:hidden;display:grid;justify-items:center;background:#E7EAF0}
+.ed-frame iframe{width:100%;height:78vh;border:0;background:#fff;transition:width .2s}
+.ed-side{position:sticky;top:80px;display:grid;gap:12px}
+.ed-pages{max-height:260px;overflow:auto;display:grid;gap:2px}
+.ed-pages button{text-align:left;border:0;background:none;padding:7px 9px;border-radius:4px;cursor:pointer;font-size:13.5px}
+.ed-pages button:hover{background:var(--bg)}
+.ed-pages button.on{background:var(--navy);color:#fff}
+.ed-pages button .tag{font-size:9.5px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.seg button{border:0;background:#fff;padding:7px 12px;cursor:pointer;font-weight:600;font-size:13px}
+.seg button.on{background:var(--navy);color:#fff}
+/* поиск */
+.res{display:grid;gap:8px}
+.res div{background:#fff;border:1px solid var(--line);border-radius:4px;padding:10px 12px;font-size:13.5px}
+.res mark{background:#FFE3D3;color:#B83C0B;padding:0 2px}
+table.tb{width:100%;border-collapse:collapse;background:#fff}
+table.tb th,table.tb td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:top}
+table.tb th{background:var(--navy);color:#fff;font-size:13px}
+table.tb code{background:var(--bg);padding:2px 6px;border-radius:4px;font-weight:700}
+/* оверлей публикации */
+.ov{position:fixed;inset:0;z-index:80;background:rgba(10,14,30,.6);display:grid;place-items:center;padding:20px}
+.ov[hidden]{display:none}
+.ov-in{background:#fff;width:min(520px,100%);border-radius:4px;padding:28px;display:grid;gap:12px;border-top:4px solid var(--acc)}
+.ov-in ul{list-style:none;display:grid;gap:6px;font-size:14px}
+.ov-in li.ok::before{content:"✓ ";color:var(--ok);font-weight:800}
+.ov-in li.run::before{content:"… ";color:var(--acc);font-weight:800}
+.ov-in li.err{color:var(--err)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:12px 18px;border-radius:4px;z-index:90;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.vprev{aspect-ratio:16/9;background:#000;border-radius:4px;overflow:hidden}
+.vprev iframe{width:100%;height:100%;border:0}
+.mob-menu{display:none}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .side{position:fixed;inset:0 auto 0 0;width:260px;z-index:60;transform:translateX(-100%);transition:transform .2s}
+  .side.open{transform:none}
+  .mob-menu{display:inline-grid}
+  .top{padding:10px 14px;flex-wrap:wrap}
+  .view{padding:14px}
+  .grid2,.grid3,.ed{grid-template-columns:1fr}
+  .it{grid-template-columns:64px 1fr;}
+  .it .th{width:64px;height:52px}
+  .it .acts{grid-column:1/-1;justify-content:flex-end}
+  .ed-side{position:static}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Вход ===== -->
+<div class="login" id="login" hidden>
+  <div class="login-box">
+    <div class="logo"><svg class="lg mn-lg" viewBox="0 0 64 64" aria-hidden="true"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#D9480F" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#D9480F"/></svg><span><b>СМАЛЬТЭРА</b><small>АДМИНКА САЙТА</small></span></div>
+    <h1>Вход в админку</h1>
+    <p class="muted">Админка сохраняет изменения прямо в ваш репозиторий GitHub, и сайт обновляется сам через 1–2 минуты. Для входа нужен ключ доступа GitHub — он хранится только в этом браузере.</p>
+    <label class="f">Репозиторий<input type="text" id="lRepo" value="skvesna010-create/smaltera" autocomplete="off"><small>владелец/название</small></label>
+    <label class="f">Ключ доступа GitHub<input type="password" id="lToken" placeholder="github_pat_..." autocomplete="off"></label>
+    <div class="hint" id="lErr" hidden></div>
+    <button class="btn" id="lGo">Войти</button>
+    <details><summary>Как получить ключ (2 минуты)</summary>
+      <ol>
+        <li>Откройте <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com → Settings → Fine-grained tokens → Generate new token</a>.</li>
+        <li>Token name: <b>smaltera-admin</b>. Expiration: 1 год (или No expiration).</li>
+        <li>Repository access: <b>Only select repositories</b> → выберите <b>smaltera</b>.</li>
+        <li>Permissions → Repository permissions → <b>Contents: Read and write</b>.</li>
+        <li>Нажмите <b>Generate token</b>, скопируйте ключ и вставьте сюда.</li>
+      </ol>
+      <p class="muted" style="margin-top:8px">Никому не передавайте ключ. Если потеряете телефон или ноутбук — удалите ключ на GitHub и создайте новый.</p>
+    </details>
+  </div>
+</div>
+
+<!-- ===== Приложение ===== -->
+<div class="app" id="app" hidden>
+  <aside class="side" id="side">
+    <div class="logo"><svg class="lg mn-lg" viewBox="0 0 64 64" aria-hidden="true"><g class="t" style="--i:0;--dx:2.26px;--dy:-2.26px"><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#D9480F" transform="rotate(45.0 46.85 17.15)"/></g><g class="t" style="--i:1;--dx:0.36px;--dy:-3.18px"><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(6.4 34.35 11.13)"/></g><g class="t" style="--i:2;--dx:-1.70px;--dy:-2.71px"><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-32.1 20.83 14.22)"/></g><g class="t" style="--i:3;--dx:-3.02px;--dy:-1.06px"><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-70.7 12.18 25.06)"/></g><g class="t" style="--i:4;--dx:-3.02px;--dy:1.06px"><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-109.3 12.18 38.94)"/></g><g class="t" style="--i:5;--dx:-1.70px;--dy:2.71px"><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-147.9 20.83 49.78)"/></g><g class="t" style="--i:6;--dx:0.36px;--dy:3.18px"><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-186.4 34.35 52.87)"/></g><g class="t" style="--i:7;--dx:2.26px;--dy:2.26px"><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-225.0 46.85 46.85)"/></g><path class="star" d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#D9480F"/></svg><span><b>СМАЛЬТЭРА</b><small>АДМИНКА</small></span></div>
+    <button data-v="projects"><i>▦</i>Объекты</button>
+    <button data-v="reviews"><i>★</i>Отзывы</button>
+    <button data-v="videos"><i>▶</i>Видео</button>
+    <button data-v="team"><i>☺</i>Команда</button>
+    <div class="sep"></div>
+    <button data-v="texts"><i>✎</i>Тексты и фото страниц</button>
+    <button data-v="replace"><i>⇄</i>Найти и заменить</button>
+    <button data-v="prices"><i>₽</i>Цены калькулятора</button>
+    <button data-v="settings"><i>⚙</i>Настройки</button>
+    <button data-v="goals"><i>◎</i>Цели Метрики</button>
+    <div class="grow"></div>
+    <button id="openSite"><i>↗</i>Открыть сайт</button>
+    <button id="logout"><i>⎋</i>Выйти</button>
+  </aside>
+  <div class="main">
+    <div class="top">
+      <button class="ic mob-menu" id="mobMenu" aria-label="Меню">☰</button>
+      <h2 id="vTitle">Объекты</h2>
+      <span class="state" id="state"><i></i><span>Всё опубликовано</span></span>
+      <button class="btn" id="publish" disabled>Опубликовать на сайте</button>
+    </div>
+    <div class="view" id="view"></div>
+  </div>
+</div>
+
+<div class="drawer" id="drawer" hidden><div class="drawer-in">
+  <div class="drawer-h"><h3 id="dTitle"></h3><button class="ic" id="dClose" aria-label="Закрыть">×</button></div>
+  <div class="drawer-b" id="dBody"></div>
+  <div class="drawer-f"><button class="btn sec" id="dCancel">Отмена</button><button class="btn" id="dSave">Готово</button></div>
+</div></div>
+
+<div class="ov" id="ov" hidden><div class="ov-in"><h3 id="ovT">Публикация</h3><ul id="ovL"></ul><button class="btn" id="ovOk" hidden>Отлично</button></div></div>
+
+<script>
+(function(){
+'use strict';
+/* ================== Общие настройки ================== */
+var WM_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><g><rect x="41.25" y="11.55" width="11.2" height="11.2" rx="2" fill="#D9480F" transform="rotate(45.0 46.85 17.15)"/></g><g><rect x="28.75" y="5.53" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(6.4 34.35 11.13)"/></g><g><rect x="15.23" y="8.62" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-32.1 20.83 14.22)"/></g><g><rect x="6.58" y="19.46" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-70.7 12.18 25.06)"/></g><g><rect x="6.58" y="33.34" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-109.3 12.18 38.94)"/></g><g><rect x="15.23" y="44.18" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-147.9 20.83 49.78)"/></g><g><rect x="28.75" y="47.27" width="11.2" height="11.2" rx="2" fill="#14213D" transform="rotate(-186.4 34.35 52.87)"/></g><g><rect x="41.25" y="41.25" width="11.2" height="11.2" rx="2" fill="#3A4D75" transform="rotate(-225.0 46.85 46.85)"/></g><path d="M35 24.5l2.1 5.4 5.4 2.1-5.4 2.1-2.1 5.4-2.1-5.4-5.4-2.1 5.4-2.1z" fill="#D9480F"/></svg>';
+var PAGE_NAMES = {"kak-my-rabotaem.html": "Как мы делаем ремонт квартиры: этапы, договор, гарантия", "remont-dvuhkomnatnoj-kvartiry.html": "Ремонт двухкомнатной квартиры в Екатеринбурге", "spasibo.html": "Спасибо, заявка принята", "obekt.html": "Шаблон страницы объекта", "404.html": "Страница не найдена", "index.html": "Главная", "otzyvy.html": "Отзывы о ремонте квартир", "garantiya.html": "Гарантия 3 года на ремонт квартиры и договор", "o-kompanii.html": "О компании Смальтэра", "ceny.html": "Цены на ремонт квартир в Екатеринбурге 2026", "dizajn-proekt.html": "Дизайн-проект квартиры в Екатеринбурге", "remont-studii.html": "Ремонт студии в Екатеринбурге", "voprosy.html": "Вопросы о ремонте квартиры: цена, сроки, гарантия", "privacy.html": "Политика конфиденциальности", "soglasie.html": "Согласие на обработку персональных данных", "komanda.html": "Команда Смальтэры", "kontakty.html": "Контакты", "remont-trehkomnatnoj-kvartiry.html": "Ремонт трёхкомнатной квартиры в Екатеринбурге", "obekty.html": "Наши объекты", "remont-odnokomnatnoj-kvartiry.html": "Ремонт однокомнатной квартиры в Екатеринбурге", "uslugi/kapitalnyj-remont.html": "Капитальный ремонт квартиры в Екатеринбурге", "uslugi/dizajnerskij-remont.html": "Дизайнерский ремонт квартиры в Екатеринбурге", "uslugi/kosmeticheskij-remont.html": "Косметический ремонт квартиры в Екатеринбурге", "uslugi/remont-vannoj.html": "Ремонт ванной под ключ в Екатеринбурге", "uslugi/index.html": "Услуги по ремонту квартир в Екатеринбурге", "uslugi/remont-pod-klyuch.html": "Ремонт квартир под ключ в Екатеринбурге", "uslugi/remont-v-novostrojke.html": "Ремонт квартиры в новостройке в Екатеринбурге", "blog/kapitalnyj-ili-kosmeticheskij-remont.html": "Статья: Капитальный или косметический ремонт: как понять, что нужно вашей квартире", "blog/kak-vybrat-kompaniyu-dlya-remonta.html": "Статья: Как выбрать компанию для ремонта квартиры: 9 вопросов до договора", "blog/kak-prinyat-remont.html": "Статья: Как принять ремонт квартиры и не пожалеть: проверка по пунктам", "blog/index.html": "Блог о ремонте квартир", "blog/remont-vannoj-oshibki.html": "Статья: Ремонт ванной: 7 ошибок, которые обходятся дороже всего", "blog/remont-v-novostroyke-s-chego-nachat.html": "Статья: Ремонт в новостройке: с чего начать и в каком порядке делать", "blog/skolko-stoit-remont-kvartiry-ekaterinburg.html": "Статья: Сколько стоит ремонт квартиры в Екатеринбурге в 2026 году"};
+var SERVICES = [['remont-pod-klyuch','Ремонт под ключ'],['kapitalnyj-remont','Капитальный ремонт'],['remont-v-novostrojke','Ремонт в новостройке'],['dizajnerskij-remont','Дизайнерский ремонт'],['remont-vannoj','Ремонт ванной под ключ'],['kosmeticheskij-remont','Косметический ремонт']];
+var SITE = new URL('../', location.href).href;          // корень сайта
+var DATA_PATH = 'assets/data.js';
+var $ = function(s, r){ return (r || document).querySelector(s); };
+var $$ = function(s, r){ return [].slice.call((r || document).querySelectorAll(s)); };
+function h(tag, attrs, kids){ var e = document.createElement(tag); if (attrs) for (var k in attrs){ if (k === 'text') e.textContent = attrs[k]; else if (k === 'html') e.innerHTML = attrs[k]; else if (k.slice(0,2) === 'on') e.addEventListener(k.slice(2), attrs[k]); else if (attrs[k] != null && attrs[k] !== false) e.setAttribute(k, attrs[k]); } (kids || []).forEach(function(c){ if (c != null) e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); }); return e; }
+function toast(t){ var d = h('div', { class:'toast', text:t }); document.body.appendChild(d); setTimeout(function(){ d.remove(); }, 2600); }
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]; }); }
+function rub(n){ return String(Math.round(+n || 0)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₽'; }
+function num(s){ return parseInt(String(s || '').replace(/\D/g, ''), 10) || 0; }
+var TR = {а:'a',б:'b',в:'v',г:'g',д:'d',е:'e',ё:'e',ж:'zh',з:'z',и:'i',й:'j',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'h',ц:'c',ч:'ch',ш:'sh',щ:'sch',ъ:'',ы:'y',ь:'',э:'e',ю:'yu',я:'ya'};
+function slug(s){ return String(s || '').toLowerCase().split('').map(function(c){ return TR[c] != null ? TR[c] : c; }).join('').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'item'; }
+function rnd(){ return Math.random().toString(36).slice(2, 7); }
+
+/* ================== Состояние ================== */
+var CFG = {}; try { CFG = JSON.parse(localStorage.getItem('sm-admin') || '{}'); } catch(e){}
+var SM = null, SM0 = '', BRANCH = 'main';
+var files = {};      // путь → { b64, url }   — новые фото и видео
+var texts = {};      // путь → html          — изменённые страницы
+var dels = {};       // путь → true          — удалить из репозитория
+var cache = {};      // путь → исходный текст из репозитория
+var view = 'projects';
+
+/* ================== GitHub API ================== */
+function gh(path, opt){
+  opt = opt || {};
+  var headers = { Authorization:'Bearer ' + CFG.token, 'X-GitHub-Api-Version':'2022-11-28', Accept: opt.raw ? 'application/vnd.github.raw+json' : 'application/vnd.github+json' };
+  if (opt.body) headers['Content-Type'] = 'application/json';
+  return fetch('https://api.github.com/repos/' + CFG.repo + path, { method: opt.method || 'GET', headers: headers, body: opt.body ? JSON.stringify(opt.body) : undefined, cache:'no-store' })
+    .then(function(r){
+      if (!r.ok) return r.text().then(function(t){ var m = t; try { m = JSON.parse(t).message; } catch(e){} var err = new Error(r.status + ': ' + m); err.status = r.status; throw err; });
+      return opt.raw ? r.text() : r.json();
+    });
+}
+function readFile(path){
+  if (texts[path] != null) return Promise.resolve(texts[path]);
+  if (cache[path] != null) return Promise.resolve(cache[path]);
+  return gh('/contents/' + path.split('/').map(encodeURIComponent).join('/') + '?ref=' + encodeURIComponent(BRANCH), { raw:true }).then(function(t){ cache[path] = t; return t; });
+}
+var TREE = null;
+function tree(){ return TREE ? Promise.resolve(TREE) : gh('/git/trees/' + encodeURIComponent(BRANCH) + '?recursive=1').then(function(j){ TREE = j.tree.filter(function(x){ return x.type === 'blob'; }).map(function(x){ return x.path; }); return TREE; }); }
+function htmlFiles(){ return tree().then(function(t){ return t.filter(function(p){ return /\.html$/.test(p) && !/^admin\//.test(p); }); }); }
+
+/* ================== Вход ================== */
+function showLogin(msg){ $('#app').hidden = true; $('#login').hidden = false; if (CFG.repo) $('#lRepo').value = CFG.repo; if (msg){ $('#lErr').hidden = false; $('#lErr').textContent = msg; } }
+$('#lGo').onclick = function(){
+  CFG = { repo: $('#lRepo').value.trim().replace(/^https?:\/\/github\.com\//, '').replace(/\/$/, ''), token: $('#lToken').value.trim() };
+  if (!CFG.repo || !CFG.token){ showLogin('Заполните репозиторий и ключ.'); return; }
+  $('#lGo').disabled = true; $('#lGo').textContent = 'Проверяю…';
+  boot().catch(function(e){ showLogin(e.status === 401 ? 'Ключ не подходит. Проверьте, что скопировали его целиком.' : e.status === 404 ? 'Репозиторий не найден или ключу не дан к нему доступ.' : 'Ошибка: ' + e.message); })
+    .then(function(){ $('#lGo').disabled = false; $('#lGo').textContent = 'Войти'; });
+};
+function boot(){
+  return gh('').then(function(repo){
+    if (repo.permissions && !repo.permissions.push) throw new Error('У ключа нет права записи (Contents: Read and write).');
+    BRANCH = repo.default_branch || 'main';
+    try { localStorage.setItem('sm-admin', JSON.stringify(CFG)); } catch(e){}
+    return readFile(DATA_PATH);
+  }).then(function(t){
+    SM = parseData(t); SM0 = JSON.stringify(SM);
+    $('#login').hidden = true; $('#app').hidden = false; go(view);
+  });
+}
+function parseData(t){
+  var a = t.indexOf('{'), b = t.lastIndexOf('}');
+  var d = JSON.parse(t.slice(a, b + 1));
+  ['projects','reviews','videos','team'].forEach(function(k){ d[k] = d[k] || []; });
+  d.projects.forEach(function(p){ p.photos = (p.photos || []).map(normPh); if (!p.id) p.id = slug(p.title) + '-' + rnd(); });
+  d.reviews.forEach(function(r){ if (r.photo) r.photo = normPh(r.photo); });
+  d.videos.forEach(function(v){ if (v.poster) v.poster = normPh(v.poster); if (!v.url && v.embed) v.url = v.embed; });
+  d.team.forEach(function(t){ if (t.photo) t.photo = normPh(t.photo); });
+  d.calc = d.calc || {}; d.watermark = d.watermark || { on:true, pos:'br', size:16, opacity:.85 }; d.company = d.company || {}; d.rating = d.rating || {};
+  return d;
+}
+function normPh(x){ return typeof x === 'string' ? { src:x, alt:'' } : x; }
+function dataText(){
+  return '/* Смальтэра — все материалы сайта. Этот файл меняет админка: ' + SITE + 'admin/\n   Вручную правьте осторожно: это JSON (кавычки, запятые). */\nwindow.SM = ' + JSON.stringify(SM, null, 1) + ';\n';
+}
+$('#logout').onclick = function(){ if (isDirty() && !confirm('Есть неопубликованные изменения. Выйти без публикации?')) return; try { localStorage.removeItem('sm-admin'); } catch(e){} location.reload(); };
+$('#openSite').onclick = function(){ window.open(SITE, '_blank'); };
+$('#mobMenu').onclick = function(){ $('#side').classList.toggle('open'); };
+
+/* ================== Навигация ================== */
+var TITLES = { projects:'Объекты', reviews:'Отзывы', videos:'Видео', team:'Команда', texts:'Тексты и фото страниц', replace:'Найти и заменить', prices:'Цены калькулятора', settings:'Настройки', goals:'Цели Яндекс Метрики' };
+$$('.side button[data-v]').forEach(function(b){ b.onclick = function(){ go(b.dataset.v); $('#side').classList.remove('open'); }; });
+function go(v){
+  view = v; $$('.side button[data-v]').forEach(function(b){ b.classList.toggle('on', b.dataset.v === v); });
+  $('#vTitle').textContent = TITLES[v]; var box = $('#view'); box.innerHTML = '';
+  ({ projects:vList, reviews:vList, videos:vList, team:vList, texts:vTexts, replace:vReplace, prices:vPrices, settings:vSettings, goals:vGoals })[v](box, v);
+  window.scrollTo(0, 0);
+}
+function isDirty(){ return JSON.stringify(SM) !== SM0 || Object.keys(files).length || Object.keys(texts).length || Object.keys(dels).length; }
+function mark(){
+  var d = isDirty(), n = Object.keys(files).length / 1 | 0;
+  var st = $('#state'); st.classList.toggle('dirty', !!d);
+  var parts = []; if (JSON.stringify(SM) !== SM0) parts.push('данные'); if (Object.keys(texts).length) parts.push(Object.keys(texts).length + ' стр.'); if (n) parts.push(n + ' файл.');
+  st.lastChild.textContent = d ? 'Не опубликовано: ' + parts.join(', ') : 'Всё опубликовано';
+  $('#publish').disabled = !d;
+}
+window.addEventListener('beforeunload', function(e){ if (SM && isDirty()){ e.preventDefault(); e.returnValue = ''; } });
+
+/* ================== Обработка фото ================== */
+var heicLoaded = null;
+function loadHeic(){ return heicLoaded || (heicLoaded = new Promise(function(res, rej){ var s = document.createElement('script'); s.src = 'https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js'; s.onload = res; s.onerror = function(){ rej(new Error('Не удалось загрузить конвертер HEIC')); }; document.head.appendChild(s); })); }
+function decode(file){
+  return createImageBitmap(file, { imageOrientation:'from-image' }).catch(function(){
+    if (/heic|heif/i.test(file.type) || /\.(heic|heif)$/i.test(file.name)) return loadHeic().then(function(){ return window.heic2any({ blob:file, toType:'image/jpeg', quality:.92 }); }).then(function(b){ return createImageBitmap(Array.isArray(b) ? b[0] : b); });
+    return new Promise(function(res, rej){ var i = new Image(); i.onload = function(){ res(i); }; i.onerror = function(){ rej(new Error('Формат «' + (file.name.split('.').pop() || file.type) + '» не поддерживается браузером. Сохраните фото как JPG или PNG.')); }; i.src = URL.createObjectURL(file); });
+  });
+}
+var wmImg = null;
+function wmLogo(){ return wmImg || (wmImg = new Promise(function(res){ var i = new Image(); i.onload = function(){ res(i); }; i.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(WM_SVG); })); }
+function drawWm(ctx, W, H, logo){
+  var w = SM.watermark || {}; if (w.on === false) return;
+  var size = (+w.size || 16) / 100, ph = Math.max(26, Math.round(Math.min(W, H) * size * 0.55));
+  var font = Math.round(ph * 0.36); ctx.font = '800 ' + font + 'px Geologica, Arial, sans-serif';
+  try { ctx.letterSpacing = Math.round(font * 0.14) + 'px'; } catch(e){}
+  var text = 'СМАЛЬТЭРА', tw = ctx.measureText(text).width, pad = Math.round(ph * 0.24), ls = Math.round(ph * 0.66);
+  var pw = pad + ls + Math.round(ph * 0.2) + tw + pad, m = Math.round(ph * 0.32);
+  var pos = w.pos || 'br', x = /l/.test(pos) ? m : W - pw - m, y = /t/.test(pos) ? m : H - ph - m;
+  if (pos === 'c'){ x = (W - pw) / 2; y = (H - ph) / 2; }
+  ctx.save(); ctx.globalAlpha = w.opacity != null ? +w.opacity : .85;
+  ctx.fillStyle = 'rgba(255,255,255,.92)'; var r = Math.round(ph * 0.12);
+  ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + pw, y, x + pw, y + ph, r); ctx.arcTo(x + pw, y + ph, x, y + ph, r); ctx.arcTo(x, y + ph, x, y, r); ctx.arcTo(x, y, x + pw, y, r); ctx.closePath(); ctx.fill();
+  ctx.drawImage(logo, x + pad, y + (ph - ls) / 2, ls, ls);
+  ctx.fillStyle = '#14213D'; ctx.textBaseline = 'middle'; ctx.fillText(text, x + pad + ls + Math.round(ph * 0.2), y + ph / 2 + 1);
+  ctx.restore();
+}
+function render(bmp, max, wm, logo){
+  var W = bmp.width, H = bmp.height, k = Math.min(1, max / Math.max(W, H)), w = Math.round(W * k), hh = Math.round(H * k);
+  var c = document.createElement('canvas'); c.width = w; c.height = hh; var ctx = c.getContext('2d');
+  ctx.imageSmoothingQuality = 'high'; ctx.drawImage(bmp, 0, 0, w, hh);
+  if (wm) drawWm(ctx, w, hh, logo);
+  return new Promise(function(res){ c.toBlob(function(b){ if (b && b.type === 'image/webp') res({ blob:b, ext:'webp' }); else c.toBlob(function(j){ res({ blob:j, ext:'jpg' }); }, 'image/jpeg', .86); }, 'image/webp', .82); });
+}
+function b64(blob){ return new Promise(function(res){ var r = new FileReader(); r.onload = function(){ res(String(r.result).split(',')[1]); }; r.readAsDataURL(blob); }); }
+function addFile(path, blob){ return b64(blob).then(function(d){ files[path] = { b64:d, url:URL.createObjectURL(blob) }; delete dels[path]; mark(); return path; }); }
+/* фото → { src, sm, alt } (большое 1920 и лёгкое 800) */
+function processPhoto(file, folder, base, wm){
+  return Promise.all([decode(file), wmLogo(), document.fonts.load('800 40px Geologica').catch(function(){})]).then(function(r){
+    var bmp = r[0], logo = r[1], id = base + '-' + rnd();
+    return Promise.all([render(bmp, 1920, wm, logo), render(bmp, 800, wm, logo)]).then(function(o){
+      var lg = folder + '/' + id + '.' + o[0].ext, sm = folder + '/' + id + '-sm.' + o[1].ext;
+      return Promise.all([addFile(lg, o[0].blob), addFile(sm, o[1].blob)]).then(function(){ return { src:lg, sm:sm, alt:'' }; });
+    });
+  });
+}
+function phUrl(x){ if (!x) return ''; var s = typeof x === 'string' ? x : (x.sm || x.src); if (!s) return ''; if (files[s]) return files[s].url; return /^(https?:|data:)/.test(s) ? s : SITE + s; }
+function forget(x){ if (!x || typeof x !== 'object') return; [x.src, x.sm].forEach(function(p){ if (!p || /^https?:/.test(p)) return; if (files[p]){ URL.revokeObjectURL(files[p].url); delete files[p]; } else dels[p] = true; }); mark(); }
+
+/* ================== Схемы разделов ================== */
+var SCHEMA = {
+  projects: { one:'объект', folder:'img/obekty', wm:true,
+    title:function(p){ return p.title || 'Без названия'; }, sub:function(p){ return [p.type, p.area && p.area + ' м²', p.days && p.days + ' дн.', p.price].filter(Boolean).join(' · '); }, thumb:function(p){ return p.photos && p.photos[0]; },
+    blank:function(){ return { id:'', title:'', service:'kapitalnyj-remont', type:'Капитальный ремонт', district:'', area:'', days:'', price:'', year:new Date().getFullYear(), task:'', done:[], materials:[], smeta:[], stages:[], photos:[] }; },
+    alt:function(p, i){ return (p.type || 'Ремонт') + ': ' + (p.title || '').replace(/^./, function(c){ return c.toLowerCase(); }) + (p.district ? ', ' + p.district : '') + ' — фото ' + (i + 1); },
+    fields:[
+      ['Основное', [['title','text','Название объекта','Двухкомнатная квартира в Академическом'], ['service','service','Вид ремонта'], ['district','text','Район','Академический'], ['area','number','Площадь, м²'], ['days','number','Срок, дней'], ['price','price','Стоимость работ','1 260 000 ₽'], ['year','number','Год']]],
+      ['Фотографии', [['photos','photos','Фото объекта (первое — обложка)']]],
+      ['Описание', [['task','textarea','С чем пришёл клиент'], ['done','lines','Что сделали (каждый пункт с новой строки)'], ['materials','lines','Материалы (каждый с новой строки)']]],
+      ['Смета по объекту', [['smeta','smeta','Работы и суммы']]],
+      ['Как шёл ремонт', [['stages','stages','Этапы и сроки']]],
+      ['Служебное', [['id','text','Адрес страницы объекта (латиницей)','akademicheskij-56'], ['demo','check','Это пример — показывать метку «Пример»']]]
+    ] },
+  reviews: { one:'отзыв', folder:'img/otzyvy', wm:true,
+    title:function(r){ return (r.name || 'Без имени') + (r.place ? ', ' + r.place : ''); }, sub:function(r){ return (r.text || '').slice(0, 90) + '…'; }, thumb:function(r){ return r.photo || { ini:(r.name || '?').charAt(0) }; },
+    blank:function(){ return { name:'', place:'', work:'', date:'', stars:5, source:'yandex', text:'', project:'', photo:'' }; },
+    alt:function(r){ return 'Фото из отзыва: ' + (r.work || r.place || 'ремонт квартиры'); },
+    fields:[['Отзыв', [['name','text','Имя клиента','Анна'], ['place','text','Где','ЖК в Академическом, 2-комн.'], ['work','text','Что делали','Капитальный ремонт, 56 м²'], ['date','text','Когда','октябрь 2026'], ['stars','stars','Оценка'], ['source','source','Откуда отзыв'], ['text','textarea','Текст отзыва'], ['project','project','Объект, к которому относится отзыв']]],
+      ['Фото (необязательно)', [['photo','photo','Фото из отзыва']]], ['Служебное', [['demo','check','Это пример — показывать метку «Пример»']]]] },
+  videos: { one:'видео', folder:'img/video', wm:true,
+    title:function(v){ return v.title || 'Без названия'; }, sub:function(v){ return v.file ? 'файл: ' + v.file : (v.url || 'ссылка не указана'); }, thumb:function(v){ return v.poster; },
+    blank:function(){ return { title:'', note:'видео с объекта', url:'', file:'', poster:'', project:'' }; },
+    alt:function(v){ return 'Видео: ' + (v.title || 'ремонт квартиры'); },
+    fields:[['Видео', [['title','text','Название','Обзор готовой квартиры'], ['note','text','Подпись','видео с объекта'], ['url','video','Ссылка на видео'], ['file','vfile','…или загрузите файл'], ['poster','photo','Обложка'], ['project','project','Объект']]], ['Служебное', [['demo','check','Это пример — показывать метку «Пример»']]]] },
+  team: { one:'сотрудника', folder:'img/komanda', wm:false,
+    title:function(t){ return (t.name || 'Без имени') + ' — ' + (t.role || ''); }, sub:function(t){ return t.exp || ''; }, thumb:function(t){ return t.photo || { ini:(t.role || '?').charAt(0) }; },
+    blank:function(){ return { name:'', role:'', exp:'', text:'', photo:'' }; },
+    alt:function(t){ return (t.role || '') + ' ' + (t.name || '') + ' — Смальтэра'; },
+    fields:[['Сотрудник', [['name','text','Имя и фамилия','Иван Петров'], ['role','text','Должность','Прораб'], ['exp','text','Опыт','опыт 12 лет'], ['text','textarea','Пара фраз о человеке'], ['photo','photo','Фото']]], ['Служебное', [['demo','check','Это пример — показывать метку «Пример»']]]] }
+};
+
+/* ================== Список ================== */
+function vList(box, kind){
+  var S = SCHEMA[kind], L = SM[kind];
+  var head = h('div', { class:'card', style:'display:flex;gap:12px;align-items:center;flex-wrap:wrap' }, [
+    h('div', { style:'margin-right:auto' }, [h('b', { text:'Всего: ' + L.length }), h('div', { class:'muted', style:'font-size:13.5px', text: L.some(function(x){ return x.demo; }) ? 'Примеры помечены меткой «Пример». Замените их настоящими материалами.' : 'Порядок здесь — порядок на сайте.' })]),
+    L.some(function(x){ return x.demo; }) ? h('button', { class:'btn danger sm', text:'Удалить все примеры', onclick:function(){ if (!confirm('Удалить все примеры из раздела «' + TITLES[kind] + '»?')) return; SM[kind] = L.filter(function(x){ return !x.demo; }); mark(); go(kind); } }) : null,
+    h('button', { class:'btn', text:'+ Добавить ' + S.one, onclick:function(){ edit(kind, -1); } })
+  ]);
+  box.appendChild(head);
+  if (kind === 'videos') box.appendChild(h('div', { class:'hint blue', html:'Лучше всего загружать видео на <b>Rutube</b> или <b>VK Видео</b> и вставлять ссылку — так сайт остаётся быстрым. Файл можно загрузить напрямую, если он меньше 50 МБ.' }));
+  if (!L.length){ box.appendChild(h('div', { class:'empty', text:'Пока пусто. Нажмите «Добавить», чтобы создать первый ' + S.one + '.' })); return; }
+  var list = h('div', { class:'list' });
+  L.forEach(function(it, i){
+    var th = S.thumb(it), thEl = h('div', { class:'th' + (th && th.ini ? ' ini' : '') });
+    if (th && th.ini) thEl.textContent = th.ini.toUpperCase(); else if (th) thEl.style.backgroundImage = 'url("' + phUrl(th) + '")';
+    var t = h('div', {}, [h('b', {}, [S.title(it), it.demo ? h('span', { class:'tag', text:'Пример' }) : null]), h('small', { text:S.sub(it) })]);
+    var acts = h('div', { class:'acts' }, [
+      h('button', { class:'ic', title:'Выше', text:'↑', onclick:function(){ if (!i) return; L.splice(i - 1, 0, L.splice(i, 1)[0]); mark(); go(kind); } }),
+      h('button', { class:'ic', title:'Ниже', text:'↓', onclick:function(){ if (i === L.length - 1) return; L.splice(i + 1, 0, L.splice(i, 1)[0]); mark(); go(kind); } }),
+      kind === 'projects' ? h('a', { class:'ic', title:'Открыть на сайте', text:'↗', href:SITE + 'obekt.html?id=' + encodeURIComponent(it.id), target:'_blank' }) : null,
+      h('button', { class:'btn sec sm', text:'Изменить', onclick:function(){ edit(kind, i); } }),
+      h('button', { class:'ic del', title:'Удалить', text:'×', onclick:function(){ if (!confirm('Удалить «' + S.title(it) + '»?')) return; delItem(kind, it); L.splice(i, 1); mark(); go(kind); } })
+    ]);
+    list.appendChild(h('div', { class:'it' }, [thEl, t, acts]));
+  });
+  box.appendChild(list);
+}
+function delItem(kind, it){ (it.photos || []).forEach(forget); ['photo','poster'].forEach(function(k){ if (it[k]) forget(it[k]); }); if (it.file && !/^https?:/.test(it.file)){ if (files[it.file]) delete files[it.file]; else dels[it.file] = true; } }
+
+/* ================== Редактирование ================== */
+var cur = null;
+function edit(kind, idx){
+  var S = SCHEMA[kind], src = idx < 0 ? S.blank() : SM[kind][idx];
+  var obj = JSON.parse(JSON.stringify(src));
+  var added = [];   // новые фото, которые нужно забыть при отмене
+  cur = { kind:kind, idx:idx, obj:obj, added:added, removed:[] };
+  $('#dTitle').textContent = (idx < 0 ? 'Новый ' : 'Изменить ') + S.one;
+  var body = $('#dBody'); body.innerHTML = '';
+  S.fields.forEach(function(g){
+    var fs = h('div', { class:'fs' }, [h('b', { text:g[0] })]);
+    var grid = null;
+    g[1].forEach(function(f){
+      var el = field(kind, obj, f);
+      var wide = /photos|photo|textarea|lines|smeta|stages|video|vfile|check|project|source/.test(f[1]) || f[0] === 'title';
+      if (wide){ grid = null; fs.appendChild(el); }
+      else { if (!grid){ grid = h('div', { class:'grid3' }); fs.appendChild(grid); } grid.appendChild(el); }
+    });
+    body.appendChild(fs);
+  });
+  $('#drawer').hidden = false;
+}
+function closeDrawer(save){
+  if (!cur) return;
+  if (!save){ cur.added.forEach(forget); }
+  else {
+    var S = SCHEMA[cur.kind], o = cur.obj;
+    if (cur.kind === 'projects'){
+      if (!o.title){ toast('Укажите название объекта'); return; }
+      o.id = slug(o.id || o.title);
+      var dup = SM.projects.some(function(p, i){ return p.id === o.id && i !== cur.idx; }); if (dup) o.id += '-' + rnd().slice(0, 3);
+      o.area = +o.area || 0; o.days = +o.days || 0; o.year = +o.year || '';
+      var svc = SERVICES.filter(function(s){ return s[0] === o.service; })[0]; if (svc) o.type = svc[1];
+      o.smeta = (o.smeta || []).filter(function(r){ return r[0]; }); o.stages = (o.stages || []).filter(function(r){ return r[0]; });
+    }
+    (o.photos || []).forEach(function(p, i){ if (!p.alt) p.alt = S.alt(o, i); });
+    ['photo','poster'].forEach(function(k){ if (o[k] && !o[k].alt) o[k].alt = S.alt(o, 0); });
+    cur.removed.forEach(forget);
+    if (cur.idx < 0) SM[cur.kind].push(o); else SM[cur.kind][cur.idx] = o;
+    mark();
+  }
+  $('#drawer').hidden = true; var k = cur.kind; cur = null; go(k);
+}
+$('#dClose').onclick = $('#dCancel').onclick = function(){ closeDrawer(false); };
+$('#dSave').onclick = function(){ closeDrawer(true); };
+
+function field(kind, obj, f){
+  var k = f[0], type = f[1], label = f[2], ph = f[3], S = SCHEMA[kind];
+  var lab = h('label', { class:'f' }, [label]);
+  function inp(t){ var i = h('input', { type:t, placeholder:ph || '', value:obj[k] != null ? obj[k] : '' }); i.oninput = function(){ obj[k] = t === 'number' ? (i.value === '' ? '' : +i.value) : i.value; }; return i; }
+  switch (type){
+    case 'text': lab.appendChild(inp('text')); return lab;
+    case 'number': lab.appendChild(inp('number')); return lab;
+    case 'price': var pi = inp('text'); pi.onblur = function(){ if (num(pi.value)){ pi.value = rub(num(pi.value)).replace(/ /g, ' '); obj[k] = pi.value; } }; lab.appendChild(pi); return lab;
+    case 'textarea': var ta = h('textarea', { placeholder:ph || '' }); ta.value = obj[k] || ''; ta.oninput = function(){ obj[k] = ta.value; }; lab.appendChild(ta); return lab;
+    case 'lines': var tl = h('textarea', {}); tl.value = (obj[k] || []).join('\n'); tl.oninput = function(){ obj[k] = tl.value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean); }; lab.appendChild(tl); return lab;
+    case 'check': var c = h('input', { type:'checkbox' }); c.checked = !!obj[k]; c.onchange = function(){ if (c.checked) obj[k] = true; else delete obj[k]; }; return h('label', { style:'display:flex;gap:10px;align-items:center;font-weight:600' }, [c, label]);
+    case 'service': var s = h('select'); SERVICES.forEach(function(o){ s.appendChild(h('option', { value:o[0], text:o[1] })); }); s.value = obj[k] || SERVICES[1][0]; s.onchange = function(){ obj[k] = s.value; }; lab.appendChild(s); return lab;
+    case 'stars': var st = h('select'); [5,4,3,2,1].forEach(function(n){ st.appendChild(h('option', { value:n, text:'★★★★★'.slice(0, n) + ' (' + n + ')' })); }); st.value = obj[k] || 5; st.onchange = function(){ obj[k] = +st.value; }; lab.appendChild(st); return lab;
+    case 'source': var so = h('select'); [['yandex','Яндекс Карты'],['2gis','2ГИС'],['','Другое / не указывать']].forEach(function(o){ so.appendChild(h('option', { value:o[0], text:o[1] })); }); so.value = obj[k] == null ? 'yandex' : (obj[k] === 'demo' ? '' : obj[k]); so.onchange = function(){ obj[k] = so.value; }; lab.appendChild(so); return lab;
+    case 'project': var pr = h('select'); pr.appendChild(h('option', { value:'', text:'— не привязан —' })); SM.projects.forEach(function(p){ pr.appendChild(h('option', { value:p.id, text:p.title })); }); pr.value = obj[k] || ''; pr.onchange = function(){ obj[k] = pr.value; }; lab.appendChild(pr); return lab;
+    case 'smeta': return rowsField(obj, k, ['Работы', 'Сумма, ₽'], true);
+    case 'stages': return rowsField(obj, k, ['Этап', 'Сколько длился'], false);
+    case 'photos': return photosField(kind, obj, k, label, true);
+    case 'photo': return photosField(kind, obj, k, label, false);
+    case 'video': return videoField(obj, k, label);
+    case 'vfile': return vfileField(obj, k, label);
+  }
+  return lab;
+}
+function rowsField(obj, k, cols, money){
+  obj[k] = obj[k] || [];
+  var wrap = h('div', { class:'rows' }), tot = h('div', { class:'sum' });
+  function draw(){
+    wrap.innerHTML = '';
+    wrap.appendChild(h('div', { class:'row' + (money ? '' : ' s2'), style:'font-size:13px;font-weight:700;color:#5B6474' }, [h('span', { text:cols[0] }), h('span', { text:cols[1] }), h('span')]));
+    obj[k].forEach(function(r, i){
+      var a = h('input', { type:'text', value:r[0] }), b = h('input', { type:money ? 'number' : 'text', value:r[1] });
+      a.oninput = function(){ r[0] = a.value; }; b.oninput = function(){ r[1] = money ? +b.value || 0 : b.value; total(); };
+      wrap.appendChild(h('div', { class:'row' + (money ? '' : ' s2') }, [a, b, h('button', { class:'ic del', type:'button', text:'×', onclick:function(){ obj[k].splice(i, 1); draw(); } })]));
+    });
+    wrap.appendChild(h('div', { style:'display:flex;gap:10px;align-items:center;justify-content:space-between' }, [h('button', { class:'btn sec sm', type:'button', text:'+ Строка', onclick:function(){ obj[k].push(['', money ? 0 : '']); draw(); } }), money ? tot : null]));
+    total();
+  }
+  function total(){ if (money) tot.textContent = 'Итого: ' + rub(obj[k].reduce(function(s, r){ return s + (+r[1] || 0); }, 0)); }
+  draw();
+  return h('div', { class:'f' }, [wrap]);
+}
+function photosField(kind, obj, k, label, multi){
+  var S = SCHEMA[kind];
+  var box = h('div', { style:'display:grid;gap:12px' });
+  var wmOn = h('input', { type:'checkbox' }); wmOn.checked = S.wm && SM.watermark.on !== false;
+  var input = h('input', { type:'file', accept:'image/*,.heic,.heif', multiple:multi ? true : null, hidden:true });
+  var drop = h('div', { class:'drop' }, [h('b', { text: multi ? 'Перетащите фото сюда или нажмите, чтобы выбрать' : 'Перетащите фото или нажмите' }), h('small', { text:'Любой формат (JPG, PNG, HEIC с iPhone…). Сами переведём в WebP, уменьшим, поставим логотип и подпись.' })]);
+  var prog = h('div', { class:'prog', hidden:true }, [h('i')]), msg = h('div', { class:'muted', style:'font-size:13px' });
+  var grid = h('div', { class:'phs' });
+  drop.onclick = function(){ input.click(); };
+  drop.ondragover = function(e){ e.preventDefault(); drop.classList.add('over'); };
+  drop.ondragleave = function(){ drop.classList.remove('over'); };
+  drop.ondrop = function(e){ e.preventDefault(); drop.classList.remove('over'); take([].slice.call(e.dataTransfer.files)); };
+  input.onchange = function(){ take([].slice.call(input.files)); input.value = ''; };
+  function list(){ return multi ? (obj[k] = obj[k] || []) : (obj[k] ? [obj[k]] : []); }
+  function take(fl){
+    fl = fl.filter(function(f){ return /^image\//.test(f.type) || /\.(heic|heif)$/i.test(f.name); }); if (!fl.length) return;
+    if (!multi) fl = fl.slice(0, 1);
+    prog.hidden = false; var done = 0, base = slug(obj.id || obj.title || obj.name || kind);
+    var chain = Promise.resolve();
+    fl.forEach(function(f){
+      chain = chain.then(function(){ msg.textContent = 'Обрабатываю: ' + f.name + ' (' + (done + 1) + ' из ' + fl.length + ')';
+        return processPhoto(f, S.folder, base, wmOn.checked).then(function(p){
+          cur.added.push(p);
+          if (multi){ obj[k].push(p); p.alt = S.alt(obj, obj[k].length - 1); }
+          else { if (obj[k]) cur.removed.push(obj[k]); obj[k] = p; p.alt = S.alt(obj, 0); }
+          done++; prog.firstChild.style.width = (done / fl.length * 100) + '%'; draw();
+        }).catch(function(e){ toast(e.message); });
+      });
+    });
+    chain.then(function(){ msg.textContent = 'Готово: ' + done + ' фото. Они опубликуются вместе с остальными изменениями.'; setTimeout(function(){ prog.hidden = true; prog.firstChild.style.width = 0; }, 800); });
+  }
+  function draw(){
+    grid.innerHTML = ''; var L = list();
+    L.forEach(function(p, i){
+      var im = h('div', { class:'im' }); im.style.backgroundImage = 'url("' + phUrl(p) + '")';
+      if (multi && i === 0) im.appendChild(h('em', { text:'Обложка' }));
+      if (files[p.src]) im.appendChild(h('u', { text:'Новое' }));
+      var ta = h('textarea', { placeholder:'Подпись к фото (alt)' }); ta.value = p.alt || ''; ta.oninput = function(){ p.alt = ta.value; };
+      var bar = h('div', { class:'bar' }, multi ? [
+        h('button', { type:'button', title:'Левее', text:'←', onclick:function(){ if (!i) return; L.splice(i - 1, 0, L.splice(i, 1)[0]); draw(); } }),
+        h('button', { type:'button', title:'Сделать обложкой', text:'★', onclick:function(){ L.unshift(L.splice(i, 1)[0]); draw(); } }),
+        h('button', { type:'button', title:'Правее', text:'→', onclick:function(){ if (i === L.length - 1) return; L.splice(i + 1, 0, L.splice(i, 1)[0]); draw(); } }),
+        h('button', { type:'button', title:'Удалить', text:'×', onclick:function(){ cur.removed.push(L.splice(i, 1)[0]); draw(); } })
+      ] : [h('button', { type:'button', text:'Удалить фото', onclick:function(){ cur.removed.push(obj[k]); obj[k] = ''; draw(); } })]);
+      grid.appendChild(h('div', { class:'ph' }, [im, ta, bar]));
+    });
+    if (multi && L.length > 1) grid.appendChild(h('div', { style:'align-self:center' }, [h('button', { class:'btn sec sm', type:'button', text:'Обновить все подписи', onclick:function(){ L.forEach(function(p, i){ p.alt = S.alt(obj, i); }); draw(); } })]));
+  }
+  draw();
+  box.appendChild(h('div', { style:'display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap' }, [h('b', { text:label, style:'font-size:14px' }), h('label', { style:'display:flex;gap:8px;align-items:center;font-size:13.5px' }, [wmOn, 'Ставить логотип на фото'])]));
+  box.appendChild(drop); box.appendChild(input); box.appendChild(prog); box.appendChild(msg); box.appendChild(grid);
+  return box;
+}
+function embedOf(u){
+  var m; u = u || '';
+  if ((m = u.match(/rutube\.ru\/(?:video|shorts|play\/embed)\/([a-z0-9]+)/i))) return { src:'https://rutube.ru/play/embed/' + m[1], kind:'Rutube', id:m[1] };
+  if ((m = u.match(/video(-?\d+)_(\d+)/))) return { src:'https://vk.com/video_ext.php?oid=' + m[1] + '&id=' + m[2] + '&hd=2', kind:'VK Видео' };
+  if ((m = u.match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/))) return { src:'https://www.youtube.com/embed/' + m[1], kind:'YouTube', yt:m[1] };
+  return null;
+}
+function videoField(obj, k, label){
+  var i = h('input', { type:'url', placeholder:'https://rutube.ru/video/…  или  https://vk.com/video-…  или  YouTube', value:obj[k] || '' });
+  var info = h('div', { class:'muted', style:'font-size:13px' }), prev = h('div');
+  function upd(){
+    obj[k] = i.value.trim(); var e = embedOf(obj[k]); prev.innerHTML = '';
+    if (!obj[k]){ info.textContent = 'Скопируйте ссылку на видео из адресной строки Rutube, VK Видео или YouTube.'; return; }
+    if (!e){ info.innerHTML = '<span style="color:#C0392B">Не похоже на ссылку Rutube, VK или YouTube.</span>'; return; }
+    info.textContent = 'Распознано: ' + e.kind + '. Видео будет открываться прямо на сайте.';
+    prev.appendChild(h('div', { class:'vprev' }, [h('iframe', { src:e.src, allow:'fullscreen', allowfullscreen:true })]));
+    if (!obj.poster && e.yt){ obj.poster = { src:'https://img.youtube.com/vi/' + e.yt + '/hqdefault.jpg', alt:'' }; toast('Обложку взяли с YouTube'); }
+    if (!obj.poster && e.id){ fetch('https://rutube.ru/api/video/' + e.id + '/?format=json').then(function(r){ return r.json(); }).then(function(j){ if (j.thumbnail_url && !obj.poster){ obj.poster = { src:j.thumbnail_url, alt:'' }; toast('Обложку взяли с Rutube'); } }).catch(function(){}); }
+  }
+  i.oninput = upd; upd();
+  return h('label', { class:'f' }, [label, i, info, prev]);
+}
+function vfileField(obj, k, label){
+  var input = h('input', { type:'file', accept:'video/*' }), info = h('div', { class:'muted', style:'font-size:13px', text: obj[k] ? 'Загружен файл: ' + obj[k] : 'MP4 до 50 МБ. Обложку сделаем сами из первой секунды видео.' });
+  input.onchange = function(){
+    var f = input.files[0]; if (!f) return;
+    if (f.size > 50 * 1024 * 1024){ info.innerHTML = '<span style="color:#C0392B">Файл больше 50 МБ. Загрузите его на Rutube и вставьте ссылку.</span>'; return; }
+    info.textContent = 'Готовлю видео…';
+    var ext = (f.name.split('.').pop() || 'mp4').toLowerCase(), path = 'img/video/' + slug(obj.title || 'video') + '-' + rnd() + '.' + ext;
+    addFile(path, f).then(function(){ obj[k] = path; obj.url = ''; info.textContent = 'Загружен: ' + f.name + ' (' + Math.round(f.size / 1048576) + ' МБ)'; return frame(f); })
+      .then(function(blob){ if (!blob || obj.poster) return; return processPhoto(new File([blob], 'poster.jpg', { type:'image/jpeg' }), 'img/video', slug(obj.title || 'video'), true).then(function(p){ obj.poster = p; p.alt = SCHEMA.videos.alt(obj); cur.added.push(p); toast('Обложка сделана из видео — откройте карточку заново, чтобы увидеть'); }); })
+      .catch(function(e){ info.textContent = 'Ошибка: ' + e.message; });
+  };
+  return h('label', { class:'f' }, [label, input, info]);
+}
+function frame(file){
+  return new Promise(function(res){
+    var v = document.createElement('video'); v.muted = true; v.preload = 'auto'; v.src = URL.createObjectURL(file);
+    v.onloadeddata = function(){ v.currentTime = Math.min(1, (v.duration || 2) / 2); };
+    v.onseeked = function(){ var c = document.createElement('canvas'); c.width = v.videoWidth; c.height = v.videoHeight; c.getContext('2d').drawImage(v, 0, 0); c.toBlob(function(b){ res(b); }, 'image/jpeg', .9); };
+    v.onerror = function(){ res(null); };
+  });
+}
+
+/* ================== Тексты и фото страниц ================== */
+var ED = { path:null, doc:null };
+function vTexts(box){
+  box.appendChild(h('div', { class:'hint blue', html:'Выберите страницу, нажмите на любой текст и меняйте его прямо на странице. Нажмите на фото, чтобы заменить его или изменить подпись. Меню и подвал одинаковые на всех страницах — их удобнее менять через «Найти и заменить».' }));
+  var frameWrap = h('div', { class:'ed-frame' }), ifr = h('iframe', { sandbox:'allow-same-origin', title:'Редактор страницы' }); frameWrap.appendChild(ifr);
+  var pages = h('div', { class:'ed-pages' }), side = h('div', { class:'ed-side' });
+  var imgBox = h('div', { class:'card', hidden:true });
+  var seg = h('div', { class:'seg' }, [h('button', { class:'on', text:'Компьютер', onclick:function(){ ifr.style.width = '100%'; seg.children[0].classList.add('on'); seg.children[1].classList.remove('on'); } }), h('button', { text:'Телефон', onclick:function(){ ifr.style.width = '390px'; seg.children[1].classList.add('on'); seg.children[0].classList.remove('on'); } })]);
+  var saveBtn = h('button', { class:'btn', text:'Сохранить страницу', disabled:true, onclick:function(){ savePage(); } });
+  side.appendChild(h('div', { class:'card' }, [h('h3', { text:'Страницы' }), pages]));
+  side.appendChild(h('div', { class:'card', style:'display:grid;gap:10px' }, [seg, saveBtn, h('small', { class:'muted', text:'«Сохранить страницу» добавляет правки к публикации. На сайт они попадут после кнопки «Опубликовать».' })]));
+  side.appendChild(imgBox);
+  box.appendChild(h('div', { class:'ed' }, [frameWrap, side]));
+  ifr.style.height = '78vh';
+  htmlFiles().then(function(L){
+    var names = PAGE_NAMES;
+    L.sort(function(a, b){ var o = function(x){ return x === 'index.html' ? '0' : /^uslugi\//.test(x) ? '2' + x : /^blog\//.test(x) ? '4' + x : /^(404|spasibo|privacy|soglasie|obekt)\.html$/.test(x) ? '5' + x : '1' + x; }; return o(a).localeCompare(o(b)); }).forEach(function(p){
+      var b = h('button', { text:names[p] || p, title:p }, [texts[p] != null ? h('span', { class:'tag new', text:'изменена' }) : null]); b.dataset.p = p;
+      b.onclick = function(){ if (ED.dirty && !confirm('На текущей странице есть несохранённые правки. Перейти без сохранения?')) return; open(p); };
+      pages.appendChild(b);
+    });
+    open(ED.path || 'index.html');
+  }).catch(function(e){ toast('Не удалось получить список страниц: ' + e.message); });
+
+  function open(p){
+    ED.path = p; ED.dirty = false; saveBtn.disabled = true; imgBox.hidden = true;
+    $$('button', pages).forEach(function(b){ b.classList.toggle('on', b.dataset.p === p); });
+    readFile(p).then(function(html){
+      var dir = p.indexOf('/') > -1 ? p.replace(/[^/]+$/, '') : '';
+      var marked = html.replace(/<head([^>]*)>/i, '<head$1><base data-ed href="' + SITE + dir + '"><style data-ed>[data-ed-h]{outline:2px dashed #D9480F!important;outline-offset:2px;cursor:text}[contenteditable]{outline:2px solid #D9480F!important;background:#FFF6F0!important}img[data-ed-h]{cursor:pointer}*{transition:none!important;animation:none!important}.reveal,[data-reveal]{opacity:1!important;transform:none!important}</style>');
+      ifr.srcdoc = marked;
+      ifr.onload = function(){ ED.doc = ifr.contentDocument; wire(ED.doc); };
+    }).catch(function(e){ toast('Не удалось открыть страницу: ' + e.message); });
+  }
+  function textEl(t){
+    for (var e = t; e && e !== ED.doc.body; e = e.parentElement){
+      if (/^(SCRIPT|STYLE|SVG|PATH|IFRAME|INPUT|TEXTAREA|SELECT)$/i.test(e.tagName)) return null;
+      for (var i = 0; i < e.childNodes.length; i++){ var n = e.childNodes[i]; if (n.nodeType === 3 && n.textContent.trim()) return e; }
+    }
+    return null;
+  }
+  function wire(doc){
+    $$('details', doc).forEach(function(d){ if (!d.open){ d.open = true; d.setAttribute('data-ed-closed', ''); } });
+    var hov = null;
+    doc.addEventListener('mouseover', function(e){ var t = e.target.tagName === 'IMG' ? e.target : textEl(e.target); if (hov) hov.removeAttribute('data-ed-h'); hov = t; if (t) t.setAttribute('data-ed-h', ''); });
+    doc.addEventListener('click', function(e){
+      var a = e.target.closest('a,button,summary,label'); if (a) e.preventDefault();
+      if (e.target.tagName === 'IMG'){ pickImg(e.target); return; }
+      var t = textEl(e.target); if (!t || t.isContentEditable) return;
+      var before = t.innerHTML; t.setAttribute('contenteditable', 'true'); t.focus();
+      t.addEventListener('blur', function once(){ t.removeEventListener('blur', once); t.removeAttribute('contenteditable'); if (t.innerHTML !== before){ ED.dirty = true; saveBtn.disabled = false; } });
+      t.addEventListener('keydown', function(ev){ if (ev.key === 'Enter' && !/^(P|LI|TD|DIV|BLOCKQUOTE)$/.test(t.tagName)){ ev.preventDefault(); t.blur(); } if (ev.key === 'Escape'){ t.innerHTML = before; t.blur(); } });
+    }, true);
+  }
+  function pickImg(im){
+    imgBox.hidden = false; imgBox.innerHTML = '';
+    var alt = h('textarea', { placeholder:'Подпись (alt)' }); alt.value = im.getAttribute('alt') || '';
+    alt.oninput = function(){ im.setAttribute('alt', alt.value); ED.dirty = true; saveBtn.disabled = false; };
+    var wm = h('input', { type:'checkbox' }); wm.checked = SM.watermark.on !== false;
+    var file = h('input', { type:'file', accept:'image/*,.heic,.heif', hidden:true });
+    var st = h('div', { class:'muted', style:'font-size:13px' });
+    file.onchange = function(){
+      var f = file.files[0]; if (!f) return; st.textContent = 'Обрабатываю…';
+      var dir = ED.path.indexOf('/') > -1 ? '../' : '';
+      processPhoto(f, 'img/stranicy', slug(ED.path.replace(/\.html$/, '')), wm.checked).then(function(p){
+        im.setAttribute('src', dir + p.src); im.removeAttribute('srcset'); im.removeAttribute('onerror');
+        if (!alt.value){ alt.value = (ED.doc.querySelector('h1') || {}).textContent || 'Ремонт квартир — Смальтэра'; im.setAttribute('alt', alt.value.trim()); }
+        ED.dirty = true; saveBtn.disabled = false; st.textContent = 'Фото заменено. Не забудьте сохранить страницу.';
+        prev.style.backgroundImage = 'url("' + files[p.src].url + '")';
+      }).catch(function(e){ st.textContent = e.message; });
+    };
+    var prev = h('div', { style:'aspect-ratio:4/3;border-radius:4px;background:#DDE1E8 center/cover no-repeat;background-image:url("' + im.src + '")' });
+    [h('h3', { text:'Фото на странице' }), prev, h('button', { class:'btn sm', text:'Заменить фото', onclick:function(){ file.click(); } }), h('label', { style:'display:flex;gap:8px;align-items:center;font-size:13.5px' }, [wm, 'Ставить логотип']), h('label', { class:'f' }, ['Подпись (alt)', alt]), file, st].forEach(function(x){ imgBox.appendChild(x); });
+    imgBox.style.display = 'grid'; imgBox.style.gap = '10px';
+  }
+  function savePage(){
+    var doc = ED.doc; if (!doc) return;
+    var clone = doc.documentElement.cloneNode(true);
+    $$('[data-ed]', clone).forEach(function(e){ e.remove(); });
+    $$('[data-ed-h]', clone).forEach(function(e){ e.removeAttribute('data-ed-h'); });
+    $$('[contenteditable]', clone).forEach(function(e){ e.removeAttribute('contenteditable'); });
+    $$('[data-ed-closed]', clone).forEach(function(e){ e.removeAttribute('open'); e.removeAttribute('data-ed-closed'); });
+    var html = '<!DOCTYPE html>\n' + clone.outerHTML + '\n';
+    texts[ED.path] = html; ED.dirty = false; saveBtn.disabled = true; mark();
+    var b = $$('button', pages).filter(function(x){ return x.dataset.p === ED.path; })[0]; if (b && !b.querySelector('.tag')) b.appendChild(h('span', { class:'tag new', text:'изменена' }));
+    toast('Страница сохранена. Нажмите «Опубликовать», чтобы правки появились на сайте.');
+  }
+}
+
+/* ================== Найти и заменить ================== */
+function vReplace(box){
+  var f = h('input', { type:'text', placeholder:'Что найти' }), r = h('input', { type:'text', placeholder:'На что заменить' });
+  var res = h('div', { class:'res' }), go1 = h('button', { class:'btn sec', text:'Найти' }), go2 = h('button', { class:'btn', text:'Заменить везде', disabled:true });
+  var found = [];
+  box.appendChild(h('div', { class:'card', style:'display:grid;gap:14px' }, [
+    h('div', { class:'hint blue', html:'Ищет текст на всех страницах сайта и меняет его разом. Подходит для меню, подвала, цен в текстах, сроков и любых повторяющихся фраз. Регистр букв учитывается.' }),
+    h('div', { class:'grid2' }, [h('label', { class:'f' }, ['Найти', f]), h('label', { class:'f' }, ['Заменить на', r])]),
+    h('div', { style:'display:flex;gap:10px' }, [go1, go2])
+  ]));
+  box.appendChild(res);
+  go1.onclick = function(){
+    var q = f.value; if (!q){ toast('Введите, что искать'); return; }
+    res.innerHTML = '<div>Ищу по всем страницам…</div>'; go2.disabled = true; found = [];
+    htmlFiles().then(function(L){ return Promise.all(L.map(function(p){ return readFile(p).then(function(t){ return [p, t]; }); })); }).then(function(all){
+      res.innerHTML = ''; var total = 0;
+      all.forEach(function(x){
+        var p = x[0], t = x[1], n = t.split(q).length - 1; if (!n) return; total += n; found.push(p);
+        var i = t.indexOf(q), snip = t.slice(Math.max(0, i - 60), i + q.length + 60).replace(/<[^>]*>?/g, ' ');
+        res.appendChild(h('div', { html:'<b>' + esc(p) + '</b> — ' + n + ' шт.<br><span class="muted">…' + esc(snip).replace(esc(q), '<mark>' + esc(q) + '</mark>') + '…</span>' }));
+      });
+      res.insertBefore(h('div', { html:'<b>Найдено: ' + total + '</b> на ' + found.length + ' страницах' }), res.firstChild);
+      go2.disabled = !found.length;
+    }).catch(function(e){ res.innerHTML = '<div>Ошибка: ' + esc(e.message) + '</div>'; });
+  };
+  go2.onclick = function(){
+    var q = f.value, w = r.value; if (!confirm('Заменить «' + q + '» на «' + w + '» на ' + found.length + ' страницах?')) return;
+    Promise.all(found.map(function(p){ return readFile(p).then(function(t){ texts[p] = t.split(q).join(w); }); })).then(function(){ mark(); toast('Заменено. Нажмите «Опубликовать».'); res.innerHTML = '<div>Готово: изменено страниц — ' + found.length + '.</div>'; go2.disabled = true; });
+  };
+}
+
+/* ================== Цены калькулятора ================== */
+function vPrices(box){
+  var C = SM.calc;
+  var F = [['Работы за м²', [['cosm','Косметический'],['cap','Капитальный (новостройка)'],['design','Дизайнерский']]],
+           ['Санузел под ключ, ₽', [['bathCosm','При косметическом'],['bathCap','При капитальном'],['bathDesign','При дизайнерском']]],
+           ['Дополнительно', [['ceil','Натяжные потолки, ₽/м²'],['warm','Тёплый пол, ₽/м²'],['des','Дизайн-проект, ₽/м²'],['oldFlat','Наценка для вторички (1.18 = +18%)']]],
+           ['Материалы, ₽ за м² квартиры', [['matEcon','Эконом'],['matStd','Стандарт'],['matPrem','Премиум']]]];
+  box.appendChild(h('div', { class:'hint blue', html:'Эти цены использует калькулятор с помощником «Смальта» на главной и быстрый расчёт на первом экране. Цены, написанные текстом на страницах (таблицы, услуги), меняются через <b>«Найти и заменить»</b> — например, «от 19 000 ₽» → «от 20 000 ₽».' }));
+  F.forEach(function(g){
+    var grid = h('div', { class:'grid3' });
+    g[1].forEach(function(f){ var i = h('input', { type:'number', step:'any', value:C[f[0]] != null ? C[f[0]] : '' }); i.oninput = function(){ C[f[0]] = i.value === '' ? '' : +i.value; mark(); }; grid.appendChild(h('label', { class:'f' }, [f[1], i])); });
+    box.appendChild(h('div', { class:'card' }, [h('h3', { text:g[0] }), grid]));
+  });
+}
+
+/* ================== Настройки ================== */
+var PHONE0 = null;
+function vSettings(box){
+  if (PHONE0 == null) PHONE0 = SM.phone || '+7 (343) 000-00-00';
+  function inp(o, k, label, ph, hint, type){ var i = h('input', { type:type || 'text', placeholder:ph || '', value:o[k] != null && o[k] !== 0 ? o[k] : '' }); i.oninput = function(){ o[k] = type === 'number' ? +i.value || 0 : i.value.trim(); mark(); }; return h('label', { class:'f' }, [label, i, hint ? h('small', { text:hint }) : null]); }
+  var phone = inp(SM, 'phone', 'Телефон', '+7 (343) 123-45-67', 'Новый номер заменится на всех страницах сайта при публикации.');
+  phone.querySelector('input').onblur = function(){ var d = this.value.replace(/\D/g, ''); if (d.length === 11){ if (d[0] === '8') d = '7' + d.slice(1); this.value = SM.phone = '+7 (' + d.slice(1, 4) + ') ' + d.slice(4, 7) + '-' + d.slice(7, 9) + '-' + d.slice(9); mark(); } };
+  box.appendChild(h('div', { class:'card', style:'display:grid;gap:14px' }, [h('h3', { text:'Контакты' }), h('div', { class:'grid2' }, [phone, inp(SM, 'leadEmail', 'Почта для заявок', 'zayavki@mail.ru', 'Сюда будут приходить заявки со всех форм. При первой заявке придёт письмо для подтверждения — нажмите в нём кнопку.'), inp(SM, 'max', 'Ссылка на MAX', 'https://max.ru/…'), inp(SM, 'vk', 'Ссылка на ВКонтакте', 'https://vk.com/…')])]));
+  box.appendChild(h('div', { class:'card', style:'display:grid;gap:14px' }, [h('h3', { text:'Реквизиты (показываются в подвале, политике и согласии)' }), h('div', { class:'grid2' }, [inp(SM.company, 'name', 'Название', 'ИП Иванов Иван Иванович'), inp(SM.company, 'inn', 'ИНН'), inp(SM.company, 'ogrn', 'ОГРН / ОГРНИП'), inp(SM.company, 'address', 'Юридический адрес'), inp(SM.company, 'email', 'E-mail для обращений')])]));
+  box.appendChild(h('div', { class:'card', style:'display:grid;gap:14px' }, [h('h3', { text:'Карты и отзывы' }), h('div', { class:'grid2' }, [inp(SM, 'yandexMaps', 'Ссылка на Яндекс Карты', 'https://yandex.ru/maps/org/…'), inp(SM, 'gis', 'Ссылка на 2ГИС', 'https://2gis.ru/ekaterinburg/firm/…'), inp(SM.rating, 'value', 'Рейтинг (только настоящий)', '4,9'), inp(SM.rating, 'count', 'Количество отзывов на картах', '27')])]));
+  box.appendChild(h('div', { class:'card', style:'display:grid;gap:14px' }, [h('h3', { text:'Яндекс Метрика' }), inp(SM, 'ym', 'Номер счётчика', '98765432', 'Метрика сразу заработает на всех страницах, цели — в разделе «Цели Метрики».', 'number')]));
+  var W = SM.watermark;
+  var pos = h('select'); [['br','Справа снизу'],['bl','Слева снизу'],['tr','Справа сверху'],['tl','Слева сверху'],['c','По центру']].forEach(function(o){ pos.appendChild(h('option', { value:o[0], text:o[1] })); }); pos.value = W.pos || 'br';
+  var on = h('input', { type:'checkbox' }); on.checked = W.on !== false;
+  var size = h('input', { type:'range', min:8, max:30, value:W.size || 16 }), op = h('input', { type:'range', min:30, max:100, value:Math.round((W.opacity != null ? W.opacity : .85) * 100) });
+  var cv = h('canvas', { width:640, height:420, style:'width:100%;max-width:480px;border-radius:4px;background:#ccc' });
+  function prevWm(){ W.on = on.checked; W.pos = pos.value; W.size = +size.value; W.opacity = +op.value / 100; mark();
+    Promise.all([wmLogo(), document.fonts.load('800 40px Geologica').catch(function(){})]).then(function(r){ var c = cv.getContext('2d'), g = c.createLinearGradient(0, 0, 640, 420); g.addColorStop(0, '#C9BBA5'); g.addColorStop(1, '#6E6A55'); c.fillStyle = g; c.fillRect(0, 0, 640, 420); c.fillStyle = '#EAE6DE'; c.fillRect(400, 60, 180, 280); c.fillStyle = '#A9BCCB'; c.fillRect(60, 90, 200, 130); drawWm(c, 640, 420, r[0]); }); }
+  [on, pos, size, op].forEach(function(x){ x.oninput = x.onchange = prevWm; });
+  box.appendChild(h('div', { class:'card', style:'display:grid;gap:14px' }, [h('h3', { text:'Логотип на фото' }), h('label', { style:'display:flex;gap:10px;align-items:center;font-weight:600' }, [on, 'Ставить логотип на новые фото']), h('div', { class:'grid3' }, [h('label', { class:'f' }, ['Где', pos]), h('label', { class:'f' }, ['Размер', size]), h('label', { class:'f' }, ['Прозрачность', op])]), cv, h('small', { class:'muted', text:'Логотип ставится на фото при загрузке. Уже загруженные фото не меняются.' })]));
+  prevWm();
+}
+
+/* ================== Цели ================== */
+function vGoals(box){
+  var G = [['lead','Заявка отправлена','любая форма: калькулятор, замер, обратный звонок, «Хочу так же»'],['thanks','Открыта страница «Спасибо»','дублирует заявку — удобно для рекламы в Директе'],['phone','Клик по телефону','на любой странице'],['messenger','Клик по MAX или ВКонтакте',''],['open_form','Открыл окно заявки','кнопки «Заказать звонок», «Бесплатный замер», «Хочу так же»'],['quiz_start','Начал расчёт в калькуляторе','первый ответ помощнику «Смальта»'],['quiz_contacts','Дошёл до контактов в калькуляторе','увидел итоговую цену и форму'],['checklist','Чек-лист приёмки','запросил или скачал PDF'],['object_view','Смотрел объект','открыл страницу объекта из портфолио'],['video_play','Включил видео','']];
+  var tb = h('table', { class:'tb' }); tb.appendChild(h('tr', {}, [h('th', { text:'Идентификатор' }), h('th', { text:'Что значит' }), h('th', { text:'Когда срабатывает' })]));
+  G.forEach(function(g){ tb.appendChild(h('tr', {}, [h('td', {}, [h('code', { text:g[0] })]), h('td', { text:g[1] }), h('td', { class:'muted', text:g[2] })])); });
+  box.appendChild(h('div', { class:'card', style:'display:grid;gap:12px' }, [h('h3', { text:'Как включить цели' }), h('ol', { style:'margin-left:20px;display:grid;gap:6px', html:'<li>Создайте счётчик на <a href="https://metrika.yandex.ru" target="_blank" rel="noopener">metrika.yandex.ru</a> и впишите его номер в «Настройках».</li><li>В Метрике: Настройка → Цели → Добавить цель → <b>JavaScript-событие</b>.</li><li>В поле «Идентификатор цели» вставьте идентификатор из таблицы. Создайте так каждую нужную цель.</li><li>Главная цель для рекламы — <code>lead</code>. Её же выберите в Яндекс Директе как цель оптимизации.</li>' }), SM.ym ? h('div', { class:'hint', html:'Счётчик подключён: <b>' + esc(SM.ym) + '</b>' }) : h('div', { class:'hint', text:'Номер счётчика пока не указан — цели не отправляются.' })]));
+  box.appendChild(tb);
+}
+
+/* ================== Публикация ================== */
+$('#publish').onclick = publish;
+function step(t){ var li = h('li', { class:'run', text:t }); $('#ovL').appendChild(li); return li; }
+function publish(){
+  $('#ov').hidden = false; $('#ovL').innerHTML = ''; $('#ovOk').hidden = true; $('#ovT').textContent = 'Публикую изменения…';
+  var s0, base, phoneJob = Promise.resolve();
+  var newPhone = SM.phone, oldPhone = PHONE0 != null ? PHONE0 : JSON.parse(SM0).phone;
+  if (newPhone && oldPhone && newPhone !== oldPhone && newPhone.replace(/\D/g, '').length === 11){
+    var l0 = step('Меняю телефон на всех страницах');
+    var od = oldPhone.replace(/\D/g, ''), nd = newPhone.replace(/\D/g, '');
+    var pairs = [[oldPhone, newPhone], ['tel:+' + od, 'tel:+' + nd], ['+' + od.slice(0, 1) + '-' + od.slice(1, 4) + '-' + od.slice(4, 7) + '-' + od.slice(7, 9) + '-' + od.slice(9), '+' + nd.slice(0, 1) + '-' + nd.slice(1, 4) + '-' + nd.slice(4, 7) + '-' + nd.slice(7, 9) + '-' + nd.slice(9)]];
+    phoneJob = htmlFiles().then(function(L){ return Promise.all(L.map(function(p){ return readFile(p).then(function(t){ var o = t; pairs.forEach(function(x){ t = t.split(x[0]).join(x[1]); }); if (t !== o) texts[p] = t; }); })); }).then(function(){ l0.className = 'ok'; });
+  }
+  var paths = Object.keys(files), tpaths = Object.keys(texts), dpaths = Object.keys(dels);
+  var l1, l2, l3;
+  phoneJob.then(function(){
+    paths = Object.keys(files); tpaths = Object.keys(texts);
+    l1 = step('Загружаю файлы: ' + paths.length);
+    return gh('/git/ref/heads/' + encodeURIComponent(BRANCH));
+  }).then(function(ref){ s0 = ref.object.sha; return gh('/git/commits/' + s0); }).then(function(c){
+    base = c.tree.sha; var done = 0;
+    return paths.reduce(function(p, path){ return p.then(function(acc){ return gh('/git/blobs', { method:'POST', body:{ content:files[path].b64, encoding:'base64' } }).then(function(b){ done++; l1.textContent = 'Загружаю файлы: ' + done + ' из ' + paths.length; acc.push({ path:path, mode:'100644', type:'blob', sha:b.sha }); return acc; }); }); }, Promise.resolve([]));
+  }).then(function(entries){
+    l1.className = 'ok'; l2 = step('Сохраняю данные и страницы');
+    if (JSON.stringify(SM) !== SM0) entries.push({ path:DATA_PATH, mode:'100644', type:'blob', content:dataText() });
+    tpaths.forEach(function(p){ entries.push({ path:p, mode:'100644', type:'blob', content:texts[p] }); });
+    return tree().then(function(T){ dpaths.forEach(function(p){ if (T.indexOf(p) > -1) entries.push({ path:p, mode:'100644', type:'blob', sha:null }); }); return gh('/git/trees', { method:'POST', body:{ base_tree:base, tree:entries } }); });
+  }).then(function(t){
+    var what = []; if (JSON.stringify(SM) !== SM0) what.push('данные'); if (tpaths.length) what.push('страницы: ' + tpaths.length); if (paths.length) what.push('файлы: ' + paths.length);
+    return gh('/git/commits', { method:'POST', body:{ message:'Админка: ' + what.join(', '), tree:t.sha, parents:[s0] } });
+  }).then(function(c){ return gh('/git/refs/heads/' + encodeURIComponent(BRANCH), { method:'PATCH', body:{ sha:c.sha } }); }).then(function(){
+    l2.className = 'ok'; step('Готово! Сайт обновится через 1–2 минуты.').className = 'ok';
+    $('#ovT').textContent = 'Опубликовано';
+    tpaths.forEach(function(p){ cache[p] = texts[p]; });
+    paths.forEach(function(p){ if (TREE) TREE.push(p); });
+    dpaths.forEach(function(p){ if (TREE) TREE = TREE.filter(function(x){ return x !== p; }); });
+    files = {}; texts = {}; dels = {}; SM0 = JSON.stringify(SM); cache[DATA_PATH] = dataText(); PHONE0 = SM.phone;
+    mark(); $('#ovOk').hidden = false; $('#ovOk').textContent = 'Отлично';
+  }).catch(function(e){
+    var li = h('li', { class:'err', text:'Ошибка: ' + e.message + (e.status === 409 || e.status === 422 ? ' — возможно, сайт только что обновили с компьютера. Обновите админку (F5) и повторите.' : '') }); $('#ovL').appendChild(li);
+    $('#ovT').textContent = 'Не получилось'; $('#ovOk').hidden = false; $('#ovOk').textContent = 'Закрыть';
+  });
+}
+$('#ovOk').onclick = function(){ $('#ov').hidden = true; if (view === 'texts' || view === 'replace') go(view); };
+
+/* ================== Старт ================== */
+if (CFG.token && CFG.repo){ boot().catch(function(e){ showLogin(e.status === 401 ? 'Ключ больше не действует. Войдите заново.' : 'Ошибка входа: ' + e.message); }); }
+else showLogin();
+})();
+</script>
+</body>
+</html>

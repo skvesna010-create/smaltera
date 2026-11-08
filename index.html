@@ -1207,10 +1207,10 @@ h1 .h1-sub,.hero h1 span.h1-sub{font-size:clamp(16px,.3em,20px)!important}
   </div>
 </section>
 
-<section id="videos" hidden>
+<section id="videos" data-hide-empty>
   <div class="wrap">
     <div class="head-row"><div><h2>Видео с объектов</h2><p class="sub">Без монтажа и красивых ракурсов: как идут работы и как выглядит результат.</p></div></div>
-    <div class="vids" id="vidGrid"></div>
+    <div data-sm="videos"></div>
   </div>
 </section>
 
@@ -1713,15 +1713,18 @@ h1 .h1-sub,.hero h1 span.h1-sub{font-size:clamp(16px,.3em,20px)!important}
   });
 
   /* ===== Цены (меняйте здесь) ===== */
-  var RATES = { cosm:8000, cap:19000, design:30000 };   /* ₽ за м², только работы */
-  var OLD_FLAT = 1.18;                                  /* вторичка: демонтаж и капитальные работы +18% */
-  var BATH = { cosm:120000, cap:160000, design:220000 }; /* санузел под ключ, ₽ */
-  var CEIL = 600;                                       /* натяжные потолки, ₽ за м² */
-  var WARM = 2200, WARM_SHARE = 0.25;                   /* тёплый пол, ₽ за м² на четверть площади */
-  var DES = 1500;                                       /* дизайн-проект, ₽ за м² */
+  /* Цены калькулятора меняются в админке (assets/data.js → calc) */
+  var CALC = (window.SM && window.SM.calc) || {};
+  function cv(k, d){ return CALC[k] != null && CALC[k] !== '' ? +CALC[k] : d; }
+  var RATES = { cosm:cv('cosm',8000), cap:cv('cap',19000), design:cv('design',30000) };   /* ₽ за м², только работы */
+  var OLD_FLAT = cv('oldFlat',1.18);                                  /* вторичка: демонтаж и капитальные работы +18% */
+  var BATH = { cosm:cv('bathCosm',120000), cap:cv('bathCap',160000), design:cv('bathDesign',220000) }; /* санузел под ключ, ₽ */
+  var CEIL = cv('ceil',600);                                       /* натяжные потолки, ₽ за м² */
+  var WARM = cv('warm',2200), WARM_SHARE = 0.25;                   /* тёплый пол, ₽ за м² на четверть площади */
+  var DES = cv('des',1500);                                       /* дизайн-проект, ₽ за м² */
   var DAYS = { cosm:[16,0.4], cap:[38,0.7], design:[55,1.0] };
   var PHONE = '+7 (343) 000-00-00';
-  var MAT = { econ:6000, std:12000, prem:25000 };       /* материалы ориентировочно, ₽ за м² квартиры */
+  var MAT = { econ:cv('matEcon',6000), std:cv('matStd',12000), prem:cv('matPrem',25000) };       /* материалы ориентировочно, ₽ за м² квартиры */
 
 
   /* ===== Отправка заявок =====
@@ -1733,13 +1736,13 @@ h1 .h1-sub,.hero h1 span.h1-sub{font-size:clamp(16px,.3em,20px)!important}
     if (c && !c.checked){ e.preventDefault(); e.stopImmediatePropagation(); var l = c.closest('.consent'); l.classList.add('need'); c.focus(); }
   }, true);
   document.addEventListener('change', function(e){ if (e.target.name === 'consent' && e.target.checked) e.target.closest('.consent').classList.remove('need'); });
-  function sendLead(data){
-    try { if (YM_ID && window.ym) ym(YM_ID, 'reachGoal', 'lead'); } catch(e){}
+  function sendLead(data, stay){
     if (!LEAD_EMAIL) return Promise.resolve(false);
     var body = Object.assign({ _subject:'Заявка с сайта Смальтэра', _template:'table', _captcha:'false' }, data);
     return fetch('https://formsubmit.co/ajax/' + encodeURIComponent(LEAD_EMAIL), {
       method:'POST', headers:{ 'Content-Type':'application/json', 'Accept':'application/json' }, body: JSON.stringify(body)
-    }).then(function(r){ return r.json(); }).then(function(j){ return String(j.success) === 'true'; }).catch(function(){ return false; });
+    }).then(function(r){ return r.json(); }).then(function(j){ return String(j.success) === 'true'; }).catch(function(){ return false; })
+      .then(function(ok){ if (ok){ window.smGoal && smGoal('lead'); if (!stay) setTimeout(function(){ location.href = 'spasibo.html'; }, 1400); } return ok; });
   }
 
   var S = { flat:'new', area:54, kind:'cap', extras:{}, when:null, name:'' };
@@ -1839,6 +1842,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{font-size:clamp(16px,.3em,20px)!important}
           (o.img ? '<span class="th ph"><img src="'+IMG(o.img)+'" alt="" onerror="this.classList.add(\'err\')"></span>' : '') +
           '<span>' + o.t + (o.s ? '<small>' + o.s + '</small>' : '') + '</span>';
         b.addEventListener('click', function(){
+          if (!window.__qs){ window.__qs = 1; window.smGoal && smGoal('quiz_start'); }
           if (!multi){ answers.innerHTML = ''; resolve(o); return; }
           picked[o.v] = !picked[o.v]; b.classList.toggle('sel', picked[o.v]);
           S.extras = Object.assign({}, picked); calc();
@@ -1857,6 +1861,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{font-size:clamp(16px,.3em,20px)!important}
   }
 
   function contactForm(){
+    window.smGoal && smGoal('quiz_contacts');
     answers.innerHTML =
       '<form class="contact" id="cForm" novalidate>' +
         '<div class="field"><label for="cName">Имя</label><input id="cName" type="text" autocomplete="name" placeholder="Как к вам обращаться"></div>' +
@@ -2299,8 +2304,8 @@ h1 .h1-sub,.hero h1 span.h1-sub{font-size:clamp(16px,.3em,20px)!important}
 
 
   /* ===== Мессенджеры: впишите ссылки ===== */
-  var MAX_URL = '';   /* например 'https://max.ru/u/ваш_ник' */
-  var VK_URL  = '';   /* например 'https://vk.com/smaltera' */
+  var MAX_URL = (window.SM && window.SM.max) || '';   /* например 'https://max.ru/u/ваш_ник' */
+  var VK_URL  = (window.SM && window.SM.vk) || '';   /* например 'https://vk.com/smaltera' */
   (function(){
     var ICON = {
       max:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 15V9l4 4 4-4v6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
@@ -2341,7 +2346,8 @@ h1 .h1-sub,.hero h1 span.h1-sub{font-size:clamp(16px,.3em,20px)!important}
       var ph = document.getElementById('popPhone').value, m = document.getElementById('popMsg');
       if (ph.replace(/\D/g,'').length < 11){ m.className = 'msg err'; m.textContent = 'Введите номер полностью: 10 цифр после +7.'; return; }
       m.className = 'msg'; m.textContent = 'Секунду…';
-      sendLead({ 'Источник':'Чек-лист приёмки', 'Телефон':ph }).then(function(){
+      window.smGoal && smGoal('checklist');
+      sendLead({ 'Источник':'Чек-лист приёмки', 'Телефон':ph }, true).then(function(){
         m.className = 'msg ok'; m.textContent = 'Готово! Чек-лист открывается по кнопке ниже.';
         document.getElementById('popForm').hidden = true; document.getElementById('popDl').hidden = false;
       });
@@ -2354,7 +2360,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{font-size:clamp(16px,.3em,20px)!important}
     var cb = document.getElementById('cb'); if (!cb) return;
     function open(){ cb.hidden = false; setTimeout(function(){ document.getElementById('cbPhone').focus(); }, 50); }
     function close(){ cb.hidden = true; }
-    document.querySelectorAll('[data-cb]').forEach(function(b){ b.addEventListener('click', open); });
+    document.querySelectorAll('[data-cb]').forEach(function(b){ b.addEventListener('click', function(){ window.smGoal && smGoal('open_form'); }); b.addEventListener('click', open); });
     cb.querySelector('[data-cb-x]').addEventListener('click', close);
     cb.addEventListener('click', function(e){ if (e.target === cb) close(); });
     document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !cb.hidden) close(); });
@@ -2413,7 +2419,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{font-size:clamp(16px,.3em,20px)!important}
       d.querySelector('.rv2-text').textContent = r.text || '';
       d.querySelector('.rv2-work').textContent = r.work || '';
       d.querySelector('.rv2-date').textContent = r.date || '';
-      if (r.photo){ var im = new Image(); im.className = 'rv2-ph'; im.alt = 'Фото объекта из отзыва'; im.loading = 'lazy'; im.src = r.photo; im.onerror = function(){ im.remove(); }; d.insertBefore(im, d.querySelector('.rv2-foot')); }
+      if (r.photo){ var im = new Image(); im.className = 'rv2-ph'; im.alt = (r.photo.alt || 'Фото объекта из отзыва'); im.loading = 'lazy'; im.src = (r.photo.sm || r.photo.src || r.photo); im.onerror = function(){ im.remove(); }; d.insertBefore(im, d.querySelector('.rv2-foot')); }
       g.appendChild(d);
       var t = d.querySelector('.rv2-text'), m = d.querySelector('.rv2-more');
       requestAnimationFrame(function(){ if (t.scrollHeight > t.clientHeight + 4) m.hidden = false; });
@@ -2500,7 +2506,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{font-size:clamp(16px,.3em,20px)!important}
 
     /* видео */
     var vp = document.getElementById('vplay'), vb = document.getElementById('vBox');
-    if (V.length){
+    if (V.length && document.getElementById('vidGrid')){
       var vg = document.getElementById('vidGrid');
       V.forEach(function(v){
         var b = document.createElement('button'); b.type = 'button'; b.className = 'vd';

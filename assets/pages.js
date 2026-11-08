@@ -6,6 +6,19 @@
   function U(p){ return !p ? '' : /^(https?:|\/|data:)/.test(p) ? p : ROOT + p; }
   function el(tag, cls, txt){ var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
   function badge(){ anyDemo = true; return el('span', 'demo-badge', 'Пример'); }
+  /* фото может быть строкой или объектом { src, sm, alt } */
+  function PS(x){ return x && typeof x === 'object' ? x.src : x; }
+  function PSM(x){ return x && typeof x === 'object' ? (x.sm || x.src) : x; }
+  function PA(x, d){ return x && typeof x === 'object' && x.alt ? x.alt : (d || ''); }
+  window.smGoal = window.smGoal || function(n){ try { if (SM.ym && window.ym) ym(SM.ym, 'reachGoal', n); } catch(e){} };
+  function embedOf(v){
+    if (v.embed) return v.embed;
+    var u = v.url || '', m;
+    if ((m = u.match(/rutube\.ru\/(?:video|shorts|play\/embed)\/([a-z0-9]+)/i))) return 'https://rutube.ru/play/embed/' + m[1];
+    if ((m = u.match(/video(-?\d+)_(\d+)/))) return 'https://vk.com/video_ext.php?oid=' + m[1] + '&id=' + m[2] + '&hd=2&autoplay=1';
+    if ((m = u.match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/))) return 'https://www.youtube.com/embed/' + m[1] + '?autoplay=1';
+    return '';
+  }
   function img(src, alt, cls){ var i = new Image(); i.loading = 'lazy'; i.alt = alt || ''; if (cls) i.className = cls; i.src = U(src); i.onerror = function(){ i.style.visibility = 'hidden'; }; return i; }
   function byId(id){ return (SM.projects || []).filter(function(p){ return p.id === id; })[0]; }
   function objUrl(p){ return ROOT + 'obekt.html?id=' + encodeURIComponent(p.id); }
@@ -13,14 +26,14 @@
   /* ---------- объекты ---------- */
   function projCard(p){
     var a = el('a', 'pj'); a.href = objUrl(p);
-    var ph = el('span', 'pj-ph'); ph.appendChild(img(p.photos && p.photos[0], p.title));
+    var ph = el('span', 'pj-ph'); ph.appendChild(img(PSM(p.photos && p.photos[0]), PA(p.photos && p.photos[0], p.title)));
     if (p.demo) ph.appendChild(badge());
     ph.appendChild(el('span', 'pj-cnt', (p.photos || []).length + ' фото'));
     a.appendChild(ph);
     var tx = el('span', 'pj-tx');
     tx.appendChild(el('small', 'pj-type', p.type + (p.district ? ' · ' + p.district : '')));
     tx.appendChild(el('b', null, p.title));
-    var m = el('span', 'pj-meta'); [p.area + ' м²', p.days + ' дней'].forEach(function(t){ m.appendChild(el('span', null, t)); }); tx.appendChild(m);
+    var m = el('span', 'pj-meta'); [p.area && p.area + ' м²', p.days && plural(p.days, 'день', 'дня', 'дней')].forEach(function(t){ if (t) m.appendChild(el('span', null, t)); }); tx.appendChild(m);
     tx.appendChild(el('span', 'pj-price', p.price));
     a.appendChild(tx);
     return a;
@@ -62,7 +75,7 @@
     var more = el('button', 'rv-more', 'Читать полностью'); more.type = 'button'; more.hidden = true; d.appendChild(more);
     more.addEventListener('click', function(){ d.classList.toggle('open'); more.textContent = d.classList.contains('open') ? 'Свернуть' : 'Читать полностью'; });
     requestAnimationFrame(function(){ if (t.scrollHeight > t.clientHeight + 4) more.hidden = false; });
-    if (r.photo) d.appendChild(img(r.photo, 'Фото объекта из отзыва', 'rv-ph'));
+    if (r.photo) d.appendChild(img(PSM(r.photo), PA(r.photo, 'Фото объекта из отзыва'), 'rv-ph'));
     var f = el('div', 'rv-foot');
     var p = r.project && byId(r.project);
     if (p){ var a = el('a', 'rv-work', r.work || p.title); a.href = objUrl(p); f.appendChild(a); } else f.appendChild(el('span', 'rv-work', r.work || ''));
@@ -98,7 +111,9 @@
       document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !vp.hidden) close(); });
     }
     var box = vp.querySelector('.vp-in'); box.innerHTML = '';
-    if (v.embed){ var f = el('iframe'); f.src = v.embed; f.allow = 'autoplay; fullscreen'; f.allowFullscreen = true; box.appendChild(f); }
+    smGoal('video_play');
+    var em = embedOf(v);
+    if (em){ var f = el('iframe'); f.src = em; f.allow = 'autoplay; fullscreen'; f.allowFullscreen = true; box.appendChild(f); }
     else if (v.file){ var vd = el('video'); vd.src = U(v.file); vd.controls = true; vd.autoplay = true; box.appendChild(vd); }
     else box.appendChild(el('p', null, 'Здесь будет видео с объекта.'));
     vp.hidden = false;
@@ -110,7 +125,7 @@
     var g = el('div', 'vd-grid');
     list.forEach(function(v){
       var b = el('button', 'vd'); b.type = 'button';
-      b.appendChild(img(v.poster, ''));
+      b.appendChild(img(PSM(v.poster), PA(v.poster, v.title)));
       if (v.demo) b.appendChild(badge());
       b.appendChild(el('span', 'vd-play'));
       var t = el('span', 'vd-t'); t.appendChild(el('b', null, v.title)); t.appendChild(el('span', null, v.note || '')); b.appendChild(t);
@@ -126,7 +141,7 @@
     (SM.team || []).forEach(function(t){
       var c = el('div', 'tmc');
       var ph = el('div', 'tmc-ph');
-      if (t.photo) ph.appendChild(img(t.photo, t.name));
+      if (t.photo) ph.appendChild(img(PSM(t.photo), PA(t.photo, t.role + ' ' + t.name)));
       else ph.appendChild(el('span', null, (t.role || '?').charAt(0)));
       if (t.demo) ph.appendChild(badge());
       c.appendChild(ph);
@@ -138,8 +153,9 @@
   }
 
   /* ---------- окно заявки (замер, «хочу так же») ---------- */
-  var PHONE = '+7 (343) 000-00-00', TEL = '+73430000000';
+  var PHONE = SM.phone || '+7 (343) 000-00-00', TEL = '+' + PHONE.replace(/\D/g, '');
   function openLead(title, extra){
+    smGoal('open_form');
     var w = el('div', 'ld'), box = el('div', 'ld-in'), x = el('button', 'ld-x', '×'); x.type = 'button'; x.setAttribute('aria-label', 'Закрыть');
     w.setAttribute('role', 'dialog'); w.setAttribute('aria-modal', 'true');
     box.appendChild(x); box.appendChild(el('h3', null, title || 'Бесплатный замер'));
@@ -167,8 +183,9 @@
         var data = Object.assign({ _subject:'Заявка с сайта Смальтэра', _template:'table', _captcha:'false', 'Заявка':title, 'Имя':f.name.value || '—', 'Телефон':ph.value, 'Страница':document.title }, extra || {});
         fetch('https://formsubmit.co/ajax/' + encodeURIComponent(SM.leadEmail), { method:'POST', headers:{ 'Content-Type':'application/json', 'Accept':'application/json' }, body: JSON.stringify(data) })
           .then(function(r){ return r.json(); }).then(function(j){ if (String(j.success) !== 'true') throw 0;
-            try { if (SM.ym && window.ym) ym(SM.ym, 'reachGoal', 'lead'); } catch(_){}
-            box.innerHTML = ''; box.appendChild(x); box.appendChild(el('h3', null, 'Спасибо, заявка у нас!')); box.appendChild(el('p', null, 'Инженер перезвонит вам в рабочее время.')); })
+            smGoal('lead');
+            box.innerHTML = ''; box.appendChild(x); box.appendChild(el('h3', null, 'Спасибо, заявка у нас!')); box.appendChild(el('p', null, 'Инженер перезвонит вам в рабочее время.'));
+            setTimeout(function(){ location.href = ROOT + 'spasibo.html'; }, 1200); })
           .catch(function(){ m.innerHTML = 'Не получилось отправить. Позвоните нам: <a href="tel:' + TEL + '">' + PHONE + '</a>'; });
       });
     }
@@ -201,12 +218,12 @@
     var tr = el('div', 'pf-track');
     list.forEach(function(p){
       var a = el('a', 'pf-card'); a.href = objUrl(p);
-      a.appendChild(img(p.photos && p.photos[0], p.title));
+      a.appendChild(img(PSM(p.photos && p.photos[0]), PA(p.photos && p.photos[0], p.title)));
       var top = el('span', 'pf-top'), tl = el('span'); tl.style.display = 'flex'; tl.style.gap = '8px';
       tl.appendChild(el('span', 'pf-type', p.type)); if (p.demo){ anyDemo = true; tl.appendChild(el('span', 'pf-demo', 'Пример')); }
       top.appendChild(tl); top.appendChild(el('span', 'pf-cnt', (p.photos || []).length + ' фото')); a.appendChild(top);
       var inf = el('span', 'pf-info'); inf.appendChild(el('b', null, p.title));
-      var ch = el('span', 'pf-chips'); [p.area + ' м²', plural(p.days, 'день', 'дня', 'дней'), p.district].forEach(function(t){ if (t) ch.appendChild(el('span', null, t)); }); inf.appendChild(ch);
+      var ch = el('span', 'pf-chips'); [p.area && p.area + ' м²', p.days && plural(p.days, 'день', 'дня', 'дней'), p.district].forEach(function(t){ if (t) ch.appendChild(el('span', null, t)); }); inf.appendChild(ch);
       var row = el('span', 'pf-row'), pr = el('span', 'pf-price'); pr.appendChild(el('small', null, 'Стоимость работ')); pr.appendChild(document.createTextNode(p.price));
       row.appendChild(pr); row.appendChild(el('span', 'pf-go', 'Смотреть объект')); inf.appendChild(row); a.appendChild(inf);
       tr.appendChild(a);
@@ -226,7 +243,7 @@
     var x = el('button', 'x', '×'), p = el('button', 'p', '‹'), n = el('button', 'n', '›');
     [x, p, n].forEach(function(b){ b.type = 'button'; }); x.setAttribute('aria-label', 'Закрыть');
     lb.appendChild(im); lb.appendChild(x); lb.appendChild(p); lb.appendChild(n); lb.appendChild(cnt); document.body.appendChild(lb);
-    function show(){ im.src = U(photos[i]); cnt.textContent = (i + 1) + ' / ' + photos.length; }
+    function show(){ im.src = U(PS(photos[i])); im.alt = PA(photos[i]); cnt.textContent = (i + 1) + ' / ' + photos.length; }
     function close(){ lb.remove(); document.removeEventListener('keydown', key); }
     function key(e){ if (e.key === 'Escape') close(); if (e.key === 'ArrowRight'){ i = (i + 1) % photos.length; show(); } if (e.key === 'ArrowLeft'){ i = (i - 1 + photos.length) % photos.length; show(); } }
     x.onclick = close; lb.onclick = function(e){ if (e.target === lb) close(); };
@@ -244,36 +261,37 @@
     document.title = p.title + ' — ' + p.type + ', ' + p.area + ' м², ' + p.price + ' | Смальтэра';
     h1.textContent = p.title;
     lead.textContent = '';
-    var sub = el('div', 'ob2-sub'); [p.type, p.district, p.area + ' м²', plural(p.days, 'день', 'дня', 'дней'), p.year].forEach(function(t){ if (t) sub.appendChild(el('span', null, String(t))); }); lead.appendChild(sub);
+    var sub = el('div', 'ob2-sub'); [p.type, p.district, p.area && p.area + ' м²', p.days && plural(p.days, 'день', 'дня', 'дней'), p.year].forEach(function(t){ if (t) sub.appendChild(el('span', null, String(t))); }); lead.appendChild(sub);
     var cr = document.querySelector('.crumbs .cur'); if (cr) cr.textContent = p.title;
 
     /* галерея + карточка заказа */
-    var lay = el('div', 'ob2'), gal = el('div'), main = el('div', 'ob2-main'), mi = img(p.photos[0], p.title), gi = 0;
+    var lay = el('div', 'ob2'), gal = el('div'), main = el('div', 'ob2-main'), mi = img(PS(p.photos[0]), PA(p.photos[0], p.title)), gi = 0;
+    smGoal('object_view');
     main.appendChild(mi); if (p.demo) main.appendChild(badge());
     var cnt = el('span', 'ob2-count'); main.appendChild(cnt); main.appendChild(el('span', 'ob2-zoom', 'Нажмите, чтобы увеличить'));
     var th = el('div', 'ob2-th');
-    function show(i){ gi = (i + p.photos.length) % p.photos.length; mi.src = U(p.photos[gi]); cnt.textContent = (gi + 1) + ' / ' + p.photos.length; th.querySelectorAll('button').forEach(function(b, k){ b.classList.toggle('on', k === gi); }); }
+    function show(i){ gi = (i + p.photos.length) % p.photos.length; mi.src = U(PS(p.photos[gi])); mi.alt = PA(p.photos[gi], p.title); cnt.textContent = (gi + 1) + ' / ' + p.photos.length; th.querySelectorAll('button').forEach(function(b, k){ b.classList.toggle('on', k === gi); }); }
     if (p.photos.length > 1){
       var pb = el('button', 'ob2-nav p', '‹'), nb = el('button', 'ob2-nav n', '›'); pb.type = nb.type = 'button'; pb.setAttribute('aria-label', 'Предыдущее фото'); nb.setAttribute('aria-label', 'Следующее фото');
       pb.onclick = function(e){ e.stopPropagation(); show(gi - 1); }; nb.onclick = function(e){ e.stopPropagation(); show(gi + 1); };
       main.appendChild(pb); main.appendChild(nb);
-      p.photos.forEach(function(src, k){ var b = el('button'); b.type = 'button'; b.setAttribute('aria-label', 'Фото ' + (k + 1)); b.appendChild(img(src, '')); b.onclick = function(){ show(k); }; th.appendChild(b); });
+      p.photos.forEach(function(src, k){ var b = el('button'); b.type = 'button'; b.setAttribute('aria-label', 'Фото ' + (k + 1)); b.appendChild(img(PSM(src), '')); b.onclick = function(){ show(k); }; th.appendChild(b); });
     }
     main.onclick = function(){ lightbox(p.photos, gi); };
     gal.appendChild(main); if (p.photos.length > 1) gal.appendChild(th); lay.appendChild(gal);
     var card = el('aside', 'ob2-card');
     card.appendChild(el('small', null, 'Стоимость работ на этом объекте'));
     card.appendChild(el('div', 'ob2-price', p.price));
-    if (perM) card.appendChild(el('div', 'ob2-pm', '≈ ' + rub(perM) + ' за м² · ' + plural(p.days, 'день', 'дня', 'дней')));
+    if (perM) card.appendChild(el('div', 'ob2-pm', '≈ ' + rub(perM) + ' за м²' + (p.days ? ' · ' + plural(p.days, 'день', 'дня', 'дней') : '')));
     var ul = el('ul'); ['Цена закреплена в договоре', 'Оплата по этапам после приёмки', 'Гарантия 3 года на все работы', /kapital|dizajner/.test(p.service || '') ? 'Дизайн-проект в подарок' : 'Фото с объекта каждую неделю'].forEach(function(t){ ul.appendChild(el('li', null, t)); }); card.appendChild(ul);
     var b1 = el('button', 'btn', 'Хочу такой же ремонт'); b1.type = 'button'; b1.onclick = function(){ openLead('Хочу такой же ремонт', { 'Объект': p.title + ', ' + p.price }); }; card.appendChild(b1);
     var b2 = el('button', 'btn ghost', 'Бесплатный замер'); b2.type = 'button'; b2.onclick = function(){ openLead('Бесплатный замер'); }; card.appendChild(b2);
-    var tel = el('a', 'ob2-tel', '+7 (343) 000-00-00'); tel.href = 'tel:+73430000000'; card.appendChild(tel);
+    var tel = el('a', 'ob2-tel', PHONE); tel.href = 'tel:' + TEL; card.appendChild(tel);
     lay.appendChild(card); box.appendChild(lay); show(0);
 
     /* цифры */
     var nums = el('div', 'ob2-nums');
-    [['Площадь', p.area + ' м²'], ['Срок ремонта', plural(p.days, 'день', 'дня', 'дней')], ['Стоимость работ', p.price], ['Цена за м²', perM ? rub(perM) : '—']].forEach(function(r){ var d = el('div'); d.appendChild(el('small', null, r[0])); d.appendChild(el('b', null, r[1])); nums.appendChild(d); });
+    [['Площадь', p.area ? p.area + ' м²' : '—'], ['Срок ремонта', p.days ? plural(p.days, 'день', 'дня', 'дней') : '—'], ['Стоимость работ', p.price || '—'], ['Цена за м²', perM ? rub(perM) : '—']].forEach(function(r){ var d = el('div'); d.appendChild(el('small', null, r[0])); d.appendChild(el('b', null, r[1])); nums.appendChild(d); });
     box.appendChild(nums);
 
     /* задача и работы */
@@ -296,7 +314,7 @@
 
     /* этапы */
     if (p.stages && p.stages.length){
-      var s3 = sec(box, 'Как шёл ремонт', 'Всего ' + plural(p.days, 'день', 'дня', 'дней') + ' — точно по графику из договора.'), tl = el('div', 'ob2-tl');
+      var s3 = sec(box, 'Как шёл ремонт', p.days ? 'Всего ' + plural(p.days, 'день', 'дня', 'дней') + ' — точно по графику из договора.' : ''), tl = el('div', 'ob2-tl');
       p.stages.forEach(function(r){ var d = el('div'); d.appendChild(el('b', null, r[0])); d.appendChild(el('span', null, r[1])); tl.appendChild(d); });
       s3.appendChild(tl);
     }
@@ -333,7 +351,7 @@
     var o = el('div'); o.dataset.exclude = p.id; o.dataset.title = 'Другие объекты'; o.dataset.service = p.service || ''; box.appendChild(o); renderPortfolio(o);
 
     /* нижняя панель на телефоне */
-    var bb = el('div', 'ob2-bottom'), x1 = el('a', 'a', 'Хочу так же'), x2 = el('a', 'b', 'Позвонить'); x1.href = '#'; x1.onclick = function(e){ e.preventDefault(); openLead('Хочу такой же ремонт', { 'Объект': p.title + ', ' + p.price }); }; x2.href = 'tel:+73430000000'; bb.appendChild(x1); bb.appendChild(x2); document.body.appendChild(bb);
+    var bb = el('div', 'ob2-bottom'), x1 = el('a', 'a', 'Хочу так же'), x2 = el('a', 'b', 'Позвонить'); x1.href = '#'; x1.onclick = function(e){ e.preventDefault(); openLead('Хочу такой же ремонт', { 'Объект': p.title + ', ' + p.price }); }; x2.href = 'tel:' + TEL; bb.appendChild(x1); bb.appendChild(x2); document.body.appendChild(bb);
   }
 
   var R = { portfolio:renderPortfolio, projects:renderProjects, reviews:renderReviews, rating:renderRating, videos:renderVideos, team:renderTeam, project:renderProject };

@@ -29,7 +29,14 @@
   document.querySelectorAll('[data-co]').forEach(function(e){ var v = co[e.dataset.co]; if (v){ e.textContent = v; e.classList.remove('ph-fill'); } });
   /* Яндекс Метрика на всех страницах */
   if (SM.ym && !window.ym){ (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym'); ym(SM.ym,'init',{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true}); }
-  document.addEventListener('click', function(e){ var a = e.target.closest && e.target.closest('a[href^="tel:"]'); if (a && SM.ym && window.ym) ym(SM.ym, 'reachGoal', 'phone'); });
+  window.smGoal = function(n){ try { if (SM.ym && window.ym) ym(SM.ym, 'reachGoal', n); } catch(e){} };
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href]'); if (!a) return;
+    var h = a.getAttribute('href');
+    if (/^tel:/.test(h)) smGoal('phone');
+    else if (/max\.ru|vk\.com|vk\.me|vkvideo/.test(h)) smGoal('messenger');
+    else if (/checklist\.pdf/.test(h)) smGoal('checklist');
+  });
   /* уведомление о cookie */
   var seen = false; try { seen = localStorage.getItem('sm-ck') === '1'; } catch(e){}
   if (!seen){

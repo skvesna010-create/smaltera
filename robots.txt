@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
-Disallow: /*?demo
+Disallow: /admin/
+Disallow: /spasibo.html
 
 Sitemap: https://skvesna010-create.github.io/smaltera/sitemap.xml
