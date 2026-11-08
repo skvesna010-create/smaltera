@@ -963,6 +963,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
 </script>
 <link rel="stylesheet" href="assets/nav.css">
 <script src="assets/data.js"></script>
+<link rel="stylesheet" href="assets/pf.css">
 </head>
 <body>
 <div id="scrollbar" aria-hidden="true"></div>
@@ -1142,12 +1143,8 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
   </div>
 </section>
 
-<section id="works" hidden>
-  <div class="wrap">
-    <div class="head-row"><div><h2>Наши объекты</h2><p class="sub">Реальные квартиры, которые мы отремонтировали: площадь, срок и итоговая стоимость работ.</p></div><span class="row-btns"><a class="btn btn-line" href="obekty.html">Все объекты</a><a class="btn btn-main" href="#quiz">Хочу так же</a></span></div>
-    <div class="works" id="worksGrid"></div>
-    <button type="button" class="btn btn-line works-more" id="worksMore" hidden>Показать ещё объекты</button>
-  </div>
+<section id="works">
+  <div class="wrap"><div data-sm="portfolio" data-text="Реальные квартиры в Екатеринбурге: фото, сроки и итоговая стоимость работ. Нажмите на объект, чтобы посмотреть смету, этапы и отзыв."></div></div>
 </section>
 
 <section id="reviews" hidden>
@@ -2409,7 +2406,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
     }
 
     /* портфолио */
-    if (P.length){
+    if (P.length && document.getElementById('worksGrid')){
       var grid = document.getElementById('worksGrid'), more = document.getElementById('worksMore');
       P.forEach(function(p, i){
         var b = document.createElement('button'); b.type = 'button'; b.className = 'wk'; if (i >= 3) b.hidden = true;
@@ -2487,6 +2484,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
   } else go();
 })();
 </script>
+<script src="assets/pages.js" defer></script>
 <script src="assets/nav.js" defer></script>
 </body>
 </html>

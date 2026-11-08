@@ -137,58 +137,165 @@
     box.appendChild(g);
   }
 
+  /* ---------- общие помощники ---------- */
+  function num(s){ return parseInt(String(s || '').replace(/\D/g, ''), 10) || 0; }
+  function rub(n){ return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₽'; }
+  function plural(n, a, b, c){ var m = n % 10, h = n % 100; return n + ' ' + (m === 1 && h !== 11 ? a : m >= 2 && m <= 4 && (h < 12 || h > 14) ? b : c); }
+
+  /* ---------- лента портфолио (на всех страницах) ---------- */
+  function renderPortfolio(box){
+    var all = (SM.projects || []).slice(), list = all;
+    if (box.dataset.exclude) list = list.filter(function(p){ return p.id !== box.dataset.exclude; });
+    if (box.dataset.service){ var s = box.dataset.service; list = list.filter(function(p){ return p.service === s; }).concat(list.filter(function(p){ return p.service !== s; })); }
+    if (!list.length){ box.hidden = true; return; }
+    var wrap = el('div', 'pf');
+    var inn = el('div', 'pf-in'), head = el('div', 'pf-head'), hl = el('div');
+    hl.appendChild(el('h2', null, box.dataset.title || 'Наши объекты'));
+    hl.appendChild(el('p', null, box.dataset.text || 'Реальные квартиры: фото, сроки и стоимость работ. Нажмите на объект, чтобы посмотреть всё.'));
+    head.appendChild(hl);
+    var ctrl = el('div', 'pf-ctrl');
+    var all_ = el('a', 'pf-all', 'Все объекты · ' + all.length); all_.href = ROOT + 'obekty.html'; ctrl.appendChild(all_);
+    var pv = el('button', 'pf-arr', '‹'), nx = el('button', 'pf-arr', '›'); pv.type = nx.type = 'button'; pv.setAttribute('aria-label', 'Назад'); nx.setAttribute('aria-label', 'Вперёд');
+    ctrl.appendChild(pv); ctrl.appendChild(nx); head.appendChild(ctrl); inn.appendChild(head); wrap.appendChild(inn);
+    var tr = el('div', 'pf-track');
+    list.forEach(function(p){
+      var a = el('a', 'pf-card'); a.href = objUrl(p);
+      a.appendChild(img(p.photos && p.photos[0], p.title));
+      var top = el('span', 'pf-top'), tl = el('span'); tl.style.display = 'flex'; tl.style.gap = '8px';
+      tl.appendChild(el('span', 'pf-type', p.type)); if (p.demo){ anyDemo = true; tl.appendChild(el('span', 'pf-demo', 'Пример')); }
+      top.appendChild(tl); top.appendChild(el('span', 'pf-cnt', (p.photos || []).length + ' фото')); a.appendChild(top);
+      var inf = el('span', 'pf-info'); inf.appendChild(el('b', null, p.title));
+      var ch = el('span', 'pf-chips'); [p.area + ' м²', plural(p.days, 'день', 'дня', 'дней'), p.district].forEach(function(t){ if (t) ch.appendChild(el('span', null, t)); }); inf.appendChild(ch);
+      var row = el('span', 'pf-row'), pr = el('span', 'pf-price'); pr.appendChild(el('small', null, 'Стоимость работ')); pr.appendChild(document.createTextNode(p.price));
+      row.appendChild(pr); row.appendChild(el('span', 'pf-go', 'Смотреть объект')); inf.appendChild(row); a.appendChild(inf);
+      tr.appendChild(a);
+    });
+    wrap.appendChild(tr);
+    var bar = el('div', 'pf-bar'), bi = el('i'); bar.appendChild(bi); wrap.appendChild(bar);
+    box.appendChild(wrap);
+    function upd(){ var max = tr.scrollWidth - tr.clientWidth; var w = tr.clientWidth / tr.scrollWidth; bi.style.width = (w * 100) + '%'; bi.style.transform = 'translateX(' + (max > 0 ? tr.scrollLeft / max * (1 / w - 1) * 100 : 0) + '%)'; pv.disabled = tr.scrollLeft < 5; nx.disabled = tr.scrollLeft > max - 5; }
+    function go(d){ var c = tr.querySelector('.pf-card'); tr.scrollBy({ left: d * (c.offsetWidth + 20), behavior: 'smooth' }); }
+    pv.addEventListener('click', function(){ go(-1); }); nx.addEventListener('click', function(){ go(1); });
+    tr.addEventListener('scroll', upd, { passive: true }); window.addEventListener('resize', upd); setTimeout(upd, 50);
+  }
+
   /* ---------- страница объекта ---------- */
+  function lightbox(photos, start){
+    var lb = el('div', 'lbx'), im = new Image(), i = start, cnt = el('span');
+    var x = el('button', 'x', '×'), p = el('button', 'p', '‹'), n = el('button', 'n', '›');
+    [x, p, n].forEach(function(b){ b.type = 'button'; }); x.setAttribute('aria-label', 'Закрыть');
+    lb.appendChild(im); lb.appendChild(x); lb.appendChild(p); lb.appendChild(n); lb.appendChild(cnt); document.body.appendChild(lb);
+    function show(){ im.src = U(photos[i]); cnt.textContent = (i + 1) + ' / ' + photos.length; }
+    function close(){ lb.remove(); document.removeEventListener('keydown', key); }
+    function key(e){ if (e.key === 'Escape') close(); if (e.key === 'ArrowRight'){ i = (i + 1) % photos.length; show(); } if (e.key === 'ArrowLeft'){ i = (i - 1 + photos.length) % photos.length; show(); } }
+    x.onclick = close; lb.onclick = function(e){ if (e.target === lb) close(); };
+    p.onclick = function(){ i = (i - 1 + photos.length) % photos.length; show(); }; n.onclick = function(){ i = (i + 1) % photos.length; show(); };
+    document.addEventListener('keydown', key); show();
+  }
+  function sec(box, title, sub){ var s = el('section', 'blk'); if (title) s.appendChild(el('h2', null, title)); if (sub) s.appendChild(el('p', 'sub', sub)); box.appendChild(s); return s; }
   function renderProject(box){
     var id = new URLSearchParams(location.search).get('id');
     var p = id && byId(id);
     var h1 = document.querySelector('.pg-hero h1'), lead = document.querySelector('.pg-hero .lead');
     if (!p){ h1.textContent = 'Объект не найден'; lead.innerHTML = 'Возможно, ссылка устарела. <a href="' + ROOT + 'obekty.html">Посмотреть все объекты</a>'; return; }
-    document.title = p.title + ' — ' + p.type + ' | Смальтэра';
-    h1.textContent = p.title; if (p.demo) h1.appendChild(badge());
-    lead.textContent = p.type + ' · ' + p.area + ' м² · ' + p.days + ' дней';
+    document.body.classList.add('has-ob2');
+    var price = num(p.price), perM = p.area ? price / p.area : 0;
+    document.title = p.title + ' — ' + p.type + ', ' + p.area + ' м², ' + p.price + ' | Смальтэра';
+    h1.textContent = p.title;
+    lead.textContent = '';
+    var sub = el('div', 'ob2-sub'); [p.type, p.district, p.area + ' м²', plural(p.days, 'день', 'дня', 'дней'), p.year].forEach(function(t){ if (t) sub.appendChild(el('span', null, String(t))); }); lead.appendChild(sub);
     var cr = document.querySelector('.crumbs .cur'); if (cr) cr.textContent = p.title;
-    var lay = el('div', 'ob');
-    /* галерея */
-    var gal = el('div', 'ob-gal'), main = el('div', 'ob-main'), mi = img(p.photos[0], p.title); main.appendChild(mi); gal.appendChild(main);
-    var th = el('div', 'ob-th');
-    p.photos.forEach(function(src, i){
-      var b = el('button', i ? '' : 'on'); b.type = 'button'; b.setAttribute('aria-label', 'Фото ' + (i + 1)); b.appendChild(img(src, ''));
-      b.addEventListener('click', function(){ mi.src = U(src); th.querySelectorAll('button').forEach(function(x){ x.classList.remove('on'); }); b.classList.add('on'); });
-      th.appendChild(b);
-    });
-    if (p.photos.length > 1) gal.appendChild(th);
-    lay.appendChild(gal);
-    /* карточка */
-    var side = el('aside', 'ob-side');
-    var dl = el('div', 'ob-specs');
-    [['Вид ремонта', p.type], ['Район', p.district], ['Площадь', p.area + ' м²'], ['Срок', p.days + ' дней'], ['Год', p.year]].forEach(function(r){
-      if (!r[1]) return; var d = el('div'); d.appendChild(el('span', null, r[0])); d.appendChild(el('b', null, String(r[1]))); dl.appendChild(d);
-    });
-    side.appendChild(dl);
-    side.appendChild(el('small', 'ob-pl', 'Стоимость работ')); side.appendChild(el('b', 'ob-price', p.price));
-    var c1 = el('a', 'btn', 'Рассчитать похожий ремонт'); c1.href = ROOT + '#quiz'; side.appendChild(c1);
-    if (p.service){ var c2 = el('a', 'btn ghost', 'Подробнее об услуге'); c2.href = ROOT + 'uslugi/' + p.service + '.html'; side.appendChild(c2); }
-    lay.appendChild(side);
-    box.appendChild(lay);
-    /* задача и работы */
-    var two = el('div', 'two ob-two');
-    if (p.task){ var b1 = el('div', 'box'); b1.appendChild(el('h3', null, 'Задача клиента')); b1.appendChild(el('p', null, p.task)); two.appendChild(b1); }
-    if (p.done && p.done.length){ var b2 = el('div', 'box'); b2.appendChild(el('h3', null, 'Что сделали')); var ul = el('ul'); p.done.forEach(function(x){ ul.appendChild(el('li', null, x)); }); b2.appendChild(ul); two.appendChild(b2); }
-    var s1 = el('section', 'blk'); s1.appendChild(two); box.appendChild(s1);
-    if (p.before && p.before.length){
-      var s2 = el('section', 'blk'); s2.appendChild(el('h2', null, 'До ремонта'));
-      var bg = el('div', 'ob-before'); p.before.forEach(function(src){ bg.appendChild(img(src, 'До ремонта')); }); s2.appendChild(bg); box.appendChild(s2);
+
+    /* галерея + карточка заказа */
+    var lay = el('div', 'ob2'), gal = el('div'), main = el('div', 'ob2-main'), mi = img(p.photos[0], p.title), gi = 0;
+    main.appendChild(mi); if (p.demo) main.appendChild(badge());
+    var cnt = el('span', 'ob2-count'); main.appendChild(cnt); main.appendChild(el('span', 'ob2-zoom', 'Нажмите, чтобы увеличить'));
+    var th = el('div', 'ob2-th');
+    function show(i){ gi = (i + p.photos.length) % p.photos.length; mi.src = U(p.photos[gi]); cnt.textContent = (gi + 1) + ' / ' + p.photos.length; th.querySelectorAll('button').forEach(function(b, k){ b.classList.toggle('on', k === gi); }); }
+    if (p.photos.length > 1){
+      var pb = el('button', 'ob2-nav p', '‹'), nb = el('button', 'ob2-nav n', '›'); pb.type = nb.type = 'button'; pb.setAttribute('aria-label', 'Предыдущее фото'); nb.setAttribute('aria-label', 'Следующее фото');
+      pb.onclick = function(e){ e.stopPropagation(); show(gi - 1); }; nb.onclick = function(e){ e.stopPropagation(); show(gi + 1); };
+      main.appendChild(pb); main.appendChild(nb);
+      p.photos.forEach(function(src, k){ var b = el('button'); b.type = 'button'; b.setAttribute('aria-label', 'Фото ' + (k + 1)); b.appendChild(img(src, '')); b.onclick = function(){ show(k); }; th.appendChild(b); });
     }
+    main.onclick = function(){ lightbox(p.photos, gi); };
+    gal.appendChild(main); if (p.photos.length > 1) gal.appendChild(th); lay.appendChild(gal);
+    var card = el('aside', 'ob2-card');
+    card.appendChild(el('small', null, 'Стоимость работ на этом объекте'));
+    card.appendChild(el('div', 'ob2-price', p.price));
+    if (perM) card.appendChild(el('div', 'ob2-pm', '≈ ' + rub(perM) + ' за м² · ' + plural(p.days, 'день', 'дня', 'дней')));
+    var ul = el('ul'); ['Цена закреплена в договоре', 'Оплата по этапам после приёмки', 'Гарантия 3 года на все работы', /kapital|dizajner/.test(p.service || '') ? 'Дизайн-проект в подарок' : 'Фото с объекта каждую неделю'].forEach(function(t){ ul.appendChild(el('li', null, t)); }); card.appendChild(ul);
+    var b1 = el('a', 'btn', 'Хочу такой же ремонт'); b1.href = ROOT + '#quiz'; card.appendChild(b1);
+    var b2 = el('a', 'btn ghost', 'Бесплатный замер'); b2.href = ROOT + 'kontakty.html'; card.appendChild(b2);
+    var tel = el('a', 'ob2-tel', '+7 (343) 000-00-00'); tel.href = 'tel:+73430000000'; card.appendChild(tel);
+    lay.appendChild(card); box.appendChild(lay); show(0);
+
+    /* цифры */
+    var nums = el('div', 'ob2-nums');
+    [['Площадь', p.area + ' м²'], ['Срок ремонта', plural(p.days, 'день', 'дня', 'дней')], ['Стоимость работ', p.price], ['Цена за м²', perM ? rub(perM) : '—']].forEach(function(r){ var d = el('div'); d.appendChild(el('small', null, r[0])); d.appendChild(el('b', null, r[1])); nums.appendChild(d); });
+    box.appendChild(nums);
+
+    /* задача и работы */
+    var s1 = sec(box, 'Задача и что сделали'), two = el('div', 'two');
+    if (p.task){ var q = el('div', 'ob2-quote'); q.appendChild(el('h3', null, 'С чем пришёл клиент')); q.appendChild(el('p', null, p.task)); two.appendChild(q); }
+    if (p.done && p.done.length){ var dn = el('div', 'box'); dn.appendChild(el('h3', null, 'Что мы сделали')); var dl = el('ul', 'ob2-done'); p.done.forEach(function(x){ dl.appendChild(el('li', null, x)); }); dn.appendChild(dl); two.appendChild(dn); }
+    s1.appendChild(two);
+
+    /* смета */
+    if (p.smeta && p.smeta.length){
+      var s2 = sec(box, 'Смета по объекту', 'Из чего сложилась стоимость работ. Материалы оплачивались отдельно.');
+      var tw = el('div', 'tw'), t = el('table', 'ptbl ob2-smeta'), tot = 0, mx = 0;
+      p.smeta.forEach(function(r){ tot += r[1]; mx = Math.max(mx, r[1]); });
+      var hr = el('tr'); hr.appendChild(el('th', null, 'Работы')); hr.appendChild(el('th', null, 'Сумма')); t.appendChild(hr);
+      p.smeta.forEach(function(r){ var tr = el('tr'), a = el('td'); a.appendChild(el('b', null, r[0])); var bar = el('span', 'ob2-bar'), bi = el('i'); bi.style.width = (r[1] / mx * 100) + '%'; bar.appendChild(bi); a.appendChild(bar); tr.appendChild(a); tr.appendChild(el('td', null, rub(r[1]))); t.appendChild(tr); });
+      var tt = el('tr', 'tot'); tt.appendChild(el('td', null, 'Итого за работы')); tt.appendChild(el('td', null, rub(tot))); t.appendChild(tt);
+      tw.appendChild(t); s2.appendChild(tw);
+      var f = el('p', 'fine'); f.innerHTML = 'Хотите такую же подробную смету на свою квартиру? <a href="' + ROOT + 'kontakty.html">Закажите бесплатный замер</a>'; s2.appendChild(f);
+    }
+
+    /* этапы */
+    if (p.stages && p.stages.length){
+      var s3 = sec(box, 'Как шёл ремонт', 'Всего ' + plural(p.days, 'день', 'дня', 'дней') + ' — точно по графику из договора.'), tl = el('div', 'ob2-tl');
+      p.stages.forEach(function(r){ var d = el('div'); d.appendChild(el('b', null, r[0])); d.appendChild(el('span', null, r[1])); tl.appendChild(d); });
+      s3.appendChild(tl);
+    }
+
+    /* материалы */
+    if (p.materials && p.materials.length){ var s4 = sec(box, 'Материалы'), m = el('div', 'ob2-mat'); p.materials.forEach(function(x){ m.appendChild(el('span', null, x)); }); s4.appendChild(m); }
+
+    /* отзыв и видео */
     [['reviews', 'Отзыв клиента'], ['videos', 'Видео с объекта']].forEach(function(k){
-      var s = el('section', 'blk'); s.setAttribute('data-hide-empty', ''); s.appendChild(el('h2', null, k[1]));
-      var c = el('div'); c.dataset.project = p.id; s.appendChild(c); box.appendChild(s);
+      var s = sec(box, k[1]); s.setAttribute('data-hide-empty', ''); var c = el('div'); c.dataset.project = p.id; s.appendChild(c);
       (k[0] === 'reviews' ? renderReviews : renderVideos)(c);
     });
-    var s3 = el('section', 'blk'); s3.setAttribute('data-hide-empty', ''); s3.appendChild(el('h2', null, 'Другие объекты'));
-    var c3 = el('div'); c3.dataset.exclude = p.id; c3.dataset.limit = '3'; s3.appendChild(c3); box.appendChild(s3); renderProjects(c3);
+
+    /* расчёт для своей квартиры */
+    if (perM){
+      var s5 = sec(box, 'Сколько будет стоить такой ремонт у вас'), cw = el('div', 'ob2-calc'), l = el('div');
+      var lab = el('label'), lv = el('span'); lab.appendChild(el('span', null, 'Площадь вашей квартиры')); lab.appendChild(lv); l.appendChild(lab);
+      var r = el('input'); r.type = 'range'; r.min = p.service === 'remont-vannoj' ? 2 : 20; r.max = p.service === 'remont-vannoj' ? 15 : 150; r.value = p.area; r.setAttribute('aria-label', 'Площадь, м²'); l.appendChild(r);
+      var lim = el('div', 'lim'); lim.appendChild(el('span', null, r.min + ' м²')); lim.appendChild(el('span', null, r.max + ' м²')); l.appendChild(lim);
+      l.appendChild(el('p', 'fine', 'Расчёт по цене этого объекта. Точную сумму закрепим в договоре после бесплатного замера.'));
+      var res = el('div', 'ob2-res'); res.appendChild(el('small', null, p.type + ', работы')); var rv = el('b'); res.appendChild(rv);
+      var rb = el('a', 'btn', 'Получить точную смету'); rb.href = ROOT + '#quiz'; res.appendChild(rb);
+      function rc(){ lv.textContent = r.value + ' м²'; rv.textContent = '≈ ' + rub(Math.round(perM * r.value / 1000) * 1000); }
+      r.addEventListener('input', rc); rc();
+      cw.appendChild(l); cw.appendChild(res); s5.appendChild(cw);
+    }
+
+    /* гарантии */
+    var s6 = sec(box, 'Почему с нами спокойно'), why = el('div', 'why');
+    [['Цена в договоре', 'Сумма за работы не меняется без вашего письменного согласия.'], ['Оплата по этапам', 'Платите только за то, что уже сделано и принято.'], ['Гарантия 3 года', 'На все работы, прописана в договоре.'], ['Отчёты каждую неделю', 'Фото и видео с объекта от прораба.']].forEach(function(r){ var d = el('div'); d.appendChild(el('b', null, r[0])); d.appendChild(el('span', null, r[1])); why.appendChild(d); });
+    s6.appendChild(why);
+
+    /* другие объекты */
+    var o = el('div'); o.dataset.exclude = p.id; o.dataset.title = 'Другие объекты'; o.dataset.service = p.service || ''; box.appendChild(o); renderPortfolio(o);
+
+    /* нижняя панель на телефоне */
+    var bb = el('div', 'ob2-bottom'), x1 = el('a', 'a', 'Хочу так же'), x2 = el('a', 'b', 'Позвонить'); x1.href = ROOT + '#quiz'; x2.href = 'tel:+73430000000'; bb.appendChild(x1); bb.appendChild(x2); document.body.appendChild(bb);
   }
 
-  var R = { projects:renderProjects, reviews:renderReviews, rating:renderRating, videos:renderVideos, team:renderTeam, project:renderProject };
+  var R = { portfolio:renderPortfolio, projects:renderProjects, reviews:renderReviews, rating:renderRating, videos:renderVideos, team:renderTeam, project:renderProject };
   document.querySelectorAll('[data-sm]').forEach(function(b){ var f = R[b.dataset.sm]; if (f) f(b); });
   var n = document.querySelector('[data-sm-notice]');
   if (n && anyDemo){ n.hidden = false; }
