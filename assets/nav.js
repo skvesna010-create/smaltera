@@ -1,4 +1,9 @@
 (function(){
+  /* запасное фото, если картинка не загрузилась */
+  var FB = 'https://images.pexels.com/photos/6908500/pexels-photo-6908500.jpeg?auto=compress&cs=tinysrgb&w=1200';
+  function fix(im){ if (im.dataset.fb || im.src.indexOf('images.pexels.com') < 0) return false; im.dataset.fb = '1'; im.classList.remove('err'); im.style.visibility = ''; im.style.opacity = ''; im.src = FB; return true; }
+  document.addEventListener('error', function(e){ if (e.target.tagName === 'IMG' && fix(e.target)) e.stopImmediatePropagation(); }, true);
+  document.querySelectorAll('img').forEach(function(im){ if (im.complete && !im.naturalWidth && im.src) fix(im); });
   var items = document.querySelectorAll('.mn-item'), t;
   function close(except){ items.forEach(function(it){ if (it !== except){ it.classList.remove('open'); it.querySelector('.mn-btn').setAttribute('aria-expanded','false'); } }); }
   function open(it){ close(it); it.classList.add('open'); it.querySelector('.mn-btn').setAttribute('aria-expanded','true'); }
