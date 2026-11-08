@@ -954,15 +954,20 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
 .wk-demo{position:absolute;left:10px;top:10px;margin:0;z-index:2}
 .row-btns{display:flex;gap:10px;flex-wrap:wrap}
 .vd .wk-demo{z-index:3}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.45;color:var(--muted);cursor:pointer;text-align:left}
+.consent input{flex:none;width:18px;height:18px;margin-top:1px;accent-color:var(--smalt);cursor:pointer}
+.consent a{color:inherit}
+.consent.need span{color:#C0392B}
+.consent.need input{outline:2px solid #C0392B;outline-offset:2px}
 </style>
+<script src="assets/data.js"></script>
 <script>
   /* Яндекс Метрика: впишите номер счётчика, например var YM_ID = 98765432; */
-  var YM_ID = 0;
+  var YM_ID = (window.SM && window.SM.ym) || 0;   /* номер счётчика вписывается в assets/data.js */
   if (YM_ID){ (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');
     ym(YM_ID,'init',{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true}); }
 </script>
 <link rel="stylesheet" href="assets/nav.css">
-<script src="assets/data.js"></script>
 <link rel="stylesheet" href="assets/pf.css">
 </head>
 <body>
@@ -1023,7 +1028,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
             <button type="button" data-a="78">3-комн.</button>
           </div>
           <div class="qp-res">
-            <div class="qp-sum" id="qpSum">от 979 000 ₽<small id="qpNote">капитальный ремонт</small></div>
+            <div class="qp-sum" id="qpSum">от 1 064 000 ₽<small id="qpNote">ремонт под ключ</small></div>
             <a class="btn btn-gold" href="#quiz">Точный расчёт</a>
           </div>
         </div>
@@ -1569,10 +1574,10 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
       <p class="final-note" id="finalNote" hidden></p>
       <div class="field"><label for="fName">Имя</label><input id="fName" type="text" autocomplete="name" placeholder="Как к вам обращаться"></div>
       <div class="field"><label for="fPhone">Телефон</label><input id="fPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></div>
+<label class="consent"><input type="checkbox" name="consent"><span>Даю <a href="soglasie.html" target="_blank">согласие на обработку персональных данных</a> и принимаю <a href="privacy.html" target="_blank">политику конфиденциальности</a></span></label>
       <button class="btn btn-gold" type="submit">Записаться на замер</button>
       <p class="micro" style="margin:0">Без предоплаты. Перезвоним в рабочее время.</p>
       <div class="msg" role="status"></div>
-      <p class="agree" style="margin:0">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank">политикой обработки персональных данных</a>.</p>
     </form>
   </div>
 </section>
@@ -1587,7 +1592,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
     <div><h4>Компания</h4><a href="obekty.html">Наши объекты</a><a href="otzyvy.html">Отзывы</a><a href="komanda.html">Команда</a><a href="kak-my-rabotaem.html">Как мы работаем</a><a href="garantiya.html">Гарантия и договор</a><a href="o-kompanii.html">О компании</a><a href="voprosy.html">Вопросы и ответы</a><a href="blog/">Блог</a><a href="kontakty.html">Контакты</a></div>
     <div><h4>Контакты</h4><a class="mf-tel" href="tel:+73430000000">+7 (343) 000-00-00</a><span>Екатеринбург</span><span>Ежедневно 9:00–21:00</span><a class="mf-cta" href="#quiz">Рассчитать стоимость</a></div>
   </div>
-  <div class="mn-wrap mf-legal"><span>© 2026 Смальтэра. Информация на сайте не является публичной офертой.</span><a href="privacy.html">Политика конфиденциальности</a></div>
+  <div class="mn-wrap mf-legal"><span>© 2026 Смальтэра. Информация на сайте не является публичной офертой.<span class="mf-co" data-company hidden></span></span><span class="mf-docs"><a href="privacy.html">Политика конфиденциальности</a><a href="soglasie.html">Согласие на обработку данных</a></span></div>
 </footer>
 
 <div class="pop" id="pop" hidden role="dialog" aria-modal="true" aria-labelledby="popT">
@@ -1598,9 +1603,9 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
     <p>41 пункт, которые нужно проверить перед тем, как подписать акт: стены, полы, плитка, электрика, сантехника и документы. Пригодится, даже если вы будете делать ремонт не с нами.</p>
     <form id="popForm" novalidate>
       <div class="field"><label for="popPhone">Телефон</label><input id="popPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></div>
+<label class="consent"><input type="checkbox" name="consent"><span>Даю <a href="soglasie.html" target="_blank">согласие на обработку персональных данных</a> и принимаю <a href="privacy.html" target="_blank">политику конфиденциальности</a></span></label>
       <button class="btn btn-gold" type="submit">Получить чек-лист</button>
       <div class="msg" id="popMsg" role="status"></div>
-      <p class="agree" style="margin:0">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank">политикой обработки персональных данных</a>.</p>
     </form>
     <a class="btn btn-main pop-dl" id="popDl" href="checklist.pdf" target="_blank" rel="noopener" hidden>Открыть чек-лист (PDF)</a>
   </div>
@@ -1617,6 +1622,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
     <p class="cb-or">или оставьте номер, и инженер перезвонит сам</p>
     <form id="cbForm" novalidate>
       <div class="field"><label for="cbPhone">Телефон</label><input id="cbPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></div>
+<label class="consent"><input type="checkbox" name="consent"><span>Даю <a href="soglasie.html" target="_blank">согласие на обработку персональных данных</a> и принимаю <a href="privacy.html" target="_blank">политику конфиденциальности</a></span></label>
       <button class="btn btn-main" type="submit" style="width:100%">Жду звонка</button>
       <div class="msg" id="cbMsg" role="status"></div>
     </form>
@@ -1679,7 +1685,12 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
   /* ===== Отправка заявок =====
      Впишите почту, на которую должны приходить заявки, например 'mail@example.ru'.
      После первой заявки сервис FormSubmit пришлёт на эту почту письмо: нажмите в нём кнопку подтверждения. */
-  var LEAD_EMAIL = '';
+  var LEAD_EMAIL = (window.SM && window.SM.leadEmail) || '';   /* почта для заявок — в assets/data.js */
+  document.addEventListener('submit', function(e){
+    var c = e.target.querySelector && e.target.querySelector('input[name=consent]');
+    if (c && !c.checked){ e.preventDefault(); e.stopImmediatePropagation(); var l = c.closest('.consent'); l.classList.add('need'); c.focus(); }
+  }, true);
+  document.addEventListener('change', function(e){ if (e.target.name === 'consent' && e.target.checked) e.target.closest('.consent').classList.remove('need'); });
   function sendLead(data){
     try { if (YM_ID && window.ym) ym(YM_ID, 'reachGoal', 'lead'); } catch(e){}
     if (!LEAD_EMAIL) return Promise.resolve(false);
@@ -1808,9 +1819,9 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
       '<form class="contact" id="cForm" novalidate>' +
         '<div class="field"><label for="cName">Имя</label><input id="cName" type="text" autocomplete="name" placeholder="Как к вам обращаться"></div>' +
         '<div class="field"><label for="cPhone">Телефон</label><input id="cPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></div>' +
+        '<label class="consent"><input type="checkbox" name="consent"><span>Даю <a href="soglasie.html" target="_blank">согласие на обработку персональных данных</a> и принимаю <a href="privacy.html" target="_blank">политику конфиденциальности</a></span></label>' +
         '<button class="btn btn-gold" type="submit">Получить смету</button>' +
-      '</form><div class="msg" id="cMsg" role="status"></div>' +
-      '<p class="agree">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank">политикой обработки персональных данных</a>.</p>';
+      '</form><div class="msg" id="cMsg" role="status"></div>';
     var f = document.getElementById('cForm'), ph = document.getElementById('cPhone');
     mask(ph);
     f.addEventListener('submit', function(e){
@@ -1971,8 +1982,8 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
       box.querySelectorAll('.qp-chips button').forEach(function(b){ b.classList.toggle('on', b === btn); });
       var a = +btn.dataset.a, v = RATES.cap * a;
       var w = Math.max(3, Math.round((DAYS.cap[0] + DAYS.cap[1]*a)/7));
-      sum.firstChild.textContent = 'от ' + money(v*0.92) + ' ₽';
-      note.textContent = 'капитальный ремонт, около ' + a + ' м², срок ' + weeksText(w);
+      sum.firstChild.textContent = 'от ' + money(Math.max(v, 400000)) + ' ₽';
+      note.textContent = 'ремонт под ключ, около ' + a + ' м², срок ' + weeksText(w);
     }
     box.querySelectorAll('.qp-chips button').forEach(function(b){ b.addEventListener('click', function(){ pick(b); }); });
     pick(box.querySelector('.qp-chips button.on'));
@@ -2380,8 +2391,8 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
   /* ===== Портфолио и видео: впишите настоящие данные =====
      Фото и видео кладите в папку сайта (например works/zhk-1.jpg) или укажите ссылку.
      Видео можно с Rutube или VK: укажите ссылку для встраивания (embed). */
-  var PROJECTS = (window.SM && SM.projects) || [];   /* материалы — в файле assets/data.js */
-  var VIDEOS = (window.SM && SM.videos) || [];
+  var PROJECTS = (window.SM && window.SM.projects) || [];   /* материалы — в файле assets/data.js */
+  var VIDEOS = (window.SM && window.SM.videos) || [];
   (function(){
     var demo = false;
     function allDemo(L){ return L.length && L.every(function(x){ return x.demo; }); }

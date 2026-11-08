@@ -85,6 +85,12 @@ footer.mf{background:#0B132F;color:#9AA4C4;font-family:"Inter Tight",Arial,sans-
 .mf a:hover{color:#fff}
 .mf-tel{font-family:Geologica,Arial,sans-serif;font-size:20px;font-weight:700;color:#fff!important}
 .mf-cta{display:inline-block;justify-self:start;margin-top:8px;background:#D9480F;color:#fff!important;font-weight:700;padding:12px 16px}
+.mf-co{display:block;margin-top:6px;color:#7E89A8}
+.mf-docs{display:flex;gap:18px;flex-wrap:wrap}
+.ck{position:fixed;left:16px;bottom:16px;z-index:90;max-width:420px;background:#14213D;color:#D5DBEA;font:14px/1.5 'Inter Tight',Arial,sans-serif;padding:16px 18px;border-radius:4px;box-shadow:0 20px 40px -20px rgba(0,0,0,.5);display:flex;gap:14px;align-items:center}
+.ck a{color:#fff}
+.ck button{flex:none;background:#D9480F;color:#fff;border:0;font-weight:700;padding:10px 14px;border-radius:4px;cursor:pointer}
+@media (max-width:620px){.ck{left:10px;right:10px;bottom:76px;max-width:none}}
 .mf-legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid #1E2A4D;margin-top:40px;padding-top:22px;font-size:13.5px}
 @media (max-width:1000px){.mf-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.mf-grid{grid-template-columns:1fr}footer.mf.mf-main{padding-bottom:110px}}

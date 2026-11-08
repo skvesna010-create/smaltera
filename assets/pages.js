@@ -137,6 +137,47 @@
     box.appendChild(g);
   }
 
+  /* ---------- окно заявки (замер, «хочу так же») ---------- */
+  var PHONE = '+7 (343) 000-00-00', TEL = '+73430000000';
+  function openLead(title, extra){
+    var w = el('div', 'ld'), box = el('div', 'ld-in'), x = el('button', 'ld-x', '×'); x.type = 'button'; x.setAttribute('aria-label', 'Закрыть');
+    w.setAttribute('role', 'dialog'); w.setAttribute('aria-modal', 'true');
+    box.appendChild(x); box.appendChild(el('h3', null, title || 'Бесплатный замер'));
+    function close(){ w.remove(); document.removeEventListener('keydown', key); }
+    function key(e){ if (e.key === 'Escape') close(); }
+    x.onclick = close; w.onclick = function(e){ if (e.target === w) close(); }; document.addEventListener('keydown', key);
+    if (!SM.leadEmail){
+      box.appendChild(el('p', null, 'Позвоните — инженер ответит на вопросы и договорится о времени замера. Замер и смета бесплатно.'));
+      var t = el('a', 'btn', 'Позвонить ' + PHONE); t.href = 'tel:' + TEL; box.appendChild(t);
+      box.appendChild(el('small', null, 'Ежедневно 9:00–21:00'));
+    } else {
+      box.appendChild(el('p', null, 'Оставьте телефон — инженер перезвонит, ответит на вопросы и договорится о замере. Это бесплатно и ни к чему не обязывает.'));
+      var f = el('form'); f.noValidate = true;
+      f.innerHTML = '<label>Имя<input name="name" autocomplete="name" placeholder="Как к вам обращаться"></label><label>Телефон<input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" required></label>' +
+        '<label class="consent"><input type="checkbox" name="consent"><span>Даю <a href="' + ROOT + 'soglasie.html" target="_blank">согласие на обработку персональных данных</a> и принимаю <a href="' + ROOT + 'privacy.html" target="_blank">политику конфиденциальности</a></span></label>' +
+        '<button class="btn" type="submit">Жду звонка</button><div class="ld-msg" role="status"></div>';
+      box.appendChild(f);
+      var ph = f.phone;
+      ph.addEventListener('input', function(){ var d = ph.value.replace(/\D/g, ''); if (d[0] === '8') d = '7' + d.slice(1); if (d[0] !== '7') d = '7' + d; d = d.slice(0, 11); var r = '+7'; if (d.length > 1) r += ' (' + d.slice(1, 4); if (d.length >= 4) r += ') ' + d.slice(4, 7); if (d.length >= 7) r += '-' + d.slice(7, 9); if (d.length >= 9) r += '-' + d.slice(9, 11); ph.value = r; });
+      f.addEventListener('submit', function(e){
+        e.preventDefault(); var m = f.querySelector('.ld-msg');
+        if (ph.value.replace(/\D/g, '').length < 11){ m.textContent = 'Введите номер полностью.'; ph.focus(); return; }
+        if (!f.consent.checked){ f.querySelector('.consent').classList.add('need'); m.textContent = 'Отметьте согласие на обработку данных.'; return; }
+        m.textContent = 'Отправляем…';
+        var data = Object.assign({ _subject:'Заявка с сайта Смальтэра', _template:'table', _captcha:'false', 'Заявка':title, 'Имя':f.name.value || '—', 'Телефон':ph.value, 'Страница':document.title }, extra || {});
+        fetch('https://formsubmit.co/ajax/' + encodeURIComponent(SM.leadEmail), { method:'POST', headers:{ 'Content-Type':'application/json', 'Accept':'application/json' }, body: JSON.stringify(data) })
+          .then(function(r){ return r.json(); }).then(function(j){ if (String(j.success) !== 'true') throw 0;
+            try { if (SM.ym && window.ym) ym(SM.ym, 'reachGoal', 'lead'); } catch(_){}
+            box.innerHTML = ''; box.appendChild(x); box.appendChild(el('h3', null, 'Спасибо, заявка у нас!')); box.appendChild(el('p', null, 'Инженер перезвонит вам в рабочее время.')); })
+          .catch(function(){ m.innerHTML = 'Не получилось отправить. Позвоните нам: <a href="tel:' + TEL + '">' + PHONE + '</a>'; });
+      });
+    }
+    w.appendChild(box); document.body.appendChild(w);
+    var first = box.querySelector('input, a.btn'); if (first) first.focus();
+  }
+  document.addEventListener('click', function(e){ var b = e.target.closest && e.target.closest('[data-lead]'); if (b){ e.preventDefault(); openLead(b.dataset.lead); } });
+  window.smOpenLead = openLead;
+
   /* ---------- общие помощники ---------- */
   function num(s){ return parseInt(String(s || '').replace(/\D/g, ''), 10) || 0; }
   function rub(n){ return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₽'; }
@@ -225,8 +266,8 @@
     card.appendChild(el('div', 'ob2-price', p.price));
     if (perM) card.appendChild(el('div', 'ob2-pm', '≈ ' + rub(perM) + ' за м² · ' + plural(p.days, 'день', 'дня', 'дней')));
     var ul = el('ul'); ['Цена закреплена в договоре', 'Оплата по этапам после приёмки', 'Гарантия 3 года на все работы', /kapital|dizajner/.test(p.service || '') ? 'Дизайн-проект в подарок' : 'Фото с объекта каждую неделю'].forEach(function(t){ ul.appendChild(el('li', null, t)); }); card.appendChild(ul);
-    var b1 = el('a', 'btn', 'Хочу такой же ремонт'); b1.href = ROOT + '#quiz'; card.appendChild(b1);
-    var b2 = el('a', 'btn ghost', 'Бесплатный замер'); b2.href = ROOT + 'kontakty.html'; card.appendChild(b2);
+    var b1 = el('button', 'btn', 'Хочу такой же ремонт'); b1.type = 'button'; b1.onclick = function(){ openLead('Хочу такой же ремонт', { 'Объект': p.title + ', ' + p.price }); }; card.appendChild(b1);
+    var b2 = el('button', 'btn ghost', 'Бесплатный замер'); b2.type = 'button'; b2.onclick = function(){ openLead('Бесплатный замер'); }; card.appendChild(b2);
     var tel = el('a', 'ob2-tel', '+7 (343) 000-00-00'); tel.href = 'tel:+73430000000'; card.appendChild(tel);
     lay.appendChild(card); box.appendChild(lay); show(0);
 
@@ -250,7 +291,7 @@
       p.smeta.forEach(function(r){ var tr = el('tr'), a = el('td'); a.appendChild(el('b', null, r[0])); var bar = el('span', 'ob2-bar'), bi = el('i'); bi.style.width = (r[1] / mx * 100) + '%'; bar.appendChild(bi); a.appendChild(bar); tr.appendChild(a); tr.appendChild(el('td', null, rub(r[1]))); t.appendChild(tr); });
       var tt = el('tr', 'tot'); tt.appendChild(el('td', null, 'Итого за работы')); tt.appendChild(el('td', null, rub(tot))); t.appendChild(tt);
       tw.appendChild(t); s2.appendChild(tw);
-      var f = el('p', 'fine'); f.innerHTML = 'Хотите такую же подробную смету на свою квартиру? <a href="' + ROOT + 'kontakty.html">Закажите бесплатный замер</a>'; s2.appendChild(f);
+      var f = el('p', 'fine'); f.innerHTML = 'Хотите такую же подробную смету на свою квартиру? <a href="#" data-lead="Смета на мою квартиру">Закажите бесплатный замер</a>'; s2.appendChild(f);
     }
 
     /* этапы */
@@ -292,7 +333,7 @@
     var o = el('div'); o.dataset.exclude = p.id; o.dataset.title = 'Другие объекты'; o.dataset.service = p.service || ''; box.appendChild(o); renderPortfolio(o);
 
     /* нижняя панель на телефоне */
-    var bb = el('div', 'ob2-bottom'), x1 = el('a', 'a', 'Хочу так же'), x2 = el('a', 'b', 'Позвонить'); x1.href = ROOT + '#quiz'; x2.href = 'tel:+73430000000'; bb.appendChild(x1); bb.appendChild(x2); document.body.appendChild(bb);
+    var bb = el('div', 'ob2-bottom'), x1 = el('a', 'a', 'Хочу так же'), x2 = el('a', 'b', 'Позвонить'); x1.href = '#'; x1.onclick = function(e){ e.preventDefault(); openLead('Хочу такой же ремонт', { 'Объект': p.title + ', ' + p.price }); }; x2.href = 'tel:+73430000000'; bb.appendChild(x1); bb.appendChild(x2); document.body.appendChild(bb);
   }
 
   var R = { portfolio:renderPortfolio, projects:renderProjects, reviews:renderReviews, rating:renderRating, videos:renderVideos, team:renderTeam, project:renderProject };
