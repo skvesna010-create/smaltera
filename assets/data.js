@@ -1,4 +1,4 @@
-/* Смальтэра — все материалы сайта. Этот файл меняет админка: https://skvesna010-create.github.io/smaltera/admin/
+/* Домилия — все материалы сайта. Этот файл меняет админка: https://skvesna010-create.github.io/smaltera/admin/
    Вручную правьте осторожно: это JSON (кавычки, запятые). */
 window.SM = {
  "phone": "+7 (343) 000-00-00",

@@ -180,7 +180,7 @@
         if (ph.value.replace(/\D/g, '').length < 11){ m.textContent = 'Введите номер полностью.'; ph.focus(); return; }
         if (!f.consent.checked){ f.querySelector('.consent').classList.add('need'); m.textContent = 'Отметьте согласие на обработку данных.'; return; }
         m.textContent = 'Отправляем…';
-        var data = Object.assign({ _subject:'Заявка с сайта Смальтэра', _template:'table', _captcha:'false', 'Заявка':title, 'Имя':f.name.value || '—', 'Телефон':ph.value, 'Страница':document.title }, extra || {});
+        var data = Object.assign({ _subject:'Заявка с сайта Домилия', _template:'table', _captcha:'false', 'Заявка':title, 'Имя':f.name.value || '—', 'Телефон':ph.value, 'Страница':document.title }, extra || {});
         fetch('https://formsubmit.co/ajax/' + encodeURIComponent(SM.leadEmail), { method:'POST', headers:{ 'Content-Type':'application/json', 'Accept':'application/json' }, body: JSON.stringify(data) })
           .then(function(r){ return r.json(); }).then(function(j){ if (String(j.success) !== 'true') throw 0;
             smGoal('lead');
@@ -258,7 +258,7 @@
     if (!p){ h1.textContent = 'Объект не найден'; lead.innerHTML = 'Возможно, ссылка устарела. <a href="' + ROOT + 'obekty.html">Посмотреть все объекты</a>'; return; }
     document.body.classList.add('has-ob2');
     var price = num(p.price), perM = p.area ? price / p.area : 0;
-    document.title = p.title + ' — ' + p.type + ', ' + p.area + ' м², ' + p.price + ' | Смальтэра';
+    document.title = p.title + ' — ' + p.type + ', ' + p.area + ' м², ' + p.price + ' | Домилия';
     h1.textContent = p.title;
     lead.textContent = '';
     var sub = el('div', 'ob2-sub'); [p.type, p.district, p.area && p.area + ' м²', p.days && plural(p.days, 'день', 'дня', 'дней'), p.year].forEach(function(t){ if (t) sub.appendChild(el('span', null, String(t))); }); lead.appendChild(sub);
