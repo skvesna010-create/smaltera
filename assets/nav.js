@@ -59,3 +59,14 @@
     if (!u.hash && u.pathname.replace(/index\.html$/, '') === here) a.setAttribute('aria-current', 'page');
   });
 })();
+/* Живой логотип ДОМИЛИЯ: клик по логотипу на той же странице — знак собирается заново */
+(function(){
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.mn-logo').forEach(function(a){
+    a.addEventListener('click', function(){
+      var s = a.querySelector('.lg'); if (!s) return;
+      s.classList.remove('replay'); void s.getBoundingClientRect(); s.classList.add('replay');
+      setTimeout(function(){ s.classList.remove('replay'); }, 1500);
+    });
+  });
+})();
