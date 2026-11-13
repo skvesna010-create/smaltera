@@ -42,7 +42,7 @@
   if (!seen){
     var pl = document.querySelector('.mf-docs a'), root = pl ? pl.getAttribute('href') : 'privacy.html';
     var ck = document.createElement('div'); ck.className = 'ck';
-    ck.innerHTML = '<span>Мы используем cookie и Яндекс Метрику, чтобы сайт работал удобнее. Подробнее — в <a href="' + root + '">политике конфиденциальности</a>.</span><button type="button">Понятно</button>';
+    ck.innerHTML = '<span>Используем cookie и Яндекс Метрику. <a href="' + root + '">Подробнее</a></span><button type="button">Понятно</button>';
     ck.querySelector('button').addEventListener('click', function(){ try { localStorage.setItem('sm-ck', '1'); } catch(e){} ck.remove(); });
     document.body.appendChild(ck);
   }

@@ -1048,7 +1048,7 @@ body{letter-spacing:-.01em}
 <body>
 <div id="scrollbar" aria-hidden="true"></div>
 
-<div class="mn-top"><div class="mn-wrap"><span><b>Дизайн-проект в подарок</b> при капитальном ремонте · гарантия 3 года в договоре</span><span>Екатеринбург · ежедневно <b>9:00–21:00</b></span></div></div>
+<div class="mn-top"><div class="mn-wrap"><span><b>Цена в договоре</b> · оплата по этапам · <b>гарантия 3 года</b></span><span>Екатеринбург · ежедневно <b>9:00–21:00</b></span></div></div>
 <header class="mn" id="mn">
   <div class="mn-wrap mn-bar">
     <a class="mn-logo" href="#top" aria-label="Домилия — на главную"><svg class="lg mn-lg" viewBox="30 26 418 416" aria-hidden="true">
@@ -1113,7 +1113,6 @@ body{letter-spacing:-.01em}
     <div class="hx-r">
       <div class="hero-img ph">
         <img src="https://images.pexels.com/photos/6908500/pexels-photo-6908500.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Светлая гостиная после ремонта" fetchpriority="high" onerror="this.classList.add('err')">
-        <a class="sticker" href="#gift">Дизайн-проект в подарок</a>
         <span class="hero-badge">Екатеринбург · замер бесплатно</span>
       </div>
       <div class="qp" id="qp">
@@ -2205,12 +2204,12 @@ body{letter-spacing:-.01em}
     acts.addEventListener('click', function(){ bub.classList.add('hide'); });
     if (!('IntersectionObserver' in window)) return;
     var ready = false, pending = null;
-    setTimeout(function(){ ready = true; if (pending) show(pending); }, 2500);
+    setTimeout(function(){ ready = true; if (pending) show(pending); }, 20000);   /* помощник не мешает первые 20 секунд */
     var io = new IntersectionObserver(function(es){
       es.forEach(function(e){
         if (!e.isIntersecting) return;
         var id = e.target.id;
-        if (!ready){ pending = id; if (id === 'quiz') h.classList.add('away'); return; }
+        if (!ready){ if (id === 'hero'){ pending = id; return; } ready = true; }   /* пролистал первый экран — помощник может заговорить */
         if (id === 'quiz'){ h.classList.add('away'); return; }
         h.classList.remove('away');
         if (id !== current) show(id);
