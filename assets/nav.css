@@ -85,14 +85,14 @@ footer.mf{background:#141618;color:#9EA6AA;font-family:Montserrat,Arial,sans-ser
 .mf a:hover{color:#fff}
 .mf-tel{font-family:Montserrat,Arial,sans-serif;font-size:20px;font-weight:700;color:#fff!important}
 .mf-cta{display:inline-block;justify-self:start;margin-top:8px;background:#007A55;color:#fff!important;font-weight:700;padding:12px 16px}
-.mf-co{display:block;margin-top:6px;color:#7E89A8}
+.mf-co{display:block;margin-top:6px;color:#8A9094}
 .mf-docs{display:flex;gap:18px;flex-wrap:wrap}
 .ck{position:fixed;left:16px;bottom:16px;z-index:90;max-width:460px;background:rgba(30,33,36,.96);color:#D7DCDE;font:13px/1.4 'Montserrat',Arial,sans-serif;padding:8px 8px 8px 14px;border-radius:4px;box-shadow:0 12px 28px -16px rgba(0,0,0,.5);display:flex;gap:12px;align-items:center}
 .ck a{color:#fff}
 .ck button{flex:none;background:#007A55;color:#fff;border:0;font:700 13px/1 'Montserrat',Arial,sans-serif;padding:8px 12px;border-radius:3px;cursor:pointer}
 .ck span{flex:1}
 @media (max-width:620px){.ck{left:8px;right:8px;bottom:72px;max-width:none;font-size:12.5px}}
-.mf-legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid #1E2A4D;margin-top:40px;padding-top:22px;font-size:13.5px}
+.mf-legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid #2B2F32;margin-top:40px;padding-top:22px;font-size:13.5px}
 @media (max-width:1000px){.mf-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.mf-grid{grid-template-columns:1fr 1fr;gap:28px 18px}.mf-grid > div:first-child{grid-column:1/-1}.mf-grid a{font-size:14px}footer.mf.mf-main{padding-bottom:110px}.mf-legal{flex-direction:column}}
 .mn :focus-visible,.mf :focus-visible{outline:3px solid #007A55;outline-offset:2px}

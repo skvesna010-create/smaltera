@@ -100,7 +100,7 @@ a.rv-work:hover{color:var(--acc)}
 .vp-x{position:absolute;right:18px;top:12px;background:none;border:0;color:#fff;font-size:44px;cursor:pointer;line-height:1}
 .tm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .tmc{background:#fff;border:1px solid var(--line);border-radius:4px;overflow:hidden}
-.tmc-ph{aspect-ratio:4/3.4;background:linear-gradient(160deg,#1E2B4A,#1E2124);display:grid;place-items:center;position:relative}
+.tmc-ph{aspect-ratio:4/3.4;background:linear-gradient(160deg,#2B2F32,#1E2124);display:grid;place-items:center;position:relative}
 .tmc-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .tmc-ph span{font-family:var(--display);font-weight:800;font-size:72px;color:rgba(255,255,255,.18)}
 .tmc-ph .demo-badge{position:absolute;left:12px;top:12px;font-size:11.5px;color:#005E42}
