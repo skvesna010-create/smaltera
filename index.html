@@ -988,6 +988,48 @@ h1 .h1-sub,.hero h1 span.h1-sub{color:var(--muted);font-size:.3em;-webkit-text-f
 @media (max-width:900px){ .hero-row{grid-template-columns:1fr!important} .hero-row .hero-img{aspect-ratio:16/10} }
 h1 .h1-sub,.hero h1 span.h1-sub{font-size:clamp(16px,.3em,20px)!important}
 @media (max-width:620px){ .h-x{min-width:36px;min-height:36px} }
+
+/* ===== Первый экран ДОМИЛИЯ (тёмный, фото в рамке со срезом, калькулятор поверх фото) ===== */
+.hero.hx{position:relative;background:#141618!important;color:#F2F4F4;padding:clamp(36px,5vw,72px) 0 clamp(48px,6vw,88px)!important;overflow:hidden;isolation:isolate}
+.hx::before{content:"";position:absolute;inset:auto auto -30% -10%;width:60vw;height:60vw;background:radial-gradient(closest-side,rgba(0,180,126,.16),transparent);z-index:-1}
+.hx-lines{position:absolute;right:0;top:0;height:100%;width:46%;z-index:-1;opacity:.9}
+.hx-grid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:center}
+.hx .offer{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14)!important;color:#E6EAEA;margin-bottom:22px;backdrop-filter:blur(6px)}
+.hx .offer i{background:#00B47E;color:#0B0B0B}
+.hx h1{color:#fff;font-size:clamp(34px,4.3vw,60px)!important;line-height:1!important;letter-spacing:-.03em!important;margin:0!important;max-width:none}
+.hx h1 span{color:#1FE6AA!important;-webkit-text-fill-color:#1FE6AA}
+.hx h1 span.h1-sub{display:block;color:#9EA6AA!important;-webkit-text-fill-color:#9EA6AA;font-size:clamp(16px,1.5vw,20px)!important;letter-spacing:0;font-weight:600;margin-top:14px}
+.hx .sub{color:#C9CFD2!important;font-size:clamp(16px,1.3vw,18px)!important;max-width:40ch;margin-top:22px}
+.hx .hero-cta{margin-top:26px;gap:12px}
+.hx .btn-main{background:#00B47E;color:#0B0B0B}
+.hx .btn-main:hover{background:#1FE6AA}
+.hx .btn-line{border-color:rgba(255,255,255,.55);color:#fff}
+.hx .btn-line:hover{background:#fff;color:#0B0B0B}
+.hx .micro{color:#9EA6AA}
+.hx-facts{list-style:none;display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:12px 34px;margin:30px 0 0;padding:22px 0 0;border-top:1px solid rgba(255,255,255,.12)}
+.hx-facts li{display:grid;gap:2px;position:relative;padding-left:16px}
+.hx-facts li::before{content:"";position:absolute;left:0;top:4px;width:5px;height:26px;background:linear-gradient(0deg,#006C4C,#1FE6AA);transform:skewX(-20deg)}
+.hx-facts b{font-size:22px;font-weight:800;color:#fff;letter-spacing:-.01em}
+.hx-facts span{font-size:13px;color:#9EA6AA}
+.hx-r{position:relative;padding-bottom:70px}
+.hx .hero-img{position:relative!important;inset:auto!important;aspect-ratio:auto!important;height:clamp(320px,34vw,470px)!important;min-height:0!important;border-radius:6px!important;overflow:hidden;background:linear-gradient(135deg,#2B2F32,#1E2124);clip-path:polygon(16% 0,100% 0,100% 100%,0 100%)}
+.hx .hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 55%}
+.hx .hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,22,24,0) 55%,rgba(20,22,24,.55));display:block!important}
+.hx .sticker{top:18px;right:18px;background:#00B47E!important;color:#0B0B0B!important;font-weight:800;z-index:1}
+.hx .hero-badge{display:none}
+.hx .qp{position:absolute;left:-28px;bottom:0;width:min(400px,86%);margin:0!important;background:#fff!important;color:#141618;border:0!important;border-radius:6px!important;padding:18px 20px!important;box-shadow:0 30px 60px -24px rgba(0,0,0,.6)!important;z-index:2}
+.hx .qp-chips{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.hx .qp-chips button{padding:10px 4px;font-size:14px;text-align:center}
+.hx .qp-t{color:#5A6064}
+.hx .qp-sum{color:#007A55}
+@media (max-width:900px){
+  .hx-grid{grid-template-columns:1fr}
+  .hx-lines{width:80%;opacity:.5}
+  .hx-r{padding-bottom:0}
+  .hx .hero-img{height:240px!important;clip-path:polygon(10% 0,100% 0,100% 100%,0 100%)}
+  .hx .qp{position:relative;left:auto;width:auto;margin:-36px 12px 0!important}
+  .hx-facts{grid-template-columns:repeat(3,1fr);gap:10px 14px}
+  .hx-facts b{font-size:18px}
+}
 /* ДОМИЛИЯ: Montserrat шире прежних шрифтов — подгонка */
 body{letter-spacing:-.01em}
 .hero-cta{gap:10px}.hero-cta .btn{padding-left:18px;padding-right:18px;font-size:14.5px}
@@ -1050,36 +1092,42 @@ body{letter-spacing:-.01em}
 
 <main id="top">
 
-<section class="hero" id="hero">
-  <div class="wrap">
-    <a class="offer" href="#gift"><i>✓</i>Дизайн-проект в подарок при капитальном ремонте</a>
-    <h1>Ремонт квартир<br><span>без сюрпризов</span><span class="h1-sub">в Екатеринбурге под ключ</span></h1>
-    <div class="hero-row">
-      <div>
-        <p class="sub">Цена фиксируется в договоре, оплата по этапам после приёмки, гарантия 3 года.</p>
-        <div class="hero-cta">
-          <a class="btn btn-main" href="#quiz">Рассчитать за минуту</a>
-          <a class="btn btn-line" href="#final">Замер бесплатно</a>
-        </div>
-        <p class="micro">Без предоплаты · работаем по договору · замер и смета бесплатно</p>
-        <div class="qp" id="qp">
-          <div class="qp-t">Сколько стоит ремонт вашей квартиры?</div>
-          <div class="qp-chips">
-            <button type="button" data-a="28">Студия</button>
-            <button type="button" data-a="38">1-комн.</button>
-            <button type="button" data-a="56" class="on">2-комн.</button>
-            <button type="button" data-a="78">3-комн.</button>
-          </div>
-          <div class="qp-res">
-            <div class="qp-sum" id="qpSum">от 1 064 000 ₽<small id="qpNote">ремонт под ключ</small></div>
-            <a class="btn btn-gold" href="#quiz">Точный расчёт</a>
-          </div>
-        </div>
+<section class="hero hx" id="hero">
+  <svg class="hx-lines" viewBox="0 0 600 700" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"><defs><linearGradient id="hxg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#006C4C"/><stop offset="1" stop-color="#1FE6AA"/></linearGradient></defs><path d="M150 700h46L476 0h-46z" fill="url(#hxg)" opacity=".55"/><path d="M262 700h22L564 0h-22z" fill="url(#hxg)" opacity=".35"/><path d="M340 700h70L690 0h-70z" fill="url(#hxg)" opacity=".18"/></svg>
+  <div class="wrap hx-grid">
+    <div class="hx-l">
+      <a class="offer" href="#gift"><i>✓</i>Дизайн-проект в подарок при капитальном ремонте</a>
+      <h1>Ремонт квартир<br><span>без сюрпризов</span><span class="h1-sub">в Екатеринбурге под ключ</span></h1>
+      <p class="sub">Цена фиксируется в договоре, оплата по этапам после приёмки, гарантия 3 года.</p>
+      <div class="hero-cta">
+        <a class="btn btn-main" href="#quiz">Рассчитать за минуту</a>
+        <a class="btn btn-line" href="#final">Замер бесплатно</a>
       </div>
+      <p class="micro">Без предоплаты · работаем по договору · замер и смета бесплатно</p>
+      <ul class="hx-facts">
+        <li><b>3 года</b><span>гарантия в договоре</span></li>
+        <li><b>24 часа</b><span>смета после замера</span></li>
+        <li><b>0 ₽</b><span>предоплаты за работы</span></li>
+      </ul>
+    </div>
+    <div class="hx-r">
       <div class="hero-img ph">
-        <img src="https://images.pexels.com/photos/6908500/pexels-photo-6908500.jpeg?auto=compress&cs=tinysrgb&w=2000" alt="Светлая гостиная после ремонта" fetchpriority="high" onerror="this.classList.add('err')">
+        <img src="https://images.pexels.com/photos/6908500/pexels-photo-6908500.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Светлая гостиная после ремонта" fetchpriority="high" onerror="this.classList.add('err')">
         <a class="sticker" href="#gift">Дизайн-проект в подарок</a>
         <span class="hero-badge">Екатеринбург · замер бесплатно</span>
+      </div>
+      <div class="qp" id="qp">
+        <div class="qp-t">Сколько стоит ремонт вашей квартиры?</div>
+        <div class="qp-chips">
+          <button type="button" data-a="28">Студия</button>
+          <button type="button" data-a="38">1-комн.</button>
+          <button type="button" data-a="56" class="on">2-комн.</button>
+          <button type="button" data-a="78">3-комн.</button>
+        </div>
+        <div class="qp-res">
+          <div class="qp-sum" id="qpSum">от 1 064 000 ₽<small id="qpNote">ремонт под ключ</small></div>
+          <a class="btn btn-gold" href="#quiz">Точный расчёт</a>
+        </div>
       </div>
     </div>
   </div>

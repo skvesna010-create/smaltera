@@ -120,23 +120,24 @@ footer.mf{background:#141618;color:#9EA6AA;font-family:Montserrat,Arial,sans-ser
 @media (max-width:620px){.mn-logo svg.dm-word{height:15px}}
 /* ===== Живой логотип ДОМИЛИЯ =====
    загрузка: грани слетаются в дом, столбы вырастают снизу;
-   наведение: грани раздвигаются, столбы «дышат», по знаку бежит блик, зелёная «Л» подпрыгивает;
-   раз в 9 секунд — тихий блик, чтобы логотип выглядел живым */
+   потом всё время живёт: каждые 6 с столбы поднимаются волной, по знаку бежит блик, зелёная «Л» вспыхивает;
+   наведение: грани раздвигаются, ритм ускоряется; клик — знак собирается заново */
 .lg{overflow:visible}
-.lg .t{transform-box:fill-box;transform-origin:center;translate:0 0;transition:translate .4s cubic-bezier(.3,1.5,.5,1);
-  animation:dmIn .8s cubic-bezier(.2,.9,.3,1.15) both;animation-delay:calc(var(--i)*80ms)}
-.lg .t.b{transform-origin:50% 100%;animation-name:dmGrow}
-.lg .sh{translate:-80px 0;animation:dmShine 9s ease-in-out 1.6s infinite}
-.mn-logo:hover .lg .t,.lg:hover .t{translate:calc(var(--dx)*.5) calc(var(--dy)*.5)}
-.mn-logo:hover .lg .t.b{animation:dmBreath 1.1s ease-in-out infinite;animation-delay:calc(var(--i)*120ms)}
-.mn-logo:hover .lg .sh,.lg:hover .sh{animation:dmSweep 1s ease-in-out 1}
-.dm-l{transform-box:fill-box;transform-origin:50% 100%;transition:transform .35s cubic-bezier(.3,1.6,.5,1),filter .35s}
-.mn-logo:hover .dm-l{transform:translateY(-9%) skewX(-4deg);filter:brightness(1.25)}
+.lg .t{transform-box:fill-box;transform-origin:center;translate:0 0;transition:translate .45s cubic-bezier(.3,1.5,.5,1);
+  animation:dmIn .9s cubic-bezier(.2,.9,.3,1.15) both;animation-delay:calc(var(--i)*85ms)}
+.lg .t.b{transform-origin:50% 100%;animation:dmGrow .9s cubic-bezier(.2,.9,.3,1.15) both,dmWave 6s ease-in-out 2s infinite;animation-delay:calc(var(--i)*85ms),calc(2s + var(--i)*140ms)}
+.lg .sh{translate:-90px 0;animation:dmShine 6s cubic-bezier(.5,0,.3,1) 1.4s infinite}
+.dm-l{transform-box:fill-box;transform-origin:50% 100%;animation:dmFlick 6s ease-in-out 2.2s infinite;transition:filter .3s}
+.mn-logo:hover .lg .t,.lg:hover .t{translate:calc(var(--dx)*.55) calc(var(--dy)*.55)}
+.mn-logo:hover .lg .t.b{animation:dmBreath 1s ease-in-out infinite;animation-delay:calc(var(--i)*110ms)}
+.mn-logo:hover .lg .sh,.lg:hover .sh{animation:dmShine 1.6s cubic-bezier(.5,0,.3,1) infinite}
+.mn-logo:hover .dm-l{animation:dmFlick 1.6s ease-in-out infinite;filter:brightness(1.2)}
 .lg.replay .t{animation:dmIn .8s cubic-bezier(.2,.9,.3,1.15) both;animation-delay:calc(var(--i)*70ms)}
-.lg.replay .t.b{animation-name:dmGrow}
+.lg.replay .t.b{animation:dmGrow .8s cubic-bezier(.2,.9,.3,1.15) both;animation-delay:calc(var(--i)*70ms)}
 @keyframes dmIn{from{opacity:0;transform:translate(calc(var(--dx)*7),calc(var(--dy)*7)) scale(.55)}}
-@keyframes dmGrow{from{opacity:0;transform:scaleY(.05)}60%{opacity:1;transform:scaleY(1.08)}}
-@keyframes dmBreath{50%{transform:scaleY(1.07)}}
-@keyframes dmShine{0%,82%{translate:-80px 0}100%{translate:560px 0}}
-@keyframes dmSweep{from{translate:-80px 0}to{translate:560px 0}}
+@keyframes dmGrow{from{opacity:0;transform:scaleY(.05)}60%{opacity:1;transform:scaleY(1.1)}}
+@keyframes dmWave{0%,14%,100%{transform:none}5%{transform:scaleY(1.13)}9%{transform:scaleY(.97)}}
+@keyframes dmBreath{50%{transform:scaleY(1.09)}}
+@keyframes dmShine{0%{translate:-90px 0}30%,100%{translate:580px 0}}
+@keyframes dmFlick{0%,30%,48%,100%{transform:none;filter:none}36%{transform:translateY(-10%) skewX(-5deg);filter:brightness(1.35)}42%{transform:translateY(2%)}}
 @media (prefers-reduced-motion:reduce){.lg .t,.lg .sh,.dm-l{animation:none!important;transition:none!important}}
