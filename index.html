@@ -1050,7 +1050,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{font-size:clamp(16px,.3em,20px)!important}
 #steps .pre span{color:#8A9094}
 #steps .pre li::before{border-radius:3px}
 /* таймлайн */
-#steps .tl{position:relative;display:grid!important;grid-template-columns:repeat(6,minmax(120px,1fr));gap:0!important;margin:0 0 26px;overflow-x:auto;flex-wrap:nowrap;padding:0 0 4px}
+#steps .tl{position:relative;display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));gap:0!important;margin:0 0 26px;overflow-x:auto;flex-wrap:nowrap;padding:0 0 4px}
 #steps .tl-line{position:absolute;left:calc(100%/12);right:calc(100%/12);top:23px;height:2px;background:#2E3337}
 #steps .tl-line span{position:absolute;inset:0;width:calc(var(--prog,0)*100%);background:linear-gradient(90deg,#00B47E,#1FE6AA);transition:width .6s cubic-bezier(.3,.9,.3,1)}
 #steps .tl button{position:relative;display:grid;justify-items:center;gap:4px;background:none!important;border:0!important;border-radius:0!important;min-height:0;padding:0 6px 12px!important;color:#7C8488;cursor:pointer;font:inherit}
@@ -1175,7 +1175,7 @@ h1 .h1-sub,.hero h1 span.h1-sub{font-size:clamp(16px,.3em,20px)!important}
 #steps .stage[data-s="6"].on ~ .st-nav .stage-next{display:none}
 @media (max-width:900px){
   #steps .proc-grid{grid-template-columns:1fr!important}
-  #steps .tl{grid-template-columns:repeat(6,104px)}
+  #steps .tl{grid-template-columns:repeat(6,104px);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 18px,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,transparent 0,#000 18px,#000 calc(100% - 28px),transparent)}
   #steps .tl button b{font-size:13px}
   #steps .stage-n em{font-size:48px}
   #steps .stage.on{padding:20px!important}

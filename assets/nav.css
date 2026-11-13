@@ -142,3 +142,6 @@ footer.mf{background:#141618;color:#9EA6AA;font-family:Montserrat,Arial,sans-ser
 @keyframes dmShine{0%{translate:-90px 0}30%,100%{translate:580px 0}}
 @keyframes dmFlick{0%,30%,48%,100%{transform:none;filter:none}36%{transform:translateY(-10%) skewX(-5deg);filter:brightness(1.35)}42%{transform:translateY(2%)}}
 @media (prefers-reduced-motion:reduce){.lg .t,.lg .sh,.dm-l{animation:none!important;transition:none!important}}
+/* Горизонтальная прокрутка без серой полосы: листается пальцем, колесом и тачпадом, но полоса прокрутки не видна */
+.plan-tabs,.sv-styles,#steps .tl,.cmp-wrap,.ob-th,.ob2-tl,.pf-track,.ptable-wrap,.rv2-track,.tbl-wrap,.tw,[class*="-track"],.mn-drop,.chips,.qp-chips{scrollbar-width:none;-ms-overflow-style:none}
+.plan-tabs::-webkit-scrollbar,.sv-styles::-webkit-scrollbar,#steps .tl::-webkit-scrollbar,.cmp-wrap::-webkit-scrollbar,.ob-th::-webkit-scrollbar,.ob2-tl::-webkit-scrollbar,.pf-track::-webkit-scrollbar,.ptable-wrap::-webkit-scrollbar,.rv2-track::-webkit-scrollbar,.tbl-wrap::-webkit-scrollbar,.tw::-webkit-scrollbar,[class*="-track"]::-webkit-scrollbar,.mn-drop::-webkit-scrollbar,.chips::-webkit-scrollbar,.qp-chips::-webkit-scrollbar{display:none;width:0;height:0}

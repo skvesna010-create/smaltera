@@ -23,10 +23,10 @@
 .ty-steps div:first-child{border-color:#1F9D55}
 .ty-steps div:first-child::before{background:#1F9D55}
 .ty-steps b{display:block;font-size:17px;margin-bottom:6px}.ty-steps span{color:var(--muted);font-size:15px}
-.ty-links{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.ty-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))!important;gap:14px}.ty-links>a{min-width:0}
 .ty-links a{background:var(--navy);color:#fff;text-decoration:none;padding:22px;border-radius:4px;display:grid;gap:6px}
 .ty-links a b{font-family:var(--display);font-size:18px}.ty-links a span{color:#C9CFD2;font-size:14.5px}
-.ty-links a:hover{background:#1E2D52}
+.ty-links a:hover{background:#007A55}
 @media (max-width:900px){.ty-steps,.ty-links{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.ty-hero{grid-template-columns:1fr;gap:16px}.ty-ok{width:64px;height:64px}.ty-steps,.ty-links{grid-template-columns:1fr}}
 </style>
