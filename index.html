@@ -1039,6 +1039,73 @@ h1 .h1-sub,.hero h1 span.h1-sub{font-size:clamp(16px,.3em,20px)!important}
 .stage-next:hover{background:var(--ink);color:#fff}
 .stage[data-s="6"].on ~ .stage-next{display:none}
 @media (min-width:901px){.proc-grid{align-items:center!important}}
+/* ===== Этапы ремонта: тёмный чертёж + таймлайн ===== */
+#steps.proc{background:#141618;color:#E6EAEA;position:relative;overflow:hidden}
+#steps.proc::before{content:"";position:absolute;right:-12%;top:-30%;width:55vw;height:55vw;background:radial-gradient(closest-side,rgba(0,180,126,.12),transparent);pointer-events:none}
+#steps h2{color:#fff}
+#steps .sub{color:#9EA6AA}
+#steps .pre-t{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#7C8488;margin:6px 0 10px}
+#steps .pre{margin-bottom:34px}
+#steps .pre li{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1);color:#E6EAEA;border-radius:4px}
+#steps .pre span{color:#8A9094}
+#steps .pre li::before{border-radius:3px}
+/* таймлайн */
+#steps .tl{position:relative;display:grid!important;grid-template-columns:repeat(6,minmax(120px,1fr));gap:0!important;margin:0 0 26px;overflow-x:auto;flex-wrap:nowrap;padding:0 0 4px}
+#steps .tl-line{position:absolute;left:calc(100%/12);right:calc(100%/12);top:23px;height:2px;background:#2E3337}
+#steps .tl-line span{position:absolute;inset:0;width:calc(var(--prog,0)*100%);background:linear-gradient(90deg,#00B47E,#1FE6AA);transition:width .6s cubic-bezier(.3,.9,.3,1)}
+#steps .tl button{position:relative;display:grid;justify-items:center;gap:4px;background:none!important;border:0!important;border-radius:0!important;min-height:0;padding:0 6px 12px!important;color:#7C8488;cursor:pointer;font:inherit}
+#steps .tl button i{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:#1E2124;border:2px solid #2E3337;font:800 14px/1 var(--body);font-style:normal;color:#9EA6AA;transition:all .35s;position:relative;z-index:1}
+#steps .tl button b{font-size:14.5px;font-weight:700;color:#C9CFD2;margin-top:6px;white-space:nowrap}
+#steps .tl button small{font-size:12px;color:#7C8488}
+#steps .tl button.done i{background:#0F3A2C;border-color:#00B47E;color:#1FE6AA}
+#steps .tl button.on i{background:#00B47E;border-color:#1FE6AA;color:#0B0B0B;box-shadow:0 0 0 6px rgba(0,180,126,.18),0 0 24px rgba(31,230,170,.45);transform:scale(1.08)}
+#steps .tl button.on b{color:#fff}
+#steps .tl button.on small{color:#1FE6AA}
+#steps .tl-bar{position:absolute;left:22%;right:22%;bottom:0;height:3px;background:#2E3337;border-radius:2px;overflow:hidden;opacity:0}
+#steps .tl button.on .tl-bar{opacity:1}
+#steps .tl-bar::after{content:"";position:absolute;inset:0;width:0;background:#1FE6AA}
+#steps.run .tl button.on .tl-bar::after{animation:tlFill 6s linear forwards}
+@keyframes tlFill{to{width:100%}}
+/* чертёж */
+#steps .proc-grid{grid-template-columns:1.25fr .75fr!important;align-items:center!important}
+#steps .plan-col{position:relative!important;top:auto!important}
+#steps .plan-card{background:#191C1F!important;border:1px solid #2A2F33!important;border-radius:6px!important;padding:14px!important;box-shadow:0 40px 80px -40px rgba(0,0,0,.7)!important}
+#steps .plan{border-radius:3px}
+#steps .plan .draw{transition:stroke-dashoffset 1.6s ease!important}
+#steps .plan .ly{transition:opacity .7s ease}
+#steps .plan.s4 .ly-el,#steps .plan.s4 .ly-pl{opacity:.35}
+#steps .plan .ly-fin{filter:saturate(.9)}
+#steps .plan.s5 .ly-fin,#steps .plan.s6 .ly-fin{animation:finIn 1s ease both}
+@keyframes finIn{from{opacity:0;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:inset(0 0 0 0)}}
+#steps .plan-foot{color:#7C8488;padding:2px 4px}
+#steps .plan-foot #planTime{color:#1FE6AA}
+#steps .plan .walls,#steps .plan .gaps,#steps .plan .lbl{transition:stroke .6s,fill .6s}
+#steps .plan.s5 .walls,#steps .plan.s6 .walls{stroke:#1E2124}
+#steps .plan.s5 .gaps,#steps .plan.s6 .gaps{fill:#E3D2B4}
+#steps .plan.s5 .gap-out,#steps .plan.s6 .gap-out{fill:#191C1F}
+#steps .plan.s5 .lbl,#steps .plan.s6 .lbl{fill:#2B2F32}
+/* карточка этапа */
+#steps .stage.on{background:#1E2124!important;border:1px solid #2A2F33!important;border-radius:6px!important;padding:28px!important}
+#steps .stage-n{display:flex;align-items:baseline;gap:12px;color:#1FE6AA!important;font-size:13px;font-weight:700;margin-bottom:6px}
+#steps .stage-n em{font-style:normal;font-size:64px;line-height:.9;font-weight:800;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px #3E4448}
+#steps .stage h3{color:#fff;font-size:clamp(22px,2.1vw,30px)!important}
+#steps .stage p{color:#B4BBBE}
+#steps .stage-get{background:rgba(0,180,126,.08)!important;border-left:3px solid #00B47E;border-radius:0 4px 4px 0!important;color:#E6EAEA}
+#steps .stage-get b{color:#1FE6AA!important}
+#steps .stage .btn-main{background:#00B47E;color:#0B0B0B}
+#steps .st-nav{display:flex;gap:10px;align-items:center}
+#steps .stage-next{border-color:rgba(255,255,255,.5)!important;color:#fff!important}
+#steps .stage-next:hover{background:#fff!important;color:#0B0B0B!important}
+#steps .st-play{width:44px;height:44px;border-radius:50%;border:1.5px solid #3E4448;background:none;color:#C9CFD2;font-size:13px;cursor:pointer}
+#steps .st-play:hover{border-color:#1FE6AA;color:#1FE6AA}
+#steps .stage[data-s="6"].on ~ .st-nav .stage-next{display:none}
+@media (max-width:900px){
+  #steps .proc-grid{grid-template-columns:1fr!important}
+  #steps .tl{grid-template-columns:repeat(6,104px)}
+  #steps .tl button b{font-size:13px}
+  #steps .stage-n em{font-size:48px}
+  #steps .stage.on{padding:20px!important}
+}
 /* ДОМИЛИЯ: Montserrat шире прежних шрифтов — подгонка */
 body{letter-spacing:-.01em}
 .hero-cta{gap:10px}.hero-cta .btn{padding-left:18px;padding-right:18px;font-size:14.5px}
@@ -1382,6 +1449,7 @@ body{letter-spacing:-.01em}
       </div>
     </div>
 
+    <div class="pre-t">До начала работ</div>
     <ol class="pre">
       <li><b>Заявка</b><span>в день обращения</span></li>
       <li><b>Бесплатный замер</b><span>около часа</span></li>
@@ -1389,24 +1457,17 @@ body{letter-spacing:-.01em}
       <li><b>Договор с фиксированной ценой</b><span>1 встреча</span></li>
     </ol>
 
+    <div class="plan-tabs tl" role="tablist" aria-label="Этапы ремонта"><span class="tl-line"><span></span></span><button type="button" data-s="1" class="on"><i>01</i><b>Демонтаж</b><small>3–5 дней</small><span class="tl-bar"></span></button><button type="button" data-s="2"><i>02</i><b>Электрика</b><small>5–7 дней</small><span class="tl-bar"></span></button><button type="button" data-s="3"><i>03</i><b>Сантехника</b><small>3–5 дней</small><span class="tl-bar"></span></button><button type="button" data-s="4"><i>04</i><b>Стены и пол</b><small>2–3 недели</small><span class="tl-bar"></span></button><button type="button" data-s="5"><i>05</i><b>Отделка</b><small>3–5 недель</small><span class="tl-bar"></span></button><button type="button" data-s="6"><i>06</i><b>Сдача</b><small>1–2 дня</small><span class="tl-bar"></span></button></div>
     <div class="proc-grid">
       <div class="plan-col">
         <div class="plan-card">
-          <div class="plan-tabs" role="tablist" aria-label="Этапы ремонта">
-            <button type="button" data-s="1" class="on">Демонтаж</button>
-            <button type="button" data-s="2">Электрика</button>
-            <button type="button" data-s="3">Сантехника</button>
-            <button type="button" data-s="4">Стены и пол</button>
-            <button type="button" data-s="5">Отделка</button>
-            <button type="button" data-s="6">Сдача</button>
-          </div>
           <svg class="plan s1" id="plan" viewBox="0 0 600 420" role="img" aria-label="Схема двухкомнатной квартиры по этапам ремонта">
             <defs>
-              <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="#EEEFF2"/><line x1="0" y1="0" x2="0" y2="10" stroke="#D6D9E0" stroke-width="3"/></pattern>
+              <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="#1F2326"/><line x1="0" y1="0" x2="0" y2="10" stroke="#2A2F33" stroke-width="3"/></pattern>
               <pattern id="parquet" width="36" height="12" patternUnits="userSpaceOnUse"><rect width="36" height="12" fill="#EADCC4"/><path d="M0 12H36M18 0V12" stroke="#D8C5A4" stroke-width="1.2"/><path d="M0 6H18" stroke="#E0CFB2" stroke-width=".8"/></pattern>
               <pattern id="tile" width="18" height="18" patternUnits="userSpaceOnUse"><rect width="18" height="18" fill="#EEF2F8"/><path d="M18 0V18H0" stroke="#D7DCDE" stroke-width="1.2" fill="none"/></pattern>
             </defs>
-            <rect x="20" y="20" width="560" height="380" fill="#F4F2EE"/>
+            <rect x="20" y="20" width="560" height="380" fill="#191C1F"/><g class="grid" stroke="#23282C" stroke-width="1"><path d="M50 20V400"/><path d="M80 20V400"/><path d="M110 20V400"/><path d="M140 20V400"/><path d="M170 20V400"/><path d="M200 20V400"/><path d="M230 20V400"/><path d="M260 20V400"/><path d="M290 20V400"/><path d="M320 20V400"/><path d="M350 20V400"/><path d="M380 20V400"/><path d="M410 20V400"/><path d="M440 20V400"/><path d="M470 20V400"/><path d="M500 20V400"/><path d="M530 20V400"/><path d="M560 20V400"/><path d="M20 50H580"/><path d="M20 80H580"/><path d="M20 110H580"/><path d="M20 140H580"/><path d="M20 170H580"/><path d="M20 200H580"/><path d="M20 230H580"/><path d="M20 260H580"/><path d="M20 290H580"/><path d="M20 320H580"/><path d="M20 350H580"/><path d="M20 380H580"/></g>
 
             <g class="ly ly-wall">
               <rect x="20" y="20" width="280" height="210" fill="url(#hatch)"/><rect x="300" y="20" width="280" height="210" fill="url(#hatch)"/>
@@ -1426,29 +1487,29 @@ body{letter-spacing:-.01em}
             </g>
             <g class="ly ly-demo">
               <line x1="140" y1="230" x2="140" y2="400" stroke="#D9534F" stroke-width="6" stroke-dasharray="10 8"/>
-              <g fill="#B9BDC6"><rect x="60" y="270" width="14" height="10" rx="2" transform="rotate(20 67 275)"/><rect x="90" y="300" width="10" height="8" rx="2"/><rect x="180" y="340" width="16" height="10" rx="2" transform="rotate(-15 188 345)"/><rect x="380" y="110" width="14" height="10" rx="2" transform="rotate(30 387 115)"/><rect x="120" y="70" width="12" height="9" rx="2"/><rect x="500" y="320" width="12" height="9" rx="2" transform="rotate(12 506 324)"/></g>
-              <g class="tag-g"><rect x="150" y="296" width="132" height="28" rx="14" fill="#D9534F"/><text x="216" y="315" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">снос перегородки</text></g>
+              <g fill="#5A6064"><rect x="60" y="270" width="14" height="10" rx="2" transform="rotate(20 67 275)"/><rect x="90" y="300" width="10" height="8" rx="2"/><rect x="180" y="340" width="16" height="10" rx="2" transform="rotate(-15 188 345)"/><rect x="380" y="110" width="14" height="10" rx="2" transform="rotate(30 387 115)"/><rect x="120" y="70" width="12" height="9" rx="2"/><rect x="500" y="320" width="12" height="9" rx="2" transform="rotate(12 506 324)"/></g>
+              <g class="tag-g"><rect x="30" y="244" width="140" height="28" rx="14" fill="#D9534F"/><text x="100" y="263" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">снос перегородки</text></g>
             </g>
             <g class="ly ly-el">
-              <g fill="none" stroke="#C9A14A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <g fill="none" stroke="#F2C14E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
                 <path class="draw" pathLength="1" d="M262 386V246H190V36"/>
                 <path class="draw" pathLength="1" d="M262 386V246H560V60"/>
                 <path class="draw" pathLength="1" d="M262 386V252H36V380"/>
                 <path class="draw" pathLength="1" d="M262 386H300V246M262 386H456V252"/>
               </g>
-              <rect x="252" y="378" width="22" height="16" rx="3" fill="#15171C"/>
-              <g fill="#fff" stroke="#C9A14A" stroke-width="2.4"><circle cx="40" cy="150" r="5.5"/><circle cx="280" cy="200" r="5.5"/><circle cx="190" cy="40" r="5.5"/><circle cx="320" cy="62" r="5.5"/><circle cx="560" cy="150" r="5.5"/><circle cx="36" cy="262" r="5.5"/><circle cx="120" cy="388" r="5.5"/><circle cx="222" cy="388" r="5.5"/><circle cx="300" cy="248" r="5.5"/><circle cx="456" cy="300" r="5.5"/></g>
-              <g class="tag-g"><rect x="330" y="92" width="150" height="28" rx="14" fill="#0A0A0A"/><text x="405" y="111" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">64 точки электрики</text></g>
+              <rect x="252" y="378" width="22" height="16" rx="3" fill="#F2C14E"/>
+              <g fill="#191C1F" stroke="#F2C14E" stroke-width="2.4"><circle cx="40" cy="150" r="5.5"/><circle cx="280" cy="200" r="5.5"/><circle cx="190" cy="40" r="5.5"/><circle cx="320" cy="62" r="5.5"/><circle cx="560" cy="150" r="5.5"/><circle cx="36" cy="262" r="5.5"/><circle cx="120" cy="388" r="5.5"/><circle cx="222" cy="388" r="5.5"/><circle cx="300" cy="248" r="5.5"/><circle cx="456" cy="300" r="5.5"/></g>
+              <g class="tag-g"><rect x="330" y="92" width="150" height="28" rx="14" fill="#F2C14E"/><text x="405" y="111" text-anchor="middle" fill="#141618" font-size="13" font-weight="700">64 точки электрики</text></g>
             </g>
             <g class="ly ly-pl">
               <g fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <path class="draw" pathLength="1" stroke="#2F7BEA" d="M566 250V392H48V372"/>
+                <path class="draw" pathLength="1" stroke="#4DA3FF" d="M566 250V392H48V372"/>
                 <path class="draw" pathLength="1" stroke="#E5484D" d="M556 250V384H58V372"/>
-                <path class="draw" pathLength="1" stroke="#2F7BEA" d="M566 250H478"/>
+                <path class="draw" pathLength="1" stroke="#4DA3FF" d="M566 250H478"/>
                 <path class="draw" pathLength="1" stroke="#E5484D" d="M556 258H486"/>
               </g>
-              <circle cx="566" cy="246" r="7" fill="#2F7BEA"/><circle cx="552" cy="246" r="7" fill="#E5484D"/>
-              <g class="tag-g"><rect x="300" y="296" width="132" height="28" rx="14" fill="#2F7BEA"/><text x="366" y="315" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">новые трубы</text></g>
+              <circle cx="566" cy="246" r="7" fill="#4DA3FF"/><circle cx="552" cy="246" r="7" fill="#E5484D"/>
+              <g class="tag-g"><rect x="300" y="296" width="132" height="28" rx="14" fill="#4DA3FF"/><text x="366" y="315" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">новые трубы</text></g>
             </g>
             <g class="ly ly-done">
               <g class="ok"><circle cx="160" cy="70" r="16"/><path d="M152 70l6 6 11-12"/></g>
@@ -1456,22 +1517,22 @@ body{letter-spacing:-.01em}
               <g class="ok"><circle cx="200" cy="270" r="16"/><path d="M192 270l6 6 11-12"/></g>
               <g class="ok"><circle cx="300" cy="296" r="16"/><path d="M292 296l6 6 11-12"/></g>
               <g class="ok"><circle cx="512" cy="350" r="16"/><path d="M504 350l6 6 11-12"/></g>
-              <g class="tag-g"><rect x="262" y="240" width="156" height="32" rx="16" fill="#1E2124"/><text x="340" y="261" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Ключи ваши!</text></g>
+              <g class="tag-g"><rect x="262" y="240" width="156" height="32" rx="16" fill="#00B47E"/><text x="340" y="261" text-anchor="middle" fill="#0B0B0B" font-size="14" font-weight="700">Ключи ваши!</text></g>
             </g>
 
-            <g class="walls" fill="none" stroke="#15171C" stroke-linecap="square">
+            <g class="walls" fill="none" stroke="#E6EAEA" stroke-linecap="square">
               <rect x="20" y="20" width="560" height="380" stroke-width="9"/>
               <path d="M300 20V230M20 230H580M240 230V400M440 230V400" stroke-width="5"/>
             </g>
-            <g fill="#F4F2EE">
+            <g class="gaps" fill="#191C1F">
               <rect x="252" y="226" width="40" height="9"/><rect x="390" y="226" width="40" height="9"/>
               <rect x="235.5" y="300" width="9" height="40"/><rect x="435.5" y="336" width="9" height="40"/>
-              <rect x="300" y="395" width="70" height="10" fill="#fff"/>
+              <rect class="gap-out" x="300" y="395" width="70" height="10" fill="#191C1F"/>
             </g>
-            <g fill="#fff" stroke="#15171C" stroke-width="1.5">
+            <g fill="#3E7C9B" stroke="#9FD3E8" stroke-width="1.5">
               <rect x="90" y="16" width="110" height="8"/><rect x="390" y="16" width="120" height="8"/><rect x="16" y="285" width="8" height="70"/>
             </g>
-            <g class="lbl" font-size="13" font-weight="700" fill="#15171C" text-anchor="middle">
+            <g class="lbl" font-size="13" font-weight="700" fill="#C9CFD2" text-anchor="middle">
               <text x="160" y="140">Гостиная · 18,4 м²</text><text x="455" y="205">Спальня · 14,2 м²</text>
               <text x="140" y="318">Кухня · 10,1 м²</text><text x="340" y="345">Прихожая · 7,6 м²</text><text x="510" y="322">Санузел · 5 м²</text>
             </g>
@@ -1482,43 +1543,43 @@ body{letter-spacing:-.01em}
 
       <div class="stage-col">
         <article class="stage on" data-s="1">
-          <span class="stage-n">Этап 1</span>
+          <span class="stage-n"><em>01</em>Этап 1 из 6 · 3–5 дней</span>
           <h3>Демонтаж и подготовка</h3>
           <p>Снимаем старую отделку и ненужные перегородки, выносим мусор, защищаем подъезд и лифт. В новостройке этот этап короче.</p>
           <div class="stage-get"><b>Вы получаете:</b> фотоотчёт и чистую «коробку» под ремонт</div>
         </article>
         <article class="stage" data-s="2">
-          <span class="stage-n">Этап 2</span>
+          <span class="stage-n"><em>02</em>Этап 2 из 6 · 5–7 дней</span>
           <h3>Новая электрика</h3>
           <p>Прокладываем проводку по проекту: каждая розетка и выключатель там, где вам удобно. Отдельные линии для плиты, духовки и кондиционера.</p>
           <div class="stage-get"><b>Вы получаете:</b> схему электрики с фото трасс до того, как их закроют стены</div>
         </article>
         <article class="stage" data-s="3">
-          <span class="stage-n">Этап 3</span>
+          <span class="stage-n"><em>03</em>Этап 3 из 6 · 3–5 дней</span>
           <h3>Сантехника</h3>
           <p>Разводим трубы холодной и горячей воды, канализацию, ставим коллектор и защиту от протечек.</p>
           <div class="stage-get"><b>Вы получаете:</b> проверку труб под давлением (опрессовку) до закрытия</div>
         </article>
         <article class="stage" data-s="4">
-          <span class="stage-n">Этап 4</span>
+          <span class="stage-n"><em>04</em>Этап 4 из 6 · 2–3 недели</span>
           <h3>Стены, пол и потолок</h3>
           <p>Штукатурим стены по маякам, заливаем стяжку, готовим все поверхности под чистовую отделку. Ровность проверяем правилом на каждой стене.</p>
           <div class="stage-get"><b>Вы получаете:</b> ровные стены и пол под любую отделку</div>
         </article>
         <article class="stage" data-s="5">
-          <span class="stage-n">Этап 5</span>
+          <span class="stage-n"><em>05</em>Этап 5 из 6 · 3–5 недель</span>
           <h3>Чистовая отделка</h3>
           <p>Плитка, покраска или обои, напольные покрытия, двери, натяжные потолки, установка сантехники, розеток и света.</p>
           <div class="stage-get"><b>Вы получаете:</b> квартиру, которая выглядит как на визуализации</div>
         </article>
         <article class="stage" data-s="6">
-          <span class="stage-n">Этап 6</span>
+          <span class="stage-n"><em>06</em>Этап 6 из 6 · 1–2 дня</span>
           <h3>Уборка и сдача</h3>
           <p>Делаем клининг, вместе проверяем всё по чек-листу, подписываем акт и выдаём гарантию. Вы заезжаете в готовую квартиру.</p>
           <div class="stage-get"><b>Вы получаете:</b> ключи, акт приёмки и гарантию на 3 года</div>
           <a class="btn btn-main" href="#quiz" style="margin-top:18px">Рассчитать мой ремонт</a>
         </article>
-        <button type="button" class="stage-next" id="stNext">Следующий этап →</button>
+        <div class="st-nav"><button type="button" class="stage-next" id="stNext">Следующий этап →</button><button type="button" class="st-play" id="stPlay" aria-label="Пауза">❚❚</button></div>
       </div>
     </div>
   </div>
@@ -2136,13 +2197,23 @@ body{letter-spacing:-.01em}
       plan.setAttribute('class', 'plan s' + n);
       tabs.forEach(function(t){ var s = +t.dataset.s; t.classList.toggle('on', s === n); t.classList.toggle('done', s < n); });
       cards.forEach(function(c){ c.classList.toggle('on', +c.dataset.s === n); });
+      document.getElementById('steps').style.setProperty('--prog', (n - 1) / 5);
+      var tlb = document.querySelector('#steps .tl'), ab = tlb && tlb.querySelector('button[data-s="' + n + '"]');
+      if (tlb && ab && tlb.scrollWidth > tlb.clientWidth) tlb.scrollTo({ left: ab.offsetLeft - (tlb.clientWidth - ab.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
       document.getElementById('planStage').textContent = 'Этап ' + n + ' из 6';
       document.getElementById('planTime').textContent = TIME[n-1];
     }
     set(1);
-    tabs.forEach(function(t){ t.addEventListener('click', function(){ set(+t.dataset.s); }); });
+    /* автопоказ: когда блок на экране, этапы сами меняются каждые 6 секунд; любой клик — ручной режим */
+    var sec = document.getElementById('steps'), playBtn = document.getElementById('stPlay'), auto = !reduce, inView = false, tmr = 0;
+    function tick(){ clearTimeout(tmr); sec.classList.remove('run'); if (!auto || !inView) return; void sec.offsetWidth; sec.classList.add('run'); tmr = setTimeout(function(){ set(cur < 6 ? cur + 1 : 1); tick(); }, 6000); }
+    function manual(){ auto = false; tick(); if (playBtn){ playBtn.textContent = '▶'; playBtn.setAttribute('aria-label','Показать автоматически'); } }
+    tabs.forEach(function(t){ t.addEventListener('click', function(){ manual(); set(+t.dataset.s); }); });
     var nx = document.getElementById('stNext');
-    if (nx) nx.addEventListener('click', function(){ set(cur < 6 ? cur + 1 : 1); });
+    if (nx) nx.addEventListener('click', function(){ manual(); set(cur < 6 ? cur + 1 : 1); });
+    if (playBtn) playBtn.addEventListener('click', function(){ if (auto){ manual(); } else { auto = true; playBtn.textContent = '❚❚'; playBtn.setAttribute('aria-label','Пауза'); tick(); } });
+    if (reduce && playBtn) playBtn.hidden = true;
+    if ('IntersectionObserver' in window){ new IntersectionObserver(function(es){ inView = es[0].isIntersecting; tick(); }, { threshold: .35 }).observe(sec); }
   })();
 
   /* ===== Живая смета ===== */
