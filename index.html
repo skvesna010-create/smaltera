@@ -1149,6 +1149,15 @@ h1 .h1-sub,.hero h1 span.h1-sub{font-size:clamp(16px,.3em,20px)!important}
 #steps .plan.s6 .ok{animation-delay:1.4s}
 #steps .plan.s6 .ok:nth-child(2){animation-delay:1.55s}#steps .plan.s6 .ok:nth-child(3){animation-delay:1.7s}#steps .plan.s6 .ok:nth-child(4){animation-delay:1.85s}#steps .plan.s6 .ok:nth-child(5){animation-delay:2s}
 @media (prefers-reduced-motion:reduce){#steps .plan *{animation:none!important}}
+#steps .plan .furn > g{filter:drop-shadow(0 2px 2px rgba(0,0,0,.22))}
+#steps .plan .furn > g:first-child,#steps .plan .furn > g:nth-child(9){filter:none}
+#steps .plan .lbl text{transition:transform .6s ease,font-size .3s}
+#steps .plan.s5 .lbl text,#steps .plan.s6 .lbl text{paint-order:stroke;stroke:rgba(255,255,255,.85);stroke-width:4px;stroke-linejoin:round;font-size:11.5px}
+#steps .plan.s5 .lbl text:nth-child(1),#steps .plan.s6 .lbl text:nth-child(1){transform:translateY(-76px)}
+#steps .plan.s5 .lbl text:nth-child(2),#steps .plan.s6 .lbl text:nth-child(2){transform:translateY(-23px)}
+#steps .plan.s5 .lbl text:nth-child(3),#steps .plan.s6 .lbl text:nth-child(3){transform:translateY(-66px)}
+#steps .plan.s5 .lbl text:nth-child(4),#steps .plan.s6 .lbl text:nth-child(4){transform:translateY(-8px)}
+#steps .plan.s5 .lbl text:nth-child(5),#steps .plan.s6 .lbl text:nth-child(5){transform:translateX(-24px)}
 /* карточка этапа */
 #steps .stage.on{background:#1E2124!important;border:1px solid #2A2F33!important;border-radius:6px!important;padding:28px!important}
 #steps .stage-n{display:flex;align-items:baseline;gap:12px;color:#1FE6AA!important;font-size:13px;font-weight:700;margin-bottom:6px}
@@ -1534,6 +1543,13 @@ body{letter-spacing:-.01em}
             <radialGradient id="lamp"><stop offset="0" stop-color="#FFE3A3" stop-opacity=".75"/><stop offset=".55" stop-color="#FFD27A" stop-opacity=".18"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
               <linearGradient id="screed" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4A5156"/><stop offset="1" stop-color="#3A4044"/></linearGradient>
               <linearGradient id="shine6" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+            <pattern id="oakA" width="72" height="12" patternUnits="userSpaceOnUse"><rect width="72" height="12" fill="#C9A47C"/><rect width="40" height="6" fill="#BF9870"/><rect x="40" width="32" height="6" fill="#D0AD86"/><rect y="6" width="20" height="6" fill="#D3B18B"/><rect x="20" y="6" width="52" height="6" fill="#C39C73"/><path d="M0 6H72M0 12H72M40 0V6M20 6V12" stroke="#A9835C" stroke-width=".8"/></pattern>
+              <pattern id="oakB" width="72" height="12" patternUnits="userSpaceOnUse"><rect width="72" height="12" fill="#E2CBA9"/><rect width="30" height="6" fill="#DCC29E"/><rect x="30" width="42" height="6" fill="#E8D3B3"/><rect y="6" width="50" height="6" fill="#E5CEAC"/><rect x="50" y="6" width="22" height="6" fill="#D9BE98"/><path d="M0 6H72M0 12H72M30 0V6M50 6V12" stroke="#C4A57D" stroke-width=".8"/></pattern>
+              <pattern id="ktile" width="30" height="30" patternUnits="userSpaceOnUse"><rect width="30" height="30" fill="#E4E2DE"/><rect width="15" height="15" fill="#DCDAD5"/><rect x="15" y="15" width="15" height="15" fill="#DCDAD5"/><path d="M30 0V30H0" stroke="#C9C6C0" stroke-width="1" fill="none"/></pattern>
+              <pattern id="htile" width="40" height="40" patternUnits="userSpaceOnUse"><rect width="40" height="40" fill="#6A7176"/><rect width="20" height="40" fill="#646B70"/><path d="M40 0V40H0" stroke="#565C60" stroke-width="1.2" fill="none"/></pattern>
+              <pattern id="mosaic" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#EEF3F3"/><rect width="5" height="5" fill="#DCE8E6"/><rect x="5" y="5" width="5" height="5" fill="#E4EEEC"/><path d="M10 0V10H0" stroke="#CBD6D4" stroke-width=".6" fill="none"/></pattern>
+              <pattern id="rugL" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#ECE6DB"/><path d="M0 8L8 0" stroke="#DED5C5" stroke-width="1.4"/></pattern>
+              <radialGradient id="glowS"><stop offset="0" stop-color="#FFF4D6"/><stop offset="1" stop-color="#F2C14E"/></radialGradient>
             </defs>
             <rect x="20" y="20" width="560" height="380" fill="#191C1F"/><g class="grid" stroke="#23282C" stroke-width="1"><path d="M50 20V400"/><path d="M80 20V400"/><path d="M110 20V400"/><path d="M140 20V400"/><path d="M170 20V400"/><path d="M200 20V400"/><path d="M230 20V400"/><path d="M260 20V400"/><path d="M290 20V400"/><path d="M320 20V400"/><path d="M350 20V400"/><path d="M380 20V400"/><path d="M410 20V400"/><path d="M440 20V400"/><path d="M470 20V400"/><path d="M500 20V400"/><path d="M530 20V400"/><path d="M560 20V400"/><path d="M20 50H580"/><path d="M20 80H580"/><path d="M20 110H580"/><path d="M20 140H580"/><path d="M20 170H580"/><path d="M20 200H580"/><path d="M20 230H580"/><path d="M20 260H580"/><path d="M20 290H580"/><path d="M20 320H580"/><path d="M20 350H580"/><path d="M20 380H580"/></g>
 
@@ -1548,15 +1564,30 @@ body{letter-spacing:-.01em}
               <g class="tag-g"><rect x="340" y="150" width="200" height="28" rx="14" fill="#FF5A4F"/><text x="440" y="169" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">лазерный уровень</text></g>
             </g>
             <g class="ly ly-fin">
-              <rect x="20" y="20" width="280" height="210" fill="url(#parquet)"/><rect x="300" y="20" width="280" height="210" fill="url(#parquet)"/>
-              <rect x="20" y="230" width="220" height="170" fill="url(#tile)"/><rect x="240" y="230" width="200" height="170" fill="url(#parquet)"/><rect x="440" y="230" width="140" height="170" fill="url(#tile)"/>
-              <g class="furn" fill="#fff" stroke="#9EA6AA" stroke-width="1.6">
-                <rect x="50" y="160" width="160" height="50" rx="10"/><rect x="50" y="160" width="160" height="14" rx="7"/>
-                <circle cx="130" cy="110" r="22"/><rect x="230" y="40" width="50" height="110" rx="4"/>
-                <rect x="380" y="50" width="150" height="120" rx="8"/><rect x="392" y="58" width="56" height="26" rx="6"/><rect x="462" y="58" width="56" height="26" rx="6"/>
-                <rect x="28" y="238" width="34" height="154" rx="3"/><rect x="28" y="358" width="190" height="34" rx="3"/><circle cx="120" cy="375" r="10"/><rect x="160" y="363" width="40" height="24" rx="3"/>
-                <rect x="250" y="370" width="110" height="24" rx="3"/>
-                <rect x="452" y="242" width="118" height="50" rx="22"/><ellipse cx="553" cy="368" rx="14" ry="19"/><rect x="455" y="372" width="44" height="22" rx="8"/>
+              <rect x="20" y="20" width="280" height="210" fill="url(#oakA)"/><rect x="300" y="20" width="280" height="210" fill="url(#oakB)"/>
+              <rect x="20" y="230" width="220" height="170" fill="url(#ktile)"/><rect x="240" y="230" width="200" height="170" fill="url(#htile)"/><rect x="440" y="230" width="140" height="170" fill="url(#mosaic)"/>
+              <g class="furn">
+                <g><rect x="52" y="92" width="168" height="88" rx="3" fill="url(#rugL)" stroke="#D6CCBA" stroke-width="2"/></g>
+                <g><rect x="44" y="168" width="176" height="50" rx="8" fill="#4A5156"/><rect x="44" y="200" width="176" height="18" rx="6" fill="#3A4044"/><rect x="50" y="170" width="52" height="30" rx="6" fill="#6B7377"/><rect x="106" y="170" width="52" height="30" rx="6" fill="#6B7377"/><rect x="162" y="170" width="52" height="30" rx="6" fill="#6B7377"/><rect x="58" y="174" width="14" height="14" rx="3" fill="#1FA67E"/><rect x="190" y="174" width="14" height="14" rx="3" fill="#E9C46A"/></g>
+                <g><rect x="96" y="112" width="84" height="40" rx="4" fill="#8B6646"/><rect x="100" y="116" width="76" height="32" rx="3" fill="#9C7552"/><circle cx="118" cy="132" r="6" fill="#EDE7DC"/><rect x="150" y="124" width="18" height="14" rx="2" fill="#2B2F32"/></g>
+                <g><rect x="280" y="62" width="14" height="110" rx="2" fill="#2B2F32"/><rect x="274" y="80" width="4" height="74" rx="1" fill="#0B0B0B"/></g>
+                <g><rect x="218" y="40" width="50" height="46" rx="10" fill="#1E7A5F"/><rect x="218" y="40" width="50" height="14" rx="7" fill="#17644E"/><rect x="226" y="54" width="34" height="26" rx="6" fill="#23906F"/></g>
+                <g><circle cx="44" cy="44" r="15" fill="#5B4636"/><circle cx="40" cy="40" r="9" fill="#2F8A5B"/><circle cx="50" cy="44" r="8" fill="#3BA36A"/><circle cx="43" cy="50" r="7" fill="#2A7A50"/></g>
+                <g><rect x="398" y="44" width="148" height="128" rx="6" fill="#CDBFA8"/><rect x="404" y="50" width="136" height="116" rx="4" fill="#FAF8F4"/><rect x="404" y="98" width="136" height="68" rx="4" fill="#2B2F32"/><rect x="404" y="98" width="136" height="10" fill="#3A4044"/><rect x="404" y="150" width="136" height="8" fill="#1FA67E"/><rect x="412" y="58" width="56" height="30" rx="8" fill="#fff" stroke="#E2DCD0"/><rect x="476" y="58" width="56" height="30" rx="8" fill="#fff" stroke="#E2DCD0"/></g>
+                <g><rect x="368" y="50" width="26" height="26" rx="3" fill="#9C7552"/><circle cx="381" cy="63" r="7" fill="url(#glowS)"/><rect x="550" y="50" width="26" height="26" rx="3" fill="#9C7552"/><circle cx="563" cy="63" r="7" fill="url(#glowS)"/></g>
+                <g><rect x="448" y="188" width="126" height="34" rx="2" fill="#B08A63"/><path d="M490 188V222M532 188V222" stroke="#8B6646" stroke-width="1.5"/><circle cx="486" cy="205" r="1.8" fill="#5B4636"/><circle cx="494" cy="205" r="1.8" fill="#5B4636"/><circle cx="528" cy="205" r="1.8" fill="#5B4636"/><circle cx="536" cy="205" r="1.8" fill="#5B4636"/></g>
+                <g><rect x="318" y="150" width="62" height="40" rx="3" fill="url(#rugL)" stroke="#D6CCBA" stroke-width="1.5"/></g>
+                <g><rect x="26" y="238" width="34" height="156" rx="2" fill="#F2F1EE" stroke="#CFCBC3"/><rect x="26" y="360" width="186" height="34" rx="2" fill="#F2F1EE" stroke="#CFCBC3"/><rect x="31" y="292" width="24" height="34" rx="5" fill="#B9C0C4"/><rect x="34" y="296" width="18" height="26" rx="4" fill="#9AA3A7"/><circle cx="50" cy="309" r="2" fill="#5A6064"/></g>
+                <g><rect x="96" y="364" width="50" height="26" rx="3" fill="#141618"/><circle cx="108" cy="371" r="4.5" fill="none" stroke="#5A6064" stroke-width="1.6"/><circle cx="134" cy="371" r="4.5" fill="none" stroke="#5A6064" stroke-width="1.6"/><circle cx="108" cy="383" r="4.5" fill="none" stroke="#5A6064" stroke-width="1.6"/><circle cx="134" cy="383" r="4.5" fill="none" stroke="#FF5A4F" stroke-width="1.6"/></g>
+                <g><rect x="176" y="356" width="38" height="40" rx="3" fill="#DDE1E2" stroke="#B4BBBE"/><path d="M178 376H212" stroke="#B4BBBE"/></g>
+                <g><rect x="132" y="262" width="22" height="20" rx="5" fill="#2B2F32"/><rect x="132" y="322" width="22" height="20" rx="5" fill="#2B2F32"/><rect x="98" y="292" width="20" height="22" rx="5" fill="#2B2F32"/><rect x="168" y="292" width="20" height="22" rx="5" fill="#2B2F32"/><circle cx="143" cy="302" r="28" fill="#9C7552"/><circle cx="143" cy="302" r="23" fill="#B08A63"/><circle cx="143" cy="302" r="6" fill="#2F8A5B"/></g>
+                <g><rect x="398" y="246" width="34" height="76" rx="2" fill="#B08A63"/><path d="M415 246V322" stroke="#8B6646" stroke-width="1.5"/><circle cx="411" cy="284" r="1.8" fill="#5B4636"/><circle cx="419" cy="284" r="1.8" fill="#5B4636"/></g>
+                <g><rect x="248" y="350" width="40" height="18" rx="3" fill="#9C7552"/><rect x="250" y="352" width="36" height="6" rx="2" fill="#2B2F32"/></g>
+                <g><rect x="310" y="372" width="52" height="20" rx="3" fill="#2B2F32"/><path d="M314 376H358M314 380H358M314 384H358M314 388H358" stroke="#3E4448" stroke-width="1.4"/></g>
+                <g><rect x="452" y="242" width="120" height="54" rx="22" fill="#FFFFFF" stroke="#C9CFD2" stroke-width="1.5"/><rect x="460" y="249" width="104" height="40" rx="18" fill="#BFE3EE"/><rect x="460" y="249" width="104" height="40" rx="18" fill="#9AD0E0" opacity=".5"/><circle cx="556" cy="262" r="3" fill="#9AA3A7"/></g>
+                <g><rect x="536" y="300" width="36" height="36" rx="4" fill="#FFFFFF" stroke="#C9CFD2" stroke-width="1.5"/><circle cx="554" cy="318" r="11" fill="#DCE5E8" stroke="#9AA3A7" stroke-width="2"/></g>
+                <g><rect x="540" y="374" width="34" height="10" rx="3" fill="#FFFFFF" stroke="#C9CFD2"/><ellipse cx="557" cy="372" rx="12" ry="15" fill="#FFFFFF" stroke="#C9CFD2" stroke-width="1.5"/><ellipse cx="557" cy="370" rx="7" ry="9" fill="#E8EEF0"/></g>
+                <g><rect x="452" y="366" width="56" height="28" rx="3" fill="#9C7552"/><ellipse cx="480" cy="380" rx="17" ry="10" fill="#FFFFFF" stroke="#C9CFD2"/><ellipse cx="480" cy="381" rx="11" ry="6" fill="#E8EEF0"/></g>
               </g>
             </g>
             <g class="ly ly-demo">
@@ -1586,7 +1617,7 @@ body{letter-spacing:-.01em}
               <g class="tag-g"><rect x="300" y="296" width="132" height="28" rx="14" fill="#4DA3FF"/><text x="366" y="315" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">новые трубы</text></g>
             </g>
             <g class="ly ly-done">
-              <g class="ok"><circle cx="160" cy="70" r="16"/><path d="M152 70l6 6 11-12"/></g>
+              <g class="ok"><circle cx="246" cy="130" r="16"/><path d="M238 130l6 6 11-12"/></g>
               <g class="ok"><circle cx="350" cy="180" r="16"/><path d="M342 180l6 6 11-12"/></g>
               <g class="ok"><circle cx="200" cy="270" r="16"/><path d="M192 270l6 6 11-12"/></g>
               <g class="ok"><circle cx="404" cy="372" r="16"/><path d="M396 372l6 6 11-12"/></g>
