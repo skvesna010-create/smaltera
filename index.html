@@ -1030,6 +1030,15 @@ h1 .h1-sub,.hero h1 span.h1-sub{font-size:clamp(16px,.3em,20px)!important}
   .hx-facts{grid-template-columns:repeat(3,1fr);gap:10px 14px}
   .hx-facts b{font-size:18px}
 }
+/* этапы ремонта: один этап на экране, переключение по кнопкам (раньше — 3 экрана прокрутки) */
+.stage-col{padding-bottom:0!important;gap:12px!important;align-content:start}
+.stage{display:none!important;min-height:0!important;opacity:1!important}
+.stage.on{display:flex!important;animation:stIn .35s ease both}
+@keyframes stIn{from{opacity:0;transform:translateY(8px)}}
+.stage-next{justify-self:start;background:none;border:1.5px solid var(--ink);color:var(--ink);font:700 15px/1 var(--body);padding:13px 20px;border-radius:4px;cursor:pointer}
+.stage-next:hover{background:var(--ink);color:#fff}
+.stage[data-s="6"].on ~ .stage-next{display:none}
+@media (min-width:901px){.proc-grid{align-items:center!important}}
 /* ДОМИЛИЯ: Montserrat шире прежних шрифтов — подгонка */
 body{letter-spacing:-.01em}
 .hero-cta{gap:10px}.hero-cta .btn{padding-left:18px;padding-right:18px;font-size:14.5px}
@@ -1264,7 +1273,7 @@ body{letter-spacing:-.01em}
   </div>
 </section>
 
-<section id="videos" data-hide-empty>
+<section id="videos" data-hide-empty hidden>
   <div class="wrap">
     <div class="head-row"><div><h2>Видео с объектов</h2><p class="sub">Без монтажа и красивых ракурсов: как идут работы и как выглядит результат.</p></div></div>
     <div data-sm="videos"></div>
@@ -1338,7 +1347,8 @@ body{letter-spacing:-.01em}
   </div>
 </section>
 
-<section class="fix" id="fix">
+<!-- скрыто: повторяет «Условия работы». Вернуть — убрать hidden -->
+<section class="fix" id="fix" hidden>
   <div class="wrap fix-grid">
     <div class="sheet" id="sheet" aria-label="Пример сметы">
       <div class="sheet-h"><b>Пример сметы</b><span>2-комн. квартира, 58 м²</span></div>
@@ -1368,7 +1378,7 @@ body{letter-spacing:-.01em}
     <div class="head-row">
       <div>
         <h2>Посмотрите, как пройдёт ваш ремонт</h2>
-        <p class="sub">Листайте вниз: квартира на схеме будет меняться этап за этапом, от голых стен до ключей.</p>
+        <p class="sub">Нажимайте на этапы: квартира на схеме меняется шаг за шагом, от голых стен до ключей.</p>
       </div>
     </div>
 
@@ -1508,6 +1518,7 @@ body{letter-spacing:-.01em}
           <div class="stage-get"><b>Вы получаете:</b> ключи, акт приёмки и гарантию на 3 года</div>
           <a class="btn btn-main" href="#quiz" style="margin-top:18px">Рассчитать мой ремонт</a>
         </article>
+        <button type="button" class="stage-next" id="stNext">Следующий этап →</button>
       </div>
     </div>
   </div>
@@ -1524,12 +1535,13 @@ body{letter-spacing:-.01em}
       <div class="term-c"><i>М</i><b>Материалы</b><p>Закупаем по согласованному списку или вы покупаете сами. Все чеки и документы остаются у вас.</p></div>
       <div class="term-c"><i>±</i><b>Изменения</b><p>Любые дополнительные работы только с вашего письменного согласия и по цене из прайса.</p></div>
     </div>
+    <div style="margin-top:22px"><a class="btn btn-gold" href="#lead-check" data-open-pop>Получить чек-лист приёмки ремонта</a></div>
   </div>
 </section>
 
 <section class="cmp-sec" id="compare">
   <div class="wrap">
-    <div class="head-row"><div><h2>Сравните, с кем спокойнее</h2><p class="sub">Чем ремонт со «Домилией» отличается от частного мастера и от крупной компании.</p></div></div>
+    <div class="head-row"><div><h2>Сравните, с кем спокойнее</h2><p class="sub">Чем ремонт с «Домилией» отличается от частного мастера и от крупной компании.</p></div></div>
     <p class="cmp-hint">Таблицу можно листать вбок →</p>
     <div class="cmp-wrap">
       <table class="cmp">
@@ -1547,7 +1559,8 @@ body{letter-spacing:-.01em}
   </div>
 </section>
 
-<section class="honest" id="honest">
+<!-- скрыто: повторяет «Условия работы». Вернуть — убрать hidden -->
+<section class="honest" id="honest" hidden>
   <div class="wrap honest-grid">
     <div>
       <h2>Мы молодая компания, поэтому даём больше гарантий</h2>
@@ -2127,17 +2140,9 @@ body{letter-spacing:-.01em}
       document.getElementById('planTime').textContent = TIME[n-1];
     }
     set(1);
-    tabs.forEach(function(t){ t.addEventListener('click', function(){
-      var n = +t.dataset.s; set(n);
-      var c = document.querySelector('.stage[data-s="'+n+'"]');
-      if (c) c.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
-    }); });
-    if ('IntersectionObserver' in window){
-      var io = new IntersectionObserver(function(es){
-        es.forEach(function(e){ if (e.isIntersecting) set(+e.target.dataset.s); });
-      }, { rootMargin: '-40% 0px -40% 0px' });
-      cards.forEach(function(c){ io.observe(c); });
-    }
+    tabs.forEach(function(t){ t.addEventListener('click', function(){ set(+t.dataset.s); }); });
+    var nx = document.getElementById('stNext');
+    if (nx) nx.addEventListener('click', function(){ set(cur < 6 ? cur + 1 : 1); });
   })();
 
   /* ===== Живая смета ===== */
@@ -2476,7 +2481,7 @@ body{letter-spacing:-.01em}
       if (t.name){ var n = document.createElement('small'); n.textContent = t.name; ph.parentNode.insertBefore(n, ph.nextSibling); }
     });
     var sec = document.getElementById('reviews'), g = document.getElementById('revGrid');
-    var demo = false, R = REVIEWS;
+    var demo = false, R = REVIEWS.filter(function(r){ return !r.demo; });   /* примеры не показываем: блок появится, когда в админке будут настоящие отзывы */
     if (demo && !R.length) R = [
       { name:'Анна', place:'ЖК в Академическом, 2-комн.', work:'Ремонт под ключ, 56 м²', date:'октябрь', source:'demo', stars:5, text:'Пример отзыва. Так будет выглядеть настоящий отзыв клиента: что понравилось, как соблюдали сроки, как прораб держал в курсе. Длинный текст аккуратно сворачивается, а по кнопке раскрывается целиком, чтобы карточки оставались ровными.' },
       { name:'Дмитрий', place:'Вторичка на Уралмаше, 3-комн.', work:'Капитальный ремонт, 64 м²', date:'сентябрь', source:'demo', stars:5, text:'Пример отзыва. Здесь будет история клиента: с чем пришёл, что сделали, совпала ли итоговая сумма со сметой.' },
@@ -2522,7 +2527,7 @@ body{letter-spacing:-.01em}
     function allDemo(L){ return L.length && L.every(function(x){ return x.demo; }); }
     [['works', PROJECTS], ['videos', VIDEOS]].forEach(function(k){ if (allDemo(k[1])){ var h = document.querySelector('#' + k[0] + ' h2'); if (h){ var t = document.createElement('span'); t.className = 'demo-tag'; t.textContent = 'ПРИМЕР'; h.appendChild(t); } } });
     var IMG = function(id, w){ return 'https://images.pexels.com/photos/' + id + '/pexels-photo-' + id + '.jpeg?auto=compress&cs=tinysrgb&w=' + (w||900); };
-    var P = PROJECTS, V = VIDEOS;
+    var P = PROJECTS, V = VIDEOS.filter(function(v){ return !v.demo; });   /* видео-примеры не показываем: блок появится с настоящими видео */
     if (demo){
       if (!P.length) P = [
         { title:'Пример: 2-комн. квартира в новостройке', area:56, days:72, price:'1 120 000 ₽', type:'Ремонт под ключ', photos:[IMG(28254550),IMG(15220864),IMG(28853362)], text:'Здесь будет описание вашего объекта: что было, что сделали, что было важно клиенту.' },
