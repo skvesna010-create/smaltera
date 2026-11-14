@@ -1180,6 +1180,20 @@ h1 .h1-sub,.hero h1 span.h1-sub{font-size:clamp(16px,.3em,20px)!important}
   #steps .stage-n em{font-size:48px}
   #steps .stage.on{padding:20px!important}
 }
+/* блок с роликом о компании */
+.vid{padding:clamp(48px,6vw,88px) 0;background:#F4F5F5}
+.vid-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,56px);align-items:center}
+.vid .eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#007A55;margin-bottom:10px}
+.vid h2{margin:0 0 12px}
+.vid .sub{margin:0 0 22px;max-width:40ch}
+.vid-box{position:relative;border-radius:6px;overflow:hidden;background:#141618;box-shadow:0 30px 60px -30px rgba(20,22,24,.45);aspect-ratio:16/9}
+.vid-box::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(0deg,#006C4C,#1FE6AA);z-index:1}
+.vid-box video{display:block;width:100%;height:100%;object-fit:cover;background:#141618}
+.vid-play{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(180deg,rgba(20,22,24,0) 50%,rgba(20,22,24,.35));border:0;cursor:pointer;z-index:2}
+.vid-play span{width:84px;height:84px;border-radius:50%;background:#00B47E;box-shadow:0 0 0 10px rgba(0,180,126,.25),0 18px 40px -10px rgba(0,0,0,.5);position:relative;transition:transform .25s}
+.vid-play span::after{content:"";position:absolute;left:34px;top:26px;border-left:24px solid #0B0B0B;border-top:16px solid transparent;border-bottom:16px solid transparent}
+.vid-play:hover span{transform:scale(1.08)}
+@media (max-width:900px){.vid-grid{grid-template-columns:1fr}.vid-txt{order:2}.vid-play span{width:64px;height:64px}.vid-play span::after{left:26px;top:19px;border-left-width:18px;border-top-width:13px;border-bottom-width:13px}}
 /* ДОМИЛИЯ: Montserrat шире прежних шрифтов — подгонка */
 body{letter-spacing:-.01em}
 .hero-cta{gap:10px}.hero-cta .btn{padding-left:18px;padding-right:18px;font-size:14.5px}
@@ -1278,6 +1292,20 @@ body{letter-spacing:-.01em}
           <a class="btn btn-gold" href="#quiz">Точный расчёт</a>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+<section class="vid" id="video">
+  <div class="wrap vid-grid">
+    <div class="vid-txt">
+      <span class="eyebrow">Знакомство</span>
+      <h2>ДОМИЛИЯ за&nbsp;50&nbsp;секунд</h2>
+      <p class="sub">Покажем, как работаем: дизайн-проект, ремонт, потолки, ванные и контроль каждого этапа в приложении.</p>
+      <a class="btn btn-main" href="#quiz">Рассчитать свой ремонт</a>
+    </div>
+    <div class="vid-box">
+      <video id="dmVid" playsinline preload="none" poster="media/domilia-video-poster.jpg" src="media/domilia-video.mp4" aria-label="Видео о компании ДОМИЛИЯ"></video>
+      <button type="button" class="vid-play" id="dmPlay" aria-label="Смотреть видео"><span></span></button>
     </div>
   </div>
 </section>
@@ -1488,6 +1516,9 @@ body{letter-spacing:-.01em}
   </div>
 </section>
 
+<script>
+(function(){var v=document.getElementById("dmVid"),b=document.getElementById("dmPlay");if(!v||!b)return;b.addEventListener("click",function(){b.hidden=true;v.controls=true;v.play();});})();
+</script>
 <!-- скрыто: повторяет «Условия работы». Вернуть — убрать hidden -->
 <section class="fix" id="fix" hidden>
   <div class="wrap fix-grid">
