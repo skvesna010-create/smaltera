@@ -2102,8 +2102,12 @@ body{letter-spacing:-.01em}
         b.className = 'a-btn' + (o.img ? '' : ' txt') + (multi && o.on ? ' sel' : '') + (o.v === 'go' ? ' go' : '');
         if (multi && o.on) picked[o.v] = true;
         b.innerHTML = (multi ? '<span class="ck">✓</span>' : '') +
-          (o.img ? '<span class="th ph"><img src="'+IMG(o.img)+'" alt="" onerror="this.classList.add(\'err\')"></span>' : '') +
+          (o.img ? '<span class="th ph"></span>' : '') +
           '<span>' + o.t + (o.s ? '<small>' + o.s + '</small>' : '') + '</span>';
+        if (o.img){   /* картинку создаём через DOM: в тексте страницы нет «src=» с кодом, браузер не пытается его загрузить */
+          var im = document.createElement('img'); im.alt = ''; im.onerror = function(){ im.classList.add('err'); };
+          im.src = IMG(o.img); b.querySelector('.th').appendChild(im);
+        }
         b.addEventListener('click', function(){
           if (!window.__qs){ window.__qs = 1; window.smGoal && smGoal('quiz_start'); }
           if (!multi){ answers.innerHTML = ''; resolve(o); return; }
