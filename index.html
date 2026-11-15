@@ -1198,6 +1198,11 @@ h1 .h1-sub,.hero h1 span.h1-sub{font-size:clamp(16px,.3em,20px)!important}
 body{letter-spacing:-.01em}
 .hero-cta{gap:10px}.hero-cta .btn{padding-left:18px;padding-right:18px;font-size:14.5px}
 .est{font-size:clamp(24px,2.2vw,31px);letter-spacing:-.02em}
+/* Мобильная версия: только главное, без повторов */
+@media (max-width:760px){
+  #tasks,#prices,#ctor,#terms,#team,#bath,#districts,#blog,#about{display:none!important}
+  .hero .micro,.gift-list{display:none!important}
+}
 </style>
 <script src="assets/data.js"></script>
 <script>
