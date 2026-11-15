@@ -164,3 +164,15 @@
 @media (max-width:620px){.vd-grid{grid-template-columns:1fr}}
 
 .ob2-count{top:14px;bottom:auto}
+/* Мобильная карточка объекта: надписи идут по порядку и не наезжают друг на друга */
+@media (max-width:760px){
+  .pf-card{aspect-ratio:auto;min-height:400px;display:flex;flex-direction:column;justify-content:space-between;gap:16px;padding:14px 16px 16px}
+  .pf-top,.pf-info{position:relative;left:auto;right:auto;top:auto;bottom:auto;z-index:2}
+  .pf-top{flex-wrap:wrap;justify-content:flex-start;gap:6px}
+  .pf-type,.pf-cnt{font-size:12px;padding:6px 9px}
+  .pf-info{gap:10px}
+  .pf-info b{font-size:19px}
+  .pf-chips span{font-size:12.5px;padding:5px 8px}
+  .pf-price{font-size:22px}
+  .pf-go{font-size:13.5px}
+}
