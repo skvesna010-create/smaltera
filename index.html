@@ -1201,8 +1201,26 @@ body{letter-spacing:-.01em}
 /* Мобильная версия: только главное, без повторов */
 @media (max-width:760px){
   #tasks,#prices,#ctor,#terms,#team,#bath,#districts,#blog,#about{display:none!important}
-  .hero .micro,.gift-list{display:none!important}
+  .hero .micro,.gift-list,.proc .pre-t,.proc .pre{display:none!important}
+  /* первый экран: сразу видно красивый результат */
+  .hero.hx{background:linear-gradient(180deg,rgba(18,20,22,.55) 0%,rgba(18,20,22,.82) 45%,#16191B 78%),url(https://images.pexels.com/photos/6908500/pexels-photo-6908500.jpeg?auto=compress&cs=tinysrgb&w=900) center top/cover no-repeat,#16191B!important}
+  .hero .hx-lines,.hero .hero-img{display:none!important}
+  .hero .offer{background:rgba(0,0,0,.35)!important;backdrop-filter:blur(6px)}
+  .hero h1{text-shadow:0 2px 18px rgba(0,0,0,.45)}
+  /* низ экрана не загромождаем: без кружка помощника, панель кнопок появляется после первого экрана */
+  .helper{display:none!important}
+  .hero .qp{margin-top:22px!important;position:relative!important;top:auto!important;transform:none!important}
+  .mbar{transform:translateY(110%);transition:transform .3s}
+  body.mb-on .mbar{transform:none}
+  /* сравнение: все три колонки сразу на экране */
+  .cmp-hint{display:none!important}
+  .cmp-wrap{overflow:visible!important}
+  table.cmp{min-width:0!important;width:100%!important;table-layout:fixed;font-size:12px!important}
+  table.cmp th,table.cmp td{padding:10px 6px!important;font-size:12px!important;line-height:1.3!important;word-break:normal;hyphens:auto}
+  table.cmp th:first-child,table.cmp td:first-child{width:34%}
+  table.cmp th{font-size:12.5px!important}
 }
+@media (max-width:620px){.ck{bottom:12px!important;padding:6px 6px 6px 12px!important;font-size:12px!important;transition:bottom .3s}body.mb-on .ck{bottom:78px!important}}
 </style>
 <script src="assets/data.js"></script>
 <script>
@@ -1991,6 +2009,7 @@ body{letter-spacing:-.01em}
   </div>
 </div>
 
+<script>(function(){var f=function(){document.body.classList.toggle('mb-on',scrollY>520)};addEventListener('scroll',f,{passive:true});f()})()</script>
 <div class="mbar">
   <a class="btn btn-line" href="tel:+73430000000">Позвонить</a>
   <button type="button" class="btn btn-line mb-write" id="mbWrite" hidden>Написать</button>
