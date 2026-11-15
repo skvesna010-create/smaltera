@@ -1,3 +1,4 @@
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 
 .mn-wrap{width:min(1240px,100% - 40px);margin-inline:auto}
 .mn-top{background:#1E2124;color:#CDD3D6;font-size:13px;font-family:Montserrat,Arial,sans-serif}

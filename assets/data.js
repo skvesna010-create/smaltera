@@ -54,19 +54,19 @@ window.SM = {
    "year": 2026,
    "photos": [
     {
-     "src": "https://images.pexels.com/photos/28254550/pexels-photo-28254550.jpeg?auto=compress&cs=tinysrgb&w=1200",
+     "src": "/img/28254550.jpg",
      "alt": "Капитальный ремонт: двухкомнатная квартира в Академическом — фото 1"
     },
     {
-     "src": "https://images.pexels.com/photos/15220864/pexels-photo-15220864.jpeg?auto=compress&cs=tinysrgb&w=1200",
+     "src": "/img/15220864.jpg",
      "alt": "Капитальный ремонт: двухкомнатная квартира в Академическом — фото 2"
     },
     {
-     "src": "https://images.pexels.com/photos/28853362/pexels-photo-28853362.jpeg?auto=compress&cs=tinysrgb&w=1200",
+     "src": "/img/28853362.jpg",
      "alt": "Капитальный ремонт: двухкомнатная квартира в Академическом — фото 3"
     },
     {
-     "src": "https://images.pexels.com/photos/15220867/pexels-photo-15220867.jpeg?auto=compress&cs=tinysrgb&w=1200",
+     "src": "/img/15220867.jpg",
      "alt": "Капитальный ремонт: двухкомнатная квартира в Академическом — фото 4"
     }
    ],
@@ -153,15 +153,15 @@ window.SM = {
    "year": 2026,
    "photos": [
     {
-     "src": "https://images.pexels.com/photos/14614670/pexels-photo-14614670.jpeg?auto=compress&cs=tinysrgb&w=1200",
+     "src": "/img/14614670.jpg",
      "alt": "Ремонт под ключ: однокомнатная квартира в новостройке на Широкой Речке — фото 1"
     },
     {
-     "src": "https://images.pexels.com/photos/14614673/pexels-photo-14614673.jpeg?auto=compress&cs=tinysrgb&w=1200",
+     "src": "/img/14614673.jpg",
      "alt": "Ремонт под ключ: однокомнатная квартира в новостройке на Широкой Речке — фото 2"
     },
     {
-     "src": "https://images.pexels.com/photos/15220864/pexels-photo-15220864.jpeg?auto=compress&cs=tinysrgb&w=1200",
+     "src": "/img/15220864.jpg",
      "alt": "Ремонт под ключ: однокомнатная квартира в новостройке на Широкой Речке — фото 3"
     }
    ],
@@ -237,15 +237,15 @@ window.SM = {
    "year": 2026,
    "photos": [
     {
-     "src": "https://images.pexels.com/photos/33529504/pexels-photo-33529504.jpeg?auto=compress&cs=tinysrgb&w=1200",
+     "src": "/img/33529504.jpg",
      "alt": "Ремонт ванной под ключ: ванная под ключ на Уралмаше — фото 1"
     },
     {
-     "src": "https://images.pexels.com/photos/33529508/pexels-photo-33529508.jpeg?auto=compress&cs=tinysrgb&w=1200",
+     "src": "/img/33529508.jpg",
      "alt": "Ремонт ванной под ключ: ванная под ключ на Уралмаше — фото 2"
     },
     {
-     "src": "https://images.pexels.com/photos/33529507/pexels-photo-33529507.jpeg?auto=compress&cs=tinysrgb&w=1200",
+     "src": "/img/33529507.jpg",
      "alt": "Ремонт ванной под ключ: ванная под ключ на Уралмаше — фото 3"
     }
    ],
@@ -317,19 +317,19 @@ window.SM = {
    "year": 2026,
    "photos": [
     {
-     "src": "https://images.pexels.com/photos/33529500/pexels-photo-33529500.jpeg?auto=compress&cs=tinysrgb&w=1200",
+     "src": "/img/33529500.jpg",
      "alt": "Дизайнерский ремонт: трёхкомнатная квартира в Центре по дизайн-проекту — фото 1"
     },
     {
-     "src": "https://images.pexels.com/photos/36451512/pexels-photo-36451512.jpeg?auto=compress&cs=tinysrgb&w=1200",
+     "src": "/img/36451512.jpg",
      "alt": "Дизайнерский ремонт: трёхкомнатная квартира в Центре по дизайн-проекту — фото 2"
     },
     {
-     "src": "https://images.pexels.com/photos/29515355/pexels-photo-29515355.jpeg?auto=compress&cs=tinysrgb&w=1200",
+     "src": "/img/29515355.jpg",
      "alt": "Дизайнерский ремонт: трёхкомнатная квартира в Центре по дизайн-проекту — фото 3"
     },
     {
-     "src": "https://images.pexels.com/photos/14613456/pexels-photo-14613456.jpeg?auto=compress&cs=tinysrgb&w=1200",
+     "src": "/img/14613456.jpg",
      "alt": "Дизайнерский ремонт: трёхкомнатная квартира в Центре по дизайн-проекту — фото 4"
     }
    ],
@@ -414,11 +414,11 @@ window.SM = {
    "year": 2026,
    "photos": [
     {
-     "src": "https://images.pexels.com/photos/28681145/pexels-photo-28681145.jpeg?auto=compress&cs=tinysrgb&w=1200",
+     "src": "/img/28681145.jpg",
      "alt": "Ремонт в новостройке: студия с white box на ВИЗе — фото 1"
     },
     {
-     "src": "https://images.pexels.com/photos/29515355/pexels-photo-29515355.jpeg?auto=compress&cs=tinysrgb&w=1200",
+     "src": "/img/29515355.jpg",
      "alt": "Ремонт в новостройке: студия с white box на ВИЗе — фото 2"
     }
    ],
@@ -493,11 +493,11 @@ window.SM = {
    "year": 2026,
    "photos": [
     {
-     "src": "https://images.pexels.com/photos/6908500/pexels-photo-6908500.jpeg?auto=compress&cs=tinysrgb&w=1200",
+     "src": "/img/6908500.jpg",
      "alt": "Косметический ремонт: двухкомнатная квартира на Эльмаше — фото 1"
     },
     {
-     "src": "https://images.pexels.com/photos/14613456/pexels-photo-14613456.jpeg?auto=compress&cs=tinysrgb&w=1200",
+     "src": "/img/14613456.jpg",
      "alt": "Косметический ремонт: двухкомнатная квартира на Эльмаше — фото 2"
     }
    ],
@@ -557,20 +557,20 @@ window.SM = {
    "demo": true,
    "title": "Обзор готовой квартиры",
    "note": "видео с объекта",
-   "poster": "https://images.pexels.com/photos/6908500/pexels-photo-6908500.jpeg?auto=compress&cs=tinysrgb&w=700",
+   "poster": "/img/6908500.jpg",
    "project": "akademicheskij-56"
   },
   {
    "demo": true,
    "title": "Как мы делаем электрику",
    "note": "видео с объекта",
-   "poster": "https://images.pexels.com/photos/14613456/pexels-photo-14613456.jpeg?auto=compress&cs=tinysrgb&w=700"
+   "poster": "/img/14613456.jpg"
   },
   {
    "demo": true,
    "title": "Приёмка ванной",
    "note": "видео с объекта",
-   "poster": "https://images.pexels.com/photos/33529508/pexels-photo-33529508.jpeg?auto=compress&cs=tinysrgb&w=700",
+   "poster": "/img/33529508.jpg",
    "project": "uralmash-vannaya"
   }
  ],
