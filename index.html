@@ -152,6 +152,8 @@ nav.menu a:hover{color:var(--smalt)}
 .a-btn small{display:block;font-weight:500;color:var(--muted);font-size:12.5px}
 .a-btn.go{background:var(--gold);border-color:var(--gold);color:#fff}
 .a-btn.go:hover{background:#A07D33;border-color:#A07D33}
+.qck{flex:none;width:20px;height:20px;border:1.5px solid var(--line);border-radius:5px;display:grid;place-items:center;font-size:12px;color:transparent;background:#fff}
+.a-btn.sel .qck{background:var(--smalt);border-color:var(--smalt);color:#fff}
 .a-btn.sel{border-color:var(--smalt);background:#EAF7F1;box-shadow:inset 0 0 0 1px var(--smalt)}
 .a-btn .ck{width:20px;height:20px;border-radius:6px;border:1.5px solid #C5C9D3;flex:none;display:grid;place-items:center;font-size:13px;color:#fff}
 .a-btn.sel .ck{background:var(--smalt);border-color:var(--smalt)}
@@ -1208,6 +1210,14 @@ body{letter-spacing:-.01em}
   .hero h1{text-shadow:0 2px 18px rgba(0,0,0,.45)}
   /* низ экрана не загромождаем: без кружка помощника, панель кнопок появляется после первого экрана */
   .helper{display:none!important}
+  /* квиз: ответы одинаковыми кнопками во всю ширину */
+  .answers{padding:14px 16px 18px!important}
+  .ans{display:grid!important;grid-template-columns:1fr;gap:8px!important}
+  .a-btn{width:100%!important;justify-content:flex-start;text-align:left;min-height:52px;padding:12px 14px!important;font-size:15px!important}
+  .chat-reset{font-size:11px!important;padding:6px 8px!important}
+  .a-btn.go{justify-content:center;text-align:center}
+  /* меньше цифр: на первом экране без калькулятора, в квизе только диалог, цена в конце */
+  .hero .qp,.quiz .calc-side,.quiz-sec .head-row .sub{display:none!important}
   .hero .qp{margin-top:22px!important;position:relative!important;top:auto!important;transform:none!important}
   .mbar{transform:translateY(110%);transition:transform .3s}
   body.mb-on .mbar{transform:none}
@@ -2008,7 +2018,7 @@ body{letter-spacing:-.01em}
   </div>
 </div>
 
-<script>(function(){var f=function(){document.body.classList.toggle('mb-on',scrollY>520)};addEventListener('scroll',f,{passive:true});f()})()</script>
+<script>(function(){var q,f=function(){q=q||document.getElementById('quiz');var r=q&&q.getBoundingClientRect(),inq=r&&r.top<innerHeight*.6&&r.bottom>innerHeight*.4;document.body.classList.toggle('mb-on',scrollY>520&&!inq)};addEventListener('scroll',f,{passive:true});f()})()</script>
 <div class="mbar">
   <a class="btn btn-line" href="tel:+73430000000">Позвонить</a>
   <button type="button" class="btn btn-line mb-write" id="mbWrite" hidden>Написать</button>
@@ -2155,7 +2165,7 @@ body{letter-spacing:-.01em}
         var b = document.createElement('button'); b.type = 'button';
         b.className = 'a-btn' + (o.img ? '' : ' txt') + (multi && o.on ? ' sel' : '') + (o.v === 'go' ? ' go' : '');
         if (multi && o.on) picked[o.v] = true;
-        b.innerHTML = (multi ? '<span class="ck">✓</span>' : '') +
+        b.innerHTML = (multi ? '<span class="qck">✓</span>' : '') +
           (o.img ? '<span class="th ph"></span>' : '') +
           '<span>' + o.t + (o.s ? '<small>' + o.s + '</small>' : '') + '</span>';
         if (o.img){   /* картинку создаём через DOM: в тексте страницы нет «src=» с кодом, браузер не пытается его загрузить */
@@ -2243,7 +2253,7 @@ body{letter-spacing:-.01em}
     var my = run;
     function alive(){ if (my !== run) throw 'reset'; }
 
-    say('Здравствуйте! Я помощник Домилии, помогу прикинуть стоимость ремонта. Всего 5 вопросов, а цена будет пересчитываться после каждого ответа.')
+    say('Здравствуйте! Я помощник Домилии. Ответьте на 5 простых вопросов, и в конце я покажу примерную стоимость ремонта.')
     .then(function(){ alive(); return say('Для начала: какая у вас квартира?'); })
     .then(function(){ alive(); return options([
         { v:'new', t:'Новостройка', s:'без отделки или white box', img:1571460 },
@@ -2257,7 +2267,7 @@ body{letter-spacing:-.01em}
         { v:28, t:'Студия' }, { v:38, t:'1-комнатная' }, { v:56, t:'2-комнатная' },
         { v:78, t:'3-комнатная' }, { v:105, t:'4 и больше' } ]); })
     .then(function(o){ alive(); me(o.t); S.area = o.v; area.value = o.v; progress(2); calc();
-        return say('Для такой квартиры типично около ' + o.v + ' м². Если у вас другая площадь, подвиньте ползунок «Площадь квартиры» в расчёте.'); })
+        return say('Для такой квартиры типично около ' + o.v + ' м². ' + (matchMedia('(max-width:760px)').matches ? 'Точную площадь инженер уточнит на замере.' : 'Если у вас другая площадь, подвиньте ползунок «Площадь квартиры» в расчёте.')); })
     .then(function(){ alive(); return say('Какой ремонт планируете?'); })
     .then(function(){ alive(); return options([
         { v:'cosm', t:'Косметический', s:'стены, полы, потолки' },
@@ -2281,7 +2291,7 @@ body{letter-spacing:-.01em}
     .then(function(list){ alive(); me(list.length ? list.map(function(o){ return o.t; }).join(', ') : 'Ничего не нужно'); progress(4); calc();
         var txt = !list.length ? 'Хорошо, считаем только основные работы.'
           : S.extras.des ? 'Добавил. Дизайн-проект — хорошая идея: с ним бригада не гадает, где розетки и свет, и переделок не бывает.'
-          : 'Добавил в расчёт, посмотрите разбивку по статьям.';
+          : 'Добавил в расчёт.';
         return say(txt); })
     .then(function(){ alive(); return say('И последнее: когда хотите начать?'); })
     .then(function(){ alive(); return options([
