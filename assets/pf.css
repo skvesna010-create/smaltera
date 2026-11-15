@@ -176,3 +176,11 @@
   .pf-price{font-size:22px}
   .pf-go{font-size:13.5px}
 }
+/* Расчёт на странице объекта: ничего не вылезает за край на телефоне */
+@media (max-width:760px){
+  .ob2-calc{grid-template-columns:minmax(0,1fr)!important;padding:18px!important;gap:18px}
+  .ob2-calc label{flex-wrap:wrap;gap:4px 10px;font-size:16px}
+  .ob2-res{padding:18px}
+  .ob2-res b{white-space:normal;font-size:26px}
+  .ob2-res .btn{white-space:normal;justify-self:stretch;text-align:center}
+}
