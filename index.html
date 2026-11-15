@@ -1199,6 +1199,29 @@ h1 .h1-sub,.hero h1 span.h1-sub{font-size:clamp(16px,.3em,20px)!important}
 body{letter-spacing:-.01em}
 .hero-cta{gap:10px}.hero-cta .btn{padding-left:18px;padding-right:18px;font-size:14.5px}
 .est{font-size:clamp(24px,2.2vw,31px);letter-spacing:-.02em}
+/* Квиз на компьютере: всё в одном экране, ответы всегда видны */
+@media (min-width:761px){
+  .quiz-sec{padding-top:clamp(40px,4vw,64px)}
+  .quiz-sec .head-row{margin-bottom:20px}
+  #quiz{scroll-margin-top:64px}
+  .quiz{grid-template-columns:minmax(0,1fr) 360px;height:clamp(520px,calc(100vh - 250px),660px);min-height:0!important}
+  .chat{min-height:0}
+  .msgs{max-height:none!important;min-height:0;flex:1;padding-top:16px}
+  .answers{flex:none;max-height:46%;overflow-y:auto}
+  .ans{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+  .a-btn{width:100%;min-height:54px;justify-content:flex-start;text-align:left}
+  .a-btn.go{justify-content:center;grid-column:1/-1;max-width:260px}
+  .calc-side{overflow-y:auto;gap:16px}
+  .calc-side .bar-i.off{display:none}
+  .calc-side .mat-h,.calc-side .mat-t{display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+  .calc-side .mat-h b,.calc-side .mat-t b,.calc-side .est{white-space:nowrap}
+  .a-btn.go{max-width:none;min-height:52px}
+}
+.cs-idle{display:none;position:relative;margin:auto 0;text-align:left}
+.cs-idle b{display:block;font-size:20px;margin-bottom:8px;color:#fff}
+.cs-idle span{color:#B4BBBE;font-size:15px;line-height:1.5}
+.calc-side.idle .cs-idle{display:block}
+.calc-side.idle > :not(.cs-idle){display:none!important}
 /* Заголовок карточки услуги — как H3 карточки: тёмный, полужирный */
 .svc b{color:var(--ink);font-weight:700;line-height:1.3;letter-spacing:-.01em}
 /* Мобильная версия: только главное, без повторов */
@@ -1429,6 +1452,7 @@ body{letter-spacing:-.01em}
       </div>
 
       <aside class="calc-side" aria-live="polite">
+        <div class="cs-idle"><b>Здесь появится расчёт</b><span>Ответьте на первые два вопроса слева — и мы покажем примерную стоимость, срок и бюджет на материалы.</span></div>
         <div>
           <div class="lbl">Примерная стоимость работ</div>
           <div class="est" id="est">—</div>
@@ -2156,7 +2180,7 @@ body{letter-spacing:-.01em}
     });
   }
   function me(text){ add('me', text); }
-  function progress(n){ for (var i=0;i<prog.length;i++) prog[i].classList.toggle('on', i < n); }
+  function progress(n){ for (var i=0;i<prog.length;i++) prog[i].classList.toggle('on', i < n); var cs=document.querySelector('.calc-side'); if (cs) cs.classList.toggle('idle', n < 2); }
 
   function options(list, multi){
     return new Promise(function(resolve){
