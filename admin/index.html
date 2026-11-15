@@ -444,7 +444,7 @@ function vList(box, kind){
     var acts = h('div', { class:'acts' }, [
       h('button', { class:'ic', title:'Выше', text:'↑', onclick:function(){ if (!i) return; L.splice(i - 1, 0, L.splice(i, 1)[0]); mark(); go(kind); } }),
       h('button', { class:'ic', title:'Ниже', text:'↓', onclick:function(){ if (i === L.length - 1) return; L.splice(i + 1, 0, L.splice(i, 1)[0]); mark(); go(kind); } }),
-      kind === 'projects' ? h('a', { class:'ic', title:'Открыть на сайте', text:'↗', href:SITE + 'obekt.html?id=' + encodeURIComponent(it.id), target:'_blank' }) : null,
+      kind === 'projects' ? h('a', { class:'ic', title:'Открыть на сайте', text:'↗', href:SITE + 'obekty/' + encodeURIComponent(it.id) + '/', target:'_blank' }) : null,
       h('button', { class:'btn sec sm', text:'Изменить', onclick:function(){ edit(kind, i); } }),
       h('button', { class:'ic del', title:'Удалить', text:'×', onclick:function(){ if (!confirm('Удалить «' + S.title(it) + '»?')) return; delItem(kind, it); L.splice(i, 1); mark(); go(kind); } })
     ]);

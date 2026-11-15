@@ -21,7 +21,7 @@
   }
   function img(src, alt, cls){ var i = new Image(); i.loading = 'lazy'; i.alt = alt || ''; if (cls) i.className = cls; i.src = U(src); i.onerror = function(){ i.style.visibility = 'hidden'; }; return i; }
   function byId(id){ return (SM.projects || []).filter(function(p){ return p.id === id; })[0]; }
-  function objUrl(p){ return ROOT + 'obekt.html?id=' + encodeURIComponent(p.id); }
+  function objUrl(p){ return ROOT + 'obekty/' + encodeURIComponent(p.id) + '/'; }
 
   /* ---------- объекты ---------- */
   function projCard(p){
@@ -252,7 +252,7 @@
   }
   function sec(box, title, sub){ var s = el('section', 'blk'); if (title) s.appendChild(el('h2', null, title)); if (sub) s.appendChild(el('p', 'sub', sub)); box.appendChild(s); return s; }
   function renderProject(box){
-    var id = new URLSearchParams(location.search).get('id');
+    var id = box.dataset.id || new URLSearchParams(location.search).get('id');
     var p = id && byId(id);
     var h1 = document.querySelector('.pg-hero h1'), lead = document.querySelector('.pg-hero .lead');
     if (!p){ h1.textContent = 'Объект не найден'; lead.innerHTML = 'Возможно, ссылка устарела. <a href="' + ROOT + 'obekty.html">Посмотреть все объекты</a>'; return; }
