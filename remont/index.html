@@ -167,6 +167,48 @@ section{scroll-margin-top:70px}
 .price-note b{color:var(--ink)}
 @media (max-width:900px){.prices{grid-template-columns:minmax(0,1fr)}.pc{padding:22px}}
 
+
+/* прайс */
+.pl{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.pl-r{display:grid;grid-template-columns:1.25fr 2fr .95fr .85fr .8fr;gap:16px;align-items:center;padding:16px 22px;border-top:1px solid var(--line);text-decoration:none;color:var(--ink);transition:background .15s}
+.pl-r:first-child{border-top:0}
+a.pl-r:hover{background:#FAFEFC}
+.pl-hd{background:var(--bg);font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-top:12px;padding-bottom:12px}
+.pl-r b{font-size:16.5px;font-weight:700;line-height:1.3}
+.pl-r b small{display:block;font-size:12.5px;font-weight:500;color:var(--muted);margin-top:2px}
+.pl-r>span{font-size:14.5px;color:var(--muted);line-height:1.45}
+.pl-r strong{font-size:19px;font-weight:800;color:var(--g2);white-space:nowrap}
+.pl-r.hit{background:var(--gl);box-shadow:inset 4px 0 0 var(--g2)}
+.mx-t{margin:44px 0 16px}
+.mx-w{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:var(--r);scrollbar-width:none}
+.mx-w::-webkit-scrollbar{display:none}
+.mx{width:100%;border-collapse:collapse;font-size:15px;min-width:560px}
+.mx th,.mx td{padding:14px 18px;text-align:right;border-top:1px solid var(--line);white-space:nowrap}
+.mx th{border-top:0;background:var(--bg);font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.mx th:first-child,.mx td:first-child{text-align:left;font-weight:700;position:sticky;left:0;background:inherit}
+.mx tbody tr{background:#fff}
+.mx .hl{background:var(--gl);color:var(--g2);font-weight:800}
+.mx th.hl{color:var(--g2)}
+.mx-n{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;margin-top:14px;font-size:14px;color:var(--muted)}
+.adds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:28px}
+.adds div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:4px}
+.adds b{font-size:15px}
+.adds span{font-size:14px;color:var(--muted)}
+.adds em{font-style:normal;color:var(--g2);font-weight:700}
+@media (max-width:900px){
+  .pl-hd{display:none}
+  .pl-r{grid-template-columns:1fr auto;gap:6px 12px;padding:16px 18px}
+  .pl-r b{grid-column:1}.pl-r strong{grid-column:2;grid-row:1;align-self:start}
+  .pl-r>span:nth-of-type(1){grid-column:1/-1;font-size:14px}
+  .pl-r>span[data-l]{font-size:13px;grid-column:auto}
+  .pl-r>span[data-l]::before{content:attr(data-l) ": ";color:var(--muted)}
+  .pl-r>span[data-l]{color:var(--ink);font-weight:600}
+  .adds{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mx th,.mx td{padding:12px 12px;font-size:14px}
+  .mx-n .btn{width:100%}
+}
+@media (max-width:420px){.adds{grid-template-columns:minmax(0,1fr)}}
+
 /* подарок */
 .gift{background:var(--ink);color:#fff;border-radius:24px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}
 .gift-t{padding:clamp(28px,4vw,56px)}
@@ -195,13 +237,38 @@ section{scroll-margin-top:70px}
 
 /* объекты */
 .objs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.ob{background:#fff;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);text-decoration:none;display:flex;flex-direction:column}
-.ob img{aspect-ratio:4/3;object-fit:cover;width:100%}
-.ob div{padding:18px;display:grid;gap:8px}
-.ob .chips{display:flex;flex-wrap:wrap;gap:6px}
-.ob .chips span{font-size:12.5px;font-weight:600;padding:5px 9px;border-radius:7px;background:var(--bg)}
-.ob strong{font-size:22px;font-weight:800;color:var(--g2)}
-@media (max-width:900px){.objs{grid-template-columns:minmax(0,1fr)}}
+.ob{background:#fff;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column;text-align:left;padding:0;cursor:pointer;font:inherit;color:inherit;transition:box-shadow .2s,transform .2s}
+.ob:hover{box-shadow:var(--sh);transform:translateY(-2px)}
+.ob-i{position:relative;display:block}
+.ob-i img{aspect-ratio:4/3;object-fit:cover;width:100%}
+.ob-demo{position:absolute;top:12px;left:12px;font-style:normal;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.92);color:var(--muted);padding:4px 8px;border-radius:6px}
+.ob-n{position:absolute;right:12px;bottom:12px;font-style:normal;font-size:12px;font-weight:700;background:rgba(22,25,27,.75);color:#fff;padding:4px 8px;border-radius:6px}
+.ob-b{padding:18px;display:grid;gap:8px}
+.ob-b small{font-size:12.5px;font-weight:700;color:var(--g2);text-transform:uppercase;letter-spacing:.04em}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:12.5px;font-weight:600;padding:5px 9px;border-radius:7px;background:var(--bg)}
+.ob-p{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:4px;padding-top:12px;border-top:1px solid var(--line)}
+.ob-p strong{font-size:20px;font-weight:800;color:var(--ink)}
+.ob-p em{font-style:normal;font-size:14px;font-weight:700;color:var(--g2)}
+@media (max-width:900px){.objs{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(270px,82%);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 -16px;padding:4px 16px 8px}.objs::-webkit-scrollbar{display:none}.ob{scroll-snap-align:start}}
+.om{position:fixed;inset:0;z-index:60;background:rgba(10,12,13,.72);display:flex;align-items:center;justify-content:center;padding:20px}
+.om-in{position:relative;background:#fff;border-radius:20px;overflow:hidden;width:min(980px,100%);max-height:calc(100vh - 40px);display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+.om-x{position:absolute;top:12px;right:12px;z-index:2;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.92);font-size:24px;cursor:pointer;line-height:1}
+.om-ph{position:relative;background:#111;min-height:320px}
+.om-ph img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.om-a{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.9);font-size:26px;cursor:pointer;line-height:1}
+.om-a.l{left:12px}.om-a.r{right:12px}
+.om-c{position:absolute;right:12px;bottom:12px;background:rgba(22,25,27,.75);color:#fff;font-size:12px;font-weight:700;padding:4px 8px;border-radius:6px}
+.om-b{padding:26px;overflow-y:auto;display:grid;gap:12px;align-content:start}
+.om-b small{font-size:12.5px;font-weight:700;color:var(--g2);text-transform:uppercase;letter-spacing:.04em}
+.om-t{font-size:15px;color:var(--muted)}
+.om-t b{color:var(--ink)}
+.om-d{list-style:none;padding:0;margin:0;display:grid;gap:6px;font-size:14.5px}
+.om-d li::before{content:"✓";color:var(--g2);font-weight:800;margin-right:8px}
+.om-p{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:12px}
+.om-p span{font-size:14px;color:var(--muted)}
+.om-p strong{font-size:24px;font-weight:800;color:var(--g2)}
+@media (max-width:760px){.om{padding:0;align-items:flex-end}.om-in{grid-template-columns:minmax(0,1fr);border-radius:20px 20px 0 0;max-height:92vh;overflow-y:auto}.om-ph{min-height:0;aspect-ratio:4/3}.om-b{overflow:visible;padding:20px}}
 
 /* как работаем */
 .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;counter-reset:s}
@@ -312,35 +379,41 @@ section{scroll-margin-top:70px}
 
 <section class="sec" id="prices">
   <div class="w">
-    <div class="sec-h rv"><div class="tag">Цены</div><h2>Сколько стоит ремонт</h2><p>Цена за работы за 1 м² площади квартиры. Итог фиксируем в договоре и не меняем без вашего согласия.</p></div>
-    <div class="prices">
-      <div class="pc rv">
-        <h3>Косметический</h3>
-        <div class="pr">от 8 000 ₽<small> / м²</small></div>
-        <p>Освежить квартиру без переноса стен и замены коммуникаций.</p>
-        <ul><li>Обои или покраска стен</li><li>Новый пол: ламинат или линолеум</li><li>Натяжные потолки</li><li>Замена дверей, розеток, плинтусов</li></ul>
-        <div class="pc-meta">Срок: от 3 недель</div>
-        <a class="btn lt" href="#calc" data-kind="cosm">Рассчитать мою квартиру</a>
-      </div>
-      <div class="pc hit rv">
-        <span class="badge">Выбирают чаще всего</span>
-        <h3>Под ключ</h3>
-        <div class="pr">от 19 000 ₽<small> / м²</small></div>
-        <p>Полный ремонт: заезжаете с мебелью — и живёте.</p>
-        <ul><li>Демонтаж и вывоз старой отделки</li><li>Новая электрика и сантехника</li><li>Выравнивание стен, стяжка пола</li><li>Чистовая отделка всех комнат</li><li>Санузел под ключ — от 160 000 ₽</li></ul>
-        <div class="pc-meta">Срок: 2–3 месяца для 2-комнатной · <b style="color:var(--g2)">дизайн-проект в подарок</b></div>
-        <a class="btn" href="#calc" data-kind="cap">Рассчитать мою квартиру</a>
-      </div>
-      <div class="pc rv">
-        <h3>Дизайнерский</h3>
-        <div class="pr">от 30 000 ₽<small> / м²</small></div>
-        <p>Ремонт по индивидуальному проекту со сложными решениями.</p>
-        <ul><li>Всё, что входит в ремонт под ключ</li><li>Сложные потолки и подсветка</li><li>Декоративные покрытия, крупный формат плитки</li><li>Авторский надзор дизайнера</li></ul>
-        <div class="pc-meta">Срок: от 3 месяцев · <b style="color:var(--g2)">дизайн-проект в подарок</b></div>
-        <a class="btn lt" href="#calc" data-kind="design">Рассчитать мою квартиру</a>
-      </div>
+    <div class="sec-h rv"><div class="tag">Цены</div><h2>Цены на ремонт квартир</h2><p>Стоимость работ за 1 м², минимальный заказ и сроки. Точную сумму закрепим в договоре после бесплатного замера.</p></div>
+    <div class="pl rv">
+      <div class="pl-r pl-hd"><span>Вид ремонта</span><span>Что входит</span><span>Работы за м²</span><span>Мин. заказ</span><span>Срок</span></div>
+      <a class="pl-r" href="#calc" data-kind="cosm"><b>Косметический<small>без переноса коммуникаций</small></b><span>Покраска или обои, напольные покрытия, потолки, двери</span><strong>от 8 000 ₽</strong><span data-l="Мин. заказ">150 000 ₽</span><span data-l="Срок">от 5 недель</span></a>
+      <a class="pl-r" href="#calc" data-kind="cap"><b>Новостройка<small>без отделки или white box</small></b><span>Стяжка, штукатурка, электрика, сантехника, чистовая отделка</span><strong>от 13 000 ₽</strong><span data-l="Мин. заказ">350 000 ₽</span><span data-l="Срок">от 9 недель</span></a>
+      <a class="pl-r hit" href="#calc" data-kind="cap"><b>Под ключ<small>выбирают чаще всего</small></b><span>Все черновые и чистовые работы, санузел, двери, уборка</span><strong>от 19 000 ₽</strong><span data-l="Мин. заказ">400 000 ₽</span><span data-l="Срок">от 10 недель</span></a>
+      <a class="pl-r" href="#calc" data-kind="cap"><b>Капитальный<small>вторичное жильё</small></b><span>Демонтаж, новая проводка и трубы, выравнивание, чистовая отделка</span><strong>от 22 500 ₽</strong><span data-l="Мин. заказ">450 000 ₽</span><span data-l="Срок">от 12 недель</span></a>
+      <a class="pl-r" href="#calc" data-kind="design"><b>Дизайнерский<small>по дизайн-проекту</small></b><span>Сложные потолки, скрытые двери, подсветка, авторский надзор</span><strong>от 30 000 ₽</strong><span data-l="Мин. заказ">600 000 ₽</span><span data-l="Срок">от 14 недель</span></a>
+      <a class="pl-r" href="#calc" data-kind="cap"><b>Ванная под ключ<small>санузел или ванная</small></b><span>Демонтаж, гидроизоляция, разводка, плитка, инсталляция</span><strong>от 43 000 ₽</strong><span data-l="Мин. заказ">160 000 ₽</span><span data-l="Срок">от 3 недель</span></a>
     </div>
-    <div class="price-note rv"><span>Новостройка — <b>базовая цена</b></span><span>Вторичное жильё — <b>+18%</b> на демонтаж и подготовку</span><span>Материалы — <b>отдельно</b>, по согласованному списку</span></div>
+
+    <h3 class="mx-t rv">Сколько стоит ремонт вашей квартиры</h3>
+    <div class="mx-w rv"><table class="mx">
+      <thead><tr><th>Квартира</th><th>Новостройка</th><th class="hl">Под ключ</th><th>Капитальный</th><th>Дизайнерский</th></tr></thead>
+      <tbody>
+      <tr><td>Студия, 30 м²</td><td>390 000 ₽</td><td class="hl">570 000 ₽</td><td>675 000 ₽</td><td>900 000 ₽</td></tr>
+      <tr><td>1-комн., 38 м²</td><td>494 000 ₽</td><td class="hl">722 000 ₽</td><td>855 000 ₽</td><td>1 140 000 ₽</td></tr>
+      <tr><td>2-комн., 56 м²</td><td>728 000 ₽</td><td class="hl">1 064 000 ₽</td><td>1 260 000 ₽</td><td>1 680 000 ₽</td></tr>
+      <tr><td>3-комн., 75 м²</td><td>975 000 ₽</td><td class="hl">1 425 000 ₽</td><td>1 687 500 ₽</td><td>2 250 000 ₽</td></tr>
+      </tbody></table></div>
+    <div class="mx-n rv"><span>Стоимость работ, материалы — отдельно по согласованному списку</span><a class="btn" href="#calc" data-goal="lp_cta_matrix">Рассчитать свою квартиру</a></div>
+
+    <div class="adds rv">
+      <div><b>Дизайн-проект</b><span>1 500 ₽/м² — <em>в подарок</em> при капитальном и дизайнерском</span></div>
+      <div><b>Натяжные потолки</b><span>от 600 ₽/м²</span></div>
+      <div><b>Тёплый пол</b><span>от 2 200 ₽/м²</span></div>
+      <div><b>Выезд, замер и смета</b><span><em>бесплатно</em></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0" id="objs" hidden>
+  <div class="w">
+    <div class="sec-h rv"><div class="tag">Объекты</div><h2>Как выглядит ремонт с Домилией</h2><p>Площадь, срок и итоговая стоимость работ. Нажмите на объект — покажем фото и что было сделано.</p></div>
+    <div class="objs" id="objList"></div>
   </div>
 </section>
 
@@ -385,12 +458,7 @@ section{scroll-margin-top:70px}
   </div>
 </section>
 
-<section class="sec" style="padding-top:0" id="objs" hidden>
-  <div class="w">
-    <div class="sec-h rv"><div class="tag">Наши объекты</div><h2>Квартиры, которые мы отремонтировали</h2><p>Реальные площади, сроки и итоговая стоимость работ.</p></div>
-    <div class="objs" id="objList"></div>
-  </div>
-</section>
+
 
 <section class="sec" style="padding-top:0" id="how">
   <div class="w">
@@ -426,7 +494,7 @@ section{scroll-margin-top:70px}
       <details><summary>Цена может вырасти во время ремонта?</summary><p>Нет. Итоговая сумма прописана в договоре. Дополнительные работы — только по отдельному соглашению, которое вы подписываете сами.</p></details>
       <details><summary>Сколько нужно заплатить сразу?</summary><p>Предоплаты за весь ремонт нет. Работы оплачиваются по этапам — после того как вы приняли этап.</p></details>
       <details><summary>Кто покупает материалы?</summary><p>Как вам удобнее: можем закупить сами по согласованному списку с чеками или работать с вашими материалами.</p></details>
-      <details><summary>Сколько длится ремонт?</summary><p>Косметический — от 3 недель, под ключ — около 2–3 месяцев для двухкомнатной квартиры. Точные сроки по этапам — в договоре.</p></details>
+      <details><summary>Сколько длится ремонт?</summary><p>Косметический — от 5 недель, под ключ — от 10 недель, капитальный — от 12 недель. Точные сроки по этапам — в договоре.</p></details>
       <details><summary>Замер точно бесплатный?</summary><p>Да. Замер и смета бесплатные и ни к чему не обязывают.</p></details>
     </div>
   </div>
@@ -612,15 +680,39 @@ section{scroll-margin-top:70px}
   var fw = document.createElement('div'); fw.className = 'lf';
   fw.innerHTML = '<b class="t">Запись на бесплатный замер</b>'; fw.appendChild(fin); $('#finForm').appendChild(fw);
 
-  /* объекты: показываем только настоящие (без пометки «пример») */
-  var real = (SM.projects || []).filter(function(p){ return !p.demo && p.photos && p.photos.length; }).slice(0, 3);
-  if (real.length){
-    $('#objList').innerHTML = real.map(function(p){
-      var ph = p.photos[0], src = typeof ph === 'string' ? ph : (ph.src || ph.url || '');
-      if (/^\d+$/.test(src)) src = IMG + src + '.jpg'; else if (src && src[0] === '/') src = 'https://domilia.ru' + src;
-      return '<a class="ob rv" href="https://domilia.ru/obekty/' + encodeURIComponent(p.id) + '/" target="_blank" rel="noopener"><img src="' + esc(src) + '" alt="' + esc(p.title) + '" loading="lazy"><div><h3>' + esc(p.title) + '</h3><div class="chips"><span>' + esc(p.area) + ' м²</span><span>' + esc(p.days) + ' дней</span><span>' + esc(p.district || '') + '</span></div><strong>' + esc(p.price) + '</strong></div></a>';
+  /* объекты: настоящие первыми; примеры честно подписаны */
+  var list = (SM.projects || []).filter(function(p){ return p.photos && p.photos.length; });
+  list.sort(function(a, b){ return (a.demo ? 1 : 0) - (b.demo ? 1 : 0); });
+  list = list.slice(0, 6);
+  function pSrc(ph){ var src = typeof ph === 'string' ? ph : (ph.src || ph.url || ''); if (/^\d+$/.test(src)) return IMG + src + '.jpg'; if (src && src[0] === '/') return 'https://domilia.ru' + src; return src; }
+  if (list.length){
+    $('#objList').innerHTML = list.map(function(p, i){
+      return '<button type="button" class="ob rv" data-o="' + i + '"><span class="ob-i"><img src="' + esc(pSrc(p.photos[0])) + '" alt="' + esc(p.title) + '" loading="lazy">' + (p.demo ? '<i class="ob-demo">пример</i>' : '') + '<i class="ob-n">' + p.photos.length + ' фото</i></span><span class="ob-b"><small>' + esc(p.type || '') + '</small><h3>' + esc(p.title) + '</h3><span class="chips"><span>' + esc(p.area) + ' м²</span><span>' + esc(p.days) + ' дней</span>' + (p.district ? '<span>' + esc(p.district) + '</span>' : '') + '</span><span class="ob-p"><strong>' + esc(p.price) + '</strong><em>Смотреть →</em></span></span></button>';
     }).join('');
     $('#objs').hidden = false;
+    $$('#objList .ob').forEach(function(b){ b.onclick = function(){ openObj(list[+b.dataset.o]); }; });
+  }
+  function openObj(p){
+    goal('lp_object');
+    var k = 0, w = document.createElement('div'); w.className = 'om'; w.setAttribute('role', 'dialog'); w.setAttribute('aria-modal', 'true');
+    w.innerHTML = '<div class="om-in"><button type="button" class="om-x" aria-label="Закрыть">×</button>' +
+      '<div class="om-ph"><img alt=""><button type="button" class="om-a l" aria-label="Предыдущее фото">‹</button><button type="button" class="om-a r" aria-label="Следующее фото">›</button><span class="om-c"></span>' + (p.demo ? '<i class="ob-demo">пример</i>' : '') + '</div>' +
+      '<div class="om-b"><small>' + esc(p.type || '') + (p.district ? ' · ' + esc(p.district) : '') + '</small><h3>' + esc(p.title) + '</h3>' +
+      '<div class="chips"><span>' + esc(p.area) + ' м²</span><span>' + esc(p.days) + ' дней</span>' + (p.year ? '<span>' + esc(p.year) + '</span>' : '') + '</div>' +
+      (p.task ? '<p class="om-t"><b>Задача.</b> ' + esc(p.task) + '</p>' : '') +
+      (p.done && p.done.length ? '<ul class="om-d">' + p.done.map(function(d){ return '<li>' + esc(d) + '</li>'; }).join('') + '</ul>' : '') +
+      '<div class="om-p"><span>Стоимость работ</span><strong>' + esc(p.price) + '</strong></div>' +
+      '<a class="btn wide" href="#final" data-goal="lp_object_cta">Хочу такой же ремонт</a></div></div>';
+    document.body.appendChild(w); document.documentElement.style.overflow = 'hidden';
+    var img = $('.om-ph img', w), cnt = $('.om-c', w);
+    function show(){ img.src = pSrc(p.photos[k]); img.alt = (p.photos[k] && p.photos[k].alt) || p.title; cnt.textContent = (k + 1) + ' / ' + p.photos.length; }
+    function close(){ w.remove(); document.documentElement.style.overflow = ''; removeEventListener('keydown', key); }
+    function key(e){ if (e.key === 'Escape') close(); if (e.key === 'ArrowRight') { k = (k + 1) % p.photos.length; show(); } if (e.key === 'ArrowLeft') { k = (k - 1 + p.photos.length) % p.photos.length; show(); } }
+    $('.om-x', w).onclick = close; w.onclick = function(e){ if (e.target === w) close(); };
+    $('.om-a.l', w).onclick = function(){ k = (k - 1 + p.photos.length) % p.photos.length; show(); };
+    $('.om-a.r', w).onclick = function(){ k = (k + 1) % p.photos.length; show(); };
+    $('.btn', w).addEventListener('click', close);
+    addEventListener('keydown', key); show();
   }
 
   /* ролик */
