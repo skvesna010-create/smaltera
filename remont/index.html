@@ -410,7 +410,7 @@ a.pl-r:hover{background:#FAFEFC}
   </div>
 </section>
 
-<section class="sec" style="padding-top:0" id="objs" hidden>
+<section class="sec" style="padding-top:0" id="objs">
   <div class="w">
     <div class="sec-h rv"><div class="tag">Объекты</div><h2>Как выглядит ремонт с Домилией</h2><p>Площадь, срок и итоговая стоимость работ. Нажмите на объект — покажем фото и что было сделано.</p></div>
     <div class="objs" id="objList"></div>
@@ -685,11 +685,11 @@ a.pl-r:hover{background:#FAFEFC}
   list.sort(function(a, b){ return (a.demo ? 1 : 0) - (b.demo ? 1 : 0); });
   list = list.slice(0, 6);
   function pSrc(ph){ var src = typeof ph === 'string' ? ph : (ph.src || ph.url || ''); if (/^\d+$/.test(src)) return IMG + src + '.jpg'; if (src && src[0] === '/') return 'https://domilia.ru' + src; return src; }
+  if (!list.length) $('#objs').hidden = true;
   if (list.length){
     $('#objList').innerHTML = list.map(function(p, i){
       return '<button type="button" class="ob rv" data-o="' + i + '"><span class="ob-i"><img src="' + esc(pSrc(p.photos[0])) + '" alt="' + esc(p.title) + '" loading="lazy">' + (p.demo ? '<i class="ob-demo">пример</i>' : '') + '<i class="ob-n">' + p.photos.length + ' фото</i></span><span class="ob-b"><small>' + esc(p.type || '') + '</small><h3>' + esc(p.title) + '</h3><span class="chips"><span>' + esc(p.area) + ' м²</span><span>' + esc(p.days) + ' дней</span>' + (p.district ? '<span>' + esc(p.district) + '</span>' : '') + '</span><span class="ob-p"><strong>' + esc(p.price) + '</strong><em>Смотреть →</em></span></span></button>';
     }).join('');
-    $('#objs').hidden = false;
     $$('#objList .ob').forEach(function(b){ b.onclick = function(){ openObj(list[+b.dataset.o]); }; });
   }
   function openObj(p){
