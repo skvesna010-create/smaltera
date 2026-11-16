@@ -28,8 +28,3 @@ if not P: h = h.replace('<section class="sec" style="padding-top:0" id="objs">',
 open('remont/index.html', 'w', encoding='utf-8').write(h)
 print('объектов на лендинге:', len(P))
 
-# копия для отдельного репозитория remont (remont.domilia.ru), если он лежит рядом
-import shutil
-other = os.path.join(os.path.dirname(ROOT), "remont")
-if os.path.isdir(os.path.join(other, ".git")):
-    shutil.copy("remont/index.html", os.path.join(other, "index.html")); print("скопировано в", other)
