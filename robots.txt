@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
+Disallow: /direkt/
 Disallow: /spasibo.html
 
 Sitemap: https://domilia.ru/sitemap.xml
