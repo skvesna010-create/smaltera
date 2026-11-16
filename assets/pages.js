@@ -153,7 +153,7 @@
   }
 
   /* ---------- окно заявки (замер, «хочу так же») ---------- */
-  var PHONE = SM.phone || '+7 (343) 000-00-00', TEL = '+' + PHONE.replace(/\D/g, '');
+  var PHONE = SM.phone || '+7 (992) 001-43-88', TEL = '+' + PHONE.replace(/\D/g, '');
   function openLead(title, extra){
     smGoal('open_form');
     var w = el('div', 'ld'), box = el('div', 'ld-in'), x = el('button', 'ld-x', '×'); x.type = 'button'; x.setAttribute('aria-label', 'Закрыть');

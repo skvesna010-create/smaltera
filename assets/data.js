@@ -1,8 +1,8 @@
 /* Домилия — все материалы сайта. Этот файл меняет админка: https://domilia.ru/admin/
    Вручную правьте осторожно: это JSON (кавычки, запятые). */
 window.SM = {
- "phone": "+7 (343) 000-00-00",
- "leadEmail": "",
+ "phone": "+7 (992) 001-43-88",
+ "leadEmail": "zakaz-domilia@yandex.ru",
  "ym": 0,
  "max": "",
  "vk": "",
