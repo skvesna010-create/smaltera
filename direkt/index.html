@@ -1,4 +1,16 @@
 <!DOCTYPE html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><title>Директ — Домилия</title>
-<script>location.replace(location.protocol + '//direkt.domilia.ru/' + location.hash);</script>
-</head><body><a href="https://direkt.domilia.ru/">Перейти на direkt.domilia.ru</a></body></html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>Директ — Домилия</title>
+<style>body{font:15px/1.5 Arial,sans-serif;max-width:560px;margin:10vh auto;padding:20px}a.b,button{display:inline-block;margin:8px 8px 0 0;padding:10px 16px;border-radius:10px;border:0;background:#007A55;color:#fff;font-weight:700;text-decoration:none;cursor:pointer}</style>
+</head><body>
+<h2>Программа «Директ» переехала на direkt.domilia.ru</h2>
+<div id="m"></div>
+<script>
+var d = null; try { d = localStorage.getItem('dk1'); } catch(e){}
+var m = document.getElementById('m');
+if (d){
+  m.innerHTML = '<p>В этом браузере остались ваши данные со старого адреса. Скачайте копию, затем на новом адресе откройте «Данные и копия» → «Загрузить копию».</p><button id="dl">Скачать копию</button><a class="b" href="https://direkt.domilia.ru/#data">Открыть новый адрес</a>';
+  document.getElementById('dl').onclick = function(){ var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([d], { type:'application/json' })); a.download = 'direkt-domilia-perenos.json'; a.click(); };
+} else location.replace(location.protocol + '//direkt.domilia.ru/' + location.hash);
+</script>
+<noscript><a href="https://direkt.domilia.ru/">Перейти на direkt.domilia.ru</a></noscript>
+</body></html>
