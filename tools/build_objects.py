@@ -68,3 +68,7 @@ add = ''.join(f'\n  <url><loc>{SITE}obekty/{i}/</loc><changefreq>monthly</change
 sm = sm.replace('</urlset>', add + '\n</urlset>')
 open('sitemap.xml', 'w', encoding='utf-8').write(sm)
 print('страниц объектов:', len(projects), '· в sitemap:', len(out_ids))
+
+# заодно обновляем объекты на лендинге
+import subprocess, sys
+subprocess.run([sys.executable, os.path.join(ROOT, "tools", "build_landing.py")])

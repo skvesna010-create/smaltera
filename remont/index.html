@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+<script>document.documentElement.className+=" js"</script>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -321,8 +322,8 @@ a.pl-r:hover{background:#FAFEFC}
 .mbar .btn{flex:1;min-height:50px;font-size:15px;padding:0 10px}
 @media (max-width:760px){.mbar{display:flex}}
 
-.rv{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
-.rv.in{opacity:1;transform:none}
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+.js .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -413,7 +414,8 @@ a.pl-r:hover{background:#FAFEFC}
 <section class="sec" style="padding-top:0" id="objs">
   <div class="w">
     <div class="sec-h rv"><div class="tag">Объекты</div><h2>Как выглядит ремонт с Домилией</h2><p>Площадь, срок и итоговая стоимость работ. Нажмите на объект — покажем фото и что было сделано.</p></div>
-    <div class="objs" id="objList"></div>
+    <div class="objs" id="objList"><button type="button" class="ob rv" data-o="0"><span class="ob-i"><img src="https://domilia.ru/img/28254550.jpg" alt="Двухкомнатная квартира в Академическом" loading="lazy"><i class="ob-demo">пример</i><i class="ob-n">4 фото</i></span><span class="ob-b"><small>Капитальный ремонт</small><h3>Двухкомнатная квартира в Академическом</h3><span class="chips"><span>56 м²</span><span>84 дней</span><span>Академический</span></span><span class="ob-p"><strong>1 260 000 ₽</strong><em>Смотреть →</em></span></span></button><button type="button" class="ob rv" data-o="1"><span class="ob-i"><img src="https://domilia.ru/img/14614670.jpg" alt="Однокомнатная квартира в новостройке на Широкой Речке" loading="lazy"><i class="ob-demo">пример</i><i class="ob-n">3 фото</i></span><span class="ob-b"><small>Ремонт под ключ</small><h3>Однокомнатная квартира в новостройке на Широкой Речке</h3><span class="chips"><span>38 м²</span><span>70 дней</span><span>Широкая Речка</span></span><span class="ob-p"><strong>722 000 ₽</strong><em>Смотреть →</em></span></span></button><button type="button" class="ob rv" data-o="2"><span class="ob-i"><img src="https://domilia.ru/img/33529504.jpg" alt="Ванная под ключ на Уралмаше" loading="lazy"><i class="ob-demo">пример</i><i class="ob-n">3 фото</i></span><span class="ob-b"><small>Ремонт ванной под ключ</small><h3>Ванная под ключ на Уралмаше</h3><span class="chips"><span>5 м²</span><span>21 дней</span><span>Уралмаш</span></span><span class="ob-p"><strong>215 000 ₽</strong><em>Смотреть →</em></span></span></button><button type="button" class="ob rv" data-o="3"><span class="ob-i"><img src="https://domilia.ru/img/33529500.jpg" alt="Трёхкомнатная квартира в Центре по дизайн-проекту" loading="lazy"><i class="ob-demo">пример</i><i class="ob-n">4 фото</i></span><span class="ob-b"><small>Дизайнерский ремонт</small><h3>Трёхкомнатная квартира в Центре по дизайн-проекту</h3><span class="chips"><span>78 м²</span><span>105 дней</span><span>Центр</span></span><span class="ob-p"><strong>2 340 000 ₽</strong><em>Смотреть →</em></span></span></button><button type="button" class="ob rv" data-o="4"><span class="ob-i"><img src="https://domilia.ru/img/28681145.jpg" alt="Студия с white box на ВИЗе" loading="lazy"><i class="ob-demo">пример</i><i class="ob-n">2 фото</i></span><span class="ob-b"><small>Ремонт в новостройке</small><h3>Студия с white box на ВИЗе</h3><span class="chips"><span>31 м²</span><span>63 дней</span><span>ВИЗ</span></span><span class="ob-p"><strong>403 000 ₽</strong><em>Смотреть →</em></span></span></button><button type="button" class="ob rv" data-o="5"><span class="ob-i"><img src="https://domilia.ru/img/6908500.jpg" alt="Двухкомнатная квартира на Эльмаше" loading="lazy"><i class="ob-demo">пример</i><i class="ob-n">2 фото</i></span><span class="ob-b"><small>Косметический ремонт</small><h3>Двухкомнатная квартира на Эльмаше</h3><span class="chips"><span>52 м²</span><span>35 дней</span><span>Эльмаш</span></span><span class="ob-p"><strong>416 000 ₽</strong><em>Смотреть →</em></span></span></button></div><!--/objList-->
+    <script type="application/json" id="objData">[{"id": "akademicheskij-56", "demo": true, "title": "Двухкомнатная квартира в Академическом", "district": "Академический", "type": "Капитальный ремонт", "area": 56, "days": 84, "price": "1 260 000 ₽", "year": 2026, "task": "Вторичка 2005 года: старая алюминиевая проводка, кривые стены, тесная ванная. Хотели светлую квартиру и кухню-гостиную.", "done": ["Демонтаж до бетона и вывоз мусора", "Новая проводка и электрощит", "Новые трубы и инсталляция", "Штукатурка по маякам и стяжка", "Объединили кухню с гостиной (с согласованием)", "Чистовая отделка и санузел под ключ"], "photos": ["https://domilia.ru/img/28254550.jpg", "https://domilia.ru/img/15220864.jpg", "https://domilia.ru/img/28853362.jpg", "https://domilia.ru/img/15220867.jpg"]}, {"id": "shirokaya-rechka-38", "demo": true, "title": "Однокомнатная квартира в новостройке на Широкой Речке", "district": "Широкая Речка", "type": "Ремонт под ключ", "area": 38, "days": 70, "price": "722 000 ₽", "year": 2026, "task": "Квартира без отделки, покупали под сдачу. Нужен практичный ремонт, который выдержит жильцов.", "done": ["Электрика по расстановке мебели", "Штукатурка и стяжка", "Кварцвинил и покраска стен", "Санузел под ключ", "Двери, свет, уборка"], "photos": ["https://domilia.ru/img/14614670.jpg", "https://domilia.ru/img/14614673.jpg", "https://domilia.ru/img/15220864.jpg"]}, {"id": "uralmash-vannaya", "demo": true, "title": "Ванная под ключ на Уралмаше", "district": "Уралмаш", "type": "Ремонт ванной под ключ", "area": 5, "days": 21, "price": "215 000 ₽", "year": 2026, "task": "Старая плитка, ржавые трубы, ванна на всю стену. Хотели душевую без поддона и подвесной унитаз.", "done": ["Демонтаж и новые трубы", "Гидроизоляция пола и стен", "Трап и уклон под душевую", "Крупноформатный керамогранит", "Инсталляция и сантехника"], "photos": ["https://domilia.ru/img/33529504.jpg", "https://domilia.ru/img/33529508.jpg", "https://domilia.ru/img/33529507.jpg"]}, {"id": "centr-78", "demo": true, "title": "Трёхкомнатная квартира в Центре по дизайн-проекту", "district": "Центр", "type": "Дизайнерский ремонт", "area": 78, "days": 105, "price": "2 340 000 ₽", "year": 2026, "task": "Нужен ремонт строго по дизайн-проекту: теневые потолки, скрытые двери, сценарии света.", "done": ["Дизайн-проект в подарок", "Теневые потолки и подсветка", "Скрытые двери под покраску", "Декоративная штукатурка", "Авторский надзор дизайнера"], "photos": ["https://domilia.ru/img/33529500.jpg", "https://domilia.ru/img/36451512.jpg", "https://domilia.ru/img/29515355.jpg", "https://domilia.ru/img/14613456.jpg"]}, {"id": "viz-studiya-31", "demo": true, "title": "Студия с white box на ВИЗе", "district": "ВИЗ", "type": "Ремонт в новостройке", "area": 31, "days": 63, "price": "403 000 ₽", "year": 2026, "task": "Застройщик сделал white box. Нужно было проверить его работу и не переплатить за лишнее.", "done": ["Проверка работ застройщика", "Доделали электрику под кухню", "Покраска стен и потолков", "Ламинат и плинтусы", "Санузел: плитка и сантехника"], "photos": ["https://domilia.ru/img/28681145.jpg", "https://domilia.ru/img/29515355.jpg"]}, {"id": "elmash-52", "demo": true, "title": "Двухкомнатная квартира на Эльмаше", "district": "Эльмаш", "type": "Косметический ремонт", "area": 52, "days": 35, "price": "416 000 ₽", "year": 2026, "task": "Освежить квартиру перед продажей без замены коммуникаций.", "done": ["Шпаклёвка и покраска стен", "Новый ламинат", "Натяжные потолки", "Замена дверей и розеток"], "photos": ["https://domilia.ru/img/6908500.jpg", "https://domilia.ru/img/14613456.jpg"]}]</script>
   </div>
 </section>
 
@@ -680,18 +682,11 @@ a.pl-r:hover{background:#FAFEFC}
   var fw = document.createElement('div'); fw.className = 'lf';
   fw.innerHTML = '<b class="t">Запись на бесплатный замер</b>'; fw.appendChild(fin); $('#finForm').appendChild(fw);
 
-  /* объекты: настоящие первыми; примеры честно подписаны */
-  var list = (SM.projects || []).filter(function(p){ return p.photos && p.photos.length; });
-  list.sort(function(a, b){ return (a.demo ? 1 : 0) - (b.demo ? 1 : 0); });
-  list = list.slice(0, 6);
-  function pSrc(ph){ var src = typeof ph === 'string' ? ph : (ph.src || ph.url || ''); if (/^\d+$/.test(src)) return IMG + src + '.jpg'; if (src && src[0] === '/') return 'https://domilia.ru' + src; return src; }
-  if (!list.length) $('#objs').hidden = true;
-  if (list.length){
-    $('#objList').innerHTML = list.map(function(p, i){
-      return '<button type="button" class="ob rv" data-o="' + i + '"><span class="ob-i"><img src="' + esc(pSrc(p.photos[0])) + '" alt="' + esc(p.title) + '" loading="lazy">' + (p.demo ? '<i class="ob-demo">пример</i>' : '') + '<i class="ob-n">' + p.photos.length + ' фото</i></span><span class="ob-b"><small>' + esc(p.type || '') + '</small><h3>' + esc(p.title) + '</h3><span class="chips"><span>' + esc(p.area) + ' м²</span><span>' + esc(p.days) + ' дней</span>' + (p.district ? '<span>' + esc(p.district) + '</span>' : '') + '</span><span class="ob-p"><strong>' + esc(p.price) + '</strong><em>Смотреть →</em></span></span></button>';
-    }).join('');
-    $$('#objList .ob').forEach(function(b){ b.onclick = function(){ openObj(list[+b.dataset.o]); }; });
-  }
+  /* объекты: карточки уже в HTML (tools/build_landing.py), здесь только окно с фото */
+  var list = []; try { list = JSON.parse($('#objData').textContent || '[]'); } catch(e){}
+  function pSrc(u){ return typeof u === 'string' ? u : (u && (u.src || u.url)) || ''; }
+  $$('#objList .ob').forEach(function(b){ b.onclick = function(){ var p = list[+b.dataset.o]; if (p) openObj(p); }; });
+
   function openObj(p){
     goal('lp_object');
     var k = 0, w = document.createElement('div'); w.className = 'om'; w.setAttribute('role', 'dialog'); w.setAttribute('aria-modal', 'true');
