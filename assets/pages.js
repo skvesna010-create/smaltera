@@ -162,7 +162,7 @@
     function close(){ w.remove(); document.removeEventListener('keydown', key); }
     function key(e){ if (e.key === 'Escape') close(); }
     x.onclick = close; w.onclick = function(e){ if (e.target === w) close(); }; document.addEventListener('keydown', key);
-    if (!SM.leadEmail){
+    if (!SM.leadEmail && !SM.crm){
       box.appendChild(el('p', null, 'Позвоните — инженер ответит на вопросы и договорится о времени замера. Замер и смета бесплатно.'));
       var t = el('a', 'btn', 'Позвонить ' + PHONE); t.href = 'tel:' + TEL; box.appendChild(t);
       box.appendChild(el('small', null, 'Ежедневно 9:00–21:00'));
@@ -181,8 +181,9 @@
         if (!f.consent.checked){ f.querySelector('.consent').classList.add('need'); m.textContent = 'Отметьте согласие на обработку данных.'; return; }
         m.textContent = 'Отправляем…';
         var data = Object.assign({ _subject:'Заявка с сайта Домилия', _template:'table', _captcha:'false', 'Заявка':title, 'Имя':f.name.value || '—', 'Телефон':ph.value, 'Страница':document.title }, extra || {});
-        fetch('https://formsubmit.co/ajax/' + encodeURIComponent(SM.leadEmail), { method:'POST', headers:{ 'Content-Type':'application/json', 'Accept':'application/json' }, body: JSON.stringify(data) })
-          .then(function(r){ return r.json(); }).then(function(j){ if (String(j.success) !== 'true') throw 0;
+        var crm = window.smCRM ? window.smCRM(SM.crm, data) : Promise.resolve(false);
+        (SM.leadEmail ? fetch('https://formsubmit.co/ajax/' + encodeURIComponent(SM.leadEmail), { method:'POST', headers:{ 'Content-Type':'application/json', 'Accept':'application/json' }, body: JSON.stringify(data) }).then(function(r){ return r.json(); }).catch(function(){ return {}; }) : Promise.resolve({}))
+          .then(function(j){ return crm.then(function(okC){ if (String(j.success) !== 'true' && !okC) throw 0; }); }).then(function(){
             smGoal('lead');
             box.innerHTML = ''; box.appendChild(x); box.appendChild(el('h3', null, 'Спасибо, заявка у нас!')); box.appendChild(el('p', null, 'Инженер перезвонит вам в рабочее время.'));
             setTimeout(function(){ location.href = ROOT + 'spasibo.html'; }, 1200); })

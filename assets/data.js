@@ -3,6 +3,7 @@
 window.SM = {
  "phone": "+7 (992) 001-43-88",
  "leadEmail": "zakaz-domilia@yandex.ru",
+ "crm": "",
  "ym": 0,
  "max": "",
  "vk": "",

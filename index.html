@@ -2090,11 +2090,13 @@ body{letter-spacing:-.01em}
   }, true);
   document.addEventListener('change', function(e){ if (e.target.name === 'consent' && e.target.checked) e.target.closest('.consent').classList.remove('need'); });
   function sendLead(data, stay){
-    if (!LEAD_EMAIL) return Promise.resolve(false);
+    var CRMU = (window.SM && window.SM.crm) || ''; if (!LEAD_EMAIL && !CRMU) return Promise.resolve(false);
     var body = Object.assign({ _subject:'Заявка с сайта Домилия', _template:'table', _captcha:'false' }, data);
-    return fetch('https://formsubmit.co/ajax/' + encodeURIComponent(LEAD_EMAIL), {
+    var crm = window.smCRM ? window.smCRM(CRMU, body) : Promise.resolve(false);
+    return (LEAD_EMAIL ? fetch('https://formsubmit.co/ajax/' + encodeURIComponent(LEAD_EMAIL), {
       method:'POST', headers:{ 'Content-Type':'application/json', 'Accept':'application/json' }, body: JSON.stringify(body)
-    }).then(function(r){ return r.json(); }).then(function(j){ return String(j.success) === 'true'; }).catch(function(){ return false; })
+    }).then(function(r){ return r.json(); }).then(function(j){ return String(j.success) === 'true'; }).catch(function(){ return false; }) : Promise.resolve(false))
+      .then(function(okM){ return crm.then(function(okC){ return okM || okC; }); })
       .then(function(ok){ if (ok){ window.smGoal && smGoal('lead'); if (!stay) setTimeout(function(){ location.href = 'spasibo.html'; }, 1400); } return ok; });
   }
 
