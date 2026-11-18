@@ -182,7 +182,7 @@
         m.textContent = 'Отправляем…';
         var data = Object.assign({ _subject:'Заявка с сайта Домилия', _template:'table', _captcha:'false', 'Заявка':title, 'Имя':f.name.value || '—', 'Телефон':ph.value, 'Страница':document.title }, extra || {});
         var crm = window.smCRM ? window.smCRM(SM.crm, data) : Promise.resolve(false);
-        (SM.leadEmail ? fetch('https://formsubmit.co/ajax/' + encodeURIComponent(SM.leadEmail), { method:'POST', headers:{ 'Content-Type':'application/json', 'Accept':'application/json' }, body: JSON.stringify(data) }).then(function(r){ return r.json(); }).catch(function(){ return {}; }) : Promise.resolve({}))
+        (SM.leadEmail && !SM.crm ? fetch('https://formsubmit.co/ajax/' + encodeURIComponent(SM.leadEmail), { method:'POST', headers:{ 'Content-Type':'application/json', 'Accept':'application/json' }, body: JSON.stringify(data) }).then(function(r){ return r.json(); }).catch(function(){ return {}; }) : Promise.resolve({}))
           .then(function(j){ return crm.then(function(okC){ if (String(j.success) !== 'true' && !okC) throw 0; }); }).then(function(){
             smGoal('lead');
             box.innerHTML = ''; box.appendChild(x); box.appendChild(el('h3', null, 'Спасибо, заявка у нас!')); box.appendChild(el('p', null, 'Инженер перезвонит вам в рабочее время.'));

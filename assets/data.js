@@ -3,7 +3,7 @@
 window.SM = {
  "phone": "+7 (992) 001-43-88",
  "leadEmail": "zakaz-domilia@yandex.ru",
- "crm": "",
+ "crm": "https://api.domilia.ru/lead/lXMk87fw2FItlO-4",
  "ym": 0,
  "max": "",
  "vk": "",
