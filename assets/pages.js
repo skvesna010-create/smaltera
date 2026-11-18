@@ -182,7 +182,7 @@
         m.textContent = 'Отправляем…';
         var data = Object.assign({ _subject:'Заявка с сайта Домилия', _template:'table', _captcha:'false', 'Заявка':title, 'Имя':f.name.value || '—', 'Телефон':ph.value, 'Страница':document.title }, extra || {});
         var crm = window.smCRM ? window.smCRM(SM.crm, data) : Promise.resolve(false);
-        var mail = SM.leadEmail ? Promise.race([fetch('https://formsubmit.co/ajax/' + encodeURIComponent(SM.leadEmail), { method:'POST', headers:{ 'Content-Type':'application/json', 'Accept':'application/json' }, body: JSON.stringify(data), keepalive:true }).then(function(r){ return r.json(); }).catch(function(){ return {}; }), new Promise(function(res){ setTimeout(function(){ res({}); }, 10000); })]) : Promise.resolve({});
+        var mail = SM.leadEmail && !SM.crm ? Promise.race([fetch('https://formsubmit.co/ajax/' + encodeURIComponent(SM.leadEmail), { method:'POST', headers:{ 'Content-Type':'application/json', 'Accept':'application/json' }, body: JSON.stringify(data), keepalive:true }).then(function(r){ return r.json(); }).catch(function(){ return {}; }), new Promise(function(res){ setTimeout(function(){ res({}); }, 10000); })]) : Promise.resolve({});
         crm.then(function(okC){ return okC ? null : mail.then(function(j){ if (String(j.success) !== 'true') throw 0; }); }).then(function(){
             smGoal('lead');
             box.innerHTML = ''; box.appendChild(x); box.appendChild(el('h3', null, 'Спасибо, заявка у нас!')); box.appendChild(el('p', null, 'Инженер перезвонит вам в рабочее время.'));

@@ -2093,7 +2093,7 @@ body{letter-spacing:-.01em}
     var CRMU = (window.SM && window.SM.crm) || ''; if (!LEAD_EMAIL && !CRMU) return Promise.resolve(false);
     var body = Object.assign({ _subject:'Заявка с сайта Домилия', _template:'table', _captcha:'false' }, data);
     var crm = window.smCRM ? window.smCRM(CRMU, body) : Promise.resolve(false);
-    var mail = LEAD_EMAIL ? Promise.race([fetch('https://formsubmit.co/ajax/' + encodeURIComponent(LEAD_EMAIL), {
+    var mail = LEAD_EMAIL && !CRMU ? Promise.race([fetch('https://formsubmit.co/ajax/' + encodeURIComponent(LEAD_EMAIL), {
       method:'POST', headers:{ 'Content-Type':'application/json', 'Accept':'application/json' }, body: JSON.stringify(body), keepalive:true
     }).then(function(r){ return r.json(); }).then(function(j){ return String(j.success) === 'true'; }).catch(function(){ return false; }), new Promise(function(res){ setTimeout(function(){ res(false); }, 10000); })]) : Promise.resolve(false);
     /* CRM приняла — сразу дальше; письмо досылается в фоне */
