@@ -2093,10 +2093,11 @@ body{letter-spacing:-.01em}
     var CRMU = (window.SM && window.SM.crm) || ''; if (!LEAD_EMAIL && !CRMU) return Promise.resolve(false);
     var body = Object.assign({ _subject:'Заявка с сайта Домилия', _template:'table', _captcha:'false' }, data);
     var crm = window.smCRM ? window.smCRM(CRMU, body) : Promise.resolve(false);
-    return (LEAD_EMAIL && !CRMU ? fetch('https://formsubmit.co/ajax/' + encodeURIComponent(LEAD_EMAIL), {
-      method:'POST', headers:{ 'Content-Type':'application/json', 'Accept':'application/json' }, body: JSON.stringify(body)
-    }).then(function(r){ return r.json(); }).then(function(j){ return String(j.success) === 'true'; }).catch(function(){ return false; }) : Promise.resolve(false))
-      .then(function(okM){ return crm.then(function(okC){ return okM || okC; }); })
+    var mail = LEAD_EMAIL ? Promise.race([fetch('https://formsubmit.co/ajax/' + encodeURIComponent(LEAD_EMAIL), {
+      method:'POST', headers:{ 'Content-Type':'application/json', 'Accept':'application/json' }, body: JSON.stringify(body), keepalive:true
+    }).then(function(r){ return r.json(); }).then(function(j){ return String(j.success) === 'true'; }).catch(function(){ return false; }), new Promise(function(res){ setTimeout(function(){ res(false); }, 10000); })]) : Promise.resolve(false);
+    /* CRM приняла — сразу дальше; письмо досылается в фоне */
+    return crm.then(function(okC){ return okC ? true : mail; })
       .then(function(ok){ if (ok){ window.smGoal && smGoal('lead'); if (!stay) setTimeout(function(){ location.href = 'spasibo.html'; }, 1400); } return ok; });
   }
 
